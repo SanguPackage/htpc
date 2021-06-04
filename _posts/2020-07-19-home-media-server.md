@@ -16,7 +16,7 @@ img:
   origin: https://unsplash.com/photos/9drS5E_Rguc
   title: ""
   linkUrl: 
-categories: dev-setup
+categories: 
 tags: [tutorial,fun]
 series: home-media-server
 toc:

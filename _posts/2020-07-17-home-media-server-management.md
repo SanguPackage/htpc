@@ -14,7 +14,7 @@ img:
   url: Home Media Center-Small.jpg
   desc: "Photo by Ian Battaglia"
   origin: https://unsplash.com/photos/9drS5E_Rguc
-categories: dev-setup
+categories: 
 tags: [tutorial,fun]
 series: home-media-server
 toc:

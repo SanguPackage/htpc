@@ -29,7 +29,7 @@ google_analytics: UA-30075487-3
 
 
 # Blog
-github_data_url: https://github.com/laoujin/???/blob/master  # TODO: put correct url here
+github_data_url: https://github.com/SanguPackage/sangu-site/blob/master/htpc/_posts
 collections:
   posts:
     output: true
@@ -43,9 +43,6 @@ kramdown:
   syntax_highlighter_opts:
     disable : true
 
-# https://github.com/jekyll/jekyll-paginate
-paginate: 8
-paginate_path: /blog/page:num/
 
 # https://github.com/jekyll/minima
 # bundle show minima
