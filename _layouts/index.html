@@ -1,0 +1,33 @@
+---
+layout: default
+---
+<div class="main">
+    {% include header.html context="blog" %}
+    {% include blog/big-header.html title="Home Theater PC" %}
+    <section class="blog-sidebar">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <!-- {% assign posts = site.posts | sort:"date" | reverse | slice: 0, 8 %} -->
+                    {% assign posts = site.posts %}
+                    {% for post in posts %}
+                        {% include blog/entry-excerpt.html post=post %}
+                    {% endfor %}
+                    {% include blog/pagination.html %}
+                </div>
+                <!-- <div class="wow zoomIn col-xs-12 col-sm-6 col-md-4">
+                    {% include blog/last-updates.html %}
+                </div>
+                <div class="wow zoomIn col-xs-12 col-sm-6 col-md-4">
+                    {% include blog/category-list.html %}
+                </div>
+                <div class="wow zoomIn col-xs-12 col-sm-6 col-md-4">
+                    {% include blog/tag-cloud.html %}
+                </div> -->
+                <!-- <div class="wow zoomIn col-xs-12 col-sm-6 col-md-4">
+                    include blog/recent-posts-sidebar.html
+                </div> -->
+            </div>
+        </div>
+    </section>
+</div>

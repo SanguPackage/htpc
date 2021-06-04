@@ -1,0 +1,43 @@
+{% assign post = include.post %}
+<div class="blog-content">
+    <div class="row">
+        <div class="wow col-md-12">
+            <h2 class="blog-title">{{ post.title }}</h2>
+            <!-- posted in <a href="/blog/cats/#{{post.categories}}">{{ post.categories }}</a> -->
+
+
+            {% assign postDate = post.date | date: "%-d %B %Y" %}
+            <!-- on -->
+            <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+                {{ postDate }}
+            </time>
+
+            {% if post.author %}
+                •
+                <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                    by <span itemprop="name">{{ post.author }}</span>
+                </span>
+            {% endif %}
+
+            {% if post.updates %}
+                {% assign lastUpdate = post.updates | first %}
+                •
+                last updated on
+
+                {% assign updateDate = lastUpdate.date | date: "%-d %B %Y" %}
+                <time datetime="{{ updateDate | date_to_xmlschema }}" itemprop="dateModified">
+                    {{ updateDate }}
+                </time>
+            {% endif %}
+
+
+            <div class="contents" style="margin: 15px 0">
+                {{ post.content }}
+            </div>
+
+
+            {% include blog/post-extras.html %}
+            <!-- {% include blog/post-category-and-tags.html %} -->
+        </div>
+    </div>
+</div>

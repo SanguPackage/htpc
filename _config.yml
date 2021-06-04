@@ -1,0 +1,64 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: HTPC @ Sangu
+meta-description: Setup your own HTPC with ease
+meta-keywords: radarr sonarr transmission htpc docker docker-compose heimdall jellyfin bazarr jackett ombi
+name: htpc
+description: > # this means to ignore newlines until "baseurl:"
+  A one step Home Theater PC (HTPC) setup with Docker.
+baseurl: "/htpc" # the subpath of your site, e.g. /blog
+url: "https://sangu.be" # the base hostname & protocol for your site, e.g. https://example.com
+
+
+
+# Social
+google_analytics: UA-30075487-3
+
+
+# Blog
+github_data_url: https://github.com/laoujin/???/blob/master  # TODO: put correct url here
+collections:
+  posts:
+    output: true
+    permalink: /blog/:categories/:title/
+
+# Build settings
+markdown: kramdown
+
+# highlighter: We've implemented highlightjs manually
+kramdown:
+  syntax_highlighter_opts:
+    disable : true
+
+# https://github.com/jekyll/jekyll-paginate
+paginate: 8
+paginate_path: /blog/page:num/
+
+# https://github.com/jekyll/minima
+# bundle show minima
+theme: minima
+
+# https://pages.github.com/versions/
+plugins:
+  - jemoji # https://github.com/jekyll/jemoji
+  - jekyll-gist # https://github.com/jekyll/jekyll-gist
+  - jekyll-avatar # https://github.com/benbalter/jekyll-avatar
+  - jekyll-redirect-from # https://github.com/jekyll/jekyll-redirect-from
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

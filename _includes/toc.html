@@ -1,0 +1,13 @@
+{% if include.html contains '<h' %}
+<div class="blog-sidebar sidebar">
+    <div class="sidebar-heading">
+        Table Of Contents
+
+        {% include blog/edit-post.html %}
+    </div>
+
+    <div class="toc__menu">
+        {% include toc-inner.html html=include.html h_max=3 %}
+    </div>
+</div>
+{% endif %}

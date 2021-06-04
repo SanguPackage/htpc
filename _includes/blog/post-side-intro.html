@@ -1,0 +1,45 @@
+<div class="blog-sidebar sidebar" style="max-width: 392px">
+    <div class="sidebar-heading">
+        {% if include.toc.icon contains "icon-" %}
+            <i class="{{ include.toc.icon }}"></i>
+        {% elsif include.toc.icon %}
+            <i class="fa fa-{{ include.toc.icon | default: 'file-text' }}"></i>
+        {% endif %}
+
+        {{ include.toc.title }}
+    </div>
+
+
+    {% assign blogExcerpt = post.content | split:'<!--more-->' | first | strip_html | strip %}
+    {% assign blogDesc = page.desc | strip_html | strip %}
+    {% if blogDesc != blogExcerpt %}
+        <div style="line-height: 16px; margin-top: 6px">{{ page.desc }}</div>
+    {% endif %}
+
+
+    <figure style="margin-top: 5px; margin-bottom: 8px" class="imagewrapper">
+        {% if page.img.origin %}
+            <a href="{{ page.img.origin }}">
+        {% endif %}
+
+        <img style="max-width: 100%" class="img-rounded" src="{{ 'assets/blog-images/' | append: page.img.url | absolute_url }}" title="{{ page.img.title }}" />
+
+        {% if page.img.origin %}
+            </a>
+        {% endif %}
+
+
+        {% if page.img.desc %}
+            <figcaption>{{ page.img.desc }}</figcaption>
+        {% endif %}
+    </figure>
+
+
+    <!-- contains '```autohotkey' didn't work -->
+    {% if post.content contains 'autohotkey' and post.title != 'Autohotkey DynaRun' %}
+        <small style="display: block; line-height: 16px; margin: 6px 0">
+            This post contains Autohotkey scripts, test them from within your browser with the
+            <a href="{{ 'blog/productivity/autohotkey-dyna-run' | absolute_url }}">Autohotkey DynaRun script</a>.
+        </smlall>
+    {% endif %}
+</div>

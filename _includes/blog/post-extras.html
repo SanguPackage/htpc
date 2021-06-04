@@ -1,0 +1,78 @@
+{% if page.extras or post.interesting %}
+    <hr>
+{% endif %}
+
+
+{% if page.extras %}
+    <div class="post-extras">
+        <b>Stuff that came into being during the making of this post</b><br>
+
+        {% assign extras = page.extras | first %}
+        <ul>
+            {% for extra in post.extras %}
+                <li>
+                    {% if extra.url %}
+                        <a href="{{ extra.url }}">
+                            {% if extra.desc %}
+                                {{ extra.desc }}
+                            {% else %}
+                                {{ extra.url }}
+                            {% endif %}
+                        </a>
+
+                    {% elsif extra.githubproject %}
+                        <a href="{{ extra.githubproject }}">
+                            {{ extra.githubtext | default: 'The accompanying source on GitHub' }}
+                        </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+
+
+
+{% if post.interesting %}
+    <div class="post-extras">
+        Other interesting reads
+        <ul>
+            {% for interest in post.interesting %}
+                <li>
+                    {% if interest.url %}
+                        <a href="{{ interest.url }}">
+                            {% if interest.desc %}
+                                {{ interest.desc }}
+                            {% else %}
+                                {{ interest.url }}
+                            {% endif %}
+                        </a>
+                    {% elsif interest.git %}
+                        {% include github-stars.html url=interest.git desc=interest.desc %}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+
+
+
+{% if post.updates %}
+    <div class="post-extras">
+        Updates
+        <ul>
+            {% for update in post.updates %}
+                {% assign updateDate = update.date | date: "%-d %B %Y" %}
+                <li>
+                    {{ updateDate }}
+                    {% if update.desc %}
+                        : {{ update.desc }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

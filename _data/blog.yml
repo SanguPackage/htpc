@@ -1,0 +1,11 @@
+# ICONS LOADED
+# - Do not prefix with fa to use font-awewome: https://fontawesome.com/icons
+# - Any from: http://fizzed.com/oss/font-mfizz
+# - Site has also loaded: /htpc/assets/vendor/flat-icon/flaticon.html
+
+categories:
+  docker: icon-docker
+
+tags:
+  windows: fa fa-windows
+  fun: fa fa-gamepad
