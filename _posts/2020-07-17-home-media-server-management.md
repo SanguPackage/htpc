@@ -95,8 +95,9 @@ Works best with XBMC, Usenet & Sick Beard / Couchpotato. So not a good match for
 
 # Docker Infrastructure
 
-<!-- TODO: Add Watchtower, vault, duplicati, ... -->
+<!-- TODO: Add vault, duplicati, ... -->
 
-This section is a work in progress 😃 But you definitely want Portainer:
+This section is a work in progress 😃 But you definitely want:
 
-{% include github-stars.html url="portainer/portainer" desc="Manage all those docker containers..." %}
+{% include github-stars.html url="portainer/portainer" desc="Portainer to manage all those docker containers..." %}
+{% include github-stars.html url="containrrr/watchtower" desc="Automatically update your containers to the latest versions" %}
