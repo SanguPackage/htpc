@@ -15,7 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 title: HTPC @ Sangu
 meta-description: Setup your own HTPC with ease
-meta-keywords: radarr sonarr transmission htpc docker docker-compose heimdall jellyfin bazarr jackett ombi
+meta-keywords: radarr sonarr transmission htpc docker docker-compose heimdall jellyfin bazarr prowlarr ombi
 name: htpc
 description: > # this means to ignore newlines until "baseurl:"
   A one step Home Theater PC (HTPC) setup with Docker.

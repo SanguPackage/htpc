@@ -34,8 +34,8 @@ It basically does the exact same thing as [Jackett](https://github.com/Jackett/J
 <!--more-->
 
 
-{% include github-stars.html url="Prowlarr/Prowlarr" desc="Looks and smells like Sonarr but made for music." %}
-{% include github-stars.html url="Jackett/Jackett" desc="music library manager and MusicBrainz tagger" %}
+{% include github-stars.html url="Prowlarr/Prowlarr" desc="Indexer manager/proxy built on the popular *arr .net/reactjs base stack" %}
+{% include github-stars.html url="Jackett/Jackett" desc="API Support for your favorite torrent trackers" %}
 
 # Automatic Sync
 

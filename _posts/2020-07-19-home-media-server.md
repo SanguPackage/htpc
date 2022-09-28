@@ -169,7 +169,17 @@ to a private indexer. A few, for example [PassThePopcorn](https://passthepopcorn
 but if you are relying on free offerings, you may not want to maintain the connection to multiple indexers manually
 (after all they tend to change urls every so often).
 
-### Jackett <small>- Indexers</small>
+### Prowlarr <small>- Indexers</small>
+
+![Prowlarr Logo]({{ site.baseurl }}/assets/blog-images/Prowlarr-Icon.png "Prowlarr Logo"){: style="float: left; margin-right: 16px"}
+
+At this point I would suggest [going with Prowlarr instead of Jackett]({{ site.baseurl }}/blog/goodbye-jackett) for new setups!
+
+{% include github-stars.html url="Prowlarr/Prowlarr" desc="Jackett alternative but for both Usenet & Torrents (with automatic sync)" %}
+
+
+### Jackett <small>- **DEPRECATED**</small>
+
 
 ![Jackett Logo]({{ site.baseurl }}/assets/blog-images/Home Media Center-Jackett-Logo.png "Jackett Logo"){: style="float: left; margin-right: 16px"}
 
@@ -183,7 +193,6 @@ If you're not sure which indexers to add from Jacketts list, check
 
 Once you've added one/some indexers in Jackett, you can configure them in Sonarr in Settings > Indexers > Torznab > Presets.
 
-{% include github-stars.html url="Prowlarr/Prowlarr" desc="Jackett alternative but for both Usenet & Torrents (early development)" %}
 
 ### Transmission <small>- Download Client</small>
 
@@ -237,7 +246,7 @@ So with all that hassle why would you ever opt for Usenet at all?
 
 ### Indexers
 
-{% include github-stars.html url="theotherp/nzbhydra2" desc="Usenet meta search. The usenet counterpart of Jackett" %}
+{% include github-stars.html url="theotherp/nzbhydra2" desc="Usenet meta search. The usenet counterpart of Prowlarr" %}
 
 
 ### Torrents vs Usenet
