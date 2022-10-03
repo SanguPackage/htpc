@@ -85,6 +85,10 @@ For movies you often even get a poster picture etc!
     - Save Changes
 
 
+**What can you expect**:
+
+A much better integration compared to Slack for sure!
+
 ![Discord Webhook example]({{ site.baseurl }}/assets/blog-images/Connections-Discord-Result.png "Discord Webhook example"){: .img-responsive}
 
 
