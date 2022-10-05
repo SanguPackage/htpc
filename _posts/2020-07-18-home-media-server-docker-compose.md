@@ -27,4 +27,4 @@ toc:
 
 {% include github-stars.html url="Laoujin/Htpc" desc="Htpc setup" %}
 
-The docker-compose is there (and in use on 3 NAS) but it needs more work before this article can be written.
+The docker-compose is there (and in use on 4 NAS) but it needs more work before this article can be written.
