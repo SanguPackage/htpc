@@ -21,10 +21,8 @@ toc:
   title: Jellyfin on LG TV
   icon: tv
 interesting:
-  - git: RootMyTV/RootMyTV.github.io
-    desc: RootMyTV is a user-friendly exploit for rooting/jailbreaking LG webOS smart TVs.
   - url: https://jellyfin.org/posts/webos-july2022/
-    desc: Official announcement LG Content Store release
+    desc: Official announcement Jellyfin LG Content Store release
 ---
 
 If you have a Smart TV with **webOS 6+**, do not follow these instructions
@@ -38,8 +36,9 @@ Following these steps should get you up & running in no time.
 
 - PC: [Create a Developer Account](https://us.lgaccount.com/login/sign_in)
 - TV: Install "Developer Mode" from the LG Content Store
-- TV (1): Turn on Developer Mode and Key Server, write down the Passphrase
-    - TV (2): All Settings > Network > Wi-Fi Connection > Advanced Wi-Fi Settings > IP Address
+    - Turn on Developer Mode and Key Server
+    - (1): Write down the Passphrase
+- TV (2): All Settings > Network > Wi-Fi Connection > Advanced Wi-Fi Settings > IP Address
 - PC: Start [Device Manager for webOS](https://github.com/webosbrew/dev-manager-desktop/releases/latest)
     - Add Device: Use TV IP Address and Passphrase from steps (1) and (2)
     - Apps > Install > Available > Jellyfin
@@ -93,18 +92,32 @@ If you don't want to install it from the "Available" tab:
 
 You basically do not want to turn on Developer Mode again every 50 hours...
 
-
-This is a work in progress :D
-
-Full solution:  
-https://gist.github.com/Raicuparta/f9cd299918e7280cc5c90c947b95de0f  
+A few ways of remedying this:
 
 
-Easier to implement solution (probably):  
-https://webosapp.club/timer/
+## Device Manager for webOS
+
+Again to the rescue!!
+
+Info > Dev Mode > Renew Automatically...
+
+It offers two possibilities:  
+- Using [ifttt](https://ifttt.com/)
+- Using a [shell script]({{ site.baseurl }}/assets/lgtv-renew-developer-mode.sh) (schedule with a cron job)
 
 
-The Device Manager for webOS also has a builtin solution.
+## RootMyTV
 
-TODO: Find out which one is curently easiest  
-TODO: Also need to connect a keyboard/mouse now I guess
+Open the TV browser and surf to [RootMy.Tv](https://rootmy.tv/)...  
+This automatically extends Developer Mode, plus you can now install stuff from the unofficial [webOS Homebrew Project](https://www.webosbrew.org).
+
+{% include github-stars.html url="RootMyTV/RootMyTV.github.io" desc="RootMyTV is a user-friendly exploit for rooting/jailbreaking LG webOS smart TVs." %}
+{% include github-stars.html url="webosbrew/webos-homebrew-channel" desc="Unofficial webOS TV homebrew store and root-related tooling" %}
+
+
+
+## Other
+
+- [Script](https://gist.github.com/Raicuparta/f9cd299918e7280cc5c90c947b95de0f) using [Home Assistant](https://www.home-assistant.io/)
+- [webOS App Club](https://webosapp.club/timer/): This is a Russian site without Github links, so I didn't try it out
+- [Manual instructions](https://github.com/SR-Lut3t1um/Webos-renew-dev/) in this Github README
