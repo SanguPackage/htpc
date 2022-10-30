@@ -8,7 +8,7 @@ desc: >
   For webOS 6, get it from the official LG Content Store. If not, get ready to
   become a webOS TV Developer!
 bigimg:
-  url: JellyfinLG-Big.png
+  url: JellyfinLG-big.png
   desc: "Photo by Dall-E"
 img:
   url: JellyfinLG.png
