@@ -21,6 +21,11 @@ tags: [tutorial,fun]
 series: home-media-server
 toc:
   title: 💁 Connections
+interesting:
+  - git: caronc/apprise
+    desc: "One notification library to rule them all."
+  - git: containrrr/shoutrrr
+    desc: Notification library for gophers and their furry friends.
 ---
 
 When a new Futurama episode comes out after a 10 year hiatus,
