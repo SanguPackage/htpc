@@ -20,10 +20,13 @@ series: home-media-server
 toc:
   title: Container Management
   icon: icon-docker
+updates:
+  - date: "2022-10-30"
+    desc: "Added Homarr"
 ---
 
 
-By now, there are so many containers, who can remember all those funky names/urls/ports.
+By now, there are so many containers, who can remember all those funky names/urls/ports.  
 The solution is, obviously, to add even more containers!
 
 <!--more-->
@@ -37,14 +40,17 @@ The more advanced ones (ex: Organizr) aggregate information from the other conta
 functionality you don't even have to leave your launcher at all.
 
 
-## Muximux
+## TL&amp;DR
 
-{% include github-stars.html url="mescon/Muximux" desc="A lightweight way to manage your HTPC" %}
+You probably want to pick one of these three:
 
-The simplest, most lightweight launcher. Has a small header with your most used apps and launches them
-in an iframe. Pretty slick, works well, the settings UI is perhaps a bit lacking.
+- **Heimdall**: Simple bookmarks with some small integrations
+- **Homarr**: Simple bookmarks with deeper integrations: a built-in calendar, healthchecks etc
+- **Organizr**: If you want the ultimate dashboard and are willing to spend time on it
 
-{% include post/image.html file="Home Media Center-MixuMux-Screenshot.png" alt="" title="" desc="Muximux" maxWidth="500px" %}
+They know all your favourite containers and are pre-configured with icons/ports for easy setup.  
+Integrations are something like showing coming-up shows/movies, the current download speed, active downloads and more.
+
 
 
 
@@ -68,6 +74,47 @@ The [one I went with](https://heimdall.site/). Definitely more feature rich comp
 {% include post/image.html file="Home Media Center-Heimdall-Screenshot.jpg" alt="" title="" desc="Heimdall" maxWidth="500px" %}
 
 
+**Disclaimer**:  
+While it works pretty well overall, editing an existing tile can be challenging at times.
+
+
+
+
+## Homarr
+
+![Homarr Logo]({{ site.baseurl }}/assets/blog-images/Homarr-Logo.png "Homarr Logo"){: style="float: left; margin-right: 16px; width: 50px"}
+
+{% include github-stars.html url="ajnart/homarr" desc="Customizable home page to interact with your Docker containers (e.g. Sonarr/Radarr)" %}
+
+
+[Homarr](https://homarr.dev/): One of the new *Arr kids on the block, with mobile support.  
+Initial setup felt like work but if you enter the name of a known container (ex: Jellyfin, Transmission, ...) it will auto-fill in the details like Heimdall does.
+
+Some notable features why you may want to go with Homarr instead of Heimdall:
+
+- Calendar: Show coming up shows/movies in a calendar widget
+- Docker: Start/Stop containers, Pin a running container to the dashboard
+- Customizations: Light/Dark themes, background image, dashboard icon size, or just inject custom CSS
+
+
+{% include post/image.html file="Homarr-Dashboard.png" alt="" title="" desc="Homarr Dashboard with calendar, ping, search, Transmission and docker integrations" maxWidth="500px" %}
+
+{% include post/image.html file="Homarr-Settings.png" alt="" title="" desc="The Settings in Homarr" maxWidth="350px" %}
+
+
+
+## Muximux
+
+{% include github-stars.html url="mescon/Muximux" desc="A lightweight way to manage your HTPC" %}
+
+The simplest, most lightweight launcher. Has a small header with your most used apps and launches them
+in an iframe. Pretty slick, works well, the settings UI is perhaps a bit lacking.
+
+{% include post/image.html file="Home Media Center-MixuMux-Screenshot.png" alt="" title="" desc="Muximux" maxWidth="500px" %}
+
+
+
+
 
 ## Organizr
 
@@ -85,6 +132,12 @@ Very good integration with Plex.
   - ...
 
 
+**Disclaimer**:  
+I spent some time trying to get this to work and got a few things setup but eventually gave up.
+You can create that one complete dashboard, but it's gonna take some time setting it up!
+
+
+
 ## HTPC-Manager
 
 {% include github-stars.html url="styxit/HTPC-Manager" desc="A fully responsive interface to manage all your favorite software on your Htpc." %}
@@ -96,6 +149,7 @@ Works best with XBMC, Usenet & Sick Beard / Couchpotato. So not a good match for
 # Docker Infrastructure
 
 <!-- TODO: Add vault, duplicati, ... -->
+<!-- If this becomes larger, probably best to move it to a separate article? -->
 
 This section is a work in progress 😃 But you definitely want:
 
