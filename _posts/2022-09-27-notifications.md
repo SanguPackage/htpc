@@ -55,7 +55,7 @@ The most useful is probably:
 One of the predefined Connections. The only thing you really need to configure is the Slack WebHook.  
 Which looks like this:
 
-```text
+```sh
 https://hooks.slack.com/services/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
 ```
 
