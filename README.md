@@ -1,7 +1,10 @@
 HTPC
 ====
 
-[HTPC @ Sangu](https://sangu.be/htpc)
+- [HTPC @ Sangu](https://sangu.be/htpc): Deployed website
+- [HTPC docker-compose](https://github.com/Laoujin/Htpc)
+- [HTPC Powerpoint](https://github.com/Laoujin/Htpc-Presentation)
+
 
 # Deployment
 
