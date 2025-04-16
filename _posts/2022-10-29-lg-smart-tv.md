@@ -68,7 +68,7 @@ After installing "Developer Mode" from the LG Content Store:
 
 {% include github-stars.html url="webosbrew/dev-manager-desktop" desc="Device/DevMode Manager for webOS TV" %}
 
-Many ways to install Jellyfin, this Desktop UI makes it particulary easy. Check the official docs for screenshots on installation.
+Many ways to install Jellyfin, this Desktop UI makes it particularly easy. Check the official docs for screenshots on installation.
 
 Note that you can leave the settings in "Add Device" not mentioned in the TL&DR as is:  
 - Port Number: 9992
