@@ -88,15 +88,6 @@ If you are looking for something hands on, this might be for you. There is work 
 {% include github-stars.html url="iam4x/bobarr" desc="The all-in-one alternative for Sonarr, Radarr, Jackett... with a VPN and running in docker" %}
 
 
-## Openflixr
-
-[Openflixr](https://www.openflixr.com/) uses VM instead of Docker.
-
-Currently under [new management](https://www.reddit.com/r/seedboxes/comments/ixbc12/what_happened_to_openflixr/):
-their website is down, the alternative [url](http://openflixr.olympitech.co.uk/).
-Check out their [Discord](https://discord.gg/vGkVqDBvSc) if interested!
-
-
 ## QuickBox
 
 {% include github-stars.html url="QuickBox/QB" desc="A simplistic approach to achieving easy seedbox and services management from a beautifully designed dashboard." %}
@@ -104,6 +95,15 @@ Check out their [Discord](https://discord.gg/vGkVqDBvSc) if interested!
 There is now a QuickBox Pro which most of the attention of the maintainer goes to, so keep that in mind when choosing this option.
 A nice web UI to [install software](https://quickbox.io/knowledge-base/list-of-applications-you-can-install-on-quickbox/) (ie Sonarr, Radarr, ...),
 monitor your server (CPU, RAM, ...) and easy user management.
+
+
+## Openflixr
+
+Openflixr uses VM instead of Docker.
+
+Not much seems to be happening here anymore,
+but they still have an active [Discord](https://discord.gg/vGkVqDBvSc).
+
 
 
 ## Discontinued
