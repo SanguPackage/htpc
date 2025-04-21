@@ -118,6 +118,6 @@ This automatically extends Developer Mode, plus you can now install stuff from t
 
 ## Other
 
-- [Script](https://gist.github.com/Raicuparta/f9cd299918e7280cc5c90c947b95de0f) using [Home Assistant](https://www.home-assistant.io/)
+- [Home Assistant](https://www.home-assistant.io/) integration [Jellyfin_HA](https://github.com/koying/jellyfin_ha)
 - [webOS App Club](https://webosapp.club/timer/): This is a Russian site without Github links, so I didn't try it out
 - [Manual instructions](https://github.com/SR-Lut3t1um/Webos-renew-dev/) in this Github README
