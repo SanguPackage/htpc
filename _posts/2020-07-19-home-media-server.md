@@ -32,7 +32,7 @@ on your NAS, on a HTPC (Home Theater PC) or even on your main system.
 This first part covers:
 
 - Explaining what the different containers do and how they work together
-- Which project I chose for each job. [Some possible alternatives can be found in this part](../home-media-server-alternatives)
+- Which project I chose for each job. [Some possible alternatives can be found in this part]({{ 'blog/home-media-server-alternatives' | relative_url}})
 - Some beginner tips & Configuration
 
 
@@ -41,9 +41,9 @@ This first part covers:
 
 Other parts:
 
-- All these containers are becoming unwieldy fast: [Container Management](../home-media-server-management)
-- Looking for a complete out-of-the-box opinionated solution instead: [Prebuilt boxes](../home-media-server-prebuilt-boxes)
-- If you do not want to stop at series/movies, take a look at [Out of scope](../home-media-server-out-of-scope) for inspiration
+- All these containers are becoming unwieldy fast: [Container Management]({{ 'blog/home-media-server-management' | relative_url }})
+- Looking for a complete out-of-the-box opinionated solution instead: [Prebuilt boxes]({{ 'blog/home-media-server-prebuilt-boxes' | relative_url }})
+- If you do not want to stop at series/movies, take a look at [Out of scope]({{ 'blog/home-media-server-out-of-scope' | relative_url }}) for inspiration
 
 
 
@@ -77,7 +77,7 @@ Anyway, I came up with something that looks like this:
 ## Breakdown
 
 Some choices needed to be made because pretty much every docker container in the diagram above has [other open-source or
-proprietary alternatives](../home-media-server-alternatives) you could opt for instead.
+proprietary alternatives]({{ 'blog/home-media-server-alternatives' | relative_url }}) you could opt for instead.
 
 Need more details? Reddit is an excellent source of information for everything Sonarr/Radarr.
 
@@ -301,5 +301,5 @@ a strong login/password set. For some containers, authentication is turned off b
 {: .notice--danger}
 
 Friends and family you'll typically give access only to the Media Server (Jellyfin or Plex or ...) and [Ombi](https://ombi.io/),
-perhaps through a separate Heimdall dashboard (Heimdall is covered in [Container Management](../home-media-server-management))
+perhaps through a separate Heimdall dashboard (Heimdall is covered in [Container Management]({{ 'blog/home-media-server-management' | relative_url }}))
 user so they also have only one url to bookmark.
