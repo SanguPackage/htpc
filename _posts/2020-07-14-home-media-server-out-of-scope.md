@@ -58,7 +58,6 @@ server, the links below might prove a good starting point.
 {% include github-stars.html url="Piwigo/Piwigo" desc="Manage your photos with Piwigo" %}
 {% include github-stars.html url="thibaud-rohmer/PhotoShow" desc="A free web gallery in PHP with drag-n-drop support" %}
 {% include github-stars.html url="KDE/digikam" desc="Digital photo management application" %}
-{% include github-stars.html url="bierdok/pixapop" desc="View your photos in the easiest way" %}
 
 
 # Other
