@@ -29,7 +29,7 @@ google_analytics: UA-30075487-3
 
 
 # Blog
-github_data_url: https://github.com/SanguPackage/htpc/blob/master/
+github_data_url: https://github.com/SanguPackage/htpc/blob/main/
 collections:
   posts:
     output: true
