@@ -65,6 +65,13 @@
   }
   .dp-logo { width: 48px; height: 48px; object-fit: contain; }
   .dp-title { margin: .5rem 0 .25rem; font-size: 1.3rem; }
+  .dp-repo {
+    display: flex; align-items: center; gap: .4rem;
+    margin: 0 0 .75rem;
+    &[hidden] { display: none; }
+    .dp-gh { color: #94a3b8; display: inline-flex; &:hover { color: #e2e8f0; } }
+    .dp-stars { font-size: .9rem; color: #cbd5e1; }
+  }
   .dp-desc { color: #94a3b8; margin: 0 0 1rem; }
   .dp-links {
     display: flex; flex-wrap: wrap; gap: .5rem;

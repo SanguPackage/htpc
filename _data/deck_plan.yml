@@ -1,8 +1,10 @@
 # Detail-panel content for the /deck-plan/ diagram. Keys match the SVG node ids
 # (data-node). Links hard-code the /htpc baseurl (YAML isn't processed by Liquid).
+# `github` (owner/repo) drives the repo-logo link + live ⭐ star count in the panel.
 Radarr:
   title: Radarr
   logo: /htpc/assets/blueprint/logos/radarr.svg
+  github: Radarr/Radarr
   description: >
     The movie quartermaster. Watches for the films you want, grabs the best
     release the moment it appears, then renames and files it into your library.
@@ -13,6 +15,7 @@ Radarr:
 Sonarr:
   title: Sonarr
   logo: /htpc/assets/blueprint/logos/sonarr.svg
+  github: Sonarr/Sonarr
   description: >
     The TV quartermaster. Follows your shows, grabs each new episode as it airs,
     and keeps every season tidily organised.
@@ -23,6 +26,7 @@ Sonarr:
 Prowlarr:
   title: Prowlarr
   logo: /htpc/assets/blueprint/logos/prowlarr.svg
+  github: Prowlarr/Prowlarr
   description: >
     The spyglass. One place to manage every indexer and tracker, feeding search
     results to Radarr and Sonarr so they always know where to look.
@@ -33,6 +37,7 @@ Prowlarr:
 qBittorrent:
   title: qBittorrent
   logo: /htpc/assets/blueprint/logos/qbittorrent.svg
+  github: qbittorrent/qBittorrent
   description: >
     The cargo hold. Does the actual hauling — downloads the releases the *arr
     fleet orders and drops them where they can be imported.
@@ -43,6 +48,7 @@ qBittorrent:
 Bazarr:
   title: Bazarr
   logo: /htpc/assets/blueprint/logos/bazarr.svg
+  github: morpheus65535/bazarr
   description: >
     The translator. Follows your library and fetches matching subtitles in your
     languages, writing them alongside each film and episode.
@@ -53,17 +59,18 @@ Bazarr:
 Seerr:
   title: Seerr
   logo: /htpc/assets/blueprint/logos/seerr.svg
+  github: seerr-team/seerr
   description: >
     The ship's log. The friendly request box for crew and guests — search a
     title, tap request, and the fleet takes it from there. The merged successor
     to Overseerr and Jellyseerr.
   links:
-    - { label: "GitHub", url: "https://github.com/seerr-team/seerr" }
     - { label: "On the blog", url: "/htpc/blog/goodbye-ombi/" }
   screenshots: []
 Jellyfin:
   title: Jellyfin
   logo: /htpc/assets/blueprint/logos/jellyfin.svg
+  github: jellyfin/jellyfin
   description: >
     Home port. The media server that streams everything the fleet brings in to
     every telly, phone and browser in the house.
@@ -74,18 +81,18 @@ Jellyfin:
 FlareSolverr:
   title: FlareSolverr
   logo: /htpc/assets/blueprint/logos/flaresolverr.svg
+  github: FlareSolverr/FlareSolverr
   description: >
     Prowlarr's first mate. A proxy that clears Cloudflare challenges so indexers
     behind them stay reachable.
-  links:
-    - { label: "GitHub", url: "https://github.com/FlareSolverr/FlareSolverr" }
+  links: []
   screenshots: []
 Jellystat:
   title: Jellystat
   logo: /htpc/assets/blueprint/logos/jellystat.svg
+  github: CyferShepard/Jellystat
   description: >
     Jellyfin's logbook. Watch statistics and history for your media server —
     who watched what, and how often.
-  links:
-    - { label: "GitHub", url: "https://github.com/CyferShepard/Jellystat" }
+  links: []
   screenshots: []

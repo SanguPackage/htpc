@@ -1,5 +1,5 @@
 import { expect, test, describe } from "bun:test";
-import { isTap, contentFor } from "../assets/js/blueprint.js";
+import { isTap, contentFor, formatStars } from "../assets/js/blueprint.js";
 
 describe("isTap", () => {
   test("true for a still, quick pointer gesture", () => {
@@ -26,5 +26,23 @@ describe("contentFor", () => {
   });
   test("returns null for a missing id", () => {
     expect(contentFor(undefined, data)).toBeNull();
+  });
+});
+
+describe("formatStars", () => {
+  test("small counts print verbatim", () => {
+    expect(formatStars(999)).toBe("999");
+    expect(formatStars(0)).toBe("0");
+  });
+  test("thousands get one decimal and a k", () => {
+    expect(formatStars(13904)).toBe("13.9k");
+    expect(formatStars(2380)).toBe("2.4k");
+  });
+  test("large round thousands drop the decimal", () => {
+    expect(formatStars(53969)).toBe("54k");
+  });
+  test("empty string for unknown/nullish counts", () => {
+    expect(formatStars(null)).toBe("");
+    expect(formatStars(undefined)).toBe("");
   });
 });
