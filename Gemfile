@@ -22,6 +22,8 @@ gem "wdm", "~> 0.2", platforms: [:mingw, :mswin, :x64_mingw]
 group :jekyll_plugins do
    gem "kramdown-parser-gfm"
    gem "jekyll-feed", "~> 0.6"
+   gem "jekyll-seo-tag", "~> 2.8"
+   gem "jekyll-sitemap", "~> 1.4"
    gem "jemoji", "~> 0.13.0"
    gem "jekyll-gist", "~> 1.5.0"
    gem "jekyll-avatar", "~> 0.8.0"
