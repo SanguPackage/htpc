@@ -7,38 +7,29 @@ date: 2020-07-18
 updates:
   - date: "2026-07-05"
     desc: "Rewrote from stub with the real 12-service compose in use on the NAS: single /data root for hardlinks, Prowlarr + FlareSolverr, Jellyseerr/Jellystat, Recyclarr and Watchtower"
-desc: >
+description: >
   Now that we have determined what our setup should look like,
   let's combine them in a single docker-compose file.
 bigimg:
   url: Home Media Center-HolyGrail-Big.png
   desc: "Photo from Once upon a time"
 img:
-  url: Home Media Center-Small.jpg
-  desc: "Photo by Ian Battaglia"
-  title: ""
+  url: containers-sm.webp
   linkUrl: 
 categories: 
 github: Laoujin/Htpc
-tags: [tutorial,fun]
+tags: [docker, self-hosted]
 series: home-media-server
 toc:
   title: Docker Compose
   icon: docker
 ---
 
-We've picked the crew, argued about which download client to press-gang, and drawn the map. All that's
-left is to actually cast off. This is where the whole fleet gets folded into a single `docker-compose.yml`
+We've picked the crew and drawn the map. All that's
+left is to actually cast off. This is where the whole fleet gets folded into a single `compose.yml`
 and — spoiler — it really is close to `docker compose up -d` easy.
 
 <!--more-->
-
-{% include github-stars.html url="Laoujin/Htpc" desc="The whole setup, .env and all" %}
-
-Everything below lives in that repo. Two files run the show: a `.env` with all the knobs, and the
-`docker-compose.yml` that reads them. No secrets or ports hard-coded in the compose itself, so the same
-file runs on all my NAS boxes with only a different `.env`.
-
 
 # The `.env` first
 
@@ -58,12 +49,14 @@ TZ=Europe/Brussels
 # Media files (movies, series, downloads) — one root, see below
 DATA_PATH=./htpc
 
-# Container config. Do NOT put this in a Dropbox/GDrive-synced folder.
+# Container config. Do NOT put this in a Dropbox/GDrive-synced/SMB folder.
+# !! This will corrupt the Radarr SQLite DB!!
 CONFIG_PATH=./config
 
 # no | on-failure | always | unless-stopped
 RESTART_POLICY=unless-stopped
 
+# For automatic updates with Watchtower
 DOCKER_SOCKET=/var/run/docker.sock
 
 # If you remember one port, make it Heimdall's:
@@ -121,7 +114,6 @@ Nothing exotic — the same shape repeated per service: the LSIO trinity, a conf
 version: "3"
 
 services:
-
   # Dashboard — the one URL you actually bookmark
   heimdall:
     image: linuxserver/heimdall
@@ -208,7 +200,7 @@ services:
 
   # Torrent client — same /data root → hardlinks kept
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
+    image: lscr.io/linuxserver/qbittorrent
     container_name: htpc-qbittorrent
     environment:
       - PUID=${PUID}
@@ -228,7 +220,7 @@ services:
 
   # Solves Cloudflare challenges for Prowlarr (proxy: http://flaresolverr:8191)
   flaresolverr:
-    image: ghcr.io/flaresolverr/flaresolverr:latest
+    image: ghcr.io/flaresolverr/flaresolverr
     container_name: htpc-flaresolverr
     environment:
       - LOG_LEVEL=info
@@ -241,7 +233,7 @@ services:
 
   # Requests — point it at wherever Jellyfin lives
   jellyseerr:
-    image: fallenbagel/jellyseerr:latest
+    image: fallenbagel/jellyseerr
     container_name: htpc-jellyseerr
     environment:
       - TZ=${TZ}
@@ -266,7 +258,7 @@ services:
     restart: ${RESTART_POLICY}
 
   jellystat:
-    image: cyfershepard/jellystat:latest
+    image: cyfershepard/jellystat
     container_name: htpc-jellystat
     environment:
       - TZ=${TZ}
@@ -287,7 +279,7 @@ services:
 
   # Syncs TRaSH-guides quality profiles into Sonarr/Radarr on a cron
   recyclarr:
-    image: ghcr.io/recyclarr/recyclarr:latest
+    image: ghcr.io/recyclarr/recyclarr
     container_name: htpc-recyclarr
     user: ${PUID}:${PGID}
     environment:
@@ -321,16 +313,10 @@ I trimmed the `expose:` blocks and Watchtower's full notification env for readab
 
 A few services earn their own paragraph — most already have a full write-up elsewhere in the series:
 
-- **Prowlarr** rides the `:develop` tag and a hard-coded `unless-stopped`. It talks to
-  **FlareSolverr** by service name (`http://flaresolverr:8191`) — no port juggling, that's Docker's
-  internal DNS. Why FlareSolverr at all? [Cloudflare]({{ site.baseurl }}/blog/flaresolverr-byparr).
 - **qBittorrent** replaced Transmission — [here's why]({{ site.baseurl }}/blog/goodbye-transmission). Note
-  `6881` is published verbatim (not via `.env`): that's the BitTorrent listen port, and a fixed one makes
-  port-forwarding sane.
+  `6881` is published verbatim (not via `.env`) it is the BitTorrent listen port.
 - **Jellyseerr** and **Jellystat** both point at a **Jellyfin that isn't in this file** — mine runs in a
   separate LXC. Requests > Sonarr/Radarr is why [Ombi got retired]({{ site.baseurl }}/blog/goodbye-ombi).
-- **Jellystat** is the only service with a `depends_on`: it needs its Postgres up first. Reachable at
-  `jellystat-db:5432`, again by service name.
 - **Recyclarr** runs `user: ${PUID}:${PGID}` directly (no LSIO wrapper) and syncs the
   [TRaSH guides]({{ site.baseurl }}/blog/recyclarr) on a cron.
 
@@ -369,11 +355,6 @@ docker compose up -d
 That's genuinely it. `docker compose logs -f sonarr` if something sulks, `docker compose down` to stop the
 lot. Then open Heimdall on port `9999` and start configuring — which, as promised way back at the start,
 is where the *real* time goes.
-
-One note on the command itself: it's `docker compose` (v2, a plugin, no hyphen) these days. The old
-standalone `docker-compose` still works but is deprecated. The `version: "3"` line at the top of the file
-is likewise ignored by modern Compose — harmless, kept here only so nobody panics at its absence.
-{: .notice--info}
 
 
 # Conclusion
