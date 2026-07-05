@@ -1,0 +1,141 @@
+// highlight.js theme for the "Dark Sea-Chart" palette + the enhancement chrome
+// (filename tab, copy button, marked lines, opt-in number gutter) produced by
+// assets/js/code-enhance.js. Loaded last so it wins over the base pre/code rules
+// in _pirateflix.scss. Colours reference the --brass/--teal/--red vars from :root.
+
+// Amber sits between brass and red on the chart palette; used for numbers so they
+// read apart from brass keywords and teal strings without leaving the scheme.
+$code-amber: #f0a868;
+$code-sky: #9ad0ff;
+$code-comment: #6f8ba6;
+
+.pf .post-content {
+  .codewrap {
+    margin: 24px 0;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #0c2136;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, .25);
+  }
+
+  .codebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 12px;
+    background: linear-gradient(#123049, #0e2740);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+
+  .codelang {
+    color: var(--brass);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .codecopy {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 3px 10px;
+    cursor: pointer;
+    transition: color .15s, border-color .15s;
+
+    &:hover { color: var(--ink); border-color: var(--teal); }
+    &.copied { color: var(--teal); border-color: var(--teal); }
+  }
+
+  // Reset the plain pre styling from _pirateflix.scss now that pre lives in a wrapper.
+  .codewrap pre {
+    margin: 0;
+    padding: 14px 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    overflow: auto;
+  }
+
+  .codewrap pre code {
+    display: inline-block;
+    min-width: 100%; // let marked-line backgrounds span the full width while scrolling
+    border: 0;
+    padding: 0;
+    color: var(--ink);
+    line-height: 1.5; // denser than the theme's airy 1.6 body rhythm
+  }
+
+  // One .cl span per source line, so a line can carry a background/number.
+  .cl {
+    display: block;
+    padding: 0 16px;
+  }
+
+  // A blank source line is an empty block and would collapse; the zero-width
+  // space (in CSS, so it stays out of copied text) keeps its line box.
+  .cl:empty::after { content: "\200b"; }
+
+  .cl.hl {
+    background: rgba(224, 179, 74, .13);
+    box-shadow: inset 3px 0 0 var(--brass);
+  }
+
+  // Opt-in gutter: `.line-numbers` IAL on the fenced block.
+  .line-numbers pre code { counter-reset: ln; }
+
+  .line-numbers .cl {
+    position: relative;
+    padding-left: 54px;
+
+    &::before {
+      counter-increment: ln;
+      content: counter(ln);
+      position: absolute;
+      left: 0;
+      width: 38px;
+      text-align: right;
+      color: var(--muted);
+      opacity: .55;
+      user-select: none;
+    }
+  }
+}
+
+// Token colours.
+.pf .hljs { color: var(--ink); }
+.pf .hljs-comment,
+.pf .hljs-quote { color: $code-comment; font-style: italic; }
+.pf .hljs-keyword,
+.pf .hljs-selector-tag,
+.pf .hljs-literal,
+.pf .hljs-doctag,
+.pf .hljs-attr,
+.pf .hljs-attribute { color: var(--brass); } // mapping keys read as the structure
+.pf .hljs-string,
+.pf .hljs-regexp,
+.pf .hljs-addition { color: var(--teal); }
+.pf .hljs-number,
+.pf .hljs-symbol,
+.pf .hljs-bullet { color: $code-amber; }
+.pf .hljs-name,
+.pf .hljs-selector-id,
+.pf .hljs-selector-class,
+.pf .hljs-title,
+.pf .hljs-section,
+.pf .hljs-built_in { color: $code-sky; }
+.pf .hljs-type,
+.pf .hljs-class .hljs-title { color: var(--teal); }
+.pf .hljs-meta { color: var(--muted); }
+.pf .hljs-meta .hljs-keyword { color: var(--brass); }
+.pf .hljs-variable,
+.pf .hljs-template-variable { color: var(--red); }
+.pf .hljs-deletion { color: var(--red); }
+.pf .hljs-emphasis { font-style: italic; }
+.pf .hljs-strong { font-weight: 700; }

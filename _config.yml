@@ -56,6 +56,8 @@ exclude:
   - Gemfile.lock
   - README.md
   - docs
+  - test
+  - assets/js/code-enhance.test.js
   - scripts
   - MIDJOURNEY.md
   - MIDJOURNEY_NEW_DESIGN.md
