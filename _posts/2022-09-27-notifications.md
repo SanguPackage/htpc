@@ -76,6 +76,10 @@ For movies you often even get a poster picture etc!
 
 ![Slack Webhook example]({{ site.baseurl }}/assets/blog-images/Connections-Slack-Result.png "Slack Webhook example"){: .img-responsive}
 
+**Tip:** Instead of a plain incoming webhook, you can wire the notifications through a proper Slack **app/bot**
+(with a `xoxb-` bot token) for richer, better-looking messages like you get with the Discord integration.
+{: .notice--info}
+
 
 ## Discord
 
@@ -103,6 +107,8 @@ For **Plex** there is a dedicated option available.
 
 
 ## Notifiarr
+
+{% include github-stars.html url="Notifiarr/notifiarr" desc="Connect your *arr stack to Discord (and more) via Notifiarr.com" %}
 
 If you want a whole Dashboard...
 
