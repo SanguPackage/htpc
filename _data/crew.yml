@@ -1,42 +1,42 @@
 - key: radarr
   name: Radarr
   role: Quartermaster · Films
-  emblem: radarr2.png
+  emblem: radarr2.webp
   accent: "#f59e0b"
   blurb: Hunts, grabs & files every movie you want.
 - key: sonarr
   name: Sonarr
   role: Quartermaster · TV
-  emblem: sonarr.png
+  emblem: sonarr.webp
   accent: "#34d399"
   blurb: Follows your shows, grabs each new episode.
 - key: seerr
   name: Seerr
   role: The Ship's Log
-  emblem: seerr2.png
+  emblem: seerr2.webp
   accent: "#e2564a"
   blurb: Crew & guests request titles with a tap.
 - key: jellyfin
   name: Jellyfin
   role: Home Port
-  emblem: jellyfin.png
+  emblem: jellyfin.webp
   accent: "#e0b34a"
   blurb: Streams it all to every telly in the house.
 - key: prowlarr
   name: Prowlarr
   role: The Spyglass
-  emblem: jellyseerr.png
+  emblem: jellyseerr.webp
   accent: "#38bdf8"
   blurb: Scans every indexer on the high seas.
 - key: bazarr
   name: Bazarr
   role: The Translator
-  emblem: bazarr.png
+  emblem: bazarr.webp
   accent: "#22d3ee"
   blurb: Finds & syncs subtitles in your tongue.
 - key: qbittorrent
   name: qBittorrent
   role: The Cargo Hold
-  emblem: qbittorrent.png
+  emblem: qbittorrent.webp
   accent: "#a78bfa"
   blurb: Does the actual hauling, quietly.

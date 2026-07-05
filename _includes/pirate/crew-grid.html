@@ -5,7 +5,7 @@
     {% for c in site.data.crew %}
       {% assign emblem = '/assets/' | append: c.emblem %}
       {% assign found = site.static_files | where: "path", emblem %}
-      {% if found == empty %}{% assign emblem = '/assets/logo.png' %}{% endif %}
+      {% if found == empty %}{% assign emblem = '/assets/logo.webp' %}{% endif %}
       <div class="crew" style="--c:{{ c.accent }};background-image:url('{{ emblem | relative_url }}')">
         <img class="logo" src="{{ '/assets/blueprint/logos/' | append: c.key | append: '.svg' | relative_url }}" alt="{{ c.name }} logo" loading="lazy">
         <div class="scrim">

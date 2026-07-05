@@ -21,7 +21,7 @@ description: > # site-wide meta description (homepage + fallback); ~155 chars fo
   Jellyfin, Radarr, Sonarr, Prowlarr and more into one copy-paste HTPC setup.
 author:
   name: Wouter Van Schandevijl # hash form (no `twitter:`) so jekyll-seo-tag skips the invalid twitter:creator handle
-logo: /assets/logo.png # JSON-LD organization logo
+logo: /assets/logo.webp # JSON-LD organization logo
 baseurl: "/htpc" # the subpath of your site, e.g. /blog
 url: "https://sangu.be" # the base hostname & protocol for your site, e.g. https://example.com
 
@@ -35,7 +35,7 @@ defaults:
   - scope:
       path: ""
     values:
-      image: /assets/hero.png
+      image: /assets/hero.webp
 
 
 # Analytics — the gtag.js include is already GA4-compatible; swap in a GA4 Measurement ID (G-XXXXXXXXXX) when ready.
