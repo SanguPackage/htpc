@@ -6,6 +6,9 @@
 // so clamp horizontal overflow at the scroll root (keeps position:sticky working).
 html{overflow-x:hidden}
 
+// NB: the Cinzel @font-face lives in assets/style.scss — it needs Liquid's
+// relative_url for the /htpc baseurl, which @use partials don't get.
+
 :root{
   --sea:#0a1826; --sea2:#0d2032; --panel:#102a40;
   --ink:#cfe3f2; --muted:#7d9bb4; --line:#254a68;
@@ -56,10 +59,22 @@ html{overflow-x:hidden}
   .pf-nav{display:flex;align-items:center;justify-content:space-between;padding:22px 28px;
     border-bottom:1px solid var(--line);position:sticky;top:0;backdrop-filter:blur(6px);
     background:rgba(10,24,38,.7);z-index:5}
-  .brand{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-size:22px;
-    letter-spacing:1px;color:#fff;font-weight:700;text-decoration:none}
-  .brand b{color:var(--brass)}
-  .brand img{height:46px;width:46px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+  .brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+  // circular mask fades the emblem's square png tile into the nav
+  .brand img{height:52px;width:52px;object-fit:contain;border-radius:50%;
+    filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));
+    box-shadow:0 0 0 1.5px rgba(224,179,74,.5),0 0 18px rgba(79,216,196,.15);
+    -webkit-mask:radial-gradient(circle at 50% 48%,#000 63%,transparent 70%);
+            mask:radial-gradient(circle at 50% 48%,#000 63%,transparent 70%)}
+  .brand .lockup{display:flex;flex-direction:column;gap:5px}
+  .brand .word{font-family:'Cinzel',var(--serif);font-weight:700;font-size:27px;
+    letter-spacing:6px;line-height:1;
+    background:linear-gradient(180deg,#f6e2a0 0%,#e0b34a 42%,#b9822b 78%,#8a5e1c 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    color:transparent;text-shadow:0 1px 0 rgba(0,0,0,.25)}
+  .brand .rule{height:1px;background:linear-gradient(90deg,var(--brass),transparent)}
+  .brand .brand-tag{font-family:var(--mono);font-size:9.5px;letter-spacing:4px;
+    text-transform:uppercase;color:var(--teal)}
 
   .hero{padding-top:72px;position:relative;isolation:isolate}
   .hero::before{content:'';position:absolute;z-index:-1;top:-24px;bottom:0;
