@@ -6,11 +6,13 @@
       {% assign emblem = '/assets/' | append: c.emblem %}
       {% assign found = site.static_files | where: "path", emblem %}
       {% if found == empty %}{% assign emblem = '/assets/logo.png' %}{% endif %}
-      <div class="crew" style="--c:{{ c.accent }}">
-        <img class="emblem" src="{{ emblem | relative_url }}" alt="{{ c.name }} emblem" loading="lazy">
-        <div class="n">{{ c.name }}</div>
-        <div class="r">{{ c.role }}</div>
-        <div class="d">{{ c.blurb }}</div>
+      <div class="crew" style="--c:{{ c.accent }};background-image:url('{{ emblem | relative_url }}')">
+        <img class="logo" src="{{ '/assets/blueprint/logos/' | append: c.key | append: '.svg' | relative_url }}" alt="{{ c.name }} logo" loading="lazy">
+        <div class="scrim">
+          <div class="n">{{ c.name }}</div>
+          <div class="r">{{ c.role }}</div>
+          <div class="d">{{ c.blurb }}</div>
+        </div>
       </div>
     {% endfor %}
   </div>

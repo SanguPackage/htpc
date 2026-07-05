@@ -1,7 +1,7 @@
 - key: radarr
   name: Radarr
   role: Quartermaster · Films
-  emblem: radarr.png
+  emblem: radarr2.png
   accent: "#f59e0b"
   blurb: Hunts, grabs & files every movie you want.
 - key: sonarr
@@ -10,28 +10,10 @@
   emblem: sonarr.png
   accent: "#34d399"
   blurb: Follows your shows, grabs each new episode.
-- key: prowlarr
-  name: Prowlarr
-  role: The Spyglass
-  emblem: prowlarr.png
-  accent: "#38bdf8"
-  blurb: Scans every indexer on the high seas.
-- key: qbittorrent
-  name: qBittorrent
-  role: The Cargo Hold
-  emblem: qbittorrent.png
-  accent: "#a78bfa"
-  blurb: Does the actual hauling, quietly.
-- key: bazarr
-  name: Bazarr
-  role: The Translator
-  emblem: bazarr.png
-  accent: "#22d3ee"
-  blurb: Finds & syncs subtitles in your tongue.
 - key: seerr
   name: Seerr
   role: The Ship's Log
-  emblem: seerr.png
+  emblem: seerr2.png
   accent: "#e2564a"
   blurb: Crew & guests request titles with a tap.
 - key: jellyfin
@@ -40,3 +22,21 @@
   emblem: jellyfin.png
   accent: "#e0b34a"
   blurb: Streams it all to every telly in the house.
+- key: prowlarr
+  name: Prowlarr
+  role: The Spyglass
+  emblem: jellyseerr.png
+  accent: "#38bdf8"
+  blurb: Scans every indexer on the high seas.
+- key: bazarr
+  name: Bazarr
+  role: The Translator
+  emblem: bazarr.png
+  accent: "#22d3ee"
+  blurb: Finds & syncs subtitles in your tongue.
+- key: qbittorrent
+  name: qBittorrent
+  role: The Cargo Hold
+  emblem: qbittorrent.png
+  accent: "#a78bfa"
+  blurb: Does the actual hauling, quietly.
