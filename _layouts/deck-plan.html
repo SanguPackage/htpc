@@ -1,13 +1,15 @@
 ---
 layout: default
 ---
-<div class="pf">
-  {% include pirate/nav.html %}
-  <div class="deck-intro">
-    <h1>See how she sails.</h1>
-    <p>The whole fleet at a glance — how a request becomes a film on your telly.
-       Drag to pan, scroll to zoom, hover a rope to trace it, tap a crewmate to meet them.</p>
-  </div>
+<div class="pf deck-page">
+  <header class="pf-nav deck-header">
+    {% include pirate/brand.html %}
+    <div class="deck-title">
+      <h1 class="deck-heading">See how she sails.</h1>
+      <p class="deck-subtitle">The whole fleet at a glance<span class="subtitle-more"> — how a request becomes a film on your telly.</span></p>
+    </div>
+    <a class="btn" href="{{ '/' | relative_url }}">← Back to port</a>
+  </header>
   <div class="deck-stage">
     {% include pirate/deck-plan-svg.html %}
     <aside id="deck-panel" aria-label="Service details">
@@ -27,10 +29,29 @@ layout: default
       </div>
     </aside>
   </div>
-  <a class="deck-back" href="{{ '/' | relative_url }}">← Back to port</a>
-  {% include pirate/footer.html %}
 </div>
 
 <script id="deck-plan-data" type="application/json">{{ site.data.deck_plan | jsonify }}</script>
 <script src="{{ '/assets/js/svg-pan-zoom.min.js' | relative_url }}"></script>
 <script type="module" src="{{ '/assets/js/blueprint.js' | relative_url }}"></script>
+
+<!-- Deck backdrop: inject the aged sea-chart above the flat #0f172a rect (behind every
+     node), kept faint so the flow/icons/arrows stay legible. Runs before the deferred
+     blueprint.js module, so svg-pan-zoom wraps it and it pans/zooms with the diagram.
+     Done in JS (not deck-plan-svg.html) to leave that generated file untouched. -->
+<script>
+(function () {
+  var svg = document.querySelector('svg.floor-svg');
+  if (!svg) return;
+  var url = '{{ "/assets/blueprint/bg3.png" | relative_url }}';
+  var img = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+  img.setAttribute('x', '0'); img.setAttribute('y', '0');
+  img.setAttribute('width', '1040'); img.setAttribute('height', '740');
+  img.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+  img.setAttribute('opacity', '0.3');
+  img.setAttribute('href', url);
+  img.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', url);
+  var bg = svg.querySelector('rect');
+  if (bg) bg.after(img); else svg.insertBefore(img, svg.firstChild);
+})();
+</script>
