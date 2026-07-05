@@ -104,6 +104,10 @@ html{overflow-x:hidden}
   .chart{margin-top:52px;border:1px solid var(--line);border-radius:10px;
     background:linear-gradient(180deg,#0c2136,#0a1826);overflow:hidden;position:relative}
   .chart svg{display:block;width:100%;height:auto}
+  // mobile: break the chart out of the .wrap's 28px padding so it goes edge-to-edge.
+  @media(max-width:640px){
+    .chart{margin-left:-28px;margin-right:-28px;border-left:0;border-right:0;border-radius:0}
+  }
   .route{stroke:var(--teal);stroke-width:2.2;stroke-dasharray:9 8;fill:none;opacity:.85}
   .wp{fill:var(--sea2);stroke:var(--brass);stroke-width:2}
   .wp-lbl{fill:var(--ink);font:600 15px var(--mono)}
@@ -236,6 +240,8 @@ html{overflow-x:hidden}
 .pf-post .post-content pre{padding:16px;overflow:auto}
 .pf-post .post-content code{padding:1px 6px;color:var(--brass)}
 .pf-post .post-content pre code{border:0;padding:0;color:var(--ink)}
+// code in a heading must scale with the heading, not fall back to the UA monospace size
+.pf-post .post-content :is(h1,h2,h3,h4,h5,h6) code{font-family:var(--mono);font-size:.9em}
 // base.scss globally strips list markers + padding; restore them for post prose
 .pf-post .post-content ul{list-style:disc}
 .pf-post .post-content ol{list-style:decimal}
