@@ -28,10 +28,10 @@
   emblem: bazarr.png
   accent: "#22d3ee"
   blurb: Finds & syncs subtitles in your tongue.
-- key: jellyseerr
-  name: Jellyseerr
+- key: seerr
+  name: Seerr
   role: The Ship's Log
-  emblem: jellyseerr.png
+  emblem: seerr.png
   accent: "#e2564a"
   blurb: Crew & guests request titles with a tap.
 - key: jellyfin
