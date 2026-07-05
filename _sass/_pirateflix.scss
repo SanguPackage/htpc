@@ -103,12 +103,6 @@ html{overflow-x:hidden}
   .crew .d{font-size:13px;color:var(--muted)}
 }
 
-// --- it's easy band ---
-.pf{
-  .easy{text-align:center}
-  .easy .btn{margin-top:22px}
-}
-
 // --- chart your course + captain's log + footer ---
 .pf{
   .course{counter-reset:step;list-style:none;padding:0;margin:0}
