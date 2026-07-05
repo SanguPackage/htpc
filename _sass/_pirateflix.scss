@@ -118,6 +118,31 @@ html{overflow-x:hidden}
   .crew .d{font-size:13px;color:var(--muted)}
 }
 
+// --- "why you actually want it" — accent-washed cards with a big faded glyph + CTA ---
+// Scoped to #why so the shared .fleet/.crew crew-grid above stays untouched.
+.pf #why{
+  .fleet{grid-template-columns:repeat(3,1fr);align-items:stretch}
+  @media(max-width:720px){.fleet{grid-template-columns:1fr}}
+
+  .crew{position:relative;overflow:hidden;display:flex;flex-direction:column;
+    text-align:left;padding:22px;min-height:220px;
+    background:
+      radial-gradient(120% 90% at 100% 0%,color-mix(in srgb,var(--c) 26%,transparent),transparent 60%),
+      var(--panel)}
+  .crew > *{position:relative;z-index:1}
+  .crew .n{font-size:20px}
+  .crew .r{margin:3px 0 10px}
+  .crew .d{font-size:14px}
+
+  // oversized, desaturated symbol bleeding out of the bottom-right corner
+  .big{position:absolute;right:8px;bottom:-14px;z-index:0;
+    font-size:120px;line-height:1;opacity:.10;filter:grayscale(1);pointer-events:none}
+
+  .more{margin-top:auto;padding-top:16px}
+  .btn{font-size:12px;padding:9px 16px;border-color:var(--c,var(--brass));color:var(--c,var(--brass))}
+  .btn:hover{background:var(--c,var(--brass));color:#0a1826}
+}
+
 // --- chart your course + captain's log + footer ---
 .pf{
   .course{counter-reset:step;list-style:none;padding:0;margin:0}
