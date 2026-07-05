@@ -1,0 +1,18 @@
+<section id="crew">
+  <h2>Meet the crew.</h2>
+  <p class="sub">Seven little containers, one <code>docker-compose up</code>, running by supper.</p>
+  <div class="fleet">
+    {% for c in site.data.crew %}
+      {% assign emblem = '/assets/' | append: c.emblem %}
+      {% unless site.static_files | where: "path", emblem | first %}
+        {% assign emblem = '/assets/logo.png' %}
+      {% endunless %}
+      <div class="crew" style="--c:{{ c.accent }}">
+        <img class="emblem" src="{{ emblem | relative_url }}" alt="{{ c.name }} emblem" loading="lazy">
+        <div class="n">{{ c.name }}</div>
+        <div class="r">{{ c.role }}</div>
+        <div class="d">{{ c.blurb }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</section>

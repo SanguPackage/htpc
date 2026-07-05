@@ -83,3 +83,15 @@
   @media(max-width:720px){.two{grid-template-columns:1fr}}
 }
 
+// --- crew grid ---
+.pf{
+  .fleet{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+  .crew{border:1px solid var(--line);border-radius:8px;padding:18px;background:var(--panel);
+    border-top:3px solid var(--c,var(--brass));text-align:center}
+  .crew .emblem{width:88px;height:88px;object-fit:contain;display:block;margin:0 auto 12px;
+    filter:drop-shadow(0 3px 8px rgba(0,0,0,.45))}
+  .crew .n{font-family:var(--serif);font-size:19px;color:#fff}
+  .crew .r{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--c,var(--brass));margin:2px 0 8px}
+  .crew .d{font-size:13px;color:var(--muted)}
+}
+
