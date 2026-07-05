@@ -4,7 +4,7 @@ author: Wouter Van Schandevijl
 title: "Goodbye Transmission, Hello qBittorrent"
 subTitle: "The download client that made me bring my own UI, and then made me leave"
 date: 2026-07-05
-desc: >
+description: >
   How Transmission 4.0 quietly killed the web UI, the linuxserver
   bring-your-own-UI dance that followed, and why I ended up on qBittorrent.
 bigimg:
@@ -13,7 +13,7 @@ img:
   url: transmission-sm.webp
   desc: "It's not you, it's me. Actually, it's you."
 categories: 
-tags: [tutorial,fun]
+tags: [torrents, docker]
 series: swapping-tools
 github: transmission/transmission
 toc:

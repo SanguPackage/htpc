@@ -4,7 +4,7 @@ author: Wouter Van Schandevijl
 title: "Recyclarr: The Quality Upgrade I Said No To"
 subTitle: "Sometimes quantity really is a feature"
 date: 2026-07-05
-desc: >
+description: >
   Recyclarr auto-syncs the TRaSH Guides quality tuning into Sonarr and Radarr.
   It's genuinely clever — and I decided not to use it. Here's both halves.
 bigimg:
@@ -14,7 +14,7 @@ img:
   desc: "A tool I admire from a safe distance"
 categories: 
 github: recyclarr/recyclarr
-tags: [tutorial,fun]
+tags: [arr, automation]
 toc:
   title: ♻️ Recyclarr
 ---

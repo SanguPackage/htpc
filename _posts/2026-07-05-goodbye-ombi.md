@@ -4,7 +4,7 @@ author: Wouter Van Schandevijl
 title: "Goodbye Ombi, Hello Jellyseerr"
 subTitle: "The request box gets a glow-up (and a new name, twice)"
 date: 2026-07-05
-desc: >
+description: >
   Ombi still works, but development stalled and it never spoke fluent
   Jellyfin. Jellyseerr does — so we switched. Then Jellyseerr became Seerr.
 bigimg:
@@ -14,7 +14,7 @@ img:
   desc: "Type a title, click request, done."
 categories: 
 github: Ombi-app/Ombi
-tags: [tutorial,fun]
+tags: [arr, jellyfin]
 series: swapping-tools
 toc:
   title: 🎬 Jellyseerr

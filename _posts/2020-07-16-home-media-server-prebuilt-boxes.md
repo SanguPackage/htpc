@@ -7,7 +7,7 @@ date: 2020-07-16
 updates:
   - date: "2026-07-05"
     desc: "Added Saltbox, SEEDbox, mediastack, YAMS, media-stack, docker-compose-nas, seedbox, Buildarr, Deployrr and a homeserver-platforms section (Umbrel/CasaOS/Runtipi/Cosmos); Cloudbox/QuickBox/bobarr moved to discontinued; dropped dead docker-standup and docker-htpc-suite"
-desc: >
+description: >
   Give in some control over your setup but gain a
   ready to go solution out of the box.
 bigimg:
@@ -15,12 +15,10 @@ bigimg:
   desc: "Photo by chuttersnap"
   origin: https://unsplash.com/photos/fyaTq-fIlro
 img:
-  url: Home Media Center-Small.jpg
-  desc: "Photo by Ian Battaglia"
-  title: ""
+  url: pre-built-sm.webp
   linkUrl: 
 categories: 
-tags: [tutorial,fun]
+tags: [self-hosted, hardware]
 series: home-media-server
 toc:
   title: Prebuilt Boxes

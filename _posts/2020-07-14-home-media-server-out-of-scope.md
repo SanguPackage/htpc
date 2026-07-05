@@ -4,7 +4,7 @@ author: Wouter Van Schandevijl
 title: "Out of scope"
 subTitle: "A curated list of open-source projects for music, books and pictures"
 date: 2020-07-14
-desc: >
+description: >
   Other Linuxserver.io docker images for downloading, managing and streaming
   music, books, pictures and more.
 bigimg:
@@ -12,11 +12,9 @@ bigimg:
   desc: "Photo by Jeremy Thomas"
   origin: https://unsplash.com/photos/E0AHdsENmDg
 img:
-  url: Home Media Center-Small.jpg
-  desc: "Photo by Ian Battaglia"
-  origin: https://unsplash.com/photos/VziuvwpGatM
+  url: out-of-scope-sm.webp
 categories: 
-tags: [tutorial,fun]
+tags: [self-hosted, media]
 series: home-media-server
 toc:
   title: Out of scope

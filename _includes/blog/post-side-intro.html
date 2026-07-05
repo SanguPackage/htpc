@@ -11,9 +11,9 @@
 
 
     {% assign blogExcerpt = post.content | split:'<!--more-->' | first | strip_html | strip %}
-    {% assign blogDesc = page.desc | strip_html | strip %}
+    {% assign blogDesc = page.description | strip_html | strip %}
     {% if blogDesc != blogExcerpt %}
-        <div style="line-height: 16px; margin-top: 6px">{{ page.desc }}</div>
+        <div style="line-height: 16px; margin-top: 6px">{{ page.description }}</div>
     {% endif %}
 
 

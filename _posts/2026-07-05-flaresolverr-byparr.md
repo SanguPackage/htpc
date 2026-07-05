@@ -4,7 +4,7 @@ author: Wouter Van Schandevijl
 title: "Getting Past Cloudflare: FlareSolverr & Byparr"
 subTitle: "When your indexer hides behind a bouncer, you bring a bigger bouncer"
 date: 2026-07-05
-desc: >
+description: >
   Some torrent indexers sit behind Cloudflare and block Prowlarr outright.
   FlareSolverr solves the challenge for you — and Byparr is the drop-in
   alternative for when it can't.
@@ -15,7 +15,7 @@ img:
   desc: "You shall not pass. — Cloudflare, probably"
 github: FlareSolverr/FlareSolverr
 categories: 
-tags: [tutorial,fun]
+tags: [torrents, docker]
 toc:
   title: ☁️ FlareSolverr
 ---

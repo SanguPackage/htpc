@@ -6,19 +6,17 @@ subTitle: "How to fill all the terabytes and get on the FBI most wanted list wit
 date: 2020-07-19
 updates:
   - date: 2026-07-05
-desc: >
+description: >
   How to setup your own media server using Linuxserver.io docker images.
 bigimg:
   url: Home Media Center-Big.png
   desc: "Photo by Paweł Czerwiński"
   origin: https://unsplash.com/photos/Yjp0TshmIUI
 img:
-  url: Home Media Center-Small.jpg
-  desc: "Photo by Ian Battaglia"
-  title: ""
+  url: media-center-sm.webp
   linkUrl: 
 categories: 
-tags: [tutorial,fun]
+tags: [self-hosted, docker, media]
 series: home-media-server
 toc:
   title: Home Media Server

@@ -4,7 +4,7 @@ author: Wouter Van Schandevijl
 title: "Jellyfin on LG Smart TV"
 subTitle: "Easy on webOS 6, not so much on pre 2021 TVs with webOS 5 or less."
 date: 2022-10-29
-desc: >
+description: >
   For webOS 6, get it from the official LG Content Store. If not, get ready to
   become a webOS TV Developer!
 bigimg:
@@ -15,7 +15,7 @@ img:
   desc: "Photo by Anna Tsukanova"
   origin: https://unsplash.com/photos/Kzfo5Tq7c9A
 categories: 
-tags: [tutorial,fun]
+tags: [jellyfin, hardware]
 toc:
   title: Jellyfin on LG TV
   icon: tv

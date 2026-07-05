@@ -7,19 +7,17 @@ date: 2020-07-15
 updates:
   - date: "2026-07-05"
     desc: "Dropped dead Emby, OpenELEC, several discontinued Plex companions, CouchPotato and sonarr-sub-downloader; qBittorrent is now the default download client"
-desc: >
+description: >
   Most projects can be swapped with any of these alternatives.
 bigimg:
   url: Home Media Center-Alternatives-Big.png
   desc: "Photo by Daniele Levis Pelusi"
   origin: https://unsplash.com/photos/QSRXNv9kmus
 img:
-  url: Home Media Center-Small.jpg
-  desc: "Photo by Ian Battaglia"
-  title: ""
+  url: alternatives-sm.webp
   linkUrl: 
 categories: 
-tags: [tutorial,fun]
+tags: [self-hosted, docker]
 series: home-media-server
 toc:
   title: Alternatives

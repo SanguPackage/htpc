@@ -4,7 +4,7 @@ author: Wouter Van Schandevijl
 title: "So... What ARE these Arr's doing?"
 subTitle: "Get notified whenever something happened that you are interested in"
 date: 2022-09-27
-desc: >
+description: >
   When it's the start of the new season of your favourite show, let the Arr's
   send you a little ping when it is ready for your viewing leisure.
 bigimg:
@@ -17,7 +17,7 @@ img:
   origin: https://unsplash.com/photos/LOHVrTsdvzY
   title: "Smoke signals is not really one of the options available."
 categories: 
-tags: [tutorial,fun]
+tags: [arr, automation]
 toc:
   title: 💁 Connections
 interesting:

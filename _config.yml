@@ -13,18 +13,32 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: PirateFlix — Home media server, automated
-meta-description: Setup your own HTPC with ease
-meta-keywords: radarr sonarr transmission htpc docker docker-compose heimdall jellyfin bazarr prowlarr ombi
+title: PirateFlix
+tagline: Home media server, automated # jekyll-seo-tag renders "PirateFlix | Home media server, automated" on the homepage
 name: htpc
-description: > # this means to ignore newlines until "baseurl:"
-  A one step Home Theater PC (HTPC) setup with Docker.
+description: > # site-wide meta description (homepage + fallback); ~155 chars for full SERP width
+  Build your own automated home media server with Docker. PirateFlix wires up
+  Jellyfin, Radarr, Sonarr, Prowlarr and more into one copy-paste HTPC setup.
+author:
+  name: Wouter Van Schandevijl # hash form (no `twitter:`) so jekyll-seo-tag skips the invalid twitter:creator handle
+logo: /assets/logo.png # JSON-LD organization logo
 baseurl: "/htpc" # the subpath of your site, e.g. /blog
 url: "https://sangu.be" # the base hostname & protocol for your site, e.g. https://example.com
 
+social:
+  name: PirateFlix
+  links:
+    - https://github.com/SanguPackage/htpc
+
+# Default Open Graph / Twitter share image (posts fall back to this when they set no `image`)
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/hero.png
 
 
-# Social
+# Analytics — the gtag.js include is already GA4-compatible; swap in a GA4 Measurement ID (G-XXXXXXXXXX) when ready.
 google_analytics: UA-30075487-3
 
 
@@ -50,11 +64,15 @@ plugins:
   - jekyll-gist # https://github.com/jekyll/jekyll-gist
   - jekyll-avatar # https://github.com/benbalter/jekyll-avatar
   - jekyll-redirect-from # https://github.com/jekyll/jekyll-redirect-from
+  - jekyll-seo-tag # https://github.com/jekyll/jekyll-seo-tag
+  - jekyll-sitemap # https://github.com/jekyll/jekyll-sitemap
 
 exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - OTHERS.md      # internal notes — keep out of the published site
+  - MIDJOURNEY.md  # internal notes — keep out of the published site
   - docs
   - test
   - assets/js/code-enhance.test.js

@@ -4,7 +4,7 @@ author: Wouter Van Schandevijl
 title: "Goodbye Jackett, Long Live Prowlarr!!"
 subTitle: "Indexer Management: Ain't Nobody Got Time For That"
 date: 2022-09-25
-desc: >
+description: >
   Jackett was great but there were some issues, which Prowlarr addressed.
 bigimg:
   url: Prowlarr-Big.png
@@ -16,7 +16,7 @@ img:
   origin: https://unsplash.com/photos/yMSecCHsIBc
   title: "Jackett simply isn't as cool as Prowlarr"
 categories: 
-tags: [tutorial,fun]
+tags: [arr, torrents]
 series: swapping-tools
 toc:
   title: 🐅 Prowlarr

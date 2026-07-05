@@ -4,17 +4,16 @@ author: Wouter Van Schandevijl
 title: "Container Management"
 subTitle: "One dashboard to command the fleet — who remembers all those ports anyway"
 date: 2020-07-17
-desc: >
+description: >
   What was that url again?
 bigimg:
   url: Home Media Center-Management-Big.jpg
   desc: "Photo by Cameron Venti"
   origin: https://unsplash.com/photos/3rabTGLccwc
 img:
-  url: Home Media Center-Small.jpg
-  desc: "Photo by Ian Battaglia"
+  url: container-management-sm.webp
 categories: 
-tags: [tutorial,fun]
+tags: [docker, self-hosted]
 series: home-media-server
 toc:
   title: Container Management
