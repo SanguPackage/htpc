@@ -2,6 +2,10 @@
 // Ported from _mockups/a-sea-chart.html. All rules are scoped under `.pf` so the
 // theme never leaks into pages that aren't wrapped in the pirate layout.
 
+// The full-bleed hero backdrop uses a 50vw trick; 100vw counts the scrollbar,
+// so clamp horizontal overflow at the scroll root (keeps position:sticky working).
+html{overflow-x:hidden}
+
 :root{
   --sea:#0a1826; --sea2:#0d2032; --panel:#102a40;
   --ink:#cfe3f2; --muted:#7d9bb4; --line:#254a68;
@@ -117,6 +121,12 @@
   .logbook li{display:flex;justify-content:space-between;gap:12px;padding:10px 4px;border-bottom:1px solid var(--line)}
   .logbook a{color:var(--teal);text-decoration:none}
   .logbook .log-date{color:var(--muted);font-size:12px;white-space:nowrap}
+
+  // faint compass-rose watermark behind the course section
+  #course{position:relative;isolation:isolate}
+  #course::after{content:'';position:absolute;z-index:-1;top:40px;right:-40px;
+    width:340px;height:340px;opacity:.05;pointer-events:none;
+    background:var(--rose) center/contain no-repeat}
 }
 .pf-footer{border-top:1px solid var(--line);margin-top:20px;padding:34px 0;color:var(--muted);font-size:13px}
 .pf-footer .wrap{max-width:1080px;margin:0 auto;padding:0 28px;display:flex;gap:22px;flex-wrap:wrap;align-items:center}
