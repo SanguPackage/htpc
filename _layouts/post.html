@@ -10,11 +10,24 @@ layout: default
       {% if page.subTitle %}<p class="post-sub">{{ page.subTitle | escape }}</p>{% endif %}
       <div class="post-date"><i class="fa fa-clock-o"></i> {{ page.date | date: "%-d %b %Y" }}</div>
     </header>
+    {% if page.bigimg %}
+      <figure class="post-hero" style="background-image:url('{{ 'assets/blog-images/' | append: page.bigimg.url | absolute_url }}')">
+        {% if page.bigimg.desc %}<figcaption>{{ page.bigimg.desc }}</figcaption>{% endif %}
+      </figure>
+    {% endif %}
     <div class="post-body">
       <article class="post-content">
         {{ content }}
       </article>
       <aside class="post-aside">
+        {% if page.img %}
+          <figure class="post-thumb">
+            {% if page.img.origin %}<a href="{{ page.img.origin }}">{% endif %}
+            <img src="{{ 'assets/blog-images/' | append: page.img.url | absolute_url }}"{% if page.img.title %} title="{{ page.img.title | escape }}"{% endif %} alt="{{ page.img.desc | default: page.title | escape }}" />
+            {% if page.img.origin %}</a>{% endif %}
+            {% if page.img.desc %}<figcaption>{{ page.img.desc }}</figcaption>{% endif %}
+          </figure>
+        {% endif %}
         {% include toc.html html=content toc=page.toc %}
         {% include blog/post-series.html %}
       </aside>

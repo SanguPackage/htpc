@@ -151,6 +151,11 @@ html{overflow-x:hidden}
 .pf-post .post-content code{padding:1px 6px;color:var(--brass)}
 .pf-post .post-content pre code{border:0;padding:0;color:var(--ink)}
 .pf-post .post-content img{max-width:100%;border:1px solid var(--line);border-radius:6px}
+.pf-post .post-hero{position:relative;height:260px;margin:6px 0 4px;border:1px solid var(--line);border-radius:8px;background-size:cover;background-position:center}
+.pf-post .post-hero figcaption{position:absolute;right:8px;bottom:6px;font-size:11px;color:var(--muted);background:rgba(6,20,33,.6);padding:2px 8px;border-radius:4px}
+.pf-post .post-thumb{margin:0 0 22px}
+.pf-post .post-thumb img{width:100%;border:1px solid var(--line);border-radius:6px}
+.pf-post .post-thumb figcaption{color:var(--muted);font-size:12px;margin-top:6px;line-height:1.4}
 .pf-post .post-aside .sidebar-heading{font-family:var(--serif);color:var(--brass);margin-bottom:8px;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .pf-post .post-aside .sidebar-heading .entry-edit{font-size:12px;color:var(--teal);white-space:nowrap}
 .pf-post .post-aside a{color:var(--teal)}
