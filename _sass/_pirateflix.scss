@@ -188,6 +188,7 @@ html{overflow-x:hidden}
 .pf-post .post-content .notice--info code,
 .pf-post .post-content .notice--danger code{background:#0c2136}
 .pf-post .post-content img{max-width:100%;border:1px solid var(--line);border-radius:6px}
+.pf-post .post-content .github img{border:0;border-radius:0}
 .pf-post .post-hero{position:relative;height:260px;margin:6px 0 4px;border:1px solid var(--line);border-radius:8px;background-size:cover;background-position:center}
 .pf-post .post-hero figcaption{position:absolute;right:8px;bottom:6px;font-size:11px;color:var(--muted);background:rgba(6,20,33,.6);padding:2px 8px;border-radius:4px}
 .pf-post .post-thumb{margin:0 0 22px}
