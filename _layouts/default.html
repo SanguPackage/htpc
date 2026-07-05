@@ -35,6 +35,6 @@
 <body>
   {{ content }}
 
-  {% include footer.html %}
+  {% unless page.layout == "index" %}{% include footer.html %}{% endunless %}
 </body>
 </html>
