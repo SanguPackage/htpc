@@ -428,20 +428,18 @@ footer{
    -         FOOTER BOTTOM            -
 =============================================================*/
 
-.footer-bottom .col-xs-12 p{
+.footer-bottom p{
     font-size   : 12px;
 }
-/*.footer-bottom .col-xs-12 p span{
-    text-transform  : uppercase;
-}*/
-.footer-bottom .col-xs-12 p a{
+.footer-bottom p a{
     color           : #9a9a9a !important;
     text-transform  : capitalize;
 }
-.footer-bottom .col-xs-12 p a:hover{
+.footer-bottom p a:hover{
     color   : #e84700 !important;
 }
 .footer-bottom{
     background-color    : #252525;
-    padding             : 20px 0;
+    padding             : 20px 15px;
+    text-align          : center;
 }
