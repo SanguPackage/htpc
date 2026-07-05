@@ -1,0 +1,28 @@
+---
+layout: default
+---
+<div class="pf">
+  {% include pirate/nav.html %}
+  <div class="deck-intro">
+    <h1>See how she sails.</h1>
+    <p>The whole fleet at a glance — how a request becomes a film on your telly.
+       Drag to pan, scroll to zoom, hover a rope to trace it, tap a crewmate to meet them.</p>
+  </div>
+  <div class="deck-stage">
+    {% include pirate/deck-plan-svg.html %}
+    <aside id="deck-panel" aria-label="Service details">
+      <button class="dp-close" aria-label="Close">&times;</button>
+      <img class="dp-logo" src="" alt="">
+      <h2 class="dp-title"></h2>
+      <p class="dp-desc"></p>
+      <div class="dp-links"></div>
+      <div class="dp-shots"></div>
+    </aside>
+  </div>
+  <a class="deck-back" href="{{ '/' | relative_url }}">← Back to port</a>
+  {% include pirate/footer.html %}
+</div>
+
+<script id="deck-plan-data" type="application/json">{{ site.data.deck_plan | jsonify }}</script>
+<script src="{{ '/assets/js/svg-pan-zoom.min.js' | relative_url }}"></script>
+<script type="module" src="{{ '/assets/js/blueprint.js' | relative_url }}"></script>
