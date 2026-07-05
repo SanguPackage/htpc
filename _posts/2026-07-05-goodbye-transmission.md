@@ -59,17 +59,15 @@ It turned out to be pretty easy to get my good ol' web-control back:
 transmission:
   image: linuxserver/transmission
   environment:
-    - PUID=${PUID}
-    - PGID=${PGID}
-    - TZ=${TZ}
     - DOCKER_MODS=linuxserver/mods:transmission-transmission-web-control
-    - USER=${TRANSMISSION_USER}
-    - PASS=${TRANSMISSION_PASS}
 ```
 
 ## What have the other UIs been up to
 
 A quick look at the other UIs...
+
+<details markdown="1">
+<summary>docker-compose.yml — spin up all four UIs side by side</summary>
 
 ```yaml
 x-transmission: &base
@@ -115,6 +113,8 @@ services:
     ports:
       - 9104:9091
 ```
+
+</details>
 
 Four contenders, same daemon underneath. Here's what they look like:
 

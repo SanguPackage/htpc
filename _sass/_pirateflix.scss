@@ -192,6 +192,13 @@ html{overflow-x:hidden}
 .pf-post .post-content .notice--danger code{background:#0c2136}
 .pf-post .post-content img{max-width:100%;border:1px solid var(--line);border-radius:6px}
 .pf-post .post-content .github img{border:0;border-radius:0}
+// collapsible <details> blocks (e.g. long code samples)
+.pf-post .post-content details{border:1px solid var(--line);border-radius:8px;background:var(--panel);margin:0 0 1.4em;padding:0 16px}
+.pf-post .post-content summary{cursor:pointer;padding:12px 4px;color:var(--brass);font-family:var(--serif);list-style:none}
+.pf-post .post-content summary::-webkit-details-marker{display:none}
+.pf-post .post-content summary::before{content:'\25B8';display:inline-block;margin-right:10px;color:var(--teal);transition:transform .15s}
+.pf-post .post-content details[open] summary::before{transform:rotate(90deg)}
+.pf-post .post-content details[open] summary{margin-bottom:4px}
 // borderless inline images (favicons, shields badges) inside prose/tables
 .pf-post .post-content img.nb{border:0;border-radius:0;vertical-align:middle;max-width:none}
 .pf-post .post-content .ui-gallery{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:1.4em 0}
