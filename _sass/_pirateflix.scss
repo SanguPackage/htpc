@@ -192,6 +192,32 @@ html{overflow-x:hidden}
 .pf-post .post-content .notice--danger code{background:#0c2136}
 .pf-post .post-content img{max-width:100%;border:1px solid var(--line);border-radius:6px}
 .pf-post .post-content .github img{border:0;border-radius:0}
+// reusable carousel + lightbox (_includes/gallery.html) -- CSS-only
+.pf-post .post-content .pf-gallery{position:relative;margin:1.4em 0}
+.pf-post .post-content .pf-gallery__title{font-family:var(--serif);color:var(--brass);margin-bottom:8px}
+.pf-post .post-content .pf-gallery__track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;border:1px solid var(--line);border-radius:8px;background:var(--panel);
+  scrollbar-width:none;-ms-overflow-style:none}
+.pf-post .post-content .pf-gallery__track::-webkit-scrollbar{display:none}
+.pf-post .post-content .pf-gallery__slide{position:relative;flex:0 0 100%;scroll-snap-align:center;margin:0}
+.pf-post .post-content .pf-gallery__slide img{display:block;width:100%;height:auto;border:0;border-radius:0;cursor:zoom-in}
+.pf-post .post-content .pf-gallery__slide figcaption{position:absolute;left:0;right:0;bottom:0;
+  padding:14px;font-size:13px;color:var(--ink);text-align:center;
+  background:linear-gradient(transparent,rgba(6,20,33,.85))}
+.pf-post .post-content .pf-gallery__nav{position:absolute;top:50%;transform:translateY(-50%);
+  width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+  font-size:26px;line-height:1;color:#fff;text-decoration:none;
+  background:rgba(6,20,33,.55);border:1px solid var(--line);border-radius:50%;transition:background .15s,color .15s}
+.pf-post .post-content .pf-gallery__nav:hover{background:rgba(6,20,33,.9);color:var(--brass)}
+.pf-post .post-content .pf-gallery__prev{left:12px}
+.pf-post .post-content .pf-gallery__next{right:12px}
+.pf-post .post-content .pf-lightbox{position:fixed;inset:0;z-index:120;display:flex;align-items:center;
+  justify-content:center;padding:24px;background:rgba(6,20,33,.92);
+  opacity:0;visibility:hidden;transition:opacity .2s}
+.pf-post .post-content .pf-lightbox:target{opacity:1;visibility:visible}
+.pf-post .post-content .pf-lightbox__close{position:absolute;inset:0;cursor:zoom-out}
+.pf-post .post-content .pf-lightbox img{position:relative;z-index:1;max-width:92vw;max-height:92vh;
+  border:1px solid var(--line);border-radius:6px;pointer-events:none}
 // collapsible <details> blocks (e.g. long code samples)
 .pf-post .post-content details{border:1px solid var(--line);border-radius:8px;background:var(--panel);margin:0 0 1.4em;padding:0 16px}
 .pf-post .post-content summary{cursor:pointer;padding:12px 4px;color:var(--brass);font-family:var(--serif);list-style:none}

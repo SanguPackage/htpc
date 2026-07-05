@@ -1,0 +1,48 @@
+{%- comment -%}
+Reusable image carousel + fullscreen lightbox. Pure CSS/HTML, no JavaScript.
+
+Define the items in the page's front matter, then include:
+
+    gallery:
+      - image: transmission-ui-flood.png
+        text: Flood for Transmission
+      - image: transmission-ui-trguing.png
+        text: TrguiNG
+
+    {% include gallery.html items=page.gallery id="ui-tour" %}
+
+Params:
+  items  (required)    array of { image, text? }
+  id     (recommended) unique slug -- required when a page has more than one
+                       gallery, since it namespaces the anchor ids
+  path   base URL for the image filenames (default /assets/blog-images/)
+  title  optional heading rendered above the carousel
+{%- endcomment -%}
+{%- assign gid = include.id | default: 'gallery' -%}
+{%- assign base = include.path | default: '/assets/blog-images/' -%}
+{%- assign total = include.items | size -%}
+<div class="pf-gallery" id="{{ gid }}">
+  {%- if include.title %}<div class="pf-gallery__title">{{ include.title }}</div>{% endif -%}
+  <div class="pf-gallery__track">
+    {%- for item in include.items -%}
+    {%- if forloop.first %}{% assign prev = total %}{% else %}{% assign prev = forloop.index0 %}{% endif -%}
+    {%- if forloop.last %}{% assign next = 1 %}{% else %}{% assign next = forloop.index | plus: 1 %}{% endif -%}
+    <figure class="pf-gallery__slide" id="{{ gid }}-{{ forloop.index }}">
+      <a class="pf-gallery__zoom" href="#{{ gid }}-lb-{{ forloop.index }}" aria-label="View full screen">
+        <img src="{{ base | append: item.image | relative_url }}" alt="{{ item.text | escape }}" loading="lazy">
+      </a>
+      {%- if item.text %}<figcaption>{{ item.text }}</figcaption>{% endif -%}
+      {%- if total > 1 -%}
+      <a class="pf-gallery__nav pf-gallery__prev" href="#{{ gid }}-{{ prev }}" aria-label="Previous">&lsaquo;</a>
+      <a class="pf-gallery__nav pf-gallery__next" href="#{{ gid }}-{{ next }}" aria-label="Next">&rsaquo;</a>
+      {%- endif -%}
+    </figure>
+    {%- endfor -%}
+  </div>
+</div>
+{%- for item in include.items -%}
+<div class="pf-lightbox" id="{{ gid }}-lb-{{ forloop.index }}">
+  <a class="pf-lightbox__close" href="#{{ gid }}-{{ forloop.index }}" aria-label="Close"></a>
+  <img src="{{ base | append: item.image | relative_url }}" alt="{{ item.text | escape }}">
+</div>
+{%- endfor -%}
