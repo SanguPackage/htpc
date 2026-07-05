@@ -1,25 +1,25 @@
 ---
 layout: default
 ---
-<div class="main">
-    {% include header.html context="blog" %}
-    {% include blog/big-header.html title=page.title bigimg=page.bigimg subTitle=page.subTitle %}
-    <div class="container blog-main-container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8">
-                {% include blog/entry-full.html post=page %}
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4">
-                {% include blog/post-side-intro.html html=content toc=page.toc %}
-
-                {% include toc.html html=content toc=page.toc %}
-
-                <!-- {% include blog/post-series.html %} -->
-            </div>
-        </div>
-        <div class="row">
-            <hr>
-            {% include blog/post-prev-next-links.html %}
-        </div>
+<div class="pf pf-post">
+  {% include pirate/nav.html %}
+  <div class="wrap">
+    <header class="post-head">
+      <a class="post-back" href="{{ '/' | relative_url }}">← Back to port</a>
+      <h1>{{ page.title | escape }}</h1>
+      {% if page.subTitle %}<p class="post-sub">{{ page.subTitle | escape }}</p>{% endif %}
+      <div class="post-date"><i class="fa fa-clock-o"></i> {{ page.date | date: "%-d %b %Y" }}</div>
+    </header>
+    <div class="post-body">
+      <article class="post-content">
+        {{ content }}
+      </article>
+      <aside class="post-aside">
+        {% include toc.html html=content toc=page.toc %}
+        {% include blog/post-series.html %}
+      </aside>
     </div>
+    {% include blog/post-prev-next-links.html %}
+  </div>
+  {% include pirate/footer.html %}
 </div>

@@ -122,3 +122,25 @@
 .pf-footer .wrap{max-width:1080px;margin:0 auto;padding:0 28px;display:flex;gap:22px;flex-wrap:wrap;align-items:center}
 .pf-footer a{color:var(--teal);text-decoration:none}
 
+// --- post pages ---
+.pf-post .post-head{padding:40px 0 10px}
+.pf-post .post-back{color:var(--teal);text-decoration:none;font-size:13px}
+.pf-post h1{font-family:var(--serif);color:#fff;margin:12px 0 6px}
+.pf-post .post-sub{color:var(--muted);font-size:18px;margin:0 0 6px}
+.pf-post .post-date{color:var(--muted);font-size:13px}
+.pf-post .post-body{display:grid;grid-template-columns:1fr 300px;gap:36px;padding:24px 0}
+.pf-post .post-content{color:var(--ink);max-width:72ch;line-height:1.75}
+.pf-post .post-content h1,
+.pf-post .post-content h2,
+.pf-post .post-content h3{font-family:var(--serif);color:#fff;margin-top:1.6em}
+.pf-post .post-content a{color:var(--teal)}
+.pf-post .post-content pre,
+.pf-post .post-content code{background:#0c2136;border:1px solid var(--line);border-radius:6px}
+.pf-post .post-content pre{padding:16px;overflow:auto}
+.pf-post .post-content code{padding:1px 6px;color:var(--brass)}
+.pf-post .post-content pre code{border:0;padding:0;color:var(--ink)}
+.pf-post .post-content img{max-width:100%;border:1px solid var(--line);border-radius:6px}
+.pf-post .post-aside .sidebar-heading{font-family:var(--serif);color:var(--brass);margin-bottom:8px}
+.pf-post .post-aside a{color:var(--teal)}
+@media(max-width:820px){.pf-post .post-body{grid-template-columns:1fr}}
+
