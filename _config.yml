@@ -59,5 +59,3 @@ exclude:
   - test
   - assets/js/code-enhance.test.js
   - scripts
-  - MIDJOURNEY.md
-  - MIDJOURNEY_NEW_DESIGN.md
