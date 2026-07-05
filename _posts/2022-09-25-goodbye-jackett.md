@@ -17,7 +17,7 @@ img:
   title: "Jackett simply isn't as cool as Prowlarr"
 categories: 
 tags: [tutorial,fun]
-series: home-media-server
+series: swapping-tools
 toc:
   title: 🐅 Prowlarr
 ---

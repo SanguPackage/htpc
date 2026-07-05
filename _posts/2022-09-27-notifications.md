@@ -18,7 +18,6 @@ img:
   title: "Smoke signals is not really one of the options available."
 categories: 
 tags: [tutorial,fun]
-series: home-media-server
 toc:
   title: 💁 Connections
 interesting:

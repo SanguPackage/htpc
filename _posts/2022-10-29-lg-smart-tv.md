@@ -16,7 +16,6 @@ img:
   origin: https://unsplash.com/photos/Kzfo5Tq7c9A
 categories: 
 tags: [tutorial,fun]
-series: home-media-server
 toc:
   title: Jellyfin on LG TV
   icon: tv
