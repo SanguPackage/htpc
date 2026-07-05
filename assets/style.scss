@@ -8,4 +8,15 @@
 @use "our-styles";
 @use "blog";
 @use "pirateflix";
+@use "blueprint";
 @use "hljs";
+
+// Self-hosted Cinzel (the header wordmark) — no render-blocking Google Fonts request.
+// relative_url resolves the /htpc baseurl; @use partials don't get Liquid, so it lives here.
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('{{ "/assets/fonts/cinzel-700.woff2" | relative_url }}') format('woff2');
+}
