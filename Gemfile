@@ -9,12 +9,10 @@ ruby RUBY_VERSION
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "4.2.2"
+gem "jekyll", "~> 4.3"
 
-# This is the default theme for new Jekyll sites. You may change this to anything you like.
-gem "minima", "~> 2.0"
-
-gem 'wdm'
+# Windows file-watching for `jekyll serve --livereload`; 0.2+ builds on Ruby 3.x.
+gem "wdm", "~> 0.2", platforms: [:mingw, :mswin, :x64_mingw]
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
