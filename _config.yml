@@ -44,10 +44,6 @@ kramdown:
     disable : true
 
 
-# https://github.com/jekyll/minima
-# bundle show minima
-theme: minima
-
 # https://pages.github.com/versions/
 plugins:
   - jemoji # https://github.com/jekyll/jemoji
@@ -59,3 +55,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - docs
+  - scripts
+  - MIDJOURNEY.md
+  - MIDJOURNEY_NEW_DESIGN.md

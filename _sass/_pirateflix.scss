@@ -1,0 +1,45 @@
+// PirateFlix "Dark Sea-Chart" theme.
+// Ported from _mockups/a-sea-chart.html. All rules are scoped under `.pf` so the
+// theme never leaks into pages that aren't wrapped in the pirate layout.
+
+:root{
+  --sea:#0a1826; --sea2:#0d2032; --panel:#102a40;
+  --ink:#cfe3f2; --muted:#7d9bb4; --line:#254a68;
+  --brass:#e0b34a; --teal:#4fd8c4; --red:#e2564a;
+  --serif:'Georgia','Times New Roman',serif;
+  --mono:ui-monospace,'SFMono-Regular','Cascadia Code',monospace;
+}
+
+.pf{
+  min-height:100vh;
+  background:var(--sea);
+  background-image:
+    radial-gradient(1200px 600px at 80% -10%, #12314a 0%, transparent 60%),
+    repeating-radial-gradient(circle at 22% 30%, transparent 0 38px, rgba(79,216,196,.05) 38px 39px),
+    repeating-radial-gradient(circle at 22% 30%, transparent 0 78px, rgba(79,216,196,.035) 78px 79px);
+  color:var(--ink);
+  font-family:var(--mono);
+  line-height:1.6;
+
+  *{box-sizing:border-box}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+  section{padding:74px 0;border-bottom:1px solid var(--line)}
+
+  h1{font-family:var(--serif);font-weight:700;font-size:clamp(38px,6vw,68px);line-height:1.02;
+    margin:14px 0 18px;color:#fff;letter-spacing:-.5px}
+  h1 em{color:var(--brass);font-style:italic}
+  h2{font-family:var(--serif);font-size:clamp(26px,4vw,40px);margin:0 0 8px;color:#fff}
+
+  .lead{font-size:18px;color:var(--muted);max-width:56ch}
+  .sub{color:var(--muted);margin:0 0 34px}
+  .tag{font-family:var(--mono);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--teal)}
+
+  .btn{font-family:var(--mono);font-size:13px;letter-spacing:.5px;text-transform:uppercase;
+    border:1px solid var(--brass);color:var(--brass);background:transparent;
+    padding:11px 20px;border-radius:3px;cursor:pointer;text-decoration:none;display:inline-block;transition:.15s}
+  .btn:hover{background:var(--brass);color:#0a1826}
+  .btn.solid{background:var(--brass);color:#0a1826}
+  .btn.solid:hover{filter:brightness(1.12)}
+}
