@@ -1,10 +1,7 @@
 <nav class="pf-nav">
-  <a class="brand" href="{{ '/' | relative_url }}">
-    <img src="{{ '/assets/logo.png' | relative_url }}" alt="PirateFlix emblem">
-    <span class="lockup">
-      <span class="word">PIRATEFLIX</span>
-      <span class="rule"></span>
-      <span class="brand-tag">Home media · the *arr fleet</span>
-    </span>
-  </a>
+  {% include pirate/brand.html %}
+  <div class="pf-nav-links">
+    <a href="{{ '/blog/' | relative_url }}"{% if page.url contains '/blog/' %} class="active" aria-current="page"{% endif %}>Captain's Log</a>
+    <a href="{{ '/deck-plan/' | relative_url }}"{% if page.url contains '/deck-plan/' %} class="active" aria-current="page"{% endif %}>Deck Plan</a>
+  </div>
 </nav>

@@ -76,6 +76,24 @@ html{overflow-x:hidden}
   .brand .brand-tag{font-family:var(--mono);font-size:9.5px;letter-spacing:4px;
     text-transform:uppercase;color:var(--teal)}
 
+  .pf-nav-links{display:flex;align-items:center;gap:28px}
+  .pf-nav-links a{font-family:var(--mono);font-size:12px;letter-spacing:2px;
+    text-transform:uppercase;color:var(--ink);text-decoration:none;
+    padding-bottom:3px;border-bottom:1px solid transparent;transition:color .15s,border-color .15s}
+  .pf-nav-links a:hover,
+  .pf-nav-links a.active{color:var(--brass);border-color:var(--brass)}
+
+  // narrow screens: the wide-tracked links overflow the row, so drop them onto
+  // their own centred line under the brand instead of letting them clip.
+  @media(max-width:640px){
+    .pf-nav{flex-wrap:wrap;gap:12px 16px;padding:16px 18px}
+    .pf-nav-links{width:100%;justify-content:center;gap:22px;letter-spacing:1px}
+  }
+  // xs: drop the "Home media · " lead-in but keep "the *arr fleet".
+  @media(max-width:420px){
+    .brand .tag-home{display:none}
+  }
+
   .hero{padding-top:72px;position:relative;isolation:isolate}
   .hero::before{content:'';position:absolute;z-index:-1;top:-24px;bottom:0;
     left:calc(50% - 50vw);right:calc(50% - 50vw);
