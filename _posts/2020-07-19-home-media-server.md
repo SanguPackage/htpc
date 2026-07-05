@@ -4,6 +4,8 @@ author: Wouter Van Schandevijl
 title: "Home Media Server"
 subTitle: "How to fill all the terabytes and get on the FBI most wanted list without ever leaving your sofa"
 date: 2020-07-19
+updates:
+  - date: 2026-07-05
 desc: >
   How to setup your own media server using Linuxserver.io docker images.
 bigimg:
@@ -97,9 +99,10 @@ Playback statistics. For me there were no must-have plugins though.
 
 Basically exactly what you'd expect:
 
-{% include post/image.html file="Home Media Center-Jellyfin.png" alt="" title="" desc="Jellyfin Movie Library" maxWidth="360px" %}
-
-{% include post/image.html file="Home Media Center-Jellyfin2.jpg" alt="" title="" desc="Jellyfin Movie Details" maxWidth="360px" %}
+<div class="ui-gallery">
+  <figure><a href="{{ site.baseurl }}/assets/blog-images/Home Media Center-Jellyfin.png"><img src="{{ site.baseurl }}/assets/blog-images/Home Media Center-Jellyfin.png" alt="Jellyfin Movie Library"></a><figcaption>Jellyfin Movie Library</figcaption></figure>
+  <figure><a href="{{ site.baseurl }}/assets/blog-images/Home Media Center-Jellyfin2.jpg"><img src="{{ site.baseurl }}/assets/blog-images/Home Media Center-Jellyfin2.jpg" alt="Jellyfin Movie Details"></a><figcaption>Jellyfin Movie Details</figcaption></figure>
+</div>
 
 
 # Sonarr & Radarr <small>- Library Management</small>
@@ -137,16 +140,13 @@ Some other features:
 - A nice web UI for all that
 
 One predefined instream is [StevenLU](https://github.com/sjlu/popular-movies): a list of popular movies based on a series of heuristics (theater visits).
-Which sounds pretty cool but is currently broken due to Corona 😃
 
 You'll definitely want to tinker with the profiles & quality because if you don't, it will just go for the biggest and
 baddest Remux-2160p release and you are looking at 40-80 gigs for one movie.
 
 ## Extra's
 
-{% include github-stars.html url="roboticsound/Pulsarr" desc="Browser extension to add movies/series directly from IMDB & TVDB" %}
-{% include github-stars.html url="l3uddz/traktarr" desc="Script to add new series & movies based on Trakt lists." %}
-{% include github-stars.html url="faulander/P4S" desc="Premieres for Sonarr - find all the new shows you've never known you're interested in!" %}
+{% include github-stars.html url="RemiRigal/Overseerr-Assistant" desc="Browser extension: one-click requests on IMDb/TMDb — works with Jellyseerr/Seerr" %}
 {% include github-stars.html url="gilbN/theme.park" desc="A collection of themes/skins for your favorite apps." %}
 
 
@@ -168,16 +168,20 @@ to a private indexer. A few, for example [PassThePopcorn](https://passthepopcorn
 but if you are relying on free offerings, you may not want to maintain the connection to multiple indexers manually
 (after all they tend to change urls every so often).
 
-### Prowlarr <small>- Indexers</small>
+### Indexers
+
+#### Prowlarr
 
 ![Prowlarr Logo]({{ site.baseurl }}/assets/blog-images/Prowlarr-Icon.png "Prowlarr Logo"){: style="float: left; margin-right: 16px"}
-
-At this point I would suggest [going with Prowlarr instead of Jackett]({{ site.baseurl }}/blog/goodbye-jackett) for new setups!
-
+At this point I would suggest [going with Prowlarr instead of Jackett]({{ site.baseurl }}/blog/goodbye-jackett) for new setups!  
 {% include github-stars.html url="Prowlarr/Prowlarr" desc="Jackett alternative but for both Usenet & Torrents (with automatic sync)" %}
 
 
-### Jackett <small>- **DEPRECATED**</small>
+If you're not sure which indexers to add the list, check
+[Reddit: Some free indexer recommendations](https://www.reddit.com/r/torrents/comments/5ok0yd/torrent_sites/)
+
+
+#### Jackett <small>- **DEPRECATED**</small>
 
 
 ![Jackett Logo]({{ site.baseurl }}/assets/blog-images/Home Media Center-Jackett-Logo.png "Jackett Logo"){: style="float: left; margin-right: 16px"}
@@ -186,14 +190,19 @@ At this point I would suggest [going with Prowlarr instead of Jackett]({{ site.b
 Jackett is the perfect companion for this. It maintains a list of preconfigured indexers for you.
 Its uniform search API is used by Sonarr and Radarr.
 
+Once you've added some indexers in Jackett, you can configure them in Sonarr in Settings > Indexers > Torznab > Presets.
 
-If you're not sure which indexers to add from Jacketts list, check
-[Reddit: Some free indexer recommendations](https://www.reddit.com/r/torrents/comments/5ok0yd/torrent_sites/)
+### Download Clients
 
-Once you've added one/some indexers in Jackett, you can configure them in Sonarr in Settings > Indexers > Torznab > Presets.
+#### qBittorrent
+
+![qBittorrent Logo]({{ site.baseurl }}/assets/blog-images/qbittorrent-logo.png "qBittorrent Logo"){: style="float: left; margin-right: 16px"}
+At this point I would suggest [going with qBittorrent instead of Transmission]({{ site.baseurl }}/blog/goodbye-transmission) for new setups!
+
+{% include github-stars.html url="qbittorrent/qBittorrent" desc="qBittorrent BitTorrent client" %}
 
 
-### Transmission <small>- Download Client</small>
+#### Transmission <small>- **DEPRECATED**</small>
 
 ![Transmission Logo]({{ site.baseurl }}/assets/blog-images/Home Media Center-Transmission-Logo.png "Transmission Logo"){: style="float: left; margin-right: 16px"}
 {% include github-stars.html url="transmission/transmission" desc="Transmission BitTorrent client" %}
@@ -203,11 +212,6 @@ Once you've added one/some indexers in Jackett, you can configure them in Sonarr
 Once Sonarr has received matching torrents from your favorite indexers, it will figure out which
 one to pick based on your Quality/Profile settings and put the torrent in a folder for your
 Download Client to pick up.
-
-I went with Transmission and was simply horrified by the default `combustion-release` UI.
-Luckily there is the alternative [`transmission-web-control`](https://github.com/ronggang/transmission-web-control)
-UI which is very similar to a classic desktop BitTorrent client.
-You could also go with the [`kettu`](https://github.com/endor/kettu) UI if you prefer something very basic.
 
 
 ## Usenet
@@ -237,11 +241,13 @@ So with all that hassle why would you ever opt for Usenet at all?
 
 ### Download Clients
 
-[NZBGet](https://nzbget.net/) is the latest and greatest in both speed and UI but
-[SABnzbd](https://sabnzbd.org/) still has most features and most integration support with other projects.
+[NZBGet](https://nzbget.net/) is the lean, fast, low-resource choice (C++) while
+[SABnzbd](https://sabnzbd.org/) is the more popular and more feature-rich one. Both are actively maintained and
+both are first-class download clients in Sonarr/Radarr these days, so either works fine.
 
-{% include github-stars.html url="nzbget/nzbget" desc="Efficient Usenet Downloader" %}
 {% include github-stars.html url="sabnzbd/sabnzbd" desc="The automated Usenet download tool" %}
+{% include github-stars.html url="nzbgetcom/nzbget" desc="Efficient Usenet Downloader (community continuation)" %}
+{% include github-stars.html url="nzbget/nzbget" desc="DEPRECATED — archived 2022/11, superseded by nzbgetcom/nzbget" %}
 
 ### Indexers
 
@@ -268,8 +274,20 @@ So with all that hassle why would you ever opt for Usenet at all?
 I've had varying success with Bazarr so far but that's just with free subtitle providers. There are many preconfigured
 subtitle sites you can connect to with login credentials or an API key. It even has built-in Anti-Captcha options.
 
+If you're unsure which ones to add, check out the [Bazarr Stats](https://wiki.bazarr.media/bazarr-stats/).
 
-# Ombi <small>- Requests</small>
+
+# Requests
+
+## Seerr
+
+For new setups, [go with Seerr instead of Ombi]({{ site.baseurl }}/blog/goodbye-ombi): it logs in
+with Jellyfin, imports your users straight from the server, and is actively developed.
+
+{% include github-stars.html url="seerr-team/seerr" desc="Request app — the merged Overseerr + Jellyseerr successor" %}
+
+
+## Ombi <small>- **DEPRECATED**</small>
 
 ![Ombi Logo]({{ site.baseurl }}/assets/blog-images/Home Media Center-Ombi-Logo.png "Ombi Logo"){: style="float: left; margin-right: 16px"}
 
@@ -295,10 +313,14 @@ but can really only follow up on it if it's available on Netflix.
 
 **Attention: These applications can do serious damage in the hands of the wrong user**!  
 Most of them have access to (parts of) your filesystem. By changing just a few settings a malicious user with access to
-Radarr, Sonarr, ... can delete all your media files. Make sure that all containers exposed to the internet have
-a strong login/password set. For some containers, authentication is turned off by default!
+Radarr, Sonarr, ... can delete all your media files.
+
+The safest stance is to **not put the arrs on the internet in the first place**: only your request app
+(Seerr) and the media server (Jellyfin) should be publicly reachable — keep Radarr, Sonarr, Prowlarr, the
+download client, ... on your LAN or behind a VPN. If you do expose something, make sure it has a strong
+login/password; for some containers authentication is turned off by default!
 {: .notice--danger}
 
-Friends and family you'll typically give access only to the Media Server (Jellyfin or Plex or ...) and [Ombi](https://ombi.io/),
+Friends and family you'll typically give access only to the Media Server (Jellyfin or Plex or ...) and [Jellyseerr/Seerr](https://github.com/seerr-team/seerr),
 perhaps through a separate Heimdall dashboard (Heimdall is covered in [Container Management]({{ 'blog/home-media-server-management' | relative_url }}))
 user so they also have only one url to bookmark.
