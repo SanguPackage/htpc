@@ -141,9 +141,14 @@ html{overflow-x:hidden}
     width:340px;height:340px;opacity:.05;pointer-events:none;
     background:var(--rose) center/contain no-repeat}
 }
-.pf-footer{border-top:1px solid var(--line);margin-top:20px;padding:34px 0;color:var(--muted);font-size:13px}
+.pf-footer{border-top:1px solid var(--line);margin-top:20px;padding:34px 0;color:var(--muted);font-size:16px}
 .pf-footer .wrap{max-width:1080px;margin:0 auto;padding:0 28px;display:flex;gap:22px;flex-wrap:wrap;align-items:center}
 .pf-footer a{color:var(--teal);text-decoration:none}
+.pf-footer .sangu{margin-left:auto;display:inline-flex;align-items:center;transition:opacity .15s}
+.pf-footer .sangu:hover{opacity:.75}
+// the sangu favicon is a near-black tile; a faint brass ring frames it on the dark footer
+.pf-footer .sangu img{height:30px;width:30px;border-radius:5px;display:block;
+  box-shadow:0 0 0 1px rgba(224,179,74,.35)}
 
 // --- post pages ---
 .pf-post .post-head{padding:40px 0 10px}
