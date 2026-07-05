@@ -6,16 +6,16 @@ layout: default
   <div class="wrap">
     <header class="post-head">
       <a class="post-back" href="{{ '/' | relative_url }}">← Back to port</a>
-      <div class="post-title-row">
-        <h1>{{ page.title | escape }}</h1>
+      <h1>{{ page.title | escape }}</h1>
+      {% if page.subTitle %}<p class="post-sub">{{ page.subTitle | escape }}</p>{% endif %}
+      <div class="post-meta">
+        <div class="post-date"><i class="fa fa-clock-o"></i> {{ page.date | date: "%-d %b %Y" }}</div>
         {% if page.github %}
         <a class="post-gh" href="https://github.com/{{ page.github }}" target="_blank" rel="noopener" aria-label="GitHub stars for {{ page.github }}">
-          <img src="https://img.shields.io/github/stars/{{ page.github }}.svg?style=social&label=Star" alt="GitHub stars" />
+          <img src="https://img.shields.io/github/stars/{{ page.github }}.svg?style=social&label={{ page.github }}" alt="GitHub stars for {{ page.github }}" />
         </a>
         {% endif %}
       </div>
-      {% if page.subTitle %}<p class="post-sub">{{ page.subTitle | escape }}</p>{% endif %}
-      <div class="post-date"><i class="fa fa-clock-o"></i> {{ page.date | date: "%-d %b %Y" }}</div>
     </header>
     {% if page.bigimg %}
       <figure class="post-hero" style="background-image:url('{{ 'assets/blog-images/' | append: page.bigimg.url | absolute_url }}')">

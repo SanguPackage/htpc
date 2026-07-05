@@ -140,8 +140,8 @@ html{overflow-x:hidden}
 .pf-post .post-head{padding:40px 0 10px}
 .pf-post .post-back{color:var(--teal);text-decoration:none;font-size:13px}
 .pf-post h1{font-family:var(--serif);color:#fff;margin:12px 0 6px}
-.pf-post .post-title-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.pf-post .post-title-row h1{margin:12px 0}
+.pf-post .post-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.pf-post .post-gh{margin-left:auto}
 .pf-post .post-gh img{display:block;border:0;border-radius:0;max-width:none}
 .pf-post .post-sub{color:var(--muted);font-size:18px;margin:0 0 6px}
 .pf-post .post-date{color:var(--muted);font-size:13px}
