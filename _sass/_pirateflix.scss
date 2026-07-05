@@ -32,7 +32,9 @@ html{overflow-x:hidden}
 
   .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
 
-  section{padding:74px 0;border-bottom:1px solid var(--line)}
+  // sections are separated by the compass-medallion divider (pirate/divider.html),
+  // not a border — so no border-bottom here.
+  section{padding:74px 0}
 
   // Max 56px: the italic 2nd line at 56px is ~968px, which keeps each phrase on
   // one line for any viewport ≥1024px (below that the .wrap column is too narrow
@@ -367,6 +369,15 @@ html{overflow-x:hidden}
     font-family:var(--serif);font-weight:700;font-size:min(42vw,420px);line-height:1;
     color:var(--brass);opacity:.06;pointer-events:none;user-select:none}
 }
+
+// compass-medallion divider: the rose knot (assets/compass.webp) flanked by
+// brass hairlines that fade outward — a lightweight nautical section break.
+.pf-divider{display:flex;align-items:center;gap:26px;margin:30px auto;max-width:1000px;padding:0 28px}
+.pf-divider::before,.pf-divider::after{content:'';height:1px;flex:1}
+.pf-divider::before{background:linear-gradient(90deg,transparent,var(--brass))}
+.pf-divider::after{background:linear-gradient(90deg,var(--brass),transparent)}
+.pf-compass{height:80px;width:auto;flex:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+@media(max-width:640px){.pf-divider{gap:18px}.pf-compass{height:62px}}
 
 // --- captain's log (blog index): a ship's-log ledger grouped by year ---
 .pf-log{

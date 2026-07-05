@@ -3,6 +3,7 @@
   {% for post in site.posts %}
     {% assign y = post.date | date: "%Y" %}
     {% if y != lastYear %}
+      {% unless lastYear == "" %}{% include pirate/divider.html %}{% endunless %}
       <div class="log-year"><span>Anno {{ y }}</span></div>
       {% assign lastYear = y %}
     {% endif %}
