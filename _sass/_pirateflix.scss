@@ -101,3 +101,24 @@
   .easy .btn{margin-top:22px}
 }
 
+// --- chart your course + captain's log + footer ---
+.pf{
+  .course{counter-reset:step;list-style:none;padding:0;margin:0}
+  .course li{counter-increment:step;border:1px solid var(--line);border-radius:8px;
+    background:var(--panel);margin:10px 0;padding:16px 18px 16px 62px;position:relative}
+  .course li::before{content:counter(step);position:absolute;left:16px;top:50%;transform:translateY(-50%);
+    width:30px;height:30px;border:1px solid var(--brass);border-radius:50%;color:var(--brass);
+    display:flex;align-items:center;justify-content:center;font:600 14px var(--mono)}
+  .course a{display:block;text-decoration:none}
+  .course .ttl{color:#fff;font-family:var(--serif);font-size:19px}
+  .course .sub-ttl{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+  .logbook-heading{font-family:var(--serif);color:#fff;margin:34px 0 12px}
+  .logbook{list-style:none;padding:0;margin:0}
+  .logbook li{display:flex;justify-content:space-between;gap:12px;padding:10px 4px;border-bottom:1px solid var(--line)}
+  .logbook a{color:var(--teal);text-decoration:none}
+  .logbook .log-date{color:var(--muted);font-size:12px;white-space:nowrap}
+}
+.pf-footer{border-top:1px solid var(--line);margin-top:20px;padding:34px 0;color:var(--muted);font-size:13px}
+.pf-footer .wrap{max-width:1080px;margin:0 auto;padding:0 28px;display:flex;gap:22px;flex-wrap:wrap;align-items:center}
+.pf-footer a{color:var(--teal);text-decoration:none}
+
