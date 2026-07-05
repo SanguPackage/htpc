@@ -1,0 +1,48 @@
+name: Deploy site to Pages
+
+# GitHub Pages' native build uses LibSass, which can't parse the `@use`-based
+# SCSS. Build with the repo's own Jekyll 4.4 + Dart Sass (sass-embedded) instead.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+      - uses: actions/configure-pages@v5
+      # The committed lockfile is Windows-only; add the runner's platform so
+      # native gems (sass-embedded) resolve, then install.
+      - run: |
+          bundle lock --add-platform x86_64-linux
+          bundle install --jobs 4 --retry 3
+      - run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
