@@ -152,6 +152,10 @@ html{overflow-x:hidden}
 .pf-post .post-content h2,
 .pf-post .post-content h3{font-family:var(--serif);color:#fff;margin-top:1.6em}
 .pf-post .post-content a{color:var(--teal)}
+.pf-post .post-content p{margin:0 0 .7em}
+// base.scss's global reset zeroes font-weight on strong/b; restore it for prose
+.pf-post .post-content strong,
+.pf-post .post-content b{font-weight:700;color:#fff}
 .pf-post .post-content pre,
 .pf-post .post-content code{background:#0c2136;border:1px solid var(--line);border-radius:6px}
 .pf-post .post-content pre{padding:16px;overflow:auto}
