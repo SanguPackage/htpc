@@ -31,3 +31,9 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# win32/registry.rb (loaded on Windows) requires fiddle, which leaves the
+# default gems in Ruby 4.0 — bundle it explicitly to silence the warning.
+# Pinned to the version shipped with Ruby 3.4 so bundler reuses the pre-built
+# default gem instead of compiling a newer one (needs libffi, fails here).
+gem "fiddle", "1.1.6", platforms: [:mingw, :mswin, :x64_mingw]
+

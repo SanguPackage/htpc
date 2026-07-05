@@ -34,6 +34,7 @@ GEM
     faraday-net_http (3.4.4)
       net-http (~> 0.5)
     ffi (1.17.4-x64-mingw-ucrt)
+    fiddle (1.1.6)
     forwardable-extended (2.6.0)
     gemoji (4.1.0)
     google-protobuf (4.35.1-x64-mingw-ucrt)
@@ -135,6 +136,7 @@ PLATFORMS
   x64-mingw-ucrt
 
 DEPENDENCIES
+  fiddle (= 1.1.6)
   jekyll (~> 4.3)
   jekyll-avatar (~> 0.8.0)
   jekyll-feed (~> 0.6)
