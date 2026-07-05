@@ -77,6 +77,51 @@
     <circle cx="720" cy="150" r="5" fill="#bfeee6" opacity="0"><animate attributeName="opacity" dur="15s" repeatCount="indefinite" keyTimes="0;.69;.7;.76;1"       values="0;0;.95;0;0"/></circle>
     <circle cx="980" cy="150" r="6" fill="#bfeee6" opacity="0"><animate attributeName="opacity" dur="15s" repeatCount="indefinite" keyTimes="0;.9;1"              values="0;0;1"/></circle>
   </g>
+  <!-- Whale breaching now and then, behind the waves so it rises out of the sea.
+       No JS: four breach arcs at different spots are chained by syncbase timing
+       (each begins a few s after the previous ends, with uneven gaps), so the whale
+       surfaces in a different place at irregular intervals — reads as random. It is
+       parked far below the waterline (hidden) whenever no breach is running. -->
+  <g class="whale">
+    <g transform="scale(.9)">
+      <!-- tail fluke -->
+      <path fill="#1c3d54" d="M-20,3 C-27,-2 -31,-6 -35,-5 C-32,-1 -33,3 -30,6 C-34,7 -30,11 -24,7 C-22,6 -21,5 -20,3 Z"/>
+      <!-- body -->
+      <path fill="#1c3d54" d="M-21,3 C-17,-8 -2,-12 10,-9 C18,-7 23,-2 24,2 C23,6 16,9 8,9 C-4,10 -16,9 -21,3 Z"/>
+      <!-- belly -->
+      <path fill="#5c8095" opacity=".55" d="M-15,6 C-4,9 7,9 16,4 C9,10 -4,11 -15,6 Z"/>
+      <!-- pectoral flipper -->
+      <path fill="#173547" d="M3,7 C6,12 11,16 8,18 C4,15 0,11 -1,7 Z"/>
+      <!-- dorsal highlight + eye -->
+      <path fill="#7ba0b3" opacity=".5" d="M-14,-6 C-3,-10 8,-9 17,-4 C8,-7 -4,-8 -14,-6 Z"/>
+      <circle cx="16" cy="-1" r="1.2" fill="#08131f"/>
+    </g>
+    <!-- park below the waterline (hidden) until the first breach; freeze keeps the
+         whale at each breach's end point (also below water) between surfacings -->
+    <animateMotion id="brInit" begin="0s" dur=".1s" fill="freeze" path="M470,440 L470,441"/>
+    <animateMotion id="brA" begin="2s; brD.end+7s"    dur="2.8s" fill="freeze" rotate="auto" path="M204,352 C226,320 238,279 250,278 C262,279 274,320 296,352"/>
+    <animateMotion id="brB" begin="brA.end+9s"        dur="2.8s" fill="freeze" rotate="auto" path="M836,352 C858,322 868,283 880,282 C892,283 902,322 924,352"/>
+    <animateMotion id="brC" begin="brB.end+6s"        dur="2.8s" fill="freeze" rotate="auto" path="M420,352 C444,320 458,275 470,274 C482,275 496,320 520,352"/>
+    <animateMotion id="brD" begin="brC.end+8s"        dur="2.8s" fill="freeze" rotate="auto" path="M640,352 C660,324 670,287 680,286 C690,287 700,324 720,352"/>
+  </g>
+  <!-- splash at each breach's re-entry point, triggered off that breach's start -->
+  <g class="splash" fill="#dceaf5">
+    <circle cx="290" cy="328" r="2" fill="none" stroke="#dceaf5" stroke-width="1.2" opacity="0"><animate attributeName="r" begin="brA.begin+2.35s" dur=".6s" values="2;13"/><animate attributeName="opacity" begin="brA.begin+2.35s" dur=".6s" values=".75;0"/></circle>
+    <circle cx="285" cy="328" r="1.6" opacity="0"><animate attributeName="cy" begin="brA.begin+2.35s" dur=".55s" values="328;313"/><animate attributeName="opacity" begin="brA.begin+2.35s" dur=".55s" values=".85;0"/></circle>
+    <circle cx="296" cy="328" r="1.6" opacity="0"><animate attributeName="cy" begin="brA.begin+2.35s" dur=".55s" values="328;315"/><animate attributeName="opacity" begin="brA.begin+2.35s" dur=".55s" values=".85;0"/></circle>
+
+    <circle cx="918" cy="328" r="2" fill="none" stroke="#dceaf5" stroke-width="1.2" opacity="0"><animate attributeName="r" begin="brB.begin+2.35s" dur=".6s" values="2;13"/><animate attributeName="opacity" begin="brB.begin+2.35s" dur=".6s" values=".75;0"/></circle>
+    <circle cx="913" cy="328" r="1.6" opacity="0"><animate attributeName="cy" begin="brB.begin+2.35s" dur=".55s" values="328;313"/><animate attributeName="opacity" begin="brB.begin+2.35s" dur=".55s" values=".85;0"/></circle>
+    <circle cx="924" cy="328" r="1.6" opacity="0"><animate attributeName="cy" begin="brB.begin+2.35s" dur=".55s" values="328;315"/><animate attributeName="opacity" begin="brB.begin+2.35s" dur=".55s" values=".85;0"/></circle>
+
+    <circle cx="514" cy="328" r="2" fill="none" stroke="#dceaf5" stroke-width="1.2" opacity="0"><animate attributeName="r" begin="brC.begin+2.35s" dur=".6s" values="2;13"/><animate attributeName="opacity" begin="brC.begin+2.35s" dur=".6s" values=".75;0"/></circle>
+    <circle cx="509" cy="328" r="1.6" opacity="0"><animate attributeName="cy" begin="brC.begin+2.35s" dur=".55s" values="328;313"/><animate attributeName="opacity" begin="brC.begin+2.35s" dur=".55s" values=".85;0"/></circle>
+    <circle cx="520" cy="328" r="1.6" opacity="0"><animate attributeName="cy" begin="brC.begin+2.35s" dur=".55s" values="328;315"/><animate attributeName="opacity" begin="brC.begin+2.35s" dur=".55s" values=".85;0"/></circle>
+
+    <circle cx="714" cy="328" r="2" fill="none" stroke="#dceaf5" stroke-width="1.2" opacity="0"><animate attributeName="r" begin="brD.begin+2.35s" dur=".6s" values="2;13"/><animate attributeName="opacity" begin="brD.begin+2.35s" dur=".6s" values=".75;0"/></circle>
+    <circle cx="709" cy="328" r="1.6" opacity="0"><animate attributeName="cy" begin="brD.begin+2.35s" dur=".55s" values="328;313"/><animate attributeName="opacity" begin="brD.begin+2.35s" dur=".55s" values=".85;0"/></circle>
+    <circle cx="720" cy="328" r="1.6" opacity="0"><animate attributeName="cy" begin="brD.begin+2.35s" dur=".55s" values="328;315"/><animate attributeName="opacity" begin="brD.begin+2.35s" dur=".55s" values=".85;0"/></circle>
+  </g>
   <!-- stormy sea: three swelling wave layers drifting against each other -->
   <g class="waves">
     <g>
