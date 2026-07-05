@@ -283,32 +283,6 @@ table.table-excel {
 
 
 
-/*===============================================================
-                         Full Width Blog
-================================================================*/
-
-.blog-header {
-    background: #ffffff url("../img/blog-background.jpg") no-repeat center center;
-    background-size: cover;
-    position: relative;
-    margin-bottom: 15px;
-}
-
-.blog-header:before {
-    background: rgba(0,0,0,0.8);
-    background-size: cover;
-    position: absolute;
-    top: 0;
-    content: " ";
-    width: 100%;
-    height: 100%
-
-}
-.blog-header .section-title {
-    color: #ffffff;
-}
-
-
 .blog-date {
     margin-right: 50px;
 }

@@ -133,22 +133,6 @@ a {
     padding     : 100px 0;
 }
 
-.section-title{
-    position    : relative;
-}
-
-.section-title:before{
-   position         : absolute;
-    content         : " ";
-    width           : 16%;
-    height          : 50px;
-    background      : url(../img/red-box.png)center center no-repeat;
-    bottom          : 0;
-    margin-bottom   : -52px;
-    margin-bottom   : -52px;
-    left            : 42%;
-}
-
 section .p-padding p {
     padding-top     : 75px;
     letter-spacing  : 1.5px;
