@@ -1,7 +1,7 @@
 <section id="course" style="--rose:url('{{ '/assets/compass-rose.png' | relative_url }}')">
   <h2>Chart your course.</h2>
   <p class="sub">Follow the voyage from empty NAS to your own bottomless cinema.</p>
-  {% assign series_posts = site.posts | where: "series", "home-media-server" | sort: "date" %}
+  {% assign series_posts = site.posts | where: "series", "home-media-server" | sort: "date" | reverse %}
   <ol class="course">
     {% for post in series_posts %}
       {% assign yr = post.date | date: "%Y" %}
