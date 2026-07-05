@@ -7,7 +7,7 @@ layout: default
     <header class="post-head">
       <a class="post-back" href="{{ '/' | relative_url }}">← Back to port</a>
       <h1>{{ page.title | escape }}</h1>
-      {% if page.subTitle %}<p class="post-sub">{{ page.subTitle | escape }}</p>{% endif %}
+      {% if page.subTitle %}<p class="post-sub">{{ page.subTitle | markdownify | remove: '<p>' | remove: '</p>' | strip }}</p>{% endif %}
       <div class="post-meta">
         <div class="post-date">{% include icon.html name="clock" %} {{ page.date | date: "%-d %b %Y" }}</div>
         {% if page.updates %}

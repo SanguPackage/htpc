@@ -9,7 +9,7 @@
         <li>
           <a href="{{ post.url | relative_url }}">
             <span class="ttl">{{ post.title | escape }}</span>
-            {% if post.subTitle %}<span class="sub-ttl">{{ post.subTitle | escape }}</span>{% endif %}
+            {% if post.subTitle %}<span class="sub-ttl">{{ post.subTitle | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span>{% endif %}
           </a>
         </li>
       {% endif %}

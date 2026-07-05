@@ -188,6 +188,7 @@ html{overflow-x:hidden}
   .course a{display:block;text-decoration:none}
   .course .ttl{color:#fff;font-family:var(--serif);font-size:19px}
   .course .sub-ttl{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+  .course .sub-ttl code{font-family:var(--mono);font-size:.92em;color:var(--brass)}
   .logbook-heading{font-family:var(--serif);color:#fff;margin:34px 0 12px}
   .logbook{list-style:none;padding:0;margin:0}
   .logbook li{display:flex;justify-content:space-between;gap:12px;padding:10px 4px;border-bottom:1px solid var(--line)}
@@ -217,6 +218,7 @@ html{overflow-x:hidden}
 .pf-post .post-gh{margin-left:auto}
 .pf-post .post-gh img{display:block;border:0;border-radius:0;max-width:none}
 .pf-post .post-sub{color:var(--muted);font-size:18px;margin:0 0 6px}
+.pf-post .post-sub code{font-family:var(--mono);font-size:.9em;color:var(--brass);background:#0c2136;border:1px solid var(--line);border-radius:4px;padding:1px 6px}
 .pf-post .post-date{color:var(--muted);font-size:13px}
 .pf-post .wrap{max-width:1320px}
 .pf-post .post-body{display:grid;grid-template-columns:1fr 300px;gap:36px;padding:24px 0}
