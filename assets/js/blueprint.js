@@ -87,6 +87,13 @@ function init() {
   // detail panel
   const dataEl = document.getElementById("deck-plan-data");
   const data = dataEl ? JSON.parse(dataEl.textContent) : {};
+
+  // Clickable nodes (those with a data entry — a detail panel or a plain link) get a
+  // pointer cursor; category/actor nodes default to `.flow-node { cursor: default }`.
+  svg.querySelectorAll("[data-node]").forEach((n) => {
+    if (data[n.dataset.node]) n.style.cursor = "pointer";
+  });
+
   const panel = document.getElementById("deck-panel");
   if (!panel) return;
   const q = (sel) => panel.querySelector(sel);

@@ -23,14 +23,14 @@
 
 .floor-svg { width: 100%; height: 100%; }
 
-// hover-highlight (mirrors the source blueprint's flow rules)
-[data-node] { cursor: pointer; }
+// hover-highlight (mirrors the source blueprint's flow rules).
+// Cursor is default for every node; blueprint.js promotes only the clickable ones
+// (those with a deck_plan entry) to a pointer, so the cursor tracks clickability.
+[data-node] { cursor: default; }
 .conn { transition: opacity .12s ease, stroke .12s ease, stroke-width .12s ease; }
 .conn.lit { stroke: #93c5fd; stroke-width: 2.5; opacity: 1; }
 .group-box.lit { stroke: #93c5fd; stroke-width: 2.5; }
 .lit .ring { stroke: #93c5fd; stroke-width: 3; }
-.flow-node { cursor: default; }
-.hl-svc.flow-node { cursor: pointer; }
 .flow-back { display: none; } // the source's "← Kelder" pill is meaningless here
 
 .deck-back {
