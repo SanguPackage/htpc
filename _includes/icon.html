@@ -1,0 +1,24 @@
+{%- comment -%}
+Inline SVG icons (Lucide, ISC — plus Tabler brand-github, MIT). Usage:
+  {% include icon.html name="clock" %}
+  {% include icon.html name="github" label="GitHub" class="foo" %}
+Icons scale with font-size (1em) and inherit color via currentColor.
+{%- endcomment -%}
+{%- assign n = include.name -%}
+<svg class="icon icon-{{ n }}{% if include.class %} {{ include.class }}{% endif %}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="1em" height="1em" {% if include.label %}role="img" aria-label="{{ include.label | escape }}"{% else %}aria-hidden="true" focusable="false"{% endif %}>
+{%- case n -%}
+{%- when "clock" -%}<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+{%- when "square-pen" -%}<path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/>
+{%- when "search" -%}<path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/>
+{%- when "folder-tree" -%}<path d="M20 10a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2.5a1 1 0 0 1-.8-.4l-.9-1.2A1 1 0 0 0 15 3h-2a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1Z"/><path d="M20 21a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-2.9a1 1 0 0 1-.88-.55l-.42-.85a1 1 0 0 0-.92-.6H13a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1Z"/><path d="M3 5a2 2 0 0 0 2 2h3"/><path d="M3 3v13a2 2 0 0 0 2 2h3"/>
+{%- when "user" -%}<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+{%- when "bookmark-check" -%}<path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/><path d="m9 10 2 2 4-4"/>
+{%- when "bookmark" -%}<path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/>
+{%- when "github" -%}<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2c2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2a4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0c-2.4-1.6-3.5-1.3-3.5-1.3a4.2 4.2 0 0 0-.1 3.2a4.6 4.6 0 0 0-1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6-.6 1.2-.5 2v3.5"/>
+{%- when "ban" -%}<circle cx="12" cy="12" r="10"/><path d="M4.929 4.929 19.07 19.071"/>
+{%- when "lightbulb" -%}<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>
+{%- when "tv" -%}<path d="m17 2-5 5-5-5"/><rect width="20" height="15" x="2" y="7" rx="2"/>
+{%- when "list" -%}<path d="M3 5h.01"/><path d="M3 12h.01"/><path d="M3 19h.01"/><path d="M8 5h13"/><path d="M8 12h13"/><path d="M8 19h13"/>
+{%- when "docker" -%}<path d="M22 12.54c-1.804-.345-2.701-1.08-3.523-2.94c-.487.696-1.102 1.568-.92 2.4c.028.238-.32 1-.557 1h-14c0 5.208 3.164 7 6.196 7c4.124.022 7.828-1.376 9.854-5c1.146-.101 2.296-1.505 2.95-2.46"/><path d="M5 10h3v3h-3z"/><path d="M8 10h3v3h-3z"/><path d="M11 10h3v3h-3z"/><path d="M8 7h3v3h-3z"/><path d="M11 7h3v3h-3z"/><path d="M11 4h3v3h-3z"/><path d="M4.571 18c1.5 0 2.047-.074 2.958-.78"/><path d="M10 16v.01"/>
+{%- endcase -%}
+</svg>

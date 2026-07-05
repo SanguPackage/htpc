@@ -194,6 +194,9 @@ html{overflow-x:hidden}
 .pf-post .post-content .github img{border:0;border-radius:0}
 .pf-post .post-hero{position:relative;height:260px;margin:6px 0 4px;border:1px solid var(--line);border-radius:8px;background-size:cover;background-position:center}
 .pf-post .post-hero figcaption{position:absolute;right:8px;bottom:6px;font-size:11px;color:var(--muted);background:rgba(6,20,33,.6);padding:2px 8px;border-radius:4px}
+.pf-post .post-aside .post-topic{font-family:var(--serif);font-size:20px;color:var(--brass);
+  margin:0 0 12px;display:flex;align-items:center;gap:8px;line-height:1.2}
+.pf-post .post-aside .post-topic .icon{color:var(--teal);flex:none}
 .pf-post .post-thumb{margin:0 0 22px}
 .pf-post .post-thumb img{width:100%;border:1px solid var(--line);border-radius:6px}
 .pf-post .post-thumb figcaption{color:var(--muted);font-size:12px;margin-top:6px;line-height:1.4}

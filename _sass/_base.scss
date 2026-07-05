@@ -241,18 +241,6 @@ button.btn-u:active{
     color           : #777777;
 }
 
-/*FLAT ICON OVER WRITE*/
-
-[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
-[class^="flaticon-"]:after, [class*=" flaticon-"]:after {
-    font-family    : Flaticon;
-    font-size      : 20px;
-    font-style     : normal;
-    margin-left    : 0;
-}
-
-
-
 /*BUTTON SET*/
 .btn:focus,
 .btn.focus{

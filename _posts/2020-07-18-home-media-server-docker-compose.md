@@ -20,7 +20,7 @@ tags: [tutorial,fun]
 series: home-media-server
 toc:
   title: Docker Compose
-  icon: icon-docker
+  icon: docker
 ---
 
 

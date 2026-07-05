@@ -18,7 +18,7 @@ tags: [tutorial,fun]
 series: home-media-server
 toc:
   title: Container Management
-  icon: icon-docker
+  icon: docker
 updates:
   - date: "2022-10-30"
     desc: "Added Homarr"

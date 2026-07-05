@@ -126,14 +126,14 @@ It's probably not a bad idea to try stuff out with a copy of some of your files 
 
 Some other features:
 
-- Settings > Media Management: <i class="fa fa-sitemap"></i> Automatic renaming and organizing
+- Settings > Media Management: {% include icon.html name="folder-tree" %} Automatic renaming and organizing
 - **Settings > Profiles & Quality**: Define file sizes and profiles which you want/don't want
 - **Wanted > Manual Import**: Import existing content from your filesystem
-- <i class="fa fa-search"></i> Automatic Search and <i class="fa fa-user"></i> Manual Search for downloading new content
+- {% include icon.html name="search" %} Automatic Search and {% include icon.html name="user" %} Manual Search for downloading new content
 - Activity: Visualization and basic manipulation of content being downloaded
 - Settings > Connect: Send notifications of events to API, Email, Slack, Growl, Jellyfin, ...
 - Settings > Lists: Define an automatic instream of new movies by following IMDB, TrakTV, RSS, ... lists & feeds
-- <i class="fa fa-bookmark"></i> Monitored or <i class="fa fa-bookmark-o"></i> Not Monitored: Should it download automatically
+- {% include icon.html name="bookmark-check" %} Monitored or {% include icon.html name="bookmark" %} Not Monitored: Should it download automatically
 - A nice web UI for all that
 
 One predefined instream is [StevenLU](https://github.com/sjlu/popular-movies): a list of popular movies based on a series of heuristics (theater visits).

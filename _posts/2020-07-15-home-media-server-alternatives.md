@@ -20,7 +20,7 @@ tags: [tutorial,fun]
 series: home-media-server
 toc:
   title: Alternatives
-  icon: icon-docker
+  icon: docker
 ---
 
 Don't like Sonarr/Radarr? Don't like Jellyfin?  
