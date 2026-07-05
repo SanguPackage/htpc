@@ -11,8 +11,9 @@ bigimg:
   url: ombi-big.webp
 img:
   url: ombi-sm.webp
-  title: "Type a title, click request, done."
+  desc: "Type a title, click request, done."
 categories: 
+github: Ombi-app/Ombi
 tags: [tutorial,fun]
 series: swapping-tools
 toc:
@@ -23,11 +24,9 @@ The [original setup]({{ site.baseurl }}/blog/home-media-server#ombi---requests) 
 the friendly search-and-click front door you hand to family so nobody makes you explain Sonarr's quality profiles
 over Sunday dinner. Type a title, click request, and it lands in Sonarr/Radarr.
 
-Ombi still does that. But it hasn't kept up, and it never really spoke Jellyfin.
+Ombi still does that. But it hasn't kept up...
 
 <!--more-->
-
-{% include github-stars.html url="Ombi-app/Ombi" desc="Want a Movie or TV Show on Plex/Emby/Jellyfin? Use Ombi!" %}
 
 
 # Why Leave Ombi
@@ -40,8 +39,7 @@ Plex/Emby roots, and its UI feels its age next to what the Overseerr family is d
 Enter **Jellyseerr** — a fork of [Overseerr](https://github.com/sct/overseerr) created specifically to add **Jellyfin
 and Emby** support (Overseerr itself is Plex-only). For a Jellyfin setup that's the whole ballgame:
 
-- **Native Jellyfin login** — it authenticates against Jellyfin and **imports your users straight from the server**,
-  so you don't recreate accounts.
+- **Native Jellyfin login** — it authenticates against Jellyfin and **imports your users straight from the server**, so you don't recreate accounts.
 - **Modern, discovery-first UI** — the slick Overseerr interface, trending rows and all.
 - **Sonarr/Radarr fulfillment** built in, plus proper request and issue management.
 
@@ -52,35 +50,18 @@ Jellyseerr is refreshingly self-contained — **SQLite by default**, so no exter
 optional via `DB_TYPE=postgres` if you outgrow it).
 
 ```yaml
-  jellyseerr:
-    image: fallenbagel/jellyseerr:latest
-    container_name: jellyseerr
-    environment:
-      - TZ=${TZ}
-      - LOG_LEVEL=info
-    volumes:
-      - ${CONFIG_PATH}/jellyseerr:/app/config
-    ports:
-      - 5055:5055
-    restart: unless-stopped
+jellyseerr:
+  image: fallenbagel/jellyseerr:latest
+  container_name: jellyseerr
+  environment:
+    - TZ=${TZ}
+    - LOG_LEVEL=info
+  volumes:
+    - ${CONFIG_PATH}/jellyseerr:/app/config
+  ports:
+    - 5055:5055
+  restart: unless-stopped
 ```
-
-WebUI is on **5055**. The `/app/config` volume holds the settings **and** the SQLite DB, so that's the folder to back
-up. One footgun if you're on Windows/WSL: don't put `/app/config` on an SMB share — SMB has no file locking and will
-happily corrupt SQLite. Keep it on a native Linux volume.
-
-
-# Migrating the Requests
-
-There's a catch worth saying out loud: **there is no Ombi → Jellyseerr importer**. Your old request history and user
-accounts don't come across. You set Jellyseerr up fresh:
-
-1. Point it at **Jellyfin** and **import the users** from the server.
-2. Connect **Sonarr** and **Radarr**, setting a default **quality profile** and **root folder** for each.
-3. Tell your users the URL changed.
-
-Anything still in flight in Ombi either gets re-requested or is already being handled by Sonarr/Radarr, so in practice
-you lose nothing but the history. Then you turn Ombi off.
 
 
 # Plot Twist: It's Called Seerr Now

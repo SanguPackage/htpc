@@ -62,7 +62,7 @@ transmission:
     - DOCKER_MODS=linuxserver/mods:transmission-transmission-web-control
 ```
 
-## What have the other UIs been up to
+## The UI Competition
 
 A quick look at the other UIs...
 
@@ -113,6 +113,7 @@ services:
     ports:
       - 9104:9091
 ```
+{: data-file="compose.yaml" }
 
 </details>
 
@@ -127,27 +128,28 @@ Four contenders, same daemon underneath. Here's what they look like:
 
 And where each one lives — with how much love it's still getting:
 
-|   | UI | Stars | Source |
-|---|----|-------|--------|
-| <img class="nb" height="26" src="{{ site.baseurl }}/assets/blog-images/transmission-ui-flood-icon.png"> | Flood for Transmission | <img class="nb" src="https://img.shields.io/github/stars/johman10/flood-for-transmission.svg?style=social&label=Star"> | [johman10/flood-for-transmission](https://github.com/johman10/flood-for-transmission) |
-| <img class="nb" height="26" src="{{ site.baseurl }}/assets/blog-images/transmission-ui-web-control-icon.ico"> | Transmission Web Control | <img class="nb" src="https://img.shields.io/github/stars/ronggang/transmission-web-control.svg?style=social&label=Star"> | [ronggang/transmission-web-control](https://github.com/ronggang/transmission-web-control) |
-| <img class="nb" height="26" src="{{ site.baseurl }}/assets/blog-images/transmission-ui-transmissionic-icon.png"> | Transmissionic | <img class="nb" src="https://img.shields.io/github/stars/6c65726f79/Transmissionic.svg?style=social&label=Star"> | [6c65726f79/Transmissionic](https://github.com/6c65726f79/Transmissionic) |
-| <img class="nb" height="26" src="{{ site.baseurl }}/assets/blog-images/transmission-ui-trguing-icon.png"> | TrguiNG | <img class="nb" src="https://img.shields.io/github/stars/openscopeproject/TrguiNG.svg?style=social&label=Star"> | [openscopeproject/TrguiNG](https://github.com/openscopeproject/TrguiNG) |
+|   | UI | Stars | Source | Commits | Last | Notes |
+|---|----|-------|--------|---------|------|-------|
+| <img class="nb" height="26" src="{{ site.baseurl }}/assets/blog-images/transmission-ui-flood-icon.png"> | Flood for Transmission | <img class="nb" src="https://img.shields.io/github/stars/johman10/flood-for-transmission.svg?style=social&label=Star"> | [johman10/flood-for-transmission](https://github.com/johman10/flood-for-transmission) | 286 | 6 months ago |
+| <img class="nb" height="26" src="{{ site.baseurl }}/assets/blog-images/transmission-ui-web-control-icon.ico"> | Transmission Web Control | <img class="nb" src="https://img.shields.io/github/stars/ronggang/transmission-web-control.svg?style=social&label=Star"> | [ronggang/transmission-web-control](https://github.com/ronggang/transmission-web-control) | 558 | last year | Archived 2025/6
+| <img class="nb" height="26" src="{{ site.baseurl }}/assets/blog-images/transmission-ui-transmissionic-icon.png"> | Transmissionic | <img class="nb" src="https://img.shields.io/github/stars/6c65726f79/Transmissionic.svg?style=social&label=Star"> | [6c65726f79/Transmissionic](https://github.com/6c65726f79/Transmissionic) | 2985 | 3 years ago
+| <img class="nb" height="26" src="{{ site.baseurl }}/assets/blog-images/transmission-ui-trguing-icon.png"> | TrguiNG | <img class="nb" src="https://img.shields.io/github/stars/openscopeproject/TrguiNG.svg?style=social&label=Star"> | [openscopeproject/TrguiNG](https://github.com/openscopeproject/TrguiNG) | 481 | 2 weeks ago
 
 
-# Why Leave Transmission
+# Leaving Transmission
 
-Turns out that the integration between qBittorrent and the *arr family is better compared to Transmission.
+I've had issues with web-control in the past but now it seemed, it was also abandoned as a project...
+And then it turned out that the integration between qBittorrent and the *arr family is better compared to Transmission.
 
 - **Categories & tags**: qBittorrent's categories map each to a save path *and* line up exactly with the "category" field the *arr apps use.
 - **Built-in search**
 - **Sequential download**: download first & last pieces first
 - **Built-in RSS auto-downloader** with filter rules.
 
-{% include github-stars.html url="qbittorrent/qBittorrent" desc="qBittorrent BitTorrent client" %}
-
 
 # Migrating to qBittorrent
+
+{% include github-stars.html url="qbittorrent/qBittorrent" desc="qBittorrent BitTorrent client" %}
 
 The [`linuxserver/qbittorrent`](https://docs.linuxserver.io/images/docker-qbittorrent/) service that replaced it:
 
@@ -167,44 +169,37 @@ qbittorrent:
     - 6881:6881
     - 6881:6881/udp
 ```
+{: data-file="compose.yaml" .line-numbers}
+
+You'll probably have to point to the correct paths in:  
+Options > Downloads > Saving Management > Default Save Path:
 
 ## The First-Login Gotcha
 
-Since qBittorrent **4.6.1** the WebUI no longer ships with the old `admin` / `adminadmin` default — too many people
-exposed those straight to the internet. Instead a **temporary password is printed to the container log on startup**:
+The admin password is printed to the docker logs at startup.
 
 ```bash
 docker logs qbittorrent | grep -i password
 ```
 
-Set a real password immediately, or a fresh temporary one is regenerated on every restart. And a footgun for the
-history books: the very first 4.6.1 build (2023-11-22) had a bug where the generated password *wasn't* printed at
-all, locking everyone out. If you ever hit that, run tag `:version-4.6.0-r0`, log in with `admin` / `adminadmin`,
-set a password, then move back to latest. Fixed in **4.6.2**.
+Set a real password immediately, or a fresh temporary one is regenerated on every restart.  
+Options > WebUI > Authentication
 
-## Moving the Torrents Across
 
-There is **no state import** — you can't hand qBittorrent Transmission's resume files and call it a day. But because
-both clients point `/data` at the same NFS export, no bytes have to move:
+## Repointing the *arrs
 
-1. Point qBittorrent's default save path at the **same** download folder Transmission used.
-2. Re-add the torrents (Transmission keeps its `.torrent` files under `.../transmission/torrents/`, so you can bulk-add them).
-3. **Force-recheck** each one. qBittorrent sees the completed files already sitting there and picks straight back up
-   seeding — no re-download.
-4. Recreate your **categories** (e.g. `tv-sonarr`, `radarr`), each with its save path.
+Last step, in Sonarr, Radarr, Prowlarr, ... under **Settings → Download Clients**: drop the Transmission client and add a
+**qBittorrent** one (host, `WEBUI_PORT`, credentials), set a **Category** (ex: radarr, sonarr, ...).
 
-## Repointing the \*arrs
+Inside qBittorrent on the left menu, right click the CATEGORIES > All > Add Category;
+or, if the categories you entered already exist, right click them and "Edit Category..."
 
-Last step, in each of Sonarr / Radarr / ... under **Settings → Download Clients**: drop the Transmission client, add a
-**qBittorrent** one (host, `WEBUI_PORT`, credentials), and set the **Category** to match what you created above. From
-then on every grab lands in qBittorrent under the right category. Anything still mid-download in Transmission is
-easiest to just let finish and import there before you pull the plug.
+In Options > Downloads > Saving Management > Default Torrent Management Mode: Automatic
+
+And now you have a separate folder for each... Nice & clean!
 
 
 # Conclusion
 
-If you're setting up fresh: skip the detour and **start on qBittorrent**. The \*arr integration alone is worth it.
-
-If Transmission still does everything you need, the `DOCKER_MODS` UI is a perfectly fine band-aid — no shame in
-staying. But once I was already editing compose files to make the UI show up, moving to a client that just *works*
-out of the box was an easy call.
+If you're setting up fresh: skip the detour and **start on qBittorrent**. The *arr integration alone is worth it.
+The qBittorrent UI is also more colorful than my old web-control, so I'm definitely staying ;)

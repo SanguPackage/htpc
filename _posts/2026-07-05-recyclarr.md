@@ -8,13 +8,12 @@ desc: >
   Recyclarr auto-syncs the TRaSH Guides quality tuning into Sonarr and Radarr.
   It's genuinely clever — and I decided not to use it. Here's both halves.
 bigimg:
-  url: Home Media Center-Management-Big.jpg
-  desc: "Photo by Cameron Venti"
+  url: recyclarr-big.webp
 img:
-  url: Home Media Center-Small.jpg
-  desc: "Photo by Ian Battaglia"
-  title: "A tool I admire from a safe distance"
+  url: recyclarr-sm.webp
+  desc: "A tool I admire from a safe distance"
 categories: 
+github: recyclarr/recyclarr
 tags: [tutorial,fun]
 toc:
   title: ♻️ Recyclarr
@@ -25,46 +24,41 @@ clearly know more than you — and you still walk away. **Recyclarr** is mine.
 
 <!--more-->
 
-{% include github-stars.html url="recyclarr/recyclarr" desc="Automatically sync TRaSH Guides to Sonarr and Radarr" %}
 
+# What It Does
 
-# What Recyclarr Does
+Recyclarr automates the release grabbing process. It configures your custom formats and quality profiles,
+much better than you ever can. If you do not want to spend time configuring all that, and keeping it up to date,
+Recyclarr might be exactly what you need!
 
-Sonarr and Radarr decide *which* release to grab using **custom formats** and **quality profiles** — scoring rules
-that say "prefer this release group, this encode, this audio; avoid that garbage." The community has spent years
-tuning those rules into the [**TRaSH Guides**](https://trash-guides.info/). Copying all of that in by hand is
-hours of tedious clicking, and it drifts out of date the moment the guides change.
+It will configure years of best practices and fine-tuning from the [**TRaSH Guides**](https://trash-guides.info/)
+for you, automatically.
 
-Recyclarr automates it. It's a small **CLI** (no web UI) that reads a `recyclarr.yml` pointing at your Sonarr/Radarr
-instances and **syncs the TRaSH custom formats, quality definitions and profile scores straight in**. Run it on a
-cron and your \*arrs stay tuned to the current best-practice with zero manual upkeep.
 
 ```yaml
-  recyclarr:
-    image: ghcr.io/recyclarr/recyclarr:latest
-    container_name: recyclarr
-    user: ${PUID}:${PGID}
-    environment:
-      - TZ=${TZ}
-      - CRON_SCHEDULE=${RECYCLARR_CRON}   # e.g. "0 3 * * *" — nightly sync
-    volumes:
-      - ${CONFIG_PATH}/recyclarr:/config   # holds recyclarr.yml
-    restart: ${RESTART_POLICY}
+recyclarr:
+  image: ghcr.io/recyclarr/recyclarr:latest
+  container_name: recyclarr
+  user: ${PUID}:${PGID}
+  environment:
+    - TZ=${TZ}
+    - CRON_SCHEDULE=${RECYCLARR_CRON}
+  volumes:
+    - ${CONFIG_PATH}/recyclarr:/config
+  restart: ${RESTART_POLICY}
 ```
 
-(One-shot instead of cron? Just `docker compose run --rm recyclarr sync`.)
+One-shot instead of cron? Just `docker compose run --rm recyclarr sync`.
 
 
 # Why I Said No
 
-Here's the thing: custom formats optimize **which** release you end up with. My problem has never been *which* — it's
-*whether*. I'd rather have the episode in a merely-fine encode tonight than wait for the perfect one, or worse, have
-Radarr turn its nose up at the only release that exists because it scores badly.
+I fall firmly on the **quantity over quality** side. Fill the terabytes, watch the thing, move on.
+Recyclarr and the TRaSH guides point towards 4k releases or something, with 14GB movies as pretty much
+the bare minimum. I'm typically aiming for a 2GB release, which, for me, is just good enough.
 
-I fall firmly on the **quantity over quality** side. Fill the terabytes, watch the thing, move on. Against that
-priority, TRaSH's careful scoring is effort spent optimizing a dimension I don't care about — and it isn't free:
-pickier profiles mean more grabs rejected or delayed, plus one more config surface to understand and maintain. So
-Recyclarr solves, very elegantly, a problem I don't have.
+A side effect of me being so picky on "bad quality" is that it is often **more** difficult for me
+to find a release...
 
 
 # When You *Should* Use It
@@ -81,6 +75,4 @@ Recyclarr pipes it into your setup automatically.
 
 # Conclusion
 
-Recyclarr isn't going in my stack — not because it's bad, but because it's *good at something I don't want*. I'm
-filing it under "tools I admire from a safe distance," right next to the day I finally care which encode of a movie
-I'm half-watching on the couch. If that day comes, I know exactly what to install.
+Recyclarr isn't going in my stack — not because it's bad, but because it's *good at something I don't want*.
