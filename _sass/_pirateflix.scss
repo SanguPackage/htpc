@@ -71,3 +71,15 @@
   .ship{fill:var(--red)}
 }
 
+// --- grind vs fleet ---
+.pf{
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .card{border:1px solid var(--line);border-radius:8px;padding:26px;background:var(--panel)}
+  .card h3{margin:0 0 14px;font-family:var(--serif);font-size:22px}
+  .grind{color:var(--muted)}
+  .grind li{text-decoration:line-through;text-decoration-color:var(--red);margin:8px 0}
+  .magic li{margin:8px 0}
+  .magic li::marker{content:'⚓ '}
+  @media(max-width:720px){.two{grid-template-columns:1fr}}
+}
+
