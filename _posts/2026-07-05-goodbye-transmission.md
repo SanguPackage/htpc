@@ -5,102 +5,144 @@ title: "Goodbye Transmission, Hello qBittorrent"
 subTitle: "The download client that made me bring my own UI, and then made me leave"
 date: 2026-07-05
 desc: >
-  How Transmission 4.0 quietly killed our web UI, the linuxserver
-  bring-your-own-UI dance that followed, and why we ended up on qBittorrent.
+  How Transmission 4.0 quietly killed the web UI, the linuxserver
+  bring-your-own-UI dance that followed, and why I ended up on qBittorrent.
 bigimg:
-  url: Home Media Center-HolyGrail-Big.png
-  desc: "Photo from Once upon a time"
+  url: transmission-big.webp
 img:
-  url: Home Media Center-Transmission-Logo.png
-  desc: "Transmission"
-  title: "It's not you, it's me. Actually, it's you."
+  url: transmission-sm.webp
+  desc: "It's not you, it's me. Actually, it's you."
 categories: 
 tags: [tutorial,fun]
 series: swapping-tools
+github: transmission/transmission
 toc:
   title: 🧲 qBittorrent
 ---
 
 Way back in the [original setup]({{ site.baseurl }}/blog/home-media-server#transmission---download-client)
-I went with **Transmission** and was horrified by the default `combustion-release` UI, so I swapped in
-[`transmission-web-control`](https://github.com/ronggang/transmission-web-control) which looks like a proper
-desktop client. That served us well for years.
+I went with **Transmission** and picked the familiar
+[`transmission-web-control`](https://github.com/ronggang/transmission-web-control) UI because it looks like
+a regular desktop client. That served me well for years.
 
 Then one day it just... stopped.
 
 <!--more-->
 
-{% include github-stars.html url="transmission/transmission" desc="Transmission BitTorrent client" %}
 
+# The v4 Troubles
 
-# The Last Good Version
+On 2023-02-08 Transmission v4.0.0 happened, they rewrote the entire UI and it didn't ship with
+my `transmission-web-control` anymore.
 
-On **2023-02-08** two things happened on the exact same day, and together they broke the setup:
-
-1. Upstream shipped [**Transmission 4.0.0**](https://github.com/transmission/transmission/releases/tag/4.0.0),
-   which *rewrote* the web client from scratch. No more jQuery, the whole gzipped bundle is now 68K, and it
-   finally works on mobile. Nice, except it **replaces** the classic UI — it doesn't sit next to it.
-2. The [`linuxserver/transmission`](https://docs.linuxserver.io/images/docker-transmission/) image rebased
-   onto Alpine Edge and **removed the bundled third-party UI packages**. The `transmission-web-control` and
-   `combustion` folders that used to just be *there* were gone.
-
-So the last image where my UI came for free was **`linuxserver/transmission:version-3.00-r8`**. I pinned there
-and froze the setup in amber — everything kept working, but no updates, forever. Not a great place to live.
-
-
-# Bring Your Own Web UI
-
-The post-4.0 world moved to *bring your own UI*. There are two ways to do it with the linuxserver image.
-
-**Option 1 — `TRANSMISSION_WEB_HOME`.** Download an alternative UI, bind-mount it into the container, and point
-the env var at the folder. This is the manual route and works for **any** UI, including ones without an official
-mod (`kettu`, `combustion`, `shift`, ...).
+Because this whole thing is supposed to save you time, I took the easy way out:
 
 ```yaml
+transmission:
+  image: linuxserver/transmission:version-3.00-r8
+```
+
+Which served me well enough for these last 3 years.
+
+
+# The Homelab Trigger
+
+As I was seriously upgrading my homelab, it was time to also have a look at my beloved Pirateflix to
+see what happened in the world of *arr.
+
+
+## Bringing back my UI
+
+It turned out to be pretty easy to get my good ol' web-control back:
+
+```yaml
+transmission:
+  image: linuxserver/transmission
+  environment:
+    - PUID=${PUID}
+    - PGID=${PGID}
+    - TZ=${TZ}
+    - DOCKER_MODS=linuxserver/mods:transmission-transmission-web-control
+    - USER=${TRANSMISSION_USER}
+    - PASS=${TRANSMISSION_PASS}
+```
+
+## What have the other UIs been up to
+
+A quick look at the other UIs...
+
+```yaml
+x-transmission: &base
+  image: lscr.io/linuxserver/transmission:latest
+  environment: &env
+    PUID: 1000
+    PGID: 1000
+
 services:
-  transmission:
-    image: lscr.io/linuxserver/transmission:latest
+  floodui:
+    <<: *base
+    container_name: tr-floodui
     environment:
-      - TRANSMISSION_WEB_HOME=/transmission-web-control
-    volumes:
-      - /opt/appdata/transmission/twc:/transmission-web-control
+      <<: *env
+      DOCKER_MODS: linuxserver/mods:transmission-floodui
+    ports:
+      - 9101:9091
+
+  webcontrol:
+    <<: *base
+    container_name: tr-webcontrol
+    environment:
+      <<: *env
+      DOCKER_MODS: linuxserver/mods:transmission-transmission-web-control
+    ports:
+      - 9102:9091
+
+  transmissionic:
+    <<: *base
+    container_name: tr-transmissionic
+    environment:
+      <<: *env
+      DOCKER_MODS: linuxserver/mods:transmission-transmissionic
+    ports:
+      - 9103:9091
+
+  trguing:
+    <<: *base
+    container_name: tr-trguing
+    environment:
+      <<: *env
+      DOCKER_MODS: linuxserver/mods:transmission-trguing
+    ports:
+      - 9104:9091
 ```
 
-**Option 2 — `DOCKER_MODS`.** linuxserver's [docker-mods](https://github.com/linuxserver/docker-mods) system
-downloads and *keeps updated* a UI every time the container starts. Much less to babysit. Chain multiple mods
-with `|`.
+Four contenders, same daemon underneath. Here's what they look like:
 
-```yaml
-    environment:
-      - DOCKER_MODS=linuxserver/mods:transmission-transmission-web-control
-```
+<div class="ui-gallery">
+  <figure><a href="{{ site.baseurl }}/assets/blog-images/transmission-ui-flood.png"><img src="{{ site.baseurl }}/assets/blog-images/transmission-ui-flood.png" alt="Flood for Transmission"></a><figcaption>Flood for Transmission</figcaption></figure>
+  <figure><a href="{{ site.baseurl }}/assets/blog-images/transmission-ui-web-control.png"><img src="{{ site.baseurl }}/assets/blog-images/transmission-ui-web-control.png" alt="Transmission Web Control"></a><figcaption>Transmission Web Control</figcaption></figure>
+  <figure><a href="{{ site.baseurl }}/assets/blog-images/transmission-ui-transmissionic.png"><img src="{{ site.baseurl }}/assets/blog-images/transmission-ui-transmissionic.png" alt="Transmissionic"></a><figcaption>Transmissionic</figcaption></figure>
+  <figure><a href="{{ site.baseurl }}/assets/blog-images/transmission-ui-trguing.png"><img src="{{ site.baseurl }}/assets/blog-images/transmission-ui-trguing.png" alt="TrguiNG"></a><figcaption>TrguiNG</figcaption></figure>
+</div>
 
-The UIs that have a first-class mod:
+And where each one lives — with how much love it's still getting:
 
-| UI                       | `DOCKER_MODS` value                                        |
-|--------------------------|------------------------------------------------------------|
-| Flood for Transmission   | `linuxserver/mods:transmission-floodui`                    |
-| Transmission Web Control | `linuxserver/mods:transmission-transmission-web-control`   |
-| Transmissionic           | `linuxserver/mods:transmission-transmissionic`             |
-| TrguiNG                  | `linuxserver/mods:transmission-trguing`                    |
-
-Anything else (`kettu`, `combustion`, ...) is `TRANSMISSION_WEB_HOME`-only these days. The mod approach got me
-back to a familiar UI, but by now I was staring at a download client that needs a mod just to look presentable,
-and started wondering what else was out there.
+|   | UI | Stars | Source |
+|---|----|-------|--------|
+| <img class="nb" height="26" src="{{ site.baseurl }}/assets/blog-images/transmission-ui-flood-icon.png"> | Flood for Transmission | <img class="nb" src="https://img.shields.io/github/stars/johman10/flood-for-transmission.svg?style=social&label=Star"> | [johman10/flood-for-transmission](https://github.com/johman10/flood-for-transmission) |
+| <img class="nb" height="26" src="{{ site.baseurl }}/assets/blog-images/transmission-ui-web-control-icon.ico"> | Transmission Web Control | <img class="nb" src="https://img.shields.io/github/stars/ronggang/transmission-web-control.svg?style=social&label=Star"> | [ronggang/transmission-web-control](https://github.com/ronggang/transmission-web-control) |
+| <img class="nb" height="26" src="{{ site.baseurl }}/assets/blog-images/transmission-ui-transmissionic-icon.png"> | Transmissionic | <img class="nb" src="https://img.shields.io/github/stars/6c65726f79/Transmissionic.svg?style=social&label=Star"> | [6c65726f79/Transmissionic](https://github.com/6c65726f79/Transmissionic) |
+| <img class="nb" height="26" src="{{ site.baseurl }}/assets/blog-images/transmission-ui-trguing-icon.png"> | TrguiNG | <img class="nb" src="https://img.shields.io/github/stars/openscopeproject/TrguiNG.svg?style=social&label=Star"> | [openscopeproject/TrguiNG](https://github.com/openscopeproject/TrguiNG) |
 
 
-# Why Leave Transmission At All
+# Why Leave Transmission
 
-The BYO-UI dance was the *trigger*. The actual *reason* to jump ship was everything qBittorrent does out of the box
-that Transmission still doesn't:
+Turns out that the integration between qBittorrent and the *arr family is better compared to Transmission.
 
-- **Categories & tags** — Transmission 4.0 added basic labels, but qBittorrent's categories map each to a save
-  path *and* line up exactly with the "category" field the \*arr apps use. That last bit is why the whole
-  Sonarr/Radarr crowd standardises on it.
-- **Built-in RSS auto-downloader** with filter rules. Transmission has no native RSS.
-- **Built-in search** (plugin based). Transmission has none.
-- **Sequential download** / download first & last piece first.
-- A **full-featured WebUI** that ships in the box — no mods, no bind-mounts.
+- **Categories & tags**: qBittorrent's categories map each to a save path *and* line up exactly with the "category" field the *arr apps use.
+- **Built-in search**
+- **Sequential download**: download first & last pieces first
+- **Built-in RSS auto-downloader** with filter rules.
 
 {% include github-stars.html url="qbittorrent/qBittorrent" desc="qBittorrent BitTorrent client" %}
 
@@ -110,26 +152,21 @@ that Transmission still doesn't:
 The [`linuxserver/qbittorrent`](https://docs.linuxserver.io/images/docker-qbittorrent/) service that replaced it:
 
 ```yaml
-  qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:5.2.1_v2.0.12-ls459
-    container_name: qbittorrent
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-      - WEBUI_PORT=${QBITTORRENT_PORT}
-    volumes:
-      - ${CONFIG_PATH}/qbittorrent:/config
-      - ${DATA_PATH}:/data
-    ports:
-      - ${QBITTORRENT_PORT}:${QBITTORRENT_PORT}
-      - 6881:6881
-      - 6881:6881/udp
-    restart: ${RESTART_POLICY}
+qbittorrent:
+  image: lscr.io/linuxserver/qbittorrent
+  environment:
+    - PUID=${PUID}
+    - PGID=${PGID}
+    - TZ=${TZ}
+    - WEBUI_PORT=${QBITTORRENT_PORT}
+  volumes:
+    - ${CONFIG_PATH}/qbittorrent:/config
+    - ${DATA_PATH}:/data
+  ports:
+    - ${QBITTORRENT_PORT}:${QBITTORRENT_PORT}
+    - 6881:6881
+    - 6881:6881/udp
 ```
-
-The WebUI is on `8080` by default. To change it you have to update **both** sides of the port mapping **and** set
-`WEBUI_PORT` — the image checks them against each other as a CSRF guard, so setting only one locks you out.
 
 ## The First-Login Gotcha
 

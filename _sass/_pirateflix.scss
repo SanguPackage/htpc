@@ -192,6 +192,14 @@ html{overflow-x:hidden}
 .pf-post .post-content .notice--danger code{background:#0c2136}
 .pf-post .post-content img{max-width:100%;border:1px solid var(--line);border-radius:6px}
 .pf-post .post-content .github img{border:0;border-radius:0}
+// borderless inline images (favicons, shields badges) inside prose/tables
+.pf-post .post-content img.nb{border:0;border-radius:0;vertical-align:middle;max-width:none}
+.pf-post .post-content .ui-gallery{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:1.4em 0}
+.pf-post .post-content .ui-gallery figure{margin:0}
+.pf-post .post-content .ui-gallery a{display:block}
+.pf-post .post-content .ui-gallery img{width:100%;display:block}
+.pf-post .post-content .ui-gallery figcaption{margin-top:6px;font-size:13px;color:var(--muted);text-align:center}
+@media(max-width:640px){.pf-post .post-content .ui-gallery{grid-template-columns:1fr}}
 .pf-post .post-hero{position:relative;height:260px;margin:6px 0 4px;border:1px solid var(--line);border-radius:8px;background-size:cover;background-position:center}
 .pf-post .post-hero figcaption{position:absolute;right:8px;bottom:6px;font-size:11px;color:var(--muted);background:rgba(6,20,33,.6);padding:2px 8px;border-radius:4px}
 .pf-post .post-aside .post-topic{font-family:var(--serif);font-size:20px;color:var(--brass);
