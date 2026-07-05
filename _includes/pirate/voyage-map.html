@@ -1,4 +1,39 @@
-<svg viewBox="0 0 1040 300" role="img" aria-label="The voyage of a request">
+<svg viewBox="0 0 1040 330" role="img" aria-label="The voyage of a request">
+  <!-- night sky: moon + twinkling stars -->
+  <g class="sky">
+    <defs>
+      <mask id="moon-crescent">
+        <circle cx="118" cy="52" r="16" fill="#fff"/>
+        <circle cx="127" cy="46" r="14.5" fill="#000"/>
+      </mask>
+    </defs>
+    <!-- soft corona, centred on the lit crescent so the glow hugs it -->
+    <circle cx="111" cy="55" r="25" fill="#e9dfc4" opacity=".05"/>
+    <circle cx="111" cy="55" r="17" fill="#e9dfc4" opacity=".08"/>
+    <!-- crescent: masked so no opaque disc sits over the corona -->
+    <circle cx="118" cy="52" r="16" fill="#efe7cf" mask="url(#moon-crescent)"/>
+    <g fill="#e9dfc4">
+      <!-- four-point sparkles -->
+      <path transform="translate(210 34)" d="M0,-5 L1.1,-1.1 5,0 1.1,1.1 0,5 -1.1,1.1 -5,0 -1.1,-1.1 Z" opacity=".8">
+        <animate attributeName="opacity" values=".3;.95;.3" dur="3.6s" begin="0s" repeatCount="indefinite"/></path>
+      <path transform="translate(648 30)" d="M0,-4 L.9,-.9 4,0 .9,.9 0,4 -.9,.9 -4,0 -.9,-.9 Z" opacity=".8">
+        <animate attributeName="opacity" values=".3;.95;.3" dur="3.1s" begin="1.3s" repeatCount="indefinite"/></path>
+    </g>
+    <g fill="#cfe3f2">
+      <circle cx="180" cy="26" r="1.4"><animate attributeName="opacity" values=".25;1;.25" dur="3s"   begin="0s"   repeatCount="indefinite"/></circle>
+      <circle cx="252" cy="54" r="1.1"><animate attributeName="opacity" values=".25;1;.25" dur="2.4s" begin=".6s"  repeatCount="indefinite"/></circle>
+      <circle cx="300" cy="20" r="1.6"><animate attributeName="opacity" values=".25;1;.25" dur="3.5s" begin="1.1s" repeatCount="indefinite"/></circle>
+      <circle cx="366" cy="42" r="1.2"><animate attributeName="opacity" values=".25;1;.25" dur="2.8s" begin=".3s"  repeatCount="indefinite"/></circle>
+      <circle cx="432" cy="24" r="1.5"><animate attributeName="opacity" values=".25;1;.25" dur="3.2s" begin="1.6s" repeatCount="indefinite"/></circle>
+      <circle cx="502" cy="50" r="1.1"><animate attributeName="opacity" values=".25;1;.25" dur="2.6s" begin=".9s"  repeatCount="indefinite"/></circle>
+      <circle cx="566" cy="22" r="1.3"><animate attributeName="opacity" values=".25;1;.25" dur="3s"   begin=".2s"  repeatCount="indefinite"/></circle>
+      <circle cx="620" cy="48" r="1.5"><animate attributeName="opacity" values=".25;1;.25" dur="3.4s" begin="1.3s" repeatCount="indefinite"/></circle>
+      <circle cx="694" cy="28" r="1.2"><animate attributeName="opacity" values=".25;1;.25" dur="2.7s" begin=".7s"  repeatCount="indefinite"/></circle>
+      <circle cx="762" cy="50" r="1.4"><animate attributeName="opacity" values=".25;1;.25" dur="3.1s" begin="1.8s" repeatCount="indefinite"/></circle>
+      <circle cx="834" cy="26" r="1.5"><animate attributeName="opacity" values=".25;1;.25" dur="2.9s" begin=".4s"  repeatCount="indefinite"/></circle>
+      <circle cx="892" cy="44" r="1.1"><animate attributeName="opacity" values=".25;1;.25" dur="2.5s" begin="1.2s" repeatCount="indefinite"/></circle>
+    </g>
+  </g>
   <!-- compass -->
   <g transform="translate(958 54)" opacity=".85">
     <circle r="30" fill="none" stroke="#254a68" stroke-width="1.5"/>
@@ -8,17 +43,80 @@
   </g>
   <!-- route -->
   <path id="rt" class="route" d="M70,235 C200,120 330,120 430,150 S650,240 720,150 S920,70 980,150"/>
+  <!-- port glow rings (expand + fade as the ship arrives; timed to the 15s voyage) -->
+  <g class="halos" fill="none" stroke="#4fd8c4" stroke-width="2">
+    <circle cx="70"  cy="235" r="8">
+      <animate attributeName="r"       dur="15s" repeatCount="indefinite" keyTimes="0;.14;1"           values="8;26;8"/>
+      <animate attributeName="opacity" dur="15s" repeatCount="indefinite" keyTimes="0;.06;.14;1"       values=".9;.5;0;0"/></circle>
+    <circle cx="330" cy="133" r="8">
+      <animate attributeName="r"       dur="15s" repeatCount="indefinite" keyTimes="0;.286;.4;1"       values="8;8;26;8"/>
+      <animate attributeName="opacity" dur="15s" repeatCount="indefinite" keyTimes="0;.286;.34;.4;1"   values="0;.9;.5;0;0"/></circle>
+    <circle cx="560" cy="191" r="8">
+      <animate attributeName="r"       dur="15s" repeatCount="indefinite" keyTimes="0;.524;.64;1"      values="8;8;26;8"/>
+      <animate attributeName="opacity" dur="15s" repeatCount="indefinite" keyTimes="0;.524;.58;.64;1"  values="0;.9;.5;0;0"/></circle>
+    <circle cx="720" cy="150" r="8">
+      <animate attributeName="r"       dur="15s" repeatCount="indefinite" keyTimes="0;.7;.82;1"        values="8;8;26;8"/>
+      <animate attributeName="opacity" dur="15s" repeatCount="indefinite" keyTimes="0;.7;.76;.82;1"    values="0;.9;.5;0;0"/></circle>
+    <circle cx="980" cy="150" r="9">
+      <animate attributeName="r"       dur="15s" repeatCount="indefinite" keyTimes="0;.9;1"            values="9;9;30"/>
+      <animate attributeName="opacity" dur="15s" repeatCount="indefinite" keyTimes="0;.9;1"             values="0;.95;0"/></circle>
+  </g>
   <!-- waypoints -->
   <g font-family="monospace">
     <circle class="wp" cx="70"  cy="235" r="8"/><text class="wp-lbl" x="70" y="268" text-anchor="middle">You</text><text class="wp-sub" x="70" y="285" text-anchor="middle">"I want this film"</text>
-    <circle class="wp" cx="330" cy="128" r="8"/><text class="wp-lbl" x="330" y="108" text-anchor="middle">The Fleet</text><text class="wp-sub" x="330" y="92" text-anchor="middle">Radarr · Sonarr</text>
-    <circle class="wp" cx="560" cy="196" r="8"/><text class="wp-lbl" x="560" y="228" text-anchor="middle">The Seas</text><text class="wp-sub" x="560" y="245" text-anchor="middle">Prowlarr · qBittorrent</text>
+    <circle class="wp" cx="330" cy="133" r="8"/><text class="wp-lbl" x="330" y="108" text-anchor="middle">The Fleet</text><text class="wp-sub" x="330" y="92" text-anchor="middle">Radarr · Sonarr</text>
+    <circle class="wp" cx="560" cy="191" r="8"/><text class="wp-lbl" x="560" y="228" text-anchor="middle">The Seas</text><text class="wp-sub" x="560" y="245" text-anchor="middle">Prowlarr · qBittorrent</text>
     <circle class="wp" cx="720" cy="150" r="8"/><text class="wp-lbl" x="720" y="130" text-anchor="middle">Home Port</text><text class="wp-sub" x="720" y="114" text-anchor="middle">NAS · Bazarr</text>
     <circle class="wp" cx="980" cy="150" r="9" fill="#0d2032" stroke="#4fd8c4" stroke-width="2.5"/><text class="wp-lbl" x="980" y="182" text-anchor="middle" fill="#4fd8c4">Your Telly</text>
   </g>
+  <!-- port lamps (bright core flashes on top of each dot as the ship passes) -->
+  <g>
+    <circle cx="70"  cy="235" r="5" fill="#bfeee6" opacity="0"><animate attributeName="opacity" dur="15s" repeatCount="indefinite" keyTimes="0;.05;.12;1"          values=".95;.5;0;0"/></circle>
+    <circle cx="330" cy="133" r="5" fill="#bfeee6" opacity="0"><animate attributeName="opacity" dur="15s" repeatCount="indefinite" keyTimes="0;.276;.286;.34;1"    values="0;0;.95;0;0"/></circle>
+    <circle cx="560" cy="191" r="5" fill="#bfeee6" opacity="0"><animate attributeName="opacity" dur="15s" repeatCount="indefinite" keyTimes="0;.514;.524;.58;1"    values="0;0;.95;0;0"/></circle>
+    <circle cx="720" cy="150" r="5" fill="#bfeee6" opacity="0"><animate attributeName="opacity" dur="15s" repeatCount="indefinite" keyTimes="0;.69;.7;.76;1"       values="0;0;.95;0;0"/></circle>
+    <circle cx="980" cy="150" r="6" fill="#bfeee6" opacity="0"><animate attributeName="opacity" dur="15s" repeatCount="indefinite" keyTimes="0;.9;1"              values="0;0;1"/></circle>
+  </g>
+  <!-- stormy sea: three swelling wave layers drifting against each other -->
+  <g class="waves">
+    <g>
+      <path fill="#16384f" opacity=".5" d="M-120,330 L-120,316 q30,-13 60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 L1200,330 Z"/>
+      <animateTransform attributeName="transform" type="translate" values="0,0;-120,0;0,0" dur="11s" repeatCount="indefinite"/>
+    </g>
+    <g>
+      <path fill="#103048" opacity=".72" d="M-88,330 L-88,320 q22,-11 44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 L1144,330 Z"/>
+      <path fill="none" stroke="#cfe3f2" stroke-width="1.3" opacity=".16" d="M-88,320 q22,-11 44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0 t44,0"/>
+      <animateTransform attributeName="transform" type="translate" values="0,0;88,0;0,0" dur="7s" repeatCount="indefinite"/>
+    </g>
+    <g>
+      <path fill="#0a1e30" opacity=".92" d="M-66,330 L-66,324 q16,-9 33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 L1122,330 Z"/>
+      <path fill="none" stroke="#dceaf5" stroke-width="1.3" opacity=".22" d="M-66,324 q16,-9 33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0 t33,0"/>
+      <animateTransform attributeName="transform" type="translate" values="0,0;-66,0;0,0" dur="5s" repeatCount="indefinite"/>
+    </g>
+  </g>
   <!-- ship -->
   <g class="ship">
-    <path d="M-11,4 L11,4 L7,12 L-7,12 Z"/><path d="M0,4 L0,-13 L10,-2 L0,-2 Z" fill="#e0b34a"/>
-    <animateMotion dur="6s" repeatCount="indefinite" rotate="auto"><mpath href="#rt"/></animateMotion>
+    <g transform="scale(.85)">
+      <g>
+        <!-- masts + spars -->
+        <line x1="0" y1="2" x2="0" y2="-25" stroke="#5a3b22" stroke-width="1.6"/>
+        <line x1="12" y1="3" x2="21" y2="-1" stroke="#5a3b22" stroke-width="1.4"/>
+        <!-- sails (billowing forward) -->
+        <path d="M11,2 L20,-0.5 L11,-6 Z" fill="#e9dfc4"/>
+        <path d="M1.2,-24 C8,-22 8,-16.5 1.2,-15 Z" fill="#efe7cf"/>
+        <path d="M1.2,-13.5 C13,-10.5 13,-1.5 1.2,0.5 Z" fill="#e9dfc4"/>
+        <line x1="6" y1="-11.5" x2="6" y2="-1" stroke="#c9bd97" stroke-width=".6"/>
+        <!-- red pennant -->
+        <path d="M0,-25 L-11,-23 L-7.5,-21.5 L-11,-20 L0,-18.5 Z" fill="#e2564a"/>
+        <!-- hull -->
+        <path d="M-13,2.5 L12.5,2.5 Q15.5,2.5 14,6 L11,11.5 Q9.5,13.5 6,13.5 L-6,13.5 Q-9.5,13.5 -11,11 L-13.5,6 Q-15,3 -13,2.5 Z" fill="#6d4a2c"/>
+        <path d="M-13,3.4 L13.5,3.4" stroke="#e0b34a" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M-11,7 L12,7" stroke="#4a3018" stroke-width="1"/>
+        <!-- bow foam -->
+        <path d="M12.5,12.5 q4,0 6,2" fill="none" stroke="#e9dfc4" stroke-width="1" opacity=".7"/>
+        <animateTransform attributeName="transform" type="translate" values="0,-1;0,1;0,-1" dur="2.6s" repeatCount="indefinite"/>
+      </g>
+    </g>
+    <animateMotion dur="15s" repeatCount="indefinite" rotate="auto"><mpath href="#rt"/></animateMotion>
   </g>
 </svg>

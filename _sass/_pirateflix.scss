@@ -75,7 +75,7 @@ html{overflow-x:hidden}
   .wp{fill:var(--sea2);stroke:var(--brass);stroke-width:2}
   .wp-lbl{fill:var(--ink);font:600 15px var(--mono)}
   .wp-sub{fill:var(--muted);font:12px var(--mono)}
-  .ship{fill:var(--red)}
+  .ship{filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
 }
 
 // --- grind vs fleet ---
