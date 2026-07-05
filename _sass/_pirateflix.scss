@@ -220,6 +220,9 @@ html{overflow-x:hidden}
 .pf-post .post-content table tbody tr{background:transparent;border:0}
 .pf-post .post-content table tbody tr:nth-child(even) td{background:rgba(79,216,196,.04)}
 .pf-post .post-content table td b{color:#fff;font-weight:600}
+// full-width variant: stretch to fill the container instead of shrink-wrapping to content
+.pf-post .post-content table.full{display:table;table-layout:auto}
+@media(max-width:640px){.pf-post .post-content table.full{display:block;overflow-x:auto}}
 // blog notice() mixin makes near-white pastel callouts — unreadable on dark; reskin as tinted panels
 .pf-post .post-content .notice,
 .pf-post .post-content .notice--info,
