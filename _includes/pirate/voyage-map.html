@@ -1,0 +1,24 @@
+<svg viewBox="0 0 1040 300" role="img" aria-label="The voyage of a request">
+  <!-- compass -->
+  <g transform="translate(958 54)" opacity=".85">
+    <circle r="30" fill="none" stroke="#254a68" stroke-width="1.5"/>
+    <path d="M0,-30 6,0 0,30 -6,0 Z" fill="#e0b34a"/>
+    <path d="M-30,0 0,6 30,0 0,-6 Z" fill="#254a68"/>
+    <text x="0" y="-36" fill="#7d9bb4" font="10px monospace" text-anchor="middle">N</text>
+  </g>
+  <!-- route -->
+  <path id="rt" class="route" d="M70,235 C200,120 330,120 430,150 S650,240 720,150 S920,70 980,150"/>
+  <!-- waypoints -->
+  <g font-family="monospace">
+    <circle class="wp" cx="70"  cy="235" r="8"/><text class="wp-lbl" x="70" y="268" text-anchor="middle">You</text><text class="wp-sub" x="70" y="285" text-anchor="middle">"I want this film"</text>
+    <circle class="wp" cx="330" cy="128" r="8"/><text class="wp-lbl" x="330" y="108" text-anchor="middle">The Fleet</text><text class="wp-sub" x="330" y="92" text-anchor="middle">Radarr · Sonarr</text>
+    <circle class="wp" cx="560" cy="196" r="8"/><text class="wp-lbl" x="560" y="228" text-anchor="middle">The Seas</text><text class="wp-sub" x="560" y="245" text-anchor="middle">Prowlarr · qBittorrent</text>
+    <circle class="wp" cx="720" cy="150" r="8"/><text class="wp-lbl" x="720" y="130" text-anchor="middle">Home Port</text><text class="wp-sub" x="720" y="114" text-anchor="middle">NAS · Bazarr</text>
+    <circle class="wp" cx="980" cy="150" r="9" fill="#0d2032" stroke="#4fd8c4" stroke-width="2.5"/><text class="wp-lbl" x="980" y="182" text-anchor="middle" fill="#4fd8c4">Your Telly</text>
+  </g>
+  <!-- ship -->
+  <g class="ship">
+    <path d="M-11,4 L11,4 L7,12 L-7,12 Z"/><path d="M0,4 L0,-13 L10,-2 L0,-2 Z" fill="#e0b34a"/>
+    <animateMotion dur="6s" repeatCount="indefinite" rotate="auto"><mpath href="#rt"/></animateMotion>
+  </g>
+</svg>
