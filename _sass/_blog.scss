@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .blog-main-container {
   font-size: 14px;
 }
@@ -509,12 +511,12 @@ $pagination-background: #e7e7e7;
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-    background: darken($pagination-background, 10%);
+    background: color.adjust($pagination-background, $lightness: -10%);
     color: #ffffff;
 }
 
 .pagination > li > a.active {
-    background-color: darken($pagination-background, 5%);
+    background-color: color.adjust($pagination-background, $lightness: -5%);
     cursor: default;
 }
 
@@ -678,7 +680,7 @@ $pagination-background: #e7e7e7;
   padding: 1em;
   font-size: 16px !important;
   text-indent: initial;
-  background-color: mix(#fff, $notice-color, 90%);
+  background-color: color.mix(#fff, $notice-color, 90%);
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba($notice-color, 0.25);
 
@@ -709,12 +711,12 @@ $pagination-background: #e7e7e7;
     color: $notice-color;
 
     &:hover {
-      color: mix(#000, $notice-color, 40%);
+      color: color.mix(#000, $notice-color, 40%);
     }
   }
 
   code {
-    background-color: mix(#fff, $notice-color, 95%);
+    background-color: color.mix(#fff, $notice-color, 95%);
   }
 
   ul {

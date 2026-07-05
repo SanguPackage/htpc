@@ -3,8 +3,8 @@
 ---
 @charset "utf-8";
 
-@import "vars";
-@import "_base";
-@import "our-styles";
-@import "_blog";
-@import "pirateflix";
+// Partials that need vars.scss @use it themselves, so it isn't loaded here.
+@use "base";
+@use "our-styles";
+@use "blog";
+@use "pirateflix";
