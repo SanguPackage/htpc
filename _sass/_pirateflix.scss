@@ -138,8 +138,9 @@ html{overflow-x:hidden}
 .pf-post h1{font-family:var(--serif);color:#fff;margin:12px 0 6px}
 .pf-post .post-sub{color:var(--muted);font-size:18px;margin:0 0 6px}
 .pf-post .post-date{color:var(--muted);font-size:13px}
+.pf-post .wrap{max-width:1320px}
 .pf-post .post-body{display:grid;grid-template-columns:1fr 300px;gap:36px;padding:24px 0}
-.pf-post .post-content{color:var(--ink);max-width:72ch;line-height:1.75}
+.pf-post .post-content{color:var(--ink);max-width:none;line-height:1.75}
 .pf-post .post-content h1,
 .pf-post .post-content h2,
 .pf-post .post-content h3{font-family:var(--serif);color:#fff;margin-top:1.6em}
@@ -150,7 +151,8 @@ html{overflow-x:hidden}
 .pf-post .post-content code{padding:1px 6px;color:var(--brass)}
 .pf-post .post-content pre code{border:0;padding:0;color:var(--ink)}
 .pf-post .post-content img{max-width:100%;border:1px solid var(--line);border-radius:6px}
-.pf-post .post-aside .sidebar-heading{font-family:var(--serif);color:var(--brass);margin-bottom:8px}
+.pf-post .post-aside .sidebar-heading{font-family:var(--serif);color:var(--brass);margin-bottom:8px;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.pf-post .post-aside .sidebar-heading .entry-edit{font-size:12px;color:var(--teal);white-space:nowrap}
 .pf-post .post-aside a{color:var(--teal)}
 @media(max-width:820px){.pf-post .post-body{grid-template-columns:1fr}}
 
