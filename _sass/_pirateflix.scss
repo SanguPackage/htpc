@@ -353,3 +353,17 @@ html{overflow-x:hidden}
 @media(max-width:640px){.pf-post .post-changelog__entry{flex-direction:column;gap:2px}
   .pf-post .post-changelog__date{width:auto}}
 
+// --- 404: off the charts — centred message over giant translucent numerals ---
+.pf-404{
+  .lost{position:relative;text-align:center;padding:88px 0 108px;overflow:hidden}
+  .lost > *{position:relative;z-index:1}
+  .lost .tag{display:block;margin-bottom:14px}
+  .lost h1{margin:0 0 14px}
+  .lost .lead{margin:0 auto 30px}
+  .lost-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  // oversized brass "404" watermark bled behind the message
+  .ghost{position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-weight:700;font-size:min(42vw,420px);line-height:1;
+    color:var(--brass);opacity:.06;pointer-events:none;user-select:none}
+}

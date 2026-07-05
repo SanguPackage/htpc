@@ -1,14 +1,22 @@
 ---
 layout: default
 permalink: /404.html
+title: Lost at sea
 ---
-
-<div class="main">
-    {% include header.html %}
-
-    {% include blog/big-header.html title="404" subTitle="Oops we couldn't find that page!" %}
-
-    <div style="margin: 15px">
-        <a href="{{ site.baseurl }}/">Return to safety!</a>
-    </div>
+<div class="pf pf-404">
+  {% include pirate/nav.html %}
+  <div class="wrap">
+    <section class="lost">
+      <div class="ghost" aria-hidden="true">404</div>
+      <span class="tag">Off the charts &middot; bearing unknown</span>
+      <h1>You&rsquo;ve sailed off the <em>map</em>.</h1>
+      <p class="lead">This stretch of sea isn&rsquo;t on any chart we keep. The page you
+        hailed has either weighed anchor elsewhere &mdash; or never made port at all.</p>
+      <div class="lost-actions">
+        <a class="btn solid" href="{{ '/' | relative_url }}">&#9875; Back to port</a>
+        <a class="btn" href="{{ '/blog/' | relative_url }}">Read the Captain&rsquo;s Log</a>
+      </div>
+    </section>
+  </div>
+  {% include pirate/footer.html %}
 </div>
