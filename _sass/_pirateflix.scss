@@ -31,7 +31,10 @@ html{overflow-x:hidden}
 
   section{padding:74px 0;border-bottom:1px solid var(--line)}
 
-  h1{font-family:var(--serif);font-weight:700;font-size:clamp(38px,6vw,68px);line-height:1.02;
+  // Max 56px: the italic 2nd line at 56px is ~968px, which keeps each phrase on
+  // one line for any viewport ≥1024px (below that the .wrap column is too narrow
+  // and it wraps, which is fine). Larger fonts overflow the fixed 1080px column.
+  h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,6vw,56px);line-height:1.02;
     margin:14px 0 18px;color:#fff;letter-spacing:-.5px}
   h1 em{color:var(--brass);font-style:italic}
   h2{font-family:var(--serif);font-size:clamp(26px,4vw,40px);margin:0 0 8px;color:#fff}
@@ -82,6 +85,7 @@ html{overflow-x:hidden}
   .card h3{margin:0 0 14px;font-family:var(--serif);font-size:22px}
   .grind{color:var(--muted)}
   .grind li{text-decoration:line-through;text-decoration-color:var(--red);margin:8px 0}
+  .magic{padding-left:1.6em}
   .magic li{margin:8px 0}
   .magic li::marker{content:'⚓ '}
   @media(max-width:720px){.two{grid-template-columns:1fr}}
