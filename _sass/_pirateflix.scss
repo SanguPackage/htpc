@@ -150,6 +150,39 @@ html{overflow-x:hidden}
 .pf-post .post-content pre{padding:16px;overflow:auto}
 .pf-post .post-content code{padding:1px 6px;color:var(--brass)}
 .pf-post .post-content pre code{border:0;padding:0;color:var(--ink)}
+// base.scss globally strips list markers + padding; restore them for post prose
+.pf-post .post-content ul{list-style:disc}
+.pf-post .post-content ol{list-style:decimal}
+.pf-post .post-content ul,
+.pf-post .post-content ol{margin:0 0 1.1em;padding-left:1.6em}
+.pf-post .post-content li{margin:.4em 0}
+.pf-post .post-content li::marker{color:var(--brass)}
+.pf-post .post-content li>ul,
+.pf-post .post-content li>ol{margin:.3em 0 .3em}
+// blog's .table-base/.table-code are light-themed (white fills) — reskin for the dark chart
+.pf-post .post-content table{display:block;width:100%;overflow-x:auto;border-collapse:collapse;
+  margin:0 0 1.4em;font-size:14px;border:1px solid var(--line);border-radius:8px}
+.pf-post .post-content table th,
+.pf-post .post-content table td{padding:10px 14px;border:1px solid var(--line);
+  text-align:left;vertical-align:top;background:transparent}
+.pf-post .post-content table thead th{background:var(--panel);color:var(--brass);
+  font-family:var(--serif);font-weight:600;white-space:nowrap}
+.pf-post .post-content table tbody tr{background:transparent;border:0}
+.pf-post .post-content table tbody tr:nth-child(even) td{background:rgba(79,216,196,.04)}
+.pf-post .post-content table td b{color:#fff;font-weight:600}
+// blog notice() mixin makes near-white pastel callouts — unreadable on dark; reskin as tinted panels
+.pf-post .post-content .notice,
+.pf-post .post-content .notice--info,
+.pf-post .post-content .notice--danger{border:1px solid var(--line);border-left:3px solid var(--muted);
+  box-shadow:none;color:var(--ink);border-radius:6px;padding:14px 18px;margin:1.4em 0}
+.pf-post .post-content .notice{background:rgba(125,155,180,.10)}
+.pf-post .post-content .notice--info{background:rgba(224,179,74,.10);border-left-color:var(--brass)}
+.pf-post .post-content .notice--danger{background:rgba(226,86,74,.12);border-left-color:var(--red)}
+.pf-post .post-content .notice--info a{color:var(--brass)}
+.pf-post .post-content .notice--danger a{color:var(--red)}
+.pf-post .post-content .notice code,
+.pf-post .post-content .notice--info code,
+.pf-post .post-content .notice--danger code{background:#0c2136}
 .pf-post .post-content img{max-width:100%;border:1px solid var(--line);border-radius:6px}
 .pf-post .post-hero{position:relative;height:260px;margin:6px 0 4px;border:1px solid var(--line);border-radius:8px;background-size:cover;background-position:center}
 .pf-post .post-hero figcaption{position:absolute;right:8px;bottom:6px;font-size:11px;color:var(--muted);background:rgba(6,20,33,.6);padding:2px 8px;border-radius:4px}
