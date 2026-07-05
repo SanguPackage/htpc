@@ -216,6 +216,14 @@ html{overflow-x:hidden}
 .pf-post .post-content .pf-lightbox__close{position:absolute;inset:0;cursor:zoom-out}
 .pf-post .post-content .pf-lightbox img{position:relative;z-index:1;max-width:92vw;max-height:92vh;
   border:1px solid var(--line);border-radius:6px;pointer-events:none}
+// JS-driven zoom for post images bigger than their displayed size (image-zoom.js).
+// Overlay lives on <body>, outside .pf, so it isn't scoped under .post-content.
+.pf-post .post-content figure.imagewrapper img.zoomable{cursor:zoom-in}
+.pf-imgzoom{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+  padding:24px;background:rgba(6,20,33,.92);cursor:zoom-out;
+  opacity:0;visibility:hidden;transition:opacity .2s}
+.pf-imgzoom.is-open{opacity:1;visibility:visible}
+.pf-imgzoom img{max-width:92vw;max-height:92vh;border:1px solid var(--line);border-radius:6px}
 // collapsible <details> blocks (e.g. long code samples)
 .pf-post .post-content details{border:1px solid var(--line);border-radius:8px;background:var(--panel);margin:0 0 1.4em;padding:0 16px}
 .pf-post .post-content summary{cursor:pointer;padding:12px 4px;color:var(--brass);font-family:var(--serif);list-style:none}
