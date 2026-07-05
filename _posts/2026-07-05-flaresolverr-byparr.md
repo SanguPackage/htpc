@@ -9,11 +9,9 @@ desc: >
   FlareSolverr solves the challenge for you — and Byparr is the drop-in
   alternative for when it can't.
 bigimg:
-  url: Integrations-Big.png
-  desc: "Photo by Compare Fibre"
+  url: flaresolverr-big.webp
 img:
-  url: Home Media Center-Small.jpg
-  desc: "Photo by Ian Battaglia"
+  url: flaresolverr-sm.webp
   title: "You shall not pass. — Cloudflare, probably"
 categories: 
 tags: [tutorial,fun]

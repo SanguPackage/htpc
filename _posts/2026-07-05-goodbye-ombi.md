@@ -8,11 +8,9 @@ desc: >
   Ombi still works, but development stalled and it never spoke fluent
   Jellyfin. Jellyseerr does — so we switched. Then Jellyseerr became Seerr.
 bigimg:
-  url: Home Media Center-Alternatives-Big.png
-  desc: "Photo by Daniele Levis Pelusi"
+  url: ombi-big.webp
 img:
-  url: Home Media Center-Small.jpg
-  desc: "Photo by Ian Battaglia"
+  url: ombi-sm.webp
   title: "Type a title, click request, done."
 categories: 
 tags: [tutorial,fun]
