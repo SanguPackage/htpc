@@ -1,0 +1,13 @@
+{% if page.updates %}
+<section class="post-changelog">
+  <h2 class="post-changelog__title">{% include icon.html name="square-pen" %} Ship's log</h2>
+  <ul class="post-changelog__list">
+    {% for update in page.updates %}
+    <li class="post-changelog__entry">
+      <time class="post-changelog__date">{{ update.date | date: "%-d %b %Y" }}</time>
+      {% if update.desc %}<span class="post-changelog__desc">{{ update.desc }}</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
