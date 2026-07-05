@@ -1,0 +1,25 @@
+<div class="log-list">
+  {% assign lastYear = "" %}
+  {% for post in site.posts %}
+    {% assign y = post.date | date: "%Y" %}
+    {% if y != lastYear %}
+      <div class="log-year"><span>Anno {{ y }}</span></div>
+      {% assign lastYear = y %}
+    {% endif %}
+    <a class="log-entry" href="{{ post.url | relative_url }}">
+      <div class="log-coord">
+        <span class="d">{{ post.date | date: "%d" }}</span>
+        <span class="m">{{ post.date | date: "%b" }}</span>
+      </div>
+      <div class="log-body">
+        <h3>{{ post.title | escape }}</h3>
+        {% if post.subTitle %}<p class="log-sub">&lsaquo; {{ post.subTitle | escape }} &rsaquo;</p>{% endif %}
+        {% if post.description %}<p class="log-exc">{{ post.description | strip_html | normalize_whitespace | truncatewords: 28 }}</p>{% endif %}
+        {% if post.tags %}<div class="log-tags">{% for tag in post.tags %}<span>#{{ tag }}</span>{% endfor %}</div>{% endif %}
+      </div>
+      {% if post.img.url %}
+        <img class="log-thumb" src="{{ 'assets/blog-images/' | append: post.img.url | absolute_url }}" alt="{{ post.img.desc | default: post.title | escape }}" loading="lazy" />
+      {% endif %}
+    </a>
+  {% endfor %}
+</div>
