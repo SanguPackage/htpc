@@ -111,6 +111,8 @@ Jellystat:
   screenshots: []
 
 # Plain new-tab links (category nodes) — clicking navigates straight to the site.
+subtitles:
+  href: https://wiki.bazarr.media/bazarr-stats/
 imdb:
   href: https://www.imdb.com/
 trakt:
