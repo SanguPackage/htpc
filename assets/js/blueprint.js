@@ -17,30 +17,13 @@ export function contentFor(id, data) {
 }
 
 // Compact star count: 999 -> "999", 13904 -> "13.9k", 53969 -> "54k". "" if unknown.
+// Counts are baked into the data (see _data/deck_plan.yml) rather than fetched live —
+// per-visitor GitHub API calls rate-limit at 60/hr per IP, so panels went starless.
 export function formatStars(n) {
   if (n == null || Number.isNaN(n)) return "";
   if (n < 1000) return String(n);
   const k = n >= 100000 ? Math.round(n / 1000) : Math.round(n / 100) / 10;
   return `${k}k`;
-}
-
-// GitHub stargazers for owner/repo, cached in localStorage for a day; null on any
-// failure (offline, rate limit) so the panel degrades to just the repo link.
-async function fetchStars(repo) {
-  const key = `ghstars:${repo}`;
-  try {
-    const cached = JSON.parse(localStorage.getItem(key) || "null");
-    if (cached && Date.now() - cached.t < 864e5) return cached.n;
-  } catch {}
-  try {
-    const r = await fetch(`https://api.github.com/repos/${repo}`);
-    if (!r.ok) return null;
-    const n = (await r.json()).stargazers_count;
-    try { localStorage.setItem(key, JSON.stringify({ n, t: Date.now() })); } catch {}
-    return n;
-  } catch {
-    return null;
-  }
 }
 
 // --- hover highlight (ported from the blueprint's highlight.ts) ---
@@ -114,14 +97,11 @@ function init() {
     q(".dp-title").textContent = entry.title || "";
     q(".dp-desc").textContent = entry.description || "";
     const repo = q(".dp-repo");
-    const stars = q(".dp-stars");
-    stars.textContent = "";
     if (entry.github) {
       repo.hidden = false;
       q(".dp-gh").href = `https://github.com/${entry.github}`;
-      fetchStars(entry.github).then((n) => {
-        if (n != null) stars.textContent = `⭐ ${formatStars(n)}`;
-      });
+      const s = formatStars(entry.stars);
+      q(".dp-stars").textContent = s ? `⭐ ${s}` : "";
     } else {
       repo.hidden = true;
     }
@@ -136,7 +116,9 @@ function init() {
   function openFromTarget(target) {
     const node = target.closest?.("[data-node]");
     const entry = node && contentFor(node.dataset.node, data);
-    if (entry) openPanel(entry);
+    if (!entry) return;
+    if (entry.href) { window.open(entry.href, "_blank", "noopener"); return; }
+    openPanel(entry);
   }
 
   // tap detection (all pointer types) so a pan-drag never opens the panel
