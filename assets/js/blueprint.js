@@ -116,6 +116,14 @@ function init() {
       .map((l) => `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join("");
     q(".dp-shots").innerHTML = (entry.screenshots || [])
       .map((s) => `<img src="${s}" alt="" loading="lazy">`).join("");
+    // full-bleed portrait: the crew art becomes the panel background (content on a scrim)
+    if (entry.portrait) {
+      panel.style.setProperty("--art", `url("${entry.portrait}")`);
+      panel.classList.add("has-art");
+    } else {
+      panel.classList.remove("has-art");
+      panel.style.removeProperty("--art");
+    }
     panel.classList.add("open");
   }
   const closePanel = () => panel.classList.remove("open");

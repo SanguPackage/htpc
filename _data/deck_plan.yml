@@ -9,6 +9,7 @@ Radarr:
   logo: /htpc/assets/blueprint/logos/radarr.svg
   github: Radarr/Radarr
   stars: 13904
+  portrait: /htpc/assets/radarr.png
   description: >
     The movie quartermaster. Watches for the films you want, grabs the best
     release the moment it appears, then renames and files it into your library.
@@ -21,6 +22,7 @@ Sonarr:
   logo: /htpc/assets/blueprint/logos/sonarr.svg
   github: Sonarr/Sonarr
   stars: 14190
+  portrait: /htpc/assets/sonarr.png
   description: >
     The TV quartermaster. Follows your shows, grabs each new episode as it airs,
     and keeps every season tidily organised.
@@ -33,6 +35,7 @@ Prowlarr:
   logo: /htpc/assets/blueprint/logos/prowlarr.svg
   github: Prowlarr/Prowlarr
   stars: 6783
+  portrait: /htpc/assets/logo.png
   description: >
     The spyglass. One place to manage every indexer and tracker, feeding search
     results to Radarr and Sonarr so they always know where to look.
@@ -45,6 +48,7 @@ qBittorrent:
   logo: /htpc/assets/blueprint/logos/qbittorrent.svg
   github: qbittorrent/qBittorrent
   stars: 38610
+  portrait: /htpc/assets/qbittorrent.png
   description: >
     The cargo hold. Does the actual hauling — downloads the releases the *arr
     fleet orders and drops them where they can be imported.
@@ -57,6 +61,7 @@ Bazarr:
   logo: /htpc/assets/blueprint/logos/bazarr.svg
   github: morpheus65535/bazarr
   stars: 4113
+  portrait: /htpc/assets/bazarr.png
   description: >
     The translator. Follows your library and fetches matching subtitles in your
     languages, writing them alongside each film and episode.
@@ -69,6 +74,7 @@ Seerr:
   logo: /htpc/assets/blueprint/logos/seerr.svg
   github: seerr-team/seerr
   stars: 11791
+  portrait: /htpc/assets/jellyseerr.png
   description: >
     The ship's log. The friendly request box for crew and guests — search a
     title, tap request, and the fleet takes it from there. The merged successor
@@ -82,6 +88,7 @@ Jellyfin:
   logo: /htpc/assets/blueprint/logos/jellyfin.svg
   github: jellyfin/jellyfin
   stars: 53969
+  portrait: /htpc/assets/jellyfin.png
   description: >
     Home port. The media server that streams everything the fleet brings in to
     every telly, phone and browser in the house.
