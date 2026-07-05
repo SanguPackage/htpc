@@ -4,3 +4,4 @@ _site
 .idea
 desktop.ini
 .jekyll-cache
+.playwright-mcp
