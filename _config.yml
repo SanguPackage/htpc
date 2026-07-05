@@ -13,7 +13,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: HTPC @ Sangu
+title: PirateFlix — Home media server, automated
 meta-description: Setup your own HTPC with ease
 meta-keywords: radarr sonarr transmission htpc docker docker-compose heimdall jellyfin bazarr prowlarr ombi
 name: htpc
