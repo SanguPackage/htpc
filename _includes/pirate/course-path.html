@@ -18,9 +18,8 @@
 
   <h3 class="logbook-heading">⚓ Captain's log — later ports of call</h3>
   <ul class="logbook">
-    {% for post in series_posts %}
-      {% assign yr = post.date | date: "%Y" %}
-      {% unless yr == "2020" %}
+    {% for post in site.posts %}
+      {% unless post.series == "home-media-server" %}
         <li>
           <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
           <span class="log-date">{{ post.date | date: "%b %Y" }}</span>
