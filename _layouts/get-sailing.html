@@ -1,0 +1,38 @@
+---
+layout: default
+---
+<div class="pf gs-page">
+  <header class="pf-nav deck-header">
+    {% include pirate/brand.html %}
+    <div class="deck-title">
+      <h1 class="deck-heading">Get sailing.</h1>
+      <p class="deck-subtitle">Every guide, shelved by the job it does<span class="subtitle-more"> — not the day it was written.</span></p>
+    </div>
+    <a class="btn" href="{{ '/' | relative_url }}">← Back to port</a>
+  </header>
+
+  <div class="wrap">
+    {% for group in site.data.get_sailing.groups %}
+    <section class="gs-group">
+      <h2 class="gs-group-title">{{ group.icon }} {{ group.title }}</h2>
+      <p class="sub">{{ group.tagline }}</p>
+      <div class="fleet">
+        {% for card in group.cards %}
+        <div class="crew" style="--c:{{ group.accent }}">
+          <div class="big">{{ card.glyph }}</div>
+          <div class="n">{{ card.title }}</div>
+          <div class="r">{{ card.kicker }}</div>
+          <div class="d">{{ card.payoff }}</div>
+          <div class="more">
+            {% for link in card.links %}<a class="btn" href="{{ link.url }}">{{ link.label }}</a>{% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endfor %}
+
+    <p class="gs-footnote">Looking for the raw, chronological archive? <a href="{{ '/blog/' | relative_url }}">Read the Captain's Log →</a></p>
+  </div>
+  {% include pirate/footer.html %}
+</div>

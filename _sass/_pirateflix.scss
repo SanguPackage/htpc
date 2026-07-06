@@ -160,7 +160,7 @@ html{overflow-x:hidden}
 // --- "why you actually want it" + "charts from other captains" ---
 // accent-washed cards with a big faded glyph + CTA.
 // Scoped so the shared .fleet/.crew crew-grid above stays untouched.
-.pf #why, .pf #charts{
+.pf #why, .pf #charts, .pf #course, .pf .gs-group{
   .fleet{grid-template-columns:repeat(3,1fr);align-items:stretch}
   @media(max-width:720px){.fleet{grid-template-columns:1fr}}
 
@@ -183,23 +183,23 @@ html{overflow-x:hidden}
   .btn:hover{background:var(--c,var(--brass));color:#0a1826}
 }
 
-// --- chart your course + captain's log + footer ---
+// --- chart your course (homepage teaser) + get-sailing hub + footer ---
 .pf{
-  .course{counter-reset:step;list-style:none;padding:0;margin:0}
-  .course li{counter-increment:step;border:1px solid var(--line);border-radius:8px;
-    background:var(--panel);margin:10px 0;padding:16px 18px 16px 62px;position:relative}
-  .course li::before{content:counter(step);position:absolute;left:16px;top:50%;transform:translateY(-50%);
-    width:30px;height:30px;border:1px solid var(--brass);border-radius:50%;color:var(--brass);
-    display:flex;align-items:center;justify-content:center;font:600 14px var(--mono)}
-  .course a{display:block;text-decoration:none}
-  .course .ttl{color:#fff;font-family:var(--serif);font-size:19px}
-  .course .sub-ttl{display:block;color:var(--muted);font-size:13px;margin-top:2px}
-  .course .sub-ttl code{font-family:var(--mono);font-size:.92em;color:var(--brass)}
-  .logbook-heading{font-family:var(--serif);color:#fff;margin:34px 0 12px}
-  .logbook{list-style:none;padding:0;margin:0}
-  .logbook li{display:flex;justify-content:space-between;gap:12px;padding:10px 4px;border-bottom:1px solid var(--line)}
-  .logbook a{color:var(--teal);text-decoration:none}
-  .logbook .log-date{color:var(--muted);font-size:12px;white-space:nowrap}
+  // #course and .gs-group cards borrow the #why accent-card look (see selector above).
+  // Extras below: multi-button card footers and the course section's out-links.
+  #why, #charts, #course, .gs-group{
+    .more{display:flex;flex-wrap:wrap;gap:10px}   // two-button cards (card 01) wrap cleanly
+  }
+  .course-out{margin:22px 0 0;font-size:14px;color:var(--muted)}
+  .course-out a{color:var(--teal);text-decoration:none}
+  .course-out a + a{margin-left:18px}
+
+  // get-sailing page
+  .gs-group{margin:0 0 44px}
+  .gs-group-title{font-family:var(--serif);color:#fff;font-size:26px;margin:0 0 4px}
+  .gs-group .sub{margin:0 0 18px}
+  .gs-footnote{color:var(--muted);font-size:14px;margin:8px 0 40px}
+  .gs-footnote a{color:var(--teal);text-decoration:none}
 
   // faint compass-rose watermark behind the course section
   #course{position:relative;isolation:isolate}

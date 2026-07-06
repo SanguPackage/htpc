@@ -1,7 +1,8 @@
 <nav class="pf-nav">
   {% include pirate/brand.html %}
   <div class="pf-nav-links">
-    <a href="{{ '/blog/' | relative_url }}"{% if page.url contains '/blog/' %} class="active" aria-current="page"{% endif %}>Captain's Log</a>
+    <a href="{{ '/get-sailing/' | relative_url }}"{% if page.url contains '/get-sailing/' %} class="active" aria-current="page"{% endif %}>Get Sailing</a>
     <a href="{{ '/deck-plan/' | relative_url }}"{% if page.url contains '/deck-plan/' %} class="active" aria-current="page"{% endif %}>Deck Plan</a>
+    <a href="{{ '/blog/' | relative_url }}"{% if page.url contains '/blog/' %} class="active" aria-current="page"{% endif %}>Captain's Log</a>
   </div>
 </nav>

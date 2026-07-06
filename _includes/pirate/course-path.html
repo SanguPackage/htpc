@@ -1,30 +1,38 @@
 <section id="course" style="--rose:url('{{ '/assets/compass-rose.webp' | relative_url }}')">
   <h2>Chart your course.</h2>
-  <p class="sub">Follow the voyage from empty NAS to your own bottomless cinema.</p>
-  {% assign series_posts = site.posts | where: "series", "home-media-server" | sort: "date" | reverse %}
-  <ol class="course">
-    {% for post in series_posts %}
-      {% assign yr = post.date | date: "%Y" %}
-      {% if yr == "2020" %}
-        <li>
-          <a href="{{ post.url | relative_url }}">
-            <span class="ttl">{{ post.title | escape }}</span>
-            {% if post.subTitle %}<span class="sub-ttl">{{ post.subTitle | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span>{% endif %}
-          </a>
-        </li>
-      {% endif %}
-    {% endfor %}
-  </ol>
-
-  <h3 class="logbook-heading">⚓ Captain's log — later ports of call</h3>
-  <ul class="logbook">
-    {% for post in site.posts %}
-      {% unless post.series == "home-media-server" %}
-        <li>
-          <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-          <span class="log-date">{{ post.date | date: "%b %Y" }}</span>
-        </li>
-      {% endunless %}
-    {% endfor %}
-  </ul>
+  <p class="sub">Three steps from empty NAS to your own bottomless cinema.</p>
+  <div class="fleet">
+    <div class="crew" style="--c:#e0b34a">
+      <div class="big">🗺️</div>
+      <div class="n">Home Media Server</div>
+      <div class="r">01 · Understand</div>
+      <div class="d">What each container does & why this crew.</div>
+      <div class="more">
+        <a class="btn" href="{% post_url 2020-07-19-home-media-server %}">Read the briefing →</a>
+        <a class="btn" href="{{ '/deck-plan/' | relative_url }}">Study the blueprint →</a>
+      </div>
+    </div>
+    <div class="crew" style="--c:#4fd8c4">
+      <div class="big">🧱</div>
+      <div class="n">Le Docker Compose</div>
+      <div class="r">02 · Build</div>
+      <div class="d">Twelve containers, one file, <code>up -d</code>, running by supper.</div>
+      <div class="more">
+        <a class="btn" href="{% post_url 2020-07-18-home-media-server-docker-compose %}">Copy-paste it →</a>
+      </div>
+    </div>
+    <div class="crew" style="--c:#e2564a">
+      <div class="big">🧭</div>
+      <div class="n">Container Management</div>
+      <div class="r">03 · Command</div>
+      <div class="d">One dashboard so you never memorise a port again.</div>
+      <div class="more">
+        <a class="btn" href="{% post_url 2020-07-17-home-media-server-management %}">Pick a dashboard →</a>
+      </div>
+    </div>
+  </div>
+  <p class="course-out">
+    <a href="{{ '/get-sailing/' | relative_url }}">See every guide → Get Sailing</a>
+    <a href="{{ '/blog/' | relative_url }}">Or browse it all → Captain's Log</a>
+  </p>
 </section>

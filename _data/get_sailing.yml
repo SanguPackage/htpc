@@ -1,0 +1,105 @@
+# Card manifest for the /get-sailing/ hub. Rendered by _layouts/get-sailing.html.
+# Links hard-code the /htpc baseurl (YAML isn't processed by Liquid) — same
+# convention as _data/deck_plan.yml. Keep groups in build order (keel → sails →
+# swaps → shore leave). Curated on purpose: adding a blog post does NOT auto-add
+# a card here.
+groups:
+  - icon: "⚓"
+    title: "Lay the keel"
+    tagline: "The required build — do these three and you're sailing."
+    accent: "#e0b34a"
+    cards:
+      - glyph: "🗺️"
+        kicker: "Understand"
+        title: "Home Media Server"
+        payoff: "What each container does & why this crew."
+        links:
+          - { label: "Read the briefing →", url: "/htpc/blog/home-media-server/" }
+          - { label: "Study the blueprint →", url: "/htpc/deck-plan/" }
+      - glyph: "🧱"
+        kicker: "Build"
+        title: "Le Docker Compose"
+        payoff: "Twelve containers, one file, docker compose up -d."
+        links:
+          - { label: "Copy-paste it →", url: "/htpc/blog/home-media-server-docker-compose/" }
+      - glyph: "🧭"
+        kicker: "Command"
+        title: "Container Management"
+        payoff: "One dashboard so you never memorise a port again."
+        links:
+          - { label: "Pick a dashboard →", url: "/htpc/blog/home-media-server-management/" }
+  - icon: "⛵"
+    title: "Trim the sails"
+    tagline: "Optional — but this is the never-think-about-it-again magic."
+    accent: "#4fd8c4"
+    cards:
+      - glyph: "🌊"
+        kicker: "Lists & watchlists"
+        title: "Follow the tides"
+        payoff: "Follow IMDb / Trakt lists — new releases sail in on their own."
+        links:
+          - { label: "Follow the tides →", url: "/htpc/blog/lists/" }
+      - glyph: "🔔"
+        kicker: "Notifications"
+        title: "Word from the crow's nest"
+        payoff: "Pinged the moment a title lands, however you like."
+        links:
+          - { label: "Set the watch →", url: "/htpc/blog/notifications/" }
+      - glyph: "📜"
+        kicker: "Requests"
+        title: "Requests from the crew"
+        payoff: "Crew & guests ask in Seerr; the fleet delivers."
+        links:
+          - { label: "Open the request box →", url: "/htpc/blog/goodbye-ombi/" }
+      - glyph: "♻️"
+        kicker: "Recyclarr"
+        title: "The quality quartermaster"
+        payoff: "Auto-tuned quality profiles from the TRaSH guides."
+        links:
+          - { label: "Weigh it up →", url: "/htpc/blog/recyclarr/" }
+      - glyph: "🗼"
+        kicker: "Watchtower"
+        title: "The self-updating fleet"
+        payoff: "Auto-update the crew."
+        links:
+          - { label: "Set the watchtower →", url: "/htpc/blog/watchtower/" }
+  # - icon: "🔁"
+  #   title: "Swap the crew"
+  #   tagline: "Upgrades & migrations — trade a mate for a better one."
+  #   accent: "#e2564a"
+  #   cards:
+  #     - glyph: "🦅"
+  #       kicker: "Prowlarr"
+  #       title: "Bye, Jackett"
+  #       payoff: "One indexer manager that syncs every tracker into Sonarr/Radarr."
+  #       links:
+  #         - { label: "Make the swap →", url: "/htpc/blog/goodbye-jackett/" }
+  #     - glyph: "🌀"
+  #       kicker: "qBittorrent"
+  #       title: "Bye, Transmission"
+  #       payoff: "A faster, tidier download client that plays nicer with the fleet."
+  #       links:
+  #         - { label: "Make the swap →", url: "/htpc/blog/goodbye-transmission/" }
+  #     - glyph: "☁️"
+  #       kicker: "FlareSolverr"
+  #       title: "Past the bouncer"
+  #       payoff: "Clear Cloudflare challenges so blocked indexers stay reachable."
+  #       links:
+  #         - { label: "Get past the wall →", url: "/htpc/blog/flaresolverr-byparr/" }
+  - icon: "🧭"
+    title: "Shore leave"
+    tagline: "Detours worth a wander before (or after) you sail."
+    accent: "#8fb3c9"
+    cards:
+      - glyph: "🔄"
+        kicker: "Alternatives"
+        title: "Don't fancy the crew?"
+        payoff: "Every crew member has a stand-in — here are the swaps."
+        links:
+          - { label: "Browse stand-ins →", url: "/htpc/blog/home-media-server-alternatives/" }
+      - glyph: "📦"
+        kicker: "Prebuilt Boxes"
+        title: "Rather borrow than build?"
+        payoff: "The all-in-one boxes, if you'd sooner not roll your own."
+        links:
+          - { label: "See the shortcuts →", url: "/htpc/blog/home-media-server-prebuilt-boxes/" }
