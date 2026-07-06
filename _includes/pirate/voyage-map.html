@@ -148,17 +148,17 @@
         <stop offset="1" stop-color="#f4e6b0" stop-opacity="0"/>
       </radialGradient>
     </defs>
-    <!-- lantern light doing a full 360° turn about the vertical axis. In this side view the
-         beam's horizontal extent is its projection = sin(angle), sweeping 0 -> right -> 0 ->
-         left -> 0 per turn. The two zero-crossings are the beam pointing at the viewer (t=0/1,
-         paired with the flare flash below) and away (t=.5, silent) — that front/back asymmetry
-         is what reads as one continuous rotation rather than a left-right bounce.
-         Scale is about the apex (x=0), which is why the beam lives in its own translated g. -->
-    <g transform="translate(0 -29)">
-      <path d="M0,0 L74,-18 L74,18 Z" fill="url(#beam)">
-        <animateTransform attributeName="transform" type="scale" calcMode="linear"
-                          values="0 1;1 1;0 1;-1 1;0 1" keyTimes="0;.25;.5;.75;1"
-                          dur="6s" repeatCount="indefinite"/>
+    <!-- lantern beam doing a full 360° turn about the vertical axis. A flat triangle that only
+         flips left/right reads as a 180° wiper, so the turn is sold as perspective instead: the
+         beam rotates a full circle in the screen plane (90 -> 450, starting front-facing) while
+         the outer group squashes it vertically (scale y .4) into a circle-seen-from-above. The
+         tip then traces an ellipse — sweeping down/front (toward viewer, t=0/1, paired with the
+         flare below) round to up/back (t=.5, dim) — which the eye reads as one continuous turn.
+         Both transforms pivot on the lantern, so the beam lives in its own group translated there. -->
+    <g transform="translate(0 -28.5) scale(1 0.4)">
+      <path d="M0,0 L74,-15 L74,15 Z" fill="url(#beam)">
+        <animateTransform attributeName="transform" type="rotate" calcMode="linear"
+                          values="90;450" dur="6s" repeatCount="indefinite"/>
       </path>
     </g>
     <!-- rocky islet so the tower stands on something instead of floating in open water -->
