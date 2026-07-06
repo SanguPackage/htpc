@@ -322,6 +322,7 @@ $brass-hi:   #f4e2a1;
   #deck-prev::before, #deck-next::before, #deck-skip::before { font-size: 17px; line-height: 1; }
   #deck-prev::before { content: "‹"; }
   #deck-next::before { content: "›"; }
+  #deck-next.is-last::before { content: "✓"; }   // final step finishes the tour
   #deck-skip::before { content: "✕"; }
 }
 

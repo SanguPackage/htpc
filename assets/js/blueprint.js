@@ -217,7 +217,9 @@ function initTour(svg, pz) {
     el("deck-tour-title").textContent = s.title;
     el("deck-tour-body").textContent = s.body;
     el("deck-prev").disabled = i === 0;
-    el("deck-next").textContent = i === steps.length - 1 ? "Finish" : "Next ›";
+    const last = i === steps.length - 1;
+    el("deck-next").textContent = last ? "Finish" : "Next ›";
+    el("deck-next").classList.toggle("is-last", last);   // mobile: › becomes ✓
     dots.querySelectorAll(".deck-dot").forEach((d, k) => d.classList.toggle("on", k === i));
     spotlight(s.nodes);
     focusOn(s.nodes);
@@ -236,6 +238,12 @@ function initTour(svg, pz) {
     remember();
     welcome.hidden = true; reopen.hidden = true;
     reveal(tourEl);
+    // On phones, pin the card to the top so it doesn't cover the spotlighted node
+    // in the middle of the chart during the walkthrough.
+    if (matchMedia("(max-width: 720px)").matches) {
+      tourEl.style.top = "10px";
+      tourEl.style.left = Math.max(12, (window.innerWidth - tourEl.offsetWidth) / 2) + "px";
+    }
     svg.classList.add("touring");
     show(0);
   }
