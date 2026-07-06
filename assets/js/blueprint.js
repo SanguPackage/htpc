@@ -96,23 +96,24 @@ function clearLit(node) {
   node.closest("svg")?.querySelectorAll(".lit").forEach((e) => e.classList.remove("lit"));
 }
 
-// Drag a card anywhere within `stage`, ignoring pointerdowns on its controls so
-// buttons still click. Positions via left/top (px) relative to the stage.
-function makeDraggable(el, stage) {
+// Drag a card (position:fixed) anywhere in the viewport — including up over the
+// header and partly off the page — keeping KEEP px on screen so it stays grabbable.
+// Ignores pointerdowns on its controls so buttons still click.
+function makeDraggable(el) {
+  const KEEP = 48;
   let sx, sy, ox, oy, dragging = false;
   el.addEventListener("pointerdown", (e) => {
     if (e.target.closest("button, a")) return;
-    const pr = stage.getBoundingClientRect(), r = el.getBoundingClientRect();
-    ox = r.left - pr.left; oy = r.top - pr.top; sx = e.clientX; sy = e.clientY;
+    const r = el.getBoundingClientRect();
+    ox = r.left; oy = r.top; sx = e.clientX; sy = e.clientY;
     el.style.left = ox + "px"; el.style.top = oy + "px";
     el.style.right = "auto"; el.style.bottom = "auto";
     dragging = true; el.setPointerCapture(e.pointerId); e.preventDefault();
   });
   el.addEventListener("pointermove", (e) => {
     if (!dragging) return;
-    const pr = stage.getBoundingClientRect();
-    const nx = Math.max(0, Math.min(ox + e.clientX - sx, pr.width - el.offsetWidth));
-    const ny = Math.max(0, Math.min(oy + e.clientY - sy, pr.height - el.offsetHeight));
+    const nx = Math.max(KEEP - el.offsetWidth, Math.min(ox + e.clientX - sx, window.innerWidth - KEEP));
+    const ny = Math.max(KEEP - el.offsetHeight, Math.min(oy + e.clientY - sy, window.innerHeight - KEEP));
     el.style.left = nx + "px"; el.style.top = ny + "px";
   });
   const end = () => { dragging = false; };
@@ -222,8 +223,13 @@ function initTour(svg, pz) {
     focusOn(s.nodes);
   }
 
+  // Seat the (fixed) card in the stage's top-left on reveal, since fixed coords are
+  // viewport-relative — otherwise the CSS 20/20 would land it over the header.
   const reveal = (node) => {
     node.hidden = false;
+    const s = stage.getBoundingClientRect();
+    node.style.left = (s.left + 20) + "px"; node.style.top = (s.top + 20) + "px";
+    node.style.right = "auto"; node.style.bottom = "auto";
     node.classList.remove("anim-in"); void node.offsetWidth; node.classList.add("anim-in");
   };
   function startTour() {
@@ -249,8 +255,8 @@ function initTour(svg, pz) {
   reopen.addEventListener("click", () => { reopen.hidden = true; reveal(welcome); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !tourEl.hidden) endTour(); });
 
-  makeDraggable(welcome, stage);
-  makeDraggable(tourEl, stage);
+  makeDraggable(welcome);
+  makeDraggable(tourEl);
 
   // First visit greets with the note; on later visits it waits behind the ? button.
   let welcomed = false;

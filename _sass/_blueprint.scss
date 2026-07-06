@@ -211,11 +211,14 @@ $brass-hi:   #f4e2a1;
   em { color: #7a4a12; }
 }
 
-// both cards float top-left and can be dragged anywhere on the stage
+// both cards float top-left and can be dragged anywhere in the viewport. Fixed
+// (not absolute) so the stage's overflow:hidden can't clip them — that's what lets
+// a drag carry the card up over the header and off the page. blueprint.js seats
+// each card in the stage on reveal (fixed coords are viewport-relative).
 .deck-card {
-  position: absolute;
+  position: fixed;
   top: 20px; left: 20px;
-  z-index: 4;
+  z-index: 20;
   width: min(440px, calc(100% - 32px));
   padding: 1.4rem 1.6rem 1.25rem;
   cursor: grab;
