@@ -1,0 +1,37 @@
+# Guided walkthrough for the Deck Plan (/deck-plan/). Each stage dims the chart,
+# then spotlights + zooms to its `nodes` (data-node ids in _includes/pirate/deck-plan-svg.html).
+- title: The request
+  body: >-
+    Every voyage starts with a wish. You add films yourself; friends & family send
+    theirs through Seerr — the request desk — and you wave them aboard.
+  nodes: ["you", "friendsfamily", "Seerr", "Libraries (PVRs)"]
+
+- title: Your quartermasters
+  body: >-
+    Radarr (films) and Sonarr (series) run the hold. Here you choose which series to
+    follow, which films to fetch the moment they surface, in what quality, and how
+    they're named and stowed.
+  nodes: ["Radarr", "Sonarr", "Libraries (PVRs)"]
+
+- title: The hunt
+  body: >-
+    To find a release, the quartermasters send Prowlarr scouring your indexers and
+    trackers across the open sea.
+  nodes: ["Prowlarr", "indexers", "Libraries (PVRs)"]
+
+- title: Hauling it in
+  body: >-
+    qBittorrent drags the catch aboard and drops it in /downloads on the NAS or your
+    local filesystem.
+  nodes: ["qBittorrent", "nas", "Libraries (PVRs)"]
+
+- title: Stow & subtitle
+  body: >-
+    The quartermasters file it into /media — renamed and sorted — while Bazarr fetches
+    the subtitles.
+  nodes: ["Bazarr", "nas", "Libraries (PVRs)"]
+
+- title: On your telly
+  body: >-
+    Jellyfin serves the library and streams it to your TV. Anchors up — the voyage is done.
+  nodes: ["Jellyfin", "nas", "tv"]

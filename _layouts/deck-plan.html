@@ -28,10 +28,41 @@ layout: default
         <div class="dp-shots"></div>
       </div>
     </aside>
+
+    <!-- Onboarding: a first-visit welcome note that can launch a guided walkthrough.
+         blueprint.js reveals these (they start hidden) and both cards are draggable. -->
+    <button id="deck-reopen" class="deck-reopen" type="button" hidden
+            aria-label="What am I looking at?" title="What am I looking at?">?</button>
+
+    <div id="deck-welcome" class="parchment deck-card" hidden>
+      <p class="parchment-eyebrow">Welcome aboard</p>
+      <h2 class="parchment-title">You're looking at the whole fleet</h2>
+      <p class="parchment-text">Every craft that turns <em>&ldquo;I want to watch this&rdquo;</em> into a film on your telly &mdash; and how they hand the catch down the line.</p>
+      <div class="deck-card-actions">
+        <button id="deck-start" class="pbtn pbtn-brass" type="button">Chart me a course</button>
+        <button id="deck-dismiss" class="pbtn pbtn-ghost" type="button">I&rsquo;ll explore myself</button>
+      </div>
+      <p class="deck-card-hint">Drag to sail the chart &middot; scroll to zoom &middot; tap any badge to meet the crew</p>
+    </div>
+
+    <div id="deck-tour" class="parchment deck-card" hidden>
+      <p class="parchment-eyebrow" id="deck-tour-eyebrow"></p>
+      <h2 class="parchment-title" id="deck-tour-title"></h2>
+      <p class="parchment-text" id="deck-tour-body"></p>
+      <div class="deck-tour-foot">
+        <div class="deck-tour-dots" id="deck-tour-dots"></div>
+        <div class="deck-tour-nav">
+          <button id="deck-prev" class="pbtn pbtn-ghost" type="button">&lsaquo; Back</button>
+          <button id="deck-next" class="pbtn pbtn-brass" type="button">Next &rsaquo;</button>
+        </div>
+      </div>
+      <button id="deck-skip" class="deck-tour-skip" type="button">Leave the tour</button>
+    </div>
   </div>
 </div>
 
 <script id="deck-plan-data" type="application/json">{{ site.data.deck_plan | jsonify }}</script>
+<script id="deck-tour-data" type="application/json">{{ site.data.deck_tour | jsonify }}</script>
 <script src="{{ '/assets/js/svg-pan-zoom.min.js' | relative_url }}"></script>
 <script type="module" src="{{ '/assets/js/blueprint.js' | relative_url }}"></script>
 

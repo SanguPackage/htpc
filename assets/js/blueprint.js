@@ -26,6 +26,37 @@ export function formatStars(n) {
   return `${k}k`;
 }
 
+// --- guided tour geometry (unit-tested) ---
+
+// Bounding box (SVG user coords) of a set of node centers, padded, then grown to
+// match the viewport aspect ratio so the focused region fills the stage undistorted.
+// null when there's nothing to frame.
+export function focusBox(centers, pad, aspect) {
+  if (!centers.length) return null;
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  for (const c of centers) {
+    if (c.cx < minX) minX = c.cx;
+    if (c.cx > maxX) maxX = c.cx;
+    if (c.cy < minY) minY = c.cy;
+    if (c.cy > maxY) maxY = c.cy;
+  }
+  minX -= pad; maxX += pad; minY -= pad; maxY += pad;
+  let w = maxX - minX, h = maxY - minY;
+  if (w / h < aspect) { const nw = h * aspect; minX -= (nw - w) / 2; w = nw; }
+  else { const nh = w / aspect; minY -= (nh - h) / 2; h = nh; }
+  return { x: minX, y: minY, w, h };
+}
+
+// Relative zoom + pixel pan that frames `box` (user coords) centered in a `sizes`
+// (px) viewport, given `baseZoom` = px per user unit at svg-pan-zoom's fit (zoom 1).
+// Zoom is clamped to maxZoom so a single-node box doesn't slam to full magnification.
+export function zoomPanForBox(box, sizes, baseZoom, maxZoom = 12) {
+  const zoom = Math.min(Math.min(sizes.width / box.w, sizes.height / box.h) / baseZoom, maxZoom);
+  const real = zoom * baseZoom;
+  const cx = box.x + box.w / 2, cy = box.y + box.h / 2;
+  return { zoom, panX: sizes.width / 2 - real * cx, panY: sizes.height / 2 - real * cy };
+}
+
 // --- hover highlight (ported from the blueprint's highlight.ts) ---
 function center(el) {
   const cx = parseFloat(el.dataset.cx ?? "");
@@ -65,24 +96,188 @@ function clearLit(node) {
   node.closest("svg")?.querySelectorAll(".lit").forEach((e) => e.classList.remove("lit"));
 }
 
+// Drag a card anywhere within `stage`, ignoring pointerdowns on its controls so
+// buttons still click. Positions via left/top (px) relative to the stage.
+function makeDraggable(el, stage) {
+  let sx, sy, ox, oy, dragging = false;
+  el.addEventListener("pointerdown", (e) => {
+    if (e.target.closest("button, a")) return;
+    const pr = stage.getBoundingClientRect(), r = el.getBoundingClientRect();
+    ox = r.left - pr.left; oy = r.top - pr.top; sx = e.clientX; sy = e.clientY;
+    el.style.left = ox + "px"; el.style.top = oy + "px";
+    el.style.right = "auto"; el.style.bottom = "auto";
+    dragging = true; el.setPointerCapture(e.pointerId); e.preventDefault();
+  });
+  el.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    const pr = stage.getBoundingClientRect();
+    const nx = Math.max(0, Math.min(ox + e.clientX - sx, pr.width - el.offsetWidth));
+    const ny = Math.max(0, Math.min(oy + e.clientY - sy, pr.height - el.offsetHeight));
+    el.style.left = nx + "px"; el.style.top = ny + "px";
+  });
+  const end = () => { dragging = false; };
+  el.addEventListener("pointerup", end);
+  el.addEventListener("pointercancel", end);
+}
+
+// --- guided tour: a first-visit welcome note that walks the request→screen flow,
+// dimming the chart and spotlighting + zooming to each step. ---
+function initTour(svg, pz) {
+  const stepsEl = document.getElementById("deck-tour-data");
+  const steps = stepsEl ? JSON.parse(stepsEl.textContent) : [];
+  const welcome = document.getElementById("deck-welcome");
+  const tourEl = document.getElementById("deck-tour");
+  const reopen = document.getElementById("deck-reopen");
+  const stage = svg.closest(".deck-stage");
+  if (!steps.length || !welcome || !tourEl || !reopen || !stage) return;
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const KEY = "pf-deck-welcomed";
+  const PAD = 150, DUR = 550;
+  const el = (id) => document.getElementById(id);
+  const remember = () => { try { localStorage.setItem(KEY, "1"); } catch (_) {} };
+
+  const esc = (s) => (window.CSS && CSS.escape) ? CSS.escape(s) : s.replace(/[^\w-]/g, "\\$&");
+  const centerOf = (n) => {
+    const cx = parseFloat(n.dataset.cx), cy = parseFloat(n.dataset.cy);
+    return Number.isNaN(cx) || Number.isNaN(cy) ? null : { cx, cy };
+  };
+
+  function clearSpot() {
+    svg.querySelectorAll(".spot, .lit").forEach((e) => e.classList.remove("spot", "lit"));
+  }
+  function spotlight(ids) {
+    clearSpot();
+    const set = new Set(ids);
+    ids.forEach((id) => svg.querySelectorAll(`[data-node="${esc(id)}"]`).forEach((n) => n.classList.add("spot")));
+    svg.querySelectorAll(".conn").forEach((c) => {
+      if (set.has(c.dataset.a) && set.has(c.dataset.b)) {
+        c.classList.add("spot", "lit");
+        // a labelled edge is followed by its label rect + text as siblings
+        let s = c.nextElementSibling;
+        for (let k = 0; k < 2 && s && !s.classList.contains("conn"); k++, s = s.nextElementSibling) {
+          s.classList.add("spot");
+        }
+      }
+    });
+  }
+
+  // Animate svg-pan-zoom to frame a step's nodes (no-op without the pan/zoom lib).
+  let raf = null;
+  function focusOn(ids) {
+    if (!pz) return;
+    const centers = [];
+    ids.forEach((id) => svg.querySelectorAll(`[data-node="${esc(id)}"]`).forEach((n) => {
+      const c = centerOf(n); if (c) centers.push(c);
+    }));
+    const sizes = pz.getSizes();
+    const box = focusBox(centers, PAD, sizes.width / sizes.height);
+    if (!box) return;
+    const base = sizes.realZoom / pz.getZoom();
+    const apply = (zoom, cx, cy) => {
+      const real = zoom * base;
+      pz.zoom(zoom);
+      pz.pan({ x: sizes.width / 2 - real * cx, y: sizes.height / 2 - real * cy });
+    };
+    const { zoom: tz } = zoomPanForBox(box, sizes, base, 12);
+    const tcx = box.x + box.w / 2, tcy = box.y + box.h / 2;
+    if (reduce) { apply(tz, tcx, tcy); return; }
+
+    const pan0 = pz.getPan(), z0 = pz.getZoom(), real0 = sizes.realZoom;
+    const cx0 = (sizes.width / 2 - pan0.x) / real0;
+    const cy0 = (sizes.height / 2 - pan0.y) / real0;
+    if (raf) cancelAnimationFrame(raf);
+    let t0 = null;
+    const ease = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const frame = (ts) => {
+      if (t0 === null) t0 = ts;
+      const e = ease(Math.min(1, (ts - t0) / DUR));
+      apply(z0 + (tz - z0) * e, cx0 + (tcx - cx0) * e, cy0 + (tcy - cy0) * e);
+      if (e < 1) raf = requestAnimationFrame(frame);
+    };
+    raf = requestAnimationFrame(frame);
+  }
+
+  // step dots
+  const dots = el("deck-tour-dots");
+  steps.forEach((_, i) => {
+    const d = document.createElement("button");
+    d.type = "button"; d.className = "deck-dot";
+    d.setAttribute("aria-label", `Go to stage ${i + 1}`);
+    d.addEventListener("click", () => show(i));
+    dots.appendChild(d);
+  });
+
+  let idx = 0;
+  function show(i) {
+    idx = i;
+    const s = steps[i];
+    el("deck-tour-eyebrow").textContent = `Stage ${i + 1} of ${steps.length}`;
+    el("deck-tour-title").textContent = s.title;
+    el("deck-tour-body").textContent = s.body;
+    el("deck-prev").disabled = i === 0;
+    el("deck-next").textContent = i === steps.length - 1 ? "Finish" : "Next ›";
+    dots.querySelectorAll(".deck-dot").forEach((d, k) => d.classList.toggle("on", k === i));
+    spotlight(s.nodes);
+    focusOn(s.nodes);
+  }
+
+  const reveal = (node) => {
+    node.hidden = false;
+    node.classList.remove("anim-in"); void node.offsetWidth; node.classList.add("anim-in");
+  };
+  function startTour() {
+    remember();
+    welcome.hidden = true; reopen.hidden = true;
+    reveal(tourEl);
+    svg.classList.add("touring");
+    show(0);
+  }
+  function endTour() {
+    tourEl.hidden = true;
+    svg.classList.remove("touring");
+    clearSpot();
+    if (pz) pz.reset();
+    reopen.hidden = false;
+  }
+
+  el("deck-start").addEventListener("click", startTour);
+  el("deck-dismiss").addEventListener("click", () => { remember(); welcome.hidden = true; reopen.hidden = false; });
+  el("deck-next").addEventListener("click", () => (idx === steps.length - 1 ? endTour() : show(idx + 1)));
+  el("deck-prev").addEventListener("click", () => show(Math.max(0, idx - 1)));
+  el("deck-skip").addEventListener("click", endTour);
+  reopen.addEventListener("click", () => { reopen.hidden = true; reveal(welcome); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !tourEl.hidden) endTour(); });
+
+  makeDraggable(welcome, stage);
+  makeDraggable(tourEl, stage);
+
+  // First visit greets with the note; on later visits it waits behind the ? button.
+  let welcomed = false;
+  try { welcomed = localStorage.getItem(KEY) === "1"; } catch (_) {}
+  if (welcomed) reopen.hidden = false; else reveal(welcome);
+}
+
 // --- DOM init ---
 function init() {
   const svg = document.querySelector("svg.floor-svg");
   if (!svg) return;
 
   // pan/zoom (opts mirror the source blueprint)
-  if (window.svgPanZoom) {
-    window.svgPanZoom(svg, {
-      controlIconsEnabled: false, fit: true, center: true,
-      minZoom: 0.4, maxZoom: 12, dblClickZoomEnabled: false, zoomScaleSensitivity: 0.3,
-    });
-  }
+  const pz = window.svgPanZoom
+    ? window.svgPanZoom(svg, {
+        controlIconsEnabled: false, fit: true, center: true,
+        minZoom: 0.4, maxZoom: 12, dblClickZoomEnabled: false, zoomScaleSensitivity: 0.3,
+      })
+    : null;
 
   // hover highlight
   svg.querySelectorAll("[data-node]").forEach((n) => {
     n.addEventListener("mouseenter", () => lightUp(n));
     n.addEventListener("mouseleave", () => clearLit(n));
   });
+
+  initTour(svg, pz);
 
   // detail panel
   const dataEl = document.getElementById("deck-plan-data");

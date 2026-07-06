@@ -129,3 +129,178 @@
     &:empty { display: none; }
   }
 }
+
+// --- onboarding: welcome note + guided walkthrough ---------------------------
+
+// During the tour the chart dims and each step's nodes/edges are spotlit (reusing
+// the hover-highlight blue). `.spot` must beat the dim rule, hence !important.
+svg.touring {
+  .flow-node, .hl-node, .conn, .group-box, .edge-label {
+    opacity: .12;
+    transition: opacity .35s ease;
+  }
+  .spot { opacity: 1 !important; }
+}
+.spot .ring     { stroke: #93c5fd; stroke-width: 3; }
+.group-box.spot { stroke: #93c5fd; stroke-width: 2.5; }
+.spot text      { fill: #e2e8f0; }
+
+$vellum-1:   #ede0c2;
+$vellum-2:   #dcc9a0;
+$deckle:     #b79b66;
+$brown:      #3a2c1a;
+$brown-soft: #4a3a1e;   // muted labels, but dark enough not to read as grey
+$brass-lo:   #7f5c1f;
+$brass-mid:  #c69433;
+$brass-hi:   #f4e2a1;
+
+// aged vellum note pinned to the chart (parchment.png under a translucent tint
+// so the dark serif text stays legible whatever the image does)
+.parchment {
+  color: $brown;
+  background-color: #e8dcc0;
+  background-image:
+    radial-gradient(120% 90% at 15% 0%, rgba(255, 255, 255, .28), transparent 55%),
+    linear-gradient(150deg, rgba($vellum-1, .55), rgba($vellum-2, .64)),
+    url('/htpc/assets/parchment.png');
+  background-size: cover;
+  background-position: center;
+  border: 1px solid $deckle;
+  border-radius: 4px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, .4) inset,
+    0 18px 44px rgba(0, 0, 0, .55),
+    0 2px 6px rgba(0, 0, 0, .4);
+
+  &::before, &::after {           // brass tacks
+    content: "";
+    position: absolute; top: 10px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, $brass-hi, $brass-mid 55%, $brass-lo);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+  }
+  &::before { left: 12px; }
+  &::after  { right: 12px; }
+}
+
+.parchment-eyebrow {
+  margin: 0 0 .5rem;
+  font-family: 'Cinzel', var(--serif);
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: 11px;
+  color: $brown-soft;
+}
+// scoped under .deck-card to outrank the site's `.pf h2 { color:#fff }` base rule
+.deck-card .parchment-title {
+  margin: 0 0 .55rem;
+  font-family: 'Cinzel', var(--serif);
+  font-weight: 700;
+  letter-spacing: .04em;
+  font-size: clamp(20px, 2.4vw, 26px);
+  color: #16324a;              // deep sea-navy map ink (white would vanish on the cream)
+  text-wrap: balance;
+}
+.parchment-text {
+  margin: 0;
+  line-height: 1.55;
+  font-size: 15px;
+  font-weight: 600;                          // heavier stroke to hold up over the texture
+  color: #12100a;                            // near-black for easy reading on the parchment
+  text-shadow: 0 0 2px rgba(247, 240, 222, .85);  // faint cream halo lifts glyphs off the stains
+  em { color: #7a4a12; }
+}
+
+// both cards float top-left and can be dragged anywhere on the stage
+.deck-card {
+  position: absolute;
+  top: 20px; left: 20px;
+  z-index: 4;
+  width: min(440px, calc(100% - 32px));
+  padding: 1.4rem 1.6rem 1.25rem;
+  cursor: grab;
+  touch-action: none;
+  &:active { cursor: grabbing; }
+}
+#deck-welcome { text-align: center; }
+#deck-tour { width: min(480px, calc(100% - 32px)); }
+
+.deck-card-actions {
+  display: flex; gap: .6rem; flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.1rem;
+}
+.deck-card-hint {
+  margin: .9rem 0 0;
+  font-size: 12px;
+  color: $brown-soft;
+}
+
+.pbtn {
+  font-family: 'Cinzel', var(--serif);
+  letter-spacing: .08em;
+  font-size: 13px;
+  border-radius: 4px;
+  padding: .55rem 1.1rem;
+  cursor: pointer;
+  border: 1px solid $brass-lo;
+  transition: transform .12s ease, box-shadow .12s ease, background .2s ease;
+  &:disabled { opacity: .35; cursor: default; transform: none; box-shadow: none; }
+}
+.pbtn-brass {
+  color: #2a1e0c;
+  background: linear-gradient(180deg, $brass-hi, $brass-mid);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset, 0 3px 8px rgba(0, 0, 0, .35);
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .6) inset, 0 6px 14px rgba(0, 0, 0, .4);
+  }
+}
+.pbtn-ghost {
+  color: $brown-soft;
+  background: rgba(255, 255, 255, .15);
+  border-color: $deckle;
+  &:hover:not(:disabled) { background: rgba(255, 255, 255, .32); color: $brown; }
+}
+
+.deck-tour-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; margin-top: 1.15rem;
+}
+.deck-tour-dots { display: flex; gap: 7px; }
+.deck-dot {
+  width: 9px; height: 9px; padding: 0; border: 0; border-radius: 50%;
+  background: rgba($brown, .25); cursor: pointer;
+  &.on { background: $brass-mid; box-shadow: 0 0 0 2px rgba($brass-mid, .3); }
+}
+.deck-tour-nav { display: flex; gap: .55rem; }
+.deck-tour-skip {
+  margin-top: .7rem;
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font-family: var(--serif);
+  font-size: 12px; color: $brown-soft;
+  text-decoration: underline; text-underline-offset: 2px;
+  &:hover { color: $brown; }
+}
+
+.deck-reopen {
+  position: absolute; top: 16px; right: 18px; z-index: 4;
+  width: 34px; height: 34px; border-radius: 50%;
+  place-items: center;
+  font-family: 'Cinzel', var(--serif); font-size: 16px; color: #2a1e0c;
+  background: linear-gradient(180deg, $brass-hi, $brass-mid);
+  border: 1px solid $brass-lo; cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .4);
+}
+.deck-reopen:not([hidden]) { display: grid; }
+
+.anim-in { animation: deck-rise .35s ease both; }
+@keyframes deck-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .anim-in { animation: none; }
+  svg.touring .flow-node, svg.touring .hl-node, svg.touring .conn,
+  svg.touring .group-box, svg.touring .edge-label { transition: none; }
+}
