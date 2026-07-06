@@ -1,4 +1,23 @@
 <svg viewBox="0 0 1040 330" role="img" aria-label="The voyage of a request">
+  <defs>
+    <!-- night sky: deep zenith easing down to a faint atmospheric glow just above the
+         waterline; the wave layers below sit over its lowest band -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#081627"/>
+      <stop offset=".42" stop-color="#0b1f33"/>
+      <stop offset=".74" stop-color="#0e2b42"/>
+      <stop offset=".88" stop-color="#123a54"/>
+      <stop offset="1"   stop-color="#0a1d2d"/>
+    </linearGradient>
+    <!-- corner vignette to frame the scene; stays clear through the centre (offset .5) so the
+         edge waypoint labels keep their contrast -->
+    <radialGradient id="vignette" cx=".5" cy=".5" r=".78">
+      <stop offset="0"  stop-color="#02070d" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#02070d" stop-opacity="0"/>
+      <stop offset="1"  stop-color="#02070d" stop-opacity=".4"/>
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" width="1040" height="330" fill="url(#sky)"/>
   <!-- night sky: moon + twinkling stars -->
   <g class="sky">
     <defs>
@@ -229,4 +248,6 @@
     </g>
     <animateMotion dur="15s" repeatCount="indefinite" rotate="auto"><mpath href="#rt"/></animateMotion>
   </g>
+  <!-- vignette sits on top of everything so it frames the whole scene -->
+  <rect x="0" y="0" width="1040" height="330" fill="url(#vignette)" pointer-events="none"/>
 </svg>
