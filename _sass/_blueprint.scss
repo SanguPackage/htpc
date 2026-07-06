@@ -294,6 +294,34 @@ $brass-hi:   #f4e2a1;
 }
 .deck-reopen:not([hidden]) { display: grid; }
 
+// On phones the guided-tour card otherwise swallows the whole chart. Strip it to
+// essentials: drop the stage counter, progress dots and the decorative brass
+// tacks, and collapse Back/Next/Leave into ‹ › ✕ icon buttons in the top-right.
+@media (max-width: 720px) {
+  #deck-tour {
+    width: min(360px, calc(100% - 24px));
+    padding: 1rem 1.1rem .9rem;
+  }
+  #deck-tour::before, #deck-tour::after { display: none; }   // brass tacks
+  #deck-tour .parchment-eyebrow,
+  #deck-tour .deck-tour-dots { display: none; }
+  #deck-tour .parchment-title { margin-top: 0; padding-right: 104px; }
+
+  #deck-tour .deck-tour-foot { position: absolute; top: 8px; right: 46px; margin: 0; gap: 4px; }
+  #deck-tour .deck-tour-skip { position: absolute; top: 8px; right: 10px; margin: 0; text-decoration: none; }
+
+  // Icon-only: hide the JS-set word ("Next ›"/"Finish"/…) with font-size:0 and
+  // draw the glyph in ::before, so the text swaps can't override it.
+  #deck-prev, #deck-next, #deck-skip {
+    font-size: 0; width: 30px; height: 30px; padding: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  #deck-prev::before, #deck-next::before, #deck-skip::before { font-size: 17px; line-height: 1; }
+  #deck-prev::before { content: "‹"; }
+  #deck-next::before { content: "›"; }
+  #deck-skip::before { content: "✕"; }
+}
+
 .anim-in { animation: deck-rise .35s ease both; }
 @keyframes deck-rise {
   from { opacity: 0; transform: translateY(12px); }
