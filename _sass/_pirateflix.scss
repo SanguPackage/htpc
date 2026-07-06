@@ -84,12 +84,16 @@ html{overflow-x:hidden}
     padding-bottom:3px;border-bottom:1px solid transparent;transition:color .15s,border-color .15s}
   .pf-nav-links a:hover,
   .pf-nav-links a.active{color:var(--brass);border-color:var(--brass)}
+  .pf-nav-links .lbl-short{display:none}
 
   // narrow screens: the wide-tracked links overflow the row, so drop them onto
-  // their own centred line under the brand instead of letting them clip.
+  // their own centred line under the brand instead of letting them clip, and
+  // swap to abbreviated labels (Sail/Plan/Log) so they don't wrap.
   @media(max-width:640px){
     .pf-nav{flex-wrap:wrap;gap:12px 16px;padding:16px 18px}
     .pf-nav-links{width:100%;justify-content:center;gap:22px;letter-spacing:1px}
+    .pf-nav-links .lbl-full{display:none}
+    .pf-nav-links .lbl-short{display:inline}
   }
   // xs: drop the "Home media · " lead-in but keep "the *arr fleet".
   @media(max-width:420px){
