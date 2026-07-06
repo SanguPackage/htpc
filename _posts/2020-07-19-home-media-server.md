@@ -319,6 +319,6 @@ download client, ... on your LAN or behind a VPN. If you do expose something, ma
 login/password; for some containers authentication is turned off by default!
 {: .notice--danger}
 
-Friends and family you'll typically give access only to the Media Server (Jellyfin or Plex or ...) and [Jellyseerr/Seerr](https://github.com/seerr-team/seerr),
+Friends and family you'll typically give access only to the Media Server (Jellyfin or Plex or ...) and [Seerr](https://github.com/seerr-team/seerr),
 perhaps through a separate Heimdall dashboard (Heimdall is covered in [Container Management]({{ 'blog/home-media-server-management' | relative_url }}))
 user so they also have only one url to bookmark.

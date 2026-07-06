@@ -138,8 +138,7 @@ The [one I went with](https://heimdall.site/). Definitely more feature rich comp
 - Multiple users, authentication and multiple dashboards (called "Tags")
 - Shows the project logo of all containers mentioned in this post
 - Has API integration to show some dynamic data on the tiles for some containers (called "Enhanced apps")
-  - Ombi: How many pending requests
-  - Transmission: Current Upload/Download speeds
+  - qBittorrent: Current Upload/Download speeds
   - Sonarr/Radarr: Missing / Download Queue counts
 - Drag & Drop UI, set your own background, optional Google search field
 - Open apps in the same or in a new tab
@@ -167,11 +166,11 @@ in an iframe. Pretty slick, works well, the settings UI is perhaps a bit lacking
 
 ## Prismarr
 
-{% include github-stars.html url="Shoshuo/Prismarr" desc="A unified dashboard/frontend for Radarr, Sonarr, Prowlarr, Jellyseerr, qBittorrent and TMDb." %}
+{% include github-stars.html url="Shoshuo/Prismarr" desc="A unified dashboard for Radarr, Sonarr, Prowlarr, Seerr, qBittorrent and TMDb." %}
 
 The new kid: rather than a generic launcher, Prismarr is an *arr-focused unified frontend that stitches
-Radarr/Sonarr/Prowlarr/Jellyseerr/qBittorrent into one interface. Ships as a single container. Small and young
-(a spare-time, single-developer project), so weigh that against the established options above before committing.
+the containers into one interface. Ships as a single container. Small and young
+(a single-developer project), so weigh that against the established options above before committing.
 
 
 
@@ -181,4 +180,7 @@ Radarr/Sonarr/Prowlarr/Jellyseerr/qBittorrent into one interface. Ships as a sin
 This section is a work in progress 😃 But you definitely want:
 
 {% include github-stars.html url="portainer/portainer" desc="Portainer to manage all those docker containers..." %}
-{% include github-stars.html url="containrrr/watchtower" desc="Automatically update your containers to the latest versions" %}
+
+And for keeping every one of those containers up to date, [Watchtower]({{ site.baseurl }}/blog/watchtower)
+pulls fresh images and recreates them on a cron — with the honest trade-offs (and which containers to keep
+*off* it) in its own post.

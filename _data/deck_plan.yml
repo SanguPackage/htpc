@@ -74,7 +74,7 @@ Seerr:
   logo: /htpc/assets/blueprint/logos/seerr.svg
   github: seerr-team/seerr
   stars: 11791
-  portrait: /htpc/assets/jellyseerr.webp
+  portrait: /htpc/assets/seerr.webp
   description: >
     The ship's log. The friendly request box for crew and guests — search a
     title, tap request, and the fleet takes it from there. The merged successor

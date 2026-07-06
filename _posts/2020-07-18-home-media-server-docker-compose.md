@@ -6,7 +6,7 @@ subTitle: "Can it really be as easy as `docker-compose up`"
 date: 2020-07-18
 updates:
   - date: "2026-07-05"
-    desc: "Rewrote from stub with the real 12-service compose in use on the NAS: single /data root for hardlinks, Prowlarr + FlareSolverr, Jellyseerr/Jellystat, Recyclarr and Watchtower"
+    desc: "Rewrote from stub with the real 12-service compose in use on the NAS: single /data root for hardlinks, Prowlarr + FlareSolverr, Seerr/Jellystat, Recyclarr and Watchtower"
 description: >
   Now that we have determined what our setup should look like,
   let's combine them in a single docker-compose file.
@@ -67,7 +67,7 @@ PROWLARR_PORT=9696
 BAZARR_PORT=6767
 QBITTORRENT_PORT=8080
 FLARESOLVERR_PORT=8191
-JELLYSEERR_PORT=5055
+SEERR_PORT=5055
 JELLYSTAT_PORT=3000
 
 # Jellystat brings its own Postgres
@@ -232,16 +232,18 @@ services:
       - 'com.centurylinklabs.watchtower.enable=true'
 
   # Requests — point it at wherever Jellyfin lives
-  jellyseerr:
-    image: fallenbagel/jellyseerr
-    container_name: htpc-jellyseerr
+  seerr:
+    image: ghcr.io/seerr-team/seerr
+    container_name: htpc-seerr
+    user: "${PUID}:${PGID}"
+    init: true
     environment:
       - TZ=${TZ}
       - LOG_LEVEL=info
     volumes:
-      - ${CONFIG_PATH}/jellyseerr:/app/config
+      - ${CONFIG_PATH}/seerr:/app/config
     ports:
-      - ${JELLYSEERR_PORT}:5055
+      - ${SEERR_PORT}:5055
     restart: ${RESTART_POLICY}
     labels:
       - 'com.centurylinklabs.watchtower.enable=true'
@@ -315,7 +317,7 @@ A few services earn their own paragraph — most already have a full write-up el
 
 - **qBittorrent** replaced Transmission — [here's why]({{ site.baseurl }}/blog/goodbye-transmission). Note
   `6881` is published verbatim (not via `.env`) it is the BitTorrent listen port.
-- **Jellyseerr** and **Jellystat** both point at a **Jellyfin that isn't in this file** — mine runs in a
+- **Seerr** and **Jellystat** both point at a **Jellyfin that isn't in this file** — mine runs in a
   separate LXC. Requests > Sonarr/Radarr is why [Ombi got retired]({{ site.baseurl }}/blog/goodbye-ombi).
 - **Recyclarr** runs `user: ${PUID}:${PGID}` directly (no LSIO wrapper) and syncs the
   [TRaSH guides]({{ site.baseurl }}/blog/recyclarr) on a cron.

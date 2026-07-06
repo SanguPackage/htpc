@@ -1,7 +1,7 @@
 ---
 layout: post
 author: Wouter Van Schandevijl
-title: "Goodbye Ombi, Hello Jellyseerr"
+title: "Goodbye Ombi, Hello Jellyseerr, ugh.. I mean Seerr"
 subTitle: "The request box gets a glow-up (and a new name, twice)"
 date: 2026-07-05
 description: >
@@ -17,7 +17,7 @@ github: Ombi-app/Ombi
 tags: [arr, jellyfin]
 series: swapping-tools
 toc:
-  title: 🎬 Jellyseerr
+  title: 🎬 Seerr
 ---
 
 The [original setup]({{ site.baseurl }}/blog/home-media-server#ombi---requests) used **Ombi** as the request box:
@@ -51,7 +51,7 @@ optional via `DB_TYPE=postgres` if you outgrow it).
 
 ```yaml
 jellyseerr:
-  image: fallenbagel/jellyseerr:latest
+  image: fallenbagel/jellyseerr
   container_name: jellyseerr
   environment:
     - TZ=${TZ}
@@ -77,6 +77,35 @@ Nothing broke — the `fallenbagel/jellyseerr` image still runs — but if you'r
 **Seerr**. It's the same lineage (Overseerr's features + Jellyseerr's Jellyfin/Emby support in one codebase), it's the
 one still getting updates, and Seerr ships a built-in auto-migration from Overseerr/Jellyseerr, so moving over later is
 painless.
+
+# The Seerr Migration
+
+The new `compose.yaml`
+
+```yaml
+seerr:
+  image: ghcr.io/seerr-team/seerr
+  container_name: seerr
+  user: "${PUID}:${PGID}"
+  init: true
+  environment:
+    - TZ=${TZ}
+    - LOG_LEVEL=info
+  volumes:
+    - ${CONFIG_PATH}/seerr:/app/config
+  ports:
+    - 5055:5055
+  restart: unless-stopped
+```
+
+Data migration from Jellyseerr/Overseerr is pretty seamless:
+
+```sh
+CONFIG_PATH=/volume1/Media/config
+mkdir "$CONFIG_PATH/seerr"
+cp -a "$CONFIG_PATH/jellyseerr/." "$CONFIG_PATH/seerr/"
+docker-compose up -d seerr
+```
 
 
 # Conclusion
