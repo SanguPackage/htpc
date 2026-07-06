@@ -104,7 +104,8 @@ FlareSolverr:
   description: >
     Prowlarr's first mate. A proxy that clears Cloudflare challenges so indexers
     behind them stay reachable.
-  links: []
+  links:
+    - { label: "On the blog", url: "/htpc/blog/flaresolverr-byparr/" }
   screenshots: []
 Jellystat:
   title: Jellystat
