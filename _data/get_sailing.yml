@@ -39,6 +39,7 @@ groups:
         payoff: "Follow IMDb / Trakt lists — new releases sail in on their own."
         links:
           - { label: "Follow the tides →", url: "/htpc/blog/lists/" }
+          - { label: "Add integrations →", url: "/htpc/blog/lists-part2/" }
       - glyph: "🔔"
         kicker: "Notifications"
         title: "Word from the crow's nest"
