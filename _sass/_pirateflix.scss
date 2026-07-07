@@ -164,7 +164,7 @@ html{overflow-x:hidden}
 // --- "why you actually want it" accent cards ---
 // accent-washed cards with a big faded glyph + CTA.
 // Scoped so the shared .fleet/.crew crew-grid above stays untouched.
-.pf #why, .pf #course, .pf .gs-group{
+.pf #why, .pf .gs-group{
   .fleet{grid-template-columns:repeat(3,1fr);align-items:stretch}
   @media(max-width:720px){.fleet{grid-template-columns:1fr}}
 
@@ -223,10 +223,9 @@ html{overflow-x:hidden}
 
 // --- chart your course (homepage teaser) + get-sailing hub + footer ---
 .pf{
-  // #course and .gs-group cards borrow the #why accent-card look (see selector above).
-  // Extras below: multi-button card footers and the course section's out-links.
-  #why, #course, .gs-group{
-    .more{display:flex;flex-wrap:wrap;gap:10px}   // two-button cards (card 01) wrap cleanly
+  // .gs-group cards borrow the #why accent-card look (see selector above).
+  #why, .gs-group{
+    .more{display:flex;flex-wrap:wrap;gap:10px}   // two-button cards wrap cleanly
   }
   .course-out{margin:22px 0 0;font-size:14px;color:var(--muted)}
   .course-out a{color:var(--teal);text-decoration:none}
@@ -239,11 +238,40 @@ html{overflow-x:hidden}
   .gs-footnote{color:var(--muted);font-size:14px;margin:8px 0 40px}
   .gs-footnote a{color:var(--teal);text-decoration:none}
 
-  // faint compass-rose watermark behind the course section
-  #course{position:relative;isolation:isolate}
-  #course::after{content:'';position:absolute;z-index:-1;top:40px;right:-40px;
-    width:340px;height:340px;opacity:.05;pointer-events:none;
-    background:var(--rose) center/contain no-repeat}
+  // chart your course: the numbered voyage. Three ordered step-cards linked by a
+  // dashed sea-route; each card's engraved instrument (i-map/i-crates/i-helm,
+  // tinted by --c) rides an elevated compass node, so the row reads as a
+  // 1 -> 2 -> 3 journey, not 3 peers.
+  #course .fleet{grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch;position:relative}
+  @media(max-width:720px){#course .fleet{grid-template-columns:1fr}}
+
+  // dashed route threading the three nodes; drops out once the cards stack
+  #course .route{position:absolute;top:56px;left:8%;right:8%;height:2px;z-index:0;
+    background:repeating-linear-gradient(90deg,var(--brass) 0 10px,transparent 10px 20px);opacity:.5}
+  @media(max-width:720px){#course .route{display:none}}
+
+  #course .crew{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;
+    text-align:center;padding:30px 22px 22px;border-radius:12px;
+    border:1px solid color-mix(in srgb,var(--c) 30%,var(--line));
+    background:linear-gradient(180deg,color-mix(in srgb,var(--c) 12%,var(--panel)),var(--sea2));
+    box-shadow:0 10px 30px -18px #000;transition:transform .18s,box-shadow .18s,border-color .18s}
+  #course .crew:hover{transform:translateY(-6px);border-color:var(--c);
+    box-shadow:0 22px 44px -22px color-mix(in srgb,var(--c) 60%,#000)}
+
+  // engraved instrument riding an elevated compass node
+  #course .node{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;margin:-58px 0 12px;
+    background:var(--sea);border:2px solid var(--c);position:relative;z-index:2;
+    box-shadow:0 0 0 6px var(--sea),0 0 26px -4px color-mix(in srgb,var(--c) 70%,transparent)}
+  #course .node svg{width:48px;height:48px;color:var(--c)}
+
+  #course .step{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--c);
+    border:1px solid color-mix(in srgb,var(--c) 40%,transparent);border-radius:20px;padding:2px 12px;margin-bottom:10px}
+  #course .n{font-size:20px}
+  #course .d{margin-top:6px}
+
+  #course .more{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:auto;padding-top:16px}
+  #course .btn{font-size:12px;padding:9px 16px;border-color:var(--c,var(--brass));color:var(--c,var(--brass))}
+  #course .btn:hover{background:var(--c,var(--brass));color:#0a1826}
 }
 .pf-footer{border-top:1px solid var(--line);margin-top:20px;padding:34px 0;color:var(--muted);font-size:16px}
 .pf-footer .wrap{max-width:1080px;margin:0 auto;padding:0 28px;display:flex;gap:22px;flex-wrap:wrap;align-items:center}
