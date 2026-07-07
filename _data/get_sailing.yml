@@ -1,104 +1,115 @@
-# Card manifest for the /get-sailing/ hub. Rendered by _layouts/get-sailing.html.
-# Links hard-code the /htpc baseurl (YAML isn't processed by Liquid) — same
-# convention as _data/deck_plan.yml. Keep groups in build order (keel → sails →
-# swaps → shore leave). Curated on purpose: adding a blog post does NOT auto-add
-# a card here.
+# Card manifest for the /get-sailing/ hub. Rendered by _layouts/get-sailing.html
+# as a "cargo hold" scene per group. Links hard-code the /htpc baseurl (YAML isn't
+# processed by Liquid) — same convention as _data/deck_plan.yml. Keep groups in
+# build order (keel → sails → swaps → shore leave). Curated on purpose: adding a
+# blog post does NOT auto-add a card here.
+#
+# Per group: `scene` picks the backdrop + object type —
+#   hold  → wooden crates, stencil-numbered (required, load in order)
+#   deck  → lit deck, SVG instruments (art: id in pirate/gs-cargo-art.html)
+#   dock  → swap crates ("hoisting" a replacement; `out` = the retired tool)
+#   quay  → stone quay, SVG side-trip objects (art: id)
 groups:
   - icon: "⚓"
+    kick: "In the hold"
     title: "Lay the keel"
-    tagline: "The required build — do these three and you're sailing."
+    tagline: "The three crates you can't sail without — load them in order."
+    scene: "hold"
+    req: "Required cargo"
     accent: "#e0b34a"
     cards:
-      - glyph: "🗺️"
-        kicker: "Understand"
+      - kicker: "Understand"
         title: "Home Media Server"
         payoff: "What each container does & why this crew."
         links:
           - { label: "Read the briefing →", url: "/htpc/blog/home-media-server/" }
           - { label: "Study the blueprint →", url: "/htpc/deck-plan/" }
-      - glyph: "🧱"
-        kicker: "Build"
+      - kicker: "Build"
         title: "Le Docker Compose"
         payoff: "Twelve containers, one file, docker compose up -d."
         links:
           - { label: "Copy-paste it →", url: "/htpc/blog/home-media-server-docker-compose/" }
-      - glyph: "🧭"
-        kicker: "Command"
+      - kicker: "Command"
         title: "Container Management"
         payoff: "One dashboard so you never memorise a port again."
         links:
           - { label: "Pick a dashboard →", url: "/htpc/blog/home-media-server-management/" }
   - icon: "⛵"
+    kick: "On deck"
     title: "Trim the sails"
-    tagline: "Optional — but this is the never-think-about-it-again magic."
+    tagline: "Optional rigging & instruments — the never-think-about-it-again magic."
+    scene: "deck"
     accent: "#4fd8c4"
     cards:
-      - glyph: "🌊"
+      - art: "spyglass"
         kicker: "Lists & watchlists"
         title: "Follow the tides"
         payoff: "Follow IMDb / Trakt lists — new releases sail in on their own."
         links:
           - { label: "Follow the tides →", url: "/htpc/blog/lists/" }
           - { label: "Add integrations →", url: "/htpc/blog/lists-part2/" }
-      - glyph: "🔔"
+      - art: "bell"
         kicker: "Notifications"
         title: "Word from the crow's nest"
         payoff: "Pinged the moment a title lands, however you like."
         links:
           - { label: "Set the watch →", url: "/htpc/blog/notifications/" }
-      - glyph: "📜"
+      - art: "barrel"
         kicker: "Requests"
         title: "Requests from the crew"
         payoff: "Crew & guests ask in Seerr; the fleet delivers."
         links:
           - { label: "Open the request box →", url: "/htpc/blog/goodbye-ombi/" }
-      - glyph: "♻️"
+      - art: "quadrant"
         kicker: "Recyclarr"
         title: "The quality quartermaster"
         payoff: "Auto-tuned quality profiles from the TRaSH guides."
         links:
           - { label: "Weigh it up →", url: "/htpc/blog/recyclarr/" }
-      - glyph: "🗼"
+      - art: "watchtower"
         kicker: "Watchtower"
         title: "The self-updating fleet"
-        payoff: "Auto-update the crew."
+        payoff: "Auto-update the crew while you sleep."
         links:
           - { label: "Set the watchtower →", url: "/htpc/blog/watchtower/" }
   # - icon: "🔁"
+  #   kick: "On the dock"
   #   title: "Swap the crew"
-  #   tagline: "Upgrades & migrations — trade a mate for a better one."
+  #   tagline: "Trade a mate for a better one — old crate off, new crate hoisted."
+  #   scene: "dock"
   #   accent: "#e2564a"
   #   cards:
-  #     - glyph: "🦅"
-  #       kicker: "Prowlarr"
+  #     - kicker: "Prowlarr"
   #       title: "Bye, Jackett"
+  #       out: "Jackett"
   #       payoff: "One indexer manager that syncs every tracker into Sonarr/Radarr."
   #       links:
   #         - { label: "Make the swap →", url: "/htpc/blog/goodbye-jackett/" }
-  #     - glyph: "🌀"
-  #       kicker: "qBittorrent"
+  #     - kicker: "qBittorrent"
   #       title: "Bye, Transmission"
+  #       out: "Transmission"
   #       payoff: "A faster, tidier download client that plays nicer with the fleet."
   #       links:
   #         - { label: "Make the swap →", url: "/htpc/blog/goodbye-transmission/" }
-  #     - glyph: "☁️"
-  #       kicker: "FlareSolverr"
+  #     - kicker: "FlareSolverr"
   #       title: "Past the bouncer"
   #       payoff: "Clear Cloudflare challenges so blocked indexers stay reachable."
   #       links:
   #         - { label: "Get past the wall →", url: "/htpc/blog/flaresolverr-byparr/" }
   - icon: "🧭"
+    kick: "On the quay"
     title: "Shore leave"
-    tagline: "Detours worth a wander before (or after) you sail."
+    tagline: "Side-trips worth a wander before — or after — you sail."
+    scene: "quay"
     accent: "#8fb3c9"
     cards:
-      - glyph: "🔄"
+      - art: "signpost"
         kicker: "Alternatives"
         title: "Don't fancy the crew?"
         payoff: "Every crew member has a stand-in — here are the swaps."
         links:
           - { label: "Browse stand-ins →", url: "/htpc/blog/home-media-server-alternatives/" }
-      - glyph: "📦"
+      - art: "chest"
         kicker: "Prebuilt Boxes"
         title: "Rather borrow than build?"
         payoff: "The all-in-one boxes, if you'd sooner not roll your own."

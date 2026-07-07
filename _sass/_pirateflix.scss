@@ -164,7 +164,7 @@ html{overflow-x:hidden}
 // --- "why you actually want it" accent cards ---
 // accent-washed cards with a big faded glyph + CTA.
 // Scoped so the shared .fleet/.crew crew-grid above stays untouched.
-.pf #why, .pf .gs-group{
+.pf #why{
   .fleet{grid-template-columns:repeat(3,1fr);align-items:stretch}
   @media(max-width:720px){.fleet{grid-template-columns:1fr}}
 
@@ -221,27 +221,18 @@ html{overflow-x:hidden}
   .chart-card:hover .arw{color:var(--c);transform:translate(2px,-2px)}
 }
 
-// --- chart your course (homepage teaser) + get-sailing hub + footer ---
+// --- chart your course: the numbered voyage ---
+// Three ordered step-cards linked by a dashed sea-route. Each card's engraved
+// instrument (i-map/i-crates/i-helm, tinted by --c) rides an elevated compass
+// node above the card, so the row reads as a 1 -> 2 -> 3 journey, not 3 peers.
 .pf{
-  // .gs-group cards borrow the #why accent-card look (see selector above).
-  #why, .gs-group{
+  #why{
     .more{display:flex;flex-wrap:wrap;gap:10px}   // two-button cards wrap cleanly
   }
   .course-out{margin:22px 0 0;font-size:14px;color:var(--muted)}
   .course-out a{color:var(--teal);text-decoration:none}
   .course-out a + a{margin-left:18px}
 
-  // get-sailing page
-  .gs-group{margin:0 0 44px}
-  .gs-group-title{font-family:var(--serif);color:#fff;font-size:26px;margin:0 0 4px}
-  .gs-group .sub{margin:0 0 18px}
-  .gs-footnote{color:var(--muted);font-size:14px;margin:8px 0 40px}
-  .gs-footnote a{color:var(--teal);text-decoration:none}
-
-  // chart your course: the numbered voyage. Three ordered step-cards linked by a
-  // dashed sea-route; each card's engraved instrument (i-map/i-crates/i-helm,
-  // tinted by --c) rides an elevated compass node, so the row reads as a
-  // 1 -> 2 -> 3 journey, not 3 peers.
   #course .fleet{grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch;position:relative}
   @media(max-width:720px){#course .fleet{grid-template-columns:1fr}}
 
@@ -273,6 +264,136 @@ html{overflow-x:hidden}
   #course .btn{font-size:12px;padding:9px 16px;border-color:var(--c,var(--brass));color:var(--c,var(--brass))}
   #course .btn:hover{background:var(--c,var(--brass));color:#0a1826}
 }
+
+// --- get-sailing hub: the "cargo hold" — a scene per build stage ---
+// Each group is a scene (hold/deck/dock/quay) with its own backdrop; every guide
+// is an object (a CSS crate, or an SVG instrument from pirate/gs-cargo-art.html)
+// that reveals its detail on hover / focus / tap. --ac carries the group accent.
+.pf.gs-page{
+  --wood:#3b2817; --wood2:#4d341d; --iron:#1a1206;
+
+  .scene{position:relative;margin:34px 0;border-radius:12px;overflow:hidden;padding:0}
+  .scene-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:20px 24px 6px}
+  .scene-head .kick{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ac)}
+  .scene-head h2{font-family:var(--serif);color:#fff;font-size:24px;letter-spacing:.5px;margin:0}
+  .scene-head .req{font-family:var(--mono);font-size:9.5px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--sea);background:var(--brass);border-radius:20px;padding:3px 9px;font-weight:700}
+  .scene-head .sub{width:100%;color:var(--muted);font-size:14px;margin:2px 0 0}
+  .stage{position:relative;padding:20px 24px 30px;display:flex;flex-wrap:wrap;align-items:flex-end}
+
+  // wooden hull backdrop (hold + dock)
+  .hold,.dock{background:
+      linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,.5)),
+      repeating-linear-gradient(180deg,var(--wood) 0 38px,var(--wood2) 38px 40px),
+      var(--wood);
+    border:1px solid #17100a}
+  .hold::before,.dock::before{content:'';position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(90deg,transparent 0 150px,rgba(0,0,0,.32) 150px 162px);
+    mix-blend-mode:multiply;opacity:.7}
+  .hold .scene-head h2,.dock .scene-head h2{color:#f3e7d2}
+  .hold .scene-head .sub,.dock .scene-head .sub{color:#c9b79a}
+
+  // lit deck planks (deck)
+  .deck{background:
+      radial-gradient(600px 300px at 15% 0%,rgba(224,179,74,.10),transparent 60%),
+      linear-gradient(180deg,var(--panel),var(--sea2));border:1px solid var(--line)}
+  .deck::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background:repeating-linear-gradient(90deg,transparent 0 120px,rgba(0,0,0,.25) 120px 130px)}
+
+  // stone quay + waterline (quay)
+  .quay{background:linear-gradient(180deg,var(--sea2) 0 62%,#0a2233 62% 70%,#0e2f45 70% 100%);border:1px solid var(--line)}
+  .quay::after{content:'';position:absolute;left:0;right:0;bottom:0;height:30%;pointer-events:none;
+    background:repeating-linear-gradient(90deg,rgba(79,216,196,.06) 0 22px,transparent 22px 44px)}
+  .quay .scene-head h2{color:#fff}
+
+  // generic object (a guide)
+  .obj{position:relative;margin:14px 12px 0;cursor:pointer;text-align:left;color:inherit;
+    transition:transform .22s ease;outline:none}
+  .obj:hover,.obj:focus-visible{transform:translateY(-10px)}
+  .obj:focus-visible{outline:2px solid var(--ac);outline-offset:6px;border-radius:6px}
+  .obj .name{font-family:var(--serif);font-weight:700;color:#fff;line-height:1.1}
+  .obj .role{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--ac);margin-bottom:2px}
+
+  // detail reveals on hover / focus / tap-open
+  .detail{max-height:0;opacity:0;overflow:hidden;transition:max-height .3s ease,opacity .25s ease,margin .3s ease}
+  .obj:hover .detail,.obj:focus-visible .detail,.obj.open .detail{max-height:200px;opacity:1;margin-top:8px}
+  .detail p{margin:0 0 10px;font-size:13px;color:var(--muted);max-width:32ch}
+  .btns{display:flex;gap:8px;flex-wrap:wrap}
+  .btns .btn{font-family:var(--mono);font-size:11px;letter-spacing:.5px;text-transform:none;text-decoration:none;
+    color:var(--ac);border:1px solid var(--ac);border-radius:5px;padding:6px 10px;
+    background:rgba(0,0,0,.25);white-space:nowrap;transition:background .18s,color .18s}
+  .btns .btn:hover,.btns .btn:focus-visible{background:var(--ac);color:#08131f}
+
+  // crate (hold + dock)
+  .crate .box{position:relative;border-radius:5px;padding:16px 16px 14px;
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.25)),
+      repeating-linear-gradient(90deg,#5a3d22 0 30px,#4a3119 30px 32px),#4a3119;
+    border:2px solid #241708;box-shadow:0 16px 26px rgba(0,0,0,.5),inset 0 0 0 6px rgba(0,0,0,.18)}
+  .crate .box::before,.crate .box::after{content:'';position:absolute;width:16px;height:16px;border:2px solid var(--iron);opacity:.85}
+  .crate .box::before{top:5px;left:5px;border-right:0;border-bottom:0}
+  .crate .box::after{top:5px;right:5px;border-left:0;border-bottom:0}
+  .crate .brace{position:absolute;bottom:5px;width:16px;height:16px;border:2px solid var(--iron);opacity:.85}
+  .crate .brace.l{left:5px;border-right:0;border-top:0}
+  .crate .brace.r{right:5px;border-left:0;border-top:0}
+  .crate .strap{position:absolute;inset:0;overflow:hidden;border-radius:5px;pointer-events:none}
+  .crate .strap span{position:absolute;top:-30%;left:38%;width:16px;height:170%;background:var(--ac);opacity:.9;
+    transform:rotate(22deg);box-shadow:0 0 0 2px rgba(0,0,0,.35)}
+  .crate .stencil{position:relative;z-index:2;font-family:var(--mono);font-weight:700;letter-spacing:2px;
+    color:#f3e2c4;text-shadow:0 1px 0 rgba(0,0,0,.6)}
+  .crate .num{display:inline-block;font-family:var(--mono);font-weight:700;font-size:26px;color:var(--ac);
+    -webkit-text-stroke:1px rgba(0,0,0,.4);line-height:1}
+  .crate .plate{position:relative;z-index:2;margin-top:8px;display:inline-block;
+    background:rgba(10,14,20,.72);border:1px solid rgba(0,0,0,.5);border-radius:3px;padding:4px 8px}
+  .crate .plate .name{font-size:18px}
+  .crate .role{position:relative;z-index:2}
+  .crate .detail{position:relative;z-index:2}
+  .crate.big .box{min-height:150px}
+  .hold .stage{gap:6px;align-items:flex-end}
+  .crate.c1{flex:1 1 240px}
+  .crate.c2{flex:1 1 240px;margin-bottom:24px}
+  .crate.c3{flex:1 1 240px}
+
+  // instruments (deck)
+  .inst{flex:1 1 190px;max-width:220px;text-align:center}
+  .inst .art{height:118px;display:flex;align-items:flex-end;justify-content:center;filter:drop-shadow(0 10px 12px rgba(0,0,0,.5))}
+  .inst svg{overflow:visible}
+  .inst .name{font-size:17px;margin-top:8px}
+  .inst .detail{margin-left:auto;margin-right:auto}
+  .inst .detail p{margin-left:auto;margin-right:auto}
+  .inst .btns{justify-content:center}
+  .glow{transition:filter .25s}
+  .inst:hover .glow,.inst:focus-visible .glow{filter:drop-shadow(0 0 8px var(--ac))}
+
+  // swap crates (dock)
+  .swap{flex:1 1 250px;max-width:300px}
+  .swap .box{padding:14px}
+  .swap.crate.big .box{min-height:0}
+  .swap .out{font-family:var(--mono);font-size:11px;color:var(--muted);
+    text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
+  .swap .hoist{position:absolute;top:-10px;right:10px;z-index:3;font-family:var(--mono);font-size:9px;letter-spacing:1px;
+    text-transform:uppercase;color:var(--sea);background:var(--red);border-radius:10px;padding:2px 7px;font-weight:700}
+
+  // quay side-trips
+  .quayitem{flex:1 1 240px;max-width:300px;text-align:center}
+  .quayitem .art{height:110px;display:flex;align-items:flex-end;justify-content:center;filter:drop-shadow(0 10px 12px rgba(0,0,0,.5))}
+  .quayitem .name{font-size:18px;margin-top:8px}
+  .quayitem .detail{margin:8px auto 0}
+  .quayitem .detail p{margin-left:auto;margin-right:auto}
+  .quayitem .btns{justify-content:center}
+
+  @media(max-width:640px){
+    .stage{flex-direction:column;align-items:stretch}
+    .crate,.inst,.swap,.quayitem{max-width:none;margin-bottom:6px}
+    .crate.c2{margin-bottom:6px}
+    .detail{max-height:none;opacity:1;margin-top:8px}   // always show on small screens
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .pf.gs-page .obj{transition:none}
+  .pf.gs-page .obj:hover,.pf.gs-page .obj:focus-visible{transform:none}
+}
+
 .pf-footer{border-top:1px solid var(--line);margin-top:20px;padding:34px 0;color:var(--muted);font-size:16px}
 .pf-footer .wrap{max-width:1080px;margin:0 auto;padding:0 28px;display:flex;gap:22px;flex-wrap:wrap;align-items:center}
 .pf-footer a{color:var(--teal);text-decoration:none}
