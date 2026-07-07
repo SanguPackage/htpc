@@ -10,9 +10,7 @@ updates:
 description: >
   Most projects can be swapped with any of these alternatives.
 bigimg:
-  url: Home Media Center-Alternatives-Big.png
-  desc: "Photo by Daniele Levis Pelusi"
-  origin: https://unsplash.com/photos/QSRXNv9kmus
+  url: alternatives-big.webp
 img:
   url: alternatives-sm.webp
   linkUrl: 

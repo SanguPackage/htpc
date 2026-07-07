@@ -8,13 +8,9 @@ description: >
   When it's the start of the new season of your favourite show, let the Arr's
   send you a little ping when it is ready for your viewing leisure.
 bigimg:
-  url: Connections-Big.png
-  desc: "Photo by Miguel A Amutio"
-  origin: https://unsplash.com/photos/27QOmh18KDc
+  url: notification-big.webp
 img:
-  url: Connections.png
-  desc: "Photo by Hugo Jehanne"
-  origin: https://unsplash.com/photos/LOHVrTsdvzY
+  url: notification-sm.webp
   title: "Smoke signals is not really one of the options available."
 categories: 
 tags: [arr, automation]

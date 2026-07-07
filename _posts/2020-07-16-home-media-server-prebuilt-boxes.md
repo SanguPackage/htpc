@@ -11,9 +11,7 @@ description: >
   Give in some control over your setup but gain a
   ready to go solution out of the box.
 bigimg:
-  url: Home Media Center-Boxes-Big.jpg
-  desc: "Photo by chuttersnap"
-  origin: https://unsplash.com/photos/fyaTq-fIlro
+  url: prebuilt-boxes-big.webp
 img:
   url: pre-built-sm.webp
   linkUrl: 

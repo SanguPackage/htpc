@@ -7,9 +7,7 @@ date: 2020-07-17
 description: >
   What was that url again?
 bigimg:
-  url: Home Media Center-Management-Big.jpg
-  desc: "Photo by Cameron Venti"
-  origin: https://unsplash.com/photos/3rabTGLccwc
+  url: container-management-big.webp
 img:
   url: container-management-sm.webp
 categories: 

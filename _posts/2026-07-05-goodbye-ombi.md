@@ -8,9 +8,9 @@ description: >
   Ombi still works, but development stalled and it never spoke fluent
   Jellyfin. Jellyseerr does — so we switched. Then Jellyseerr became Seerr.
 bigimg:
-  url: ombi-big.webp
+  url: hello-seerr-big.webp
 img:
-  url: ombi-sm.webp
+  url: hello-seerr-sm.webp
   desc: "Type a title, click request, done."
 categories: 
 github: Ombi-app/Ombi

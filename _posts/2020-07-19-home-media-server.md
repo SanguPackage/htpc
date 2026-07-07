@@ -9,9 +9,7 @@ updates:
 description: >
   How to setup your own media server using Linuxserver.io docker images.
 bigimg:
-  url: Home Media Center-Big.png
-  desc: "Photo by Paweł Czerwiński"
-  origin: https://unsplash.com/photos/Yjp0TshmIUI
+  url: home-media-server-big.webp
 img:
   url: media-center-sm.webp
   linkUrl: 
