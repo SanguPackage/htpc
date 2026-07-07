@@ -161,10 +161,10 @@ html{overflow-x:hidden}
   .d{font-size:12.5px}
 }
 
-// --- "why you actually want it" + "charts from other captains" ---
+// --- "why you actually want it" accent cards ---
 // accent-washed cards with a big faded glyph + CTA.
 // Scoped so the shared .fleet/.crew crew-grid above stays untouched.
-.pf #why, .pf #charts, .pf #course, .pf .gs-group{
+.pf #why, .pf #course, .pf .gs-group{
   .fleet{grid-template-columns:repeat(3,1fr);align-items:stretch}
   @media(max-width:720px){.fleet{grid-template-columns:1fr}}
 
@@ -187,11 +187,45 @@ html{overflow-x:hidden}
   .btn:hover{background:var(--c,var(--brass));color:#0a1826}
 }
 
+// --- charts from other captains: a compact link-shelf, not accent-cards ---
+// The section only sends readers off-site, so the rows stay light: a brand
+// favicon + name/role + blurb, the whole row is the link.
+.pf #charts{
+  // minmax(0,…) lets a track shrink below its content on narrow screens, so the
+  // blurb wraps instead of forcing the row past the viewport (which ate the margin).
+  // align-items:start so a 1-line card isn't stretched to its 2-line neighbour's
+  // height (which left the shorter card's content floating in dead space).
+  .shelf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 10px;align-items:start}
+  @media(max-width:620px){.shelf{grid-template-columns:1fr;gap:6px}}
+  // NB: not `.chart` — that's the hero voyage-map container (margin-top:52px), which
+  // this class would otherwise inherit and space every card 52px apart.
+  .chart-card{display:flex;align-items:flex-start;gap:15px;min-width:0;height:100%;text-decoration:none;color:inherit;
+    padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:var(--sea2);
+    transition:background .15s,border-color .15s,transform .15s}
+  .chart-card:hover{background:var(--panel);border-color:color-mix(in srgb,var(--c) 55%,var(--line));transform:translateY(-2px)}
+  .ic{flex:none;width:38px;height:38px;object-fit:contain;border-radius:8px;padding:4px;
+    border:1px solid var(--line)}
+  .body{min-width:0;flex:1}
+  // line 1: title + role, always on one line
+  .n{font-family:var(--serif);font-size:17px;color:#fff;line-height:1.25;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .n .role{display:inline-block;vertical-align:middle;margin-left:9px;
+    font-family:var(--mono);font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--c);padding:2px 8px;border-radius:20px;
+    border:1px solid color-mix(in srgb,var(--c) 45%,transparent);
+    background:color-mix(in srgb,var(--c) 12%,transparent)}
+  // description: up to two lines, then clamp
+  .d{font-size:12.5px;color:var(--muted);margin:3px 0 0;line-height:1.4;
+    display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+  .arw{flex:none;color:var(--muted);font-size:15px;transition:color .15s,transform .15s}
+  .chart-card:hover .arw{color:var(--c);transform:translate(2px,-2px)}
+}
+
 // --- chart your course (homepage teaser) + get-sailing hub + footer ---
 .pf{
   // #course and .gs-group cards borrow the #why accent-card look (see selector above).
   // Extras below: multi-button card footers and the course section's out-links.
-  #why, #charts, #course, .gs-group{
+  #why, #course, .gs-group{
     .more{display:flex;flex-wrap:wrap;gap:10px}   // two-button cards (card 01) wrap cleanly
   }
   .course-out{margin:22px 0 0;font-size:14px;color:var(--muted)}

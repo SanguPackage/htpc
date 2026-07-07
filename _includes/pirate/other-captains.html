@@ -1,14 +1,16 @@
 <section id="charts">
   <h2>Charts from other captains.</h2>
   <p class="sub">We're not sailing these seas alone — wisdom from fellow crews worth following.</p>
-  <div class="fleet">
+  <div class="shelf">
     {% for r in site.data.other_captains %}
-      <div class="crew" style="--c:{{ r.accent }}">
-        <div class="big">{{ r.glyph }}</div>
-        <div class="n">{{ r.name }}</div><div class="r">{{ r.role }}</div>
-        <div class="d">{{ r.blurb }}</div>
-        <div class="more"><a class="btn" href="{{ r.url }}" target="_blank" rel="noopener">Set sail →</a></div>
-      </div>
+      <a class="chart-card" href="{{ r.url }}" target="_blank" rel="noopener" style="--c:{{ r.accent }}">
+        <img class="ic" src="{{ '/assets/' | append: r.logo | relative_url }}" alt="{{ r.name }} logo" loading="lazy">
+        <span class="body">
+          <span class="n">{{ r.name }}<span class="role">{{ r.role }}</span></span>
+          <span class="d">{{ r.blurb }}</span>
+        </span>
+        <span class="arw" aria-hidden="true">↗</span>
+      </a>
     {% endfor %}
   </div>
 </section>

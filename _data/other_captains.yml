@@ -1,37 +1,27 @@
 # External resources for the "Charts from other captains" homepage section.
+# Rendered as a compact link-shelf by _includes/pirate/other-captains.html.
+# Logos are the sites' own marks, fetched to assets/charts/ and served locally.
 - name: Servarr Wiki
-  role: The official manuals
-  glyph: 🧭
+  role: The manuals
+  logo: charts/servarr.webp
   accent: "#4fd8c4"
   blurb: The canonical charts for every *arr aboard your ship.
   url: https://wiki.servarr.com
 - name: Trash Guides
   role: Quality & naming
-  glyph: 🗑️
+  logo: charts/trash.webp
   accent: "#e0b34a"
-  blurb: Dial in quality profiles and custom formats like a seasoned quartermaster.
+  blurb: Dial in quality profiles and custom formats like a quartermaster.
   url: https://trash-guides.info
-- name: Recyclarr
-  role: Config sync
-  glyph: ♻️
-  accent: "#34d399"
-  blurb: Pours the Trash Guides straight into Radarr & Sonarr, automatically.
-  url: https://recyclarr.dev
 - name: selfh.st
   role: Weekly dispatches
-  glyph: 📰
+  logo: charts/selfhst.webp
   accent: "#38bdf8"
   blurb: The freshest self-hosting news and app finds, every week.
   url: https://selfh.st
-- name: Awesome-Selfhosted
-  role: The great index
-  glyph: ⭐
-  accent: "#a78bfa"
-  blurb: A sprawling atlas of every app you could ever host.
-  url: https://github.com/awesome-selfhosted/awesome-selfhosted
 - name: r/selfhosted
   role: The tavern
-  glyph: 💬
+  logo: charts/reddit.webp
   accent: "#e2564a"
   blurb: Where the crews swap charts, hard-won wins, and war stories.
   url: https://reddit.com/r/selfhosted
