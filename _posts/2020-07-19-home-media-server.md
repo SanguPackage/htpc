@@ -73,6 +73,8 @@ Anyway, I came up with something that looks like this:
 
 ![The Goal]({{ site.baseurl }}/assets/blog-images/Home Media Center-In Depth.png "The Goal"){: .img-responsive}
 
+<p style="text-align:center;margin:24px 0"><a class="btn solid" href="{{ '/deck-plan/' | relative_url }}">Want a more interactive blueprint of the fleet? Check the Deck Plan →</a></p>
+
 ## Breakdown
 
 Some choices needed to be made because pretty much every docker container in the diagram above has [other open-source or
