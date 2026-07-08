@@ -22,8 +22,8 @@ description: > # site-wide meta description (homepage + fallback); ~155 chars fo
 author:
   name: Wouter Van Schandevijl # hash form (no `twitter:`) so jekyll-seo-tag skips the invalid twitter:creator handle
 logo: /assets/logo.webp # JSON-LD organization logo
-baseurl: "/htpc" # the subpath of your site, e.g. /blog
-url: "https://sangu.be" # the base hostname & protocol for your site, e.g. https://example.com
+baseurl: "" # served at the apex of its own subdomain now, not a subpath
+url: "https://pirateflix.sangu.be" # the base hostname & protocol for your site, e.g. https://example.com
 
 social:
   name: PirateFlix
