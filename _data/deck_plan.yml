@@ -1,115 +1,116 @@
 # Detail-panel content for the /deck-plan/ diagram. Keys match the SVG node ids
-# (data-node). Links hard-code the /htpc baseurl (YAML isn't processed by Liquid).
+# (data-node). Paths are site-absolute (leading /) since YAML isn't processed by
+# Liquid, so they can't use relative_url — the site is served at its subdomain apex.
 # `github` (owner/repo) shows a repo-logo link; `stars` is a baked-in snapshot of
 # the GitHub star count (rendered as ⭐N) — static so every visitor gets it without
 # per-visitor GitHub API calls (which rate-limit at 60/hr per IP). Refresh manually.
 # Entries with only `href` are plain new-tab links, not detail panels.
 Radarr:
   title: Radarr
-  logo: /htpc/assets/blueprint/logos/radarr.svg
+  logo: /assets/blueprint/logos/radarr.svg
   github: Radarr/Radarr
   stars: 13904
-  portrait: /htpc/assets/radarr.webp
+  portrait: /assets/radarr.webp
   description: >
     The movie quartermaster. Watches for the films you want, grabs the best
     release the moment it appears, then renames and files it into your library.
   links:
     - { label: "Official site", url: "https://radarr.video" }
-    - { label: "On the blog", url: "/htpc/blog/home-media-server/" }
+    - { label: "On the blog", url: "/blog/home-media-server/" }
   screenshots: []
 Sonarr:
   title: Sonarr
-  logo: /htpc/assets/blueprint/logos/sonarr.svg
+  logo: /assets/blueprint/logos/sonarr.svg
   github: Sonarr/Sonarr
   stars: 14190
-  portrait: /htpc/assets/sonarr.webp
+  portrait: /assets/sonarr.webp
   description: >
     The TV quartermaster. Follows your shows, grabs each new episode as it airs,
     and keeps every season tidily organised.
   links:
     - { label: "Official site", url: "https://sonarr.tv" }
-    - { label: "On the blog", url: "/htpc/blog/home-media-server/" }
+    - { label: "On the blog", url: "/blog/home-media-server/" }
   screenshots: []
 Prowlarr:
   title: Prowlarr
-  logo: /htpc/assets/blueprint/logos/prowlarr.svg
+  logo: /assets/blueprint/logos/prowlarr.svg
   github: Prowlarr/Prowlarr
   stars: 6783
-  portrait: /htpc/assets/logo.webp
+  portrait: /assets/logo.webp
   description: >
     The spyglass. One place to manage every indexer and tracker, feeding search
     results to Radarr and Sonarr so they always know where to look.
   links:
     - { label: "Official site", url: "https://prowlarr.com" }
-    - { label: "On the blog", url: "/htpc/blog/home-media-server/" }
+    - { label: "On the blog", url: "/blog/home-media-server/" }
   screenshots: []
 qBittorrent:
   title: qBittorrent
-  logo: /htpc/assets/blueprint/logos/qbittorrent.svg
+  logo: /assets/blueprint/logos/qbittorrent.svg
   github: qbittorrent/qBittorrent
   stars: 38610
-  portrait: /htpc/assets/qbittorrent.webp
+  portrait: /assets/qbittorrent.webp
   description: >
     The cargo hold. Does the actual hauling — downloads the releases the *arr
     fleet orders and drops them where they can be imported.
   links:
     - { label: "Official site", url: "https://www.qbittorrent.org" }
-    - { label: "On the blog", url: "/htpc/blog/home-media-server/" }
+    - { label: "On the blog", url: "/blog/home-media-server/" }
   screenshots: []
 Bazarr:
   title: Bazarr
-  logo: /htpc/assets/blueprint/logos/bazarr.svg
+  logo: /assets/blueprint/logos/bazarr.svg
   github: morpheus65535/bazarr
   stars: 4113
-  portrait: /htpc/assets/bazarr.webp
+  portrait: /assets/bazarr.webp
   description: >
     The translator. Follows your library and fetches matching subtitles in your
     languages, writing them alongside each film and episode.
   links:
     - { label: "Official site", url: "https://www.bazarr.media" }
-    - { label: "On the blog", url: "/htpc/blog/home-media-server/" }
+    - { label: "On the blog", url: "/blog/home-media-server/" }
   screenshots: []
 Seerr:
   title: Seerr
-  logo: /htpc/assets/blueprint/logos/seerr.svg
+  logo: /assets/blueprint/logos/seerr.svg
   github: seerr-team/seerr
   stars: 11791
-  portrait: /htpc/assets/seerr.webp
+  portrait: /assets/seerr.webp
   description: >
     The ship's log. The friendly request box for crew and guests — search a
     title, tap request, and the fleet takes it from there. The merged successor
     to Overseerr and Jellyseerr.
   links:
     - { label: "Official site", url: "https://docs.seerr.dev/" }
-    - { label: "On the blog", url: "/htpc/blog/goodbye-ombi/" }
+    - { label: "On the blog", url: "/blog/goodbye-ombi/" }
   screenshots: []
 Jellyfin:
   title: Jellyfin
-  logo: /htpc/assets/blueprint/logos/jellyfin.svg
+  logo: /assets/blueprint/logos/jellyfin.svg
   github: jellyfin/jellyfin
   stars: 53969
-  portrait: /htpc/assets/jellyfin.webp
+  portrait: /assets/jellyfin.webp
   description: >
     Home port. The media server that streams everything the fleet brings in to
     every telly, phone and browser in the house.
   links:
     - { label: "Official site", url: "https://jellyfin.org" }
-    - { label: "On the blog", url: "/htpc/blog/home-media-server/" }
+    - { label: "On the blog", url: "/blog/home-media-server/" }
   screenshots: []
 FlareSolverr:
   title: FlareSolverr
-  logo: /htpc/assets/blueprint/logos/flaresolverr.svg
+  logo: /assets/blueprint/logos/flaresolverr.svg
   github: FlareSolverr/FlareSolverr
   stars: 14593
   description: >
     Prowlarr's first mate. A proxy that clears Cloudflare challenges so indexers
     behind them stay reachable.
   links:
-    - { label: "On the blog", url: "/htpc/blog/flaresolverr-byparr/" }
+    - { label: "On the blog", url: "/blog/flaresolverr-byparr/" }
   screenshots: []
 Jellystat:
   title: Jellystat
-  logo: /htpc/assets/blueprint/logos/jellystat.svg
+  logo: /assets/blueprint/logos/jellystat.svg
   github: CyferShepard/Jellystat
   stars: 2380
   description: >
