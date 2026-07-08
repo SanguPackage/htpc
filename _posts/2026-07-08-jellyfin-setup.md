@@ -80,7 +80,7 @@ Two things make it work:
 
 # The Companions
 
-The ships that orbit Jellyfin:
+The ships that orbit Jellyfin.
 
 ## Seerr <small>- requests</small>
 
@@ -89,6 +89,26 @@ The ships that orbit Jellyfin:
 
 The front door you give friends and family: they search, click *request*, and it lands in Sonarr/Radarr
 (directly or after you approve).
+
+<details markdown="1">
+<summary>Docker Compose</summary>
+
+```yaml
+seerr:
+  image: ghcr.io/seerr-team/seerr
+  container_name: seerr
+  user: "${PUID}:${PGID}"
+  init: true
+  environment:
+    - TZ=${TZ}
+  volumes:
+    - ${CONFIG_PATH}/seerr:/app/config
+  ports:
+    - ${SEERR_PORT}:5055
+  restart: ${RESTART_POLICY}
+```
+
+</details>
 
 {% include post/image.html file="seerr-preview.jpg" alt="" title="" desc="Seerr Requests" maxWidth="460px" %}
 
@@ -106,6 +126,43 @@ If you want more *who watched what, when, and how much got transcoded* stats, th
 ![Jellystat Logo]({{ site.baseurl }}/assets/blueprint/logos/jellystat.svg "Jellystat Logo"){: style="float: left; margin-right: 16px; width: 50px"}
 {% include github-stars.html url="CyferShepard/Jellystat" desc="Statistics app for Jellyfin" %}
 
+<br>
+
+<details markdown="1">
+<summary>Docker Compose</summary>
+
+```yaml
+jellystat-db:
+  image: postgres:16
+  container_name: jellystat-db
+  environment:
+    - POSTGRES_USER=${JELLYSTAT_DB_USER}
+    - POSTGRES_PASSWORD=${JELLYSTAT_DB_PASSWORD}
+  volumes:
+    - ${CONFIG_PATH}/jellystat-db:/var/lib/postgresql/data
+  restart: ${RESTART_POLICY}
+
+jellystat:
+  image: cyfershepard/jellystat
+  container_name: jellystat
+  environment:
+    - TZ=${TZ}
+    - POSTGRES_USER=${JELLYSTAT_DB_USER}
+    - POSTGRES_PASSWORD=${JELLYSTAT_DB_PASSWORD}
+    - POSTGRES_IP=jellystat-db
+    - POSTGRES_PORT=5432
+    - JWT_SECRET=${JELLYSTAT_JWT_SECRET}
+  volumes:
+    - ${CONFIG_PATH}/jellystat/backup:/app/backend/backup-data
+  ports:
+    - ${JELLYSTAT_PORT}:3000
+  depends_on:
+    - jellystat-db
+  restart: ${RESTART_POLICY}
+```
+
+</details>
+
 
 ### Streamystats
 
@@ -113,6 +170,61 @@ If you want more *who watched what, when, and how much got transcoded* stats, th
 {% include github-stars.html url="fredrikburmester/streamystats" desc="Streamystats is a statistics service for Jellyfin, providing analytics and data visualization." %}
 
 A newer stats alternative to Jellystat. I installed it for the heck of it... I'll get back here with conclusions sometime 😉
+
+<details markdown="1">
+<summary>Docker Compose</summary>
+
+```yaml
+streamystats-db:
+  image: tensorchord/vchord-postgres:pg17-v0.4.1
+  container_name: streamystats-db
+  environment:
+    - POSTGRES_USER=${STREAMYSTATS_DB_USER}
+    - POSTGRES_PASSWORD=${STREAMYSTATS_DB_PASSWORD}
+    - POSTGRES_DB=streamystats
+    - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
+    - POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256
+  volumes:
+    - ${CONFIG_PATH}/streamystats-db:/var/lib/postgresql/data
+  healthcheck:
+    test: ["CMD-SHELL", "pg_isready -U ${STREAMYSTATS_DB_USER} -d streamystats"]
+    interval: 10s
+    timeout: 5s
+    retries: 5
+    start_period: 30s
+  restart: ${RESTART_POLICY}
+
+streamystats-job-server:
+  image: ghcr.io/fredrikburmester/streamystats-job-server
+  container_name: streamystats-job-server
+  environment:
+    - NODE_ENV=production
+    - DATABASE_URL=postgresql://${STREAMYSTATS_DB_USER}:${STREAMYSTATS_DB_PASSWORD}@streamystats-db:5432/streamystats
+    - PORT=3005
+    - HOST=0.0.0.0
+  depends_on:
+    - streamystats-db
+  restart: ${RESTART_POLICY}
+
+streamystats:
+  image: ghcr.io/fredrikburmester/streamystats-nextjs
+  container_name: streamystats
+  environment:
+    - NODE_ENV=production
+    - DATABASE_URL=postgresql://${STREAMYSTATS_DB_USER}:${STREAMYSTATS_DB_PASSWORD}@streamystats-db:5432/streamystats
+    - JOB_SERVER_URL=http://streamystats-job-server:3005
+    - HOSTNAME=0.0.0.0
+    - SESSION_SECRET=${STREAMYSTATS_SESSION_SECRET}
+    - NEXT_SERVER_ACTIONS_ENCRYPTION_KEY=${STREAMYSTATS_ENCRYPTION_KEY}
+  depends_on:
+    - streamystats-db
+    - streamystats-job-server
+  ports:
+    - ${STREAMYSTATS_PORT}:3000
+  restart: ${RESTART_POLICY}
+```
+
+</details>
 
 
 ## Wizarr <small>- invitations & onboarding</small>
@@ -123,6 +235,28 @@ I thought this was a bit silly but then I tried it and well... It's actually pre
 of giving your mom a URL, create her login/password and do a whole lot of explaining, you just give her a link
 and she gets onboarded with a wizard where she gets explained what it is, how to get going,
 fill in her own login/password.
+
+<details markdown="1">
+<summary>Docker Compose</summary>
+
+```yaml
+wizarr:
+  image: ghcr.io/wizarrrr/wizarr
+  container_name: wizarr
+  environment:
+    - PUID=${PUID}
+    - PGID=${PGID}
+    - TZ=${TZ}
+    # Set to true ONLY if you are using another auth provider (Authelia, Authentik, etc)
+    - DISABLE_BUILTIN_AUTH=false
+  volumes:
+    - ${CONFIG_PATH}/wizarr:/data
+  ports:
+    - ${WIZARR_PORT}:5690
+  restart: ${RESTART_POLICY}
+```
+
+</details>
 
 It works for Plex, Emby, Jellyfin and also for:
 
