@@ -305,6 +305,23 @@ layout: default
 
     </div>
   </div>
+
+  <!-- guided reveal note — walks the ship deck-to-keel (data in _data/get_building_tour.yml) -->
+  <div id="gb-tour" class="gb-note" hidden>
+    <p class="gb-eyebrow"></p>
+    <h2 class="gb-note-title"></h2>
+    <p class="gb-note-text"></p>
+    <div class="gb-note-foot">
+      <div class="gb-dots" aria-hidden="true"></div>
+      <div class="gb-nav">
+        <button class="gb-back pbtn pbtn-ghost" type="button">&lsaquo; Back</button>
+        <button class="gb-next pbtn pbtn-brass" type="button">Next &rsaquo;</button>
+      </div>
+    </div>
+    <button class="gb-skip" type="button">Leave the tour</button>
+  </div>
+  <button id="gb-reopen" class="gb-reopen" type="button" hidden aria-label="Take the tour" title="Take the tour">?</button>
+  <script id="gb-tour-data" type="application/json">{{ site.data.get_building_tour | jsonify }}</script>
 </div>
 
 <!-- reusable SVG art (gradients + the helm wheel symbol) -->
@@ -340,19 +357,129 @@ layout: default
 </defs></svg>
 
 <script>
-  // Single-open accordion. Zone heads (badges) toggle; clicking a crate/cell/deckhouse
-  // opens its zone. Deck starts open so the ship reads as whole on load.
   (function () {
     var ship = document.getElementById('ship');
     if (!ship) return;
+
+    // ---- Single-open accordion. Zone heads (badges) toggle; clicking a crate/cell/
+    // deckhouse opens its zone. Deck starts open so the ship reads as whole on load.
+    // Suspended while the guided tour is driving the ship. ----
+    function touring() { return ship.classList.contains('touring'); }
     function closeAll() { ship.querySelectorAll('.zone').forEach(function (z) { z.classList.remove('open'); }); }
-    function open(zone) { closeAll(); zone.classList.add('open'); }
+    function openZone(zone) { closeAll(); if (zone) zone.classList.add('open'); }
     function toggle(zone) { var was = zone.classList.contains('open'); closeAll(); if (!was) zone.classList.add('open'); }
+    function zoneOf(name) { return ship.querySelector('.zone[data-zone="' + name + '"]'); }
     ship.querySelectorAll('.zhead').forEach(function (h) {
-      h.addEventListener('click', function () { toggle(h.closest('.zone')); });
+      h.addEventListener('click', function () { if (!touring()) toggle(h.closest('.zone')); });
     });
     ship.querySelectorAll('.cell, .crate, .pathway, .chartbox, .helmbox').forEach(function (c) {
-      c.addEventListener('click', function (e) { if (e.target.closest('a')) return; open(c.closest('.zone')); });
+      c.addEventListener('click', function (e) { if (touring() || e.target.closest('a')) return; openZone(c.closest('.zone')); });
     });
+
+    // ---- Guided tour: reveal the vessel part by part, then hand over to the live view. ----
+    var card = document.getElementById('gb-tour');
+    var reopen = document.getElementById('gb-reopen');
+    var dataEl = document.getElementById('gb-tour-data');
+    if (!card || !dataEl) return;
+    var tour = JSON.parse(dataEl.textContent);
+    var stages = tour.stages || [];
+    var SEEN = 'gb-tour-seen';
+
+    var eyebrow = card.querySelector('.gb-eyebrow');
+    var title = card.querySelector('.gb-note-title');
+    var text = card.querySelector('.gb-note-text');
+    var dots = card.querySelector('.gb-dots');
+    var back = card.querySelector('.gb-back');
+    var next = card.querySelector('.gb-next');
+    var skip = card.querySelector('.gb-skip');
+    var idx = -1;   // -1 = welcome note, 0..n-1 = the ship's parts
+
+    dots.innerHTML = stages.map(function () { return '<span class="gb-dot"></span>'; }).join('');
+    var dotEls = Array.prototype.slice.call(dots.children);
+
+    // drag the note anywhere (keeps KEEP px on screen); ignores its own buttons so they still click
+    (function makeDraggable(el) {
+      var KEEP = 48, sx, sy, ox, oy, dragging = false;
+      el.addEventListener('pointerdown', function (e) {
+        if (e.target.closest('button, a')) return;
+        var r = el.getBoundingClientRect();
+        ox = r.left; oy = r.top; sx = e.clientX; sy = e.clientY;
+        el.style.left = ox + 'px'; el.style.top = oy + 'px'; el.style.right = 'auto'; el.style.bottom = 'auto';
+        dragging = true; el.setPointerCapture(e.pointerId); e.preventDefault();
+      });
+      el.addEventListener('pointermove', function (e) {
+        if (!dragging) return;
+        var nx = Math.max(KEEP - el.offsetWidth, Math.min(ox + e.clientX - sx, window.innerWidth - KEEP));
+        var ny = Math.max(KEEP - el.offsetHeight, Math.min(oy + e.clientY - sy, window.innerHeight - KEEP));
+        el.style.left = nx + 'px'; el.style.top = ny + 'px';
+      });
+      function end() { dragging = false; }
+      el.addEventListener('pointerup', end);
+      el.addEventListener('pointercancel', end);
+    })(card);
+
+    function reveal(level, zone) {
+      ship.dataset.reveal = level;              // CSS shows badge/hold/brig up to this level
+      openZone(zone ? zoneOf(zone) : null);     // open the part we're describing (or all closed)
+    }
+    function render() {
+      if (idx < 0) {
+        eyebrow.textContent = tour.welcome.eyebrow;
+        title.textContent = tour.welcome.title;
+        text.innerHTML = tour.welcome.body;
+        back.textContent = tour.welcome.dismiss;
+        next.textContent = tour.welcome.start;
+        dots.hidden = true; skip.hidden = true;
+      } else {
+        var s = stages[idx];
+        eyebrow.textContent = 'Step ' + (idx + 1) + ' of ' + stages.length;
+        title.textContent = s.title;
+        text.innerHTML = s.body;
+        back.textContent = '‹ Back';
+        next.textContent = idx === stages.length - 1 ? 'Aboard ⚓' : 'Next ›';
+        dots.hidden = false; skip.hidden = false;
+        dotEls.forEach(function (d, i) { d.classList.toggle('on', i === idx); });
+      }
+      card.hidden = false; reopen.hidden = true;
+    }
+    function goWelcome() {
+      idx = -1; ship.classList.add('touring'); reveal(0, null); render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function goStage(i) {
+      idx = i; ship.classList.add('touring');
+      var s = stages[i]; reveal(s.reveal, s.zone); render();
+      var z = zoneOf(s.zone);
+      if (z) z.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    function endTour(closed) {
+      ship.classList.remove('touring');
+      delete ship.dataset.reveal;
+      card.hidden = true; reopen.hidden = false;
+      try { localStorage.setItem(SEEN, '1'); } catch (e) {}
+      if (closed) {                        // "Aboard": whole ship shut, scrolled back to the deck
+        closeAll();
+        var d = zoneOf('deck');
+        if (d) d.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        openZone(zoneOf('deck'));          // the default live view
+      }
+    }
+
+    next.addEventListener('click', function () {
+      if (idx < 0) goStage(0);
+      else if (idx < stages.length - 1) goStage(idx + 1);
+      else endTour(true);                  // finished the last part
+    });
+    back.addEventListener('click', function () {
+      if (idx < 0) endTour();              // welcome: "I'll explore myself"
+      else if (idx === 0) goWelcome();
+      else goStage(idx - 1);
+    });
+    skip.addEventListener('click', function () { endTour(); });
+    reopen.addEventListener('click', goWelcome);
+
+    var seen; try { seen = localStorage.getItem(SEEN); } catch (e) { seen = null; }
+    if (seen) reopen.hidden = false; else goWelcome();
   })();
 </script>

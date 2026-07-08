@@ -1,0 +1,30 @@
+# Guided reveal for /get-building/. The welcome note shows the ship fully closed;
+# each following note reveals one more part of the vessel (its `reveal` level, read
+# by #ship[data-reveal] in the layout) and opens that `zone` so you see inside.
+welcome:
+  eyebrow: Welcome aboard
+  title: Meet your ship
+  body: >-
+    Everything you need to run the fleet is built into one vessel — deck to keel.
+    Care for the grand tour?
+  start: Show me around
+  dismiss: I'll explore myself
+stages:
+  - title: The Deck
+    reveal: 1
+    zone: deck
+    body: >-
+      Up top, the three you raise first: the <em>chart room</em> to understand her,
+      the <em>sail</em> that is your Docker Compose, and the <em>helm</em> you steer from.
+  - title: The Cargo Hold
+    reveal: 2
+    zone: hold
+    body: >-
+      Below the waterline, two decks of optional crates — the polish that lets her
+      sail herself: lists, alerts and updates that just happen.
+  - title: The Brig
+    reveal: 3
+    zone: brig
+    body: >-
+      Down in the keel, what you lock away until needed: a stand-in for any crew
+      member, or a prebuilt box if you'd sooner not roll your own.

@@ -422,6 +422,19 @@ html:has(.pf){background:var(--sea)}
     .zone.open .detail{max-height:400px;opacity:1}
     .zhead{cursor:pointer;user-select:none}
 
+    // ===== GUIDED TOUR reveal — the ship starts fully closed, then parts appear one
+    // at a time as the walkthrough advances (JS sets #ship[data-reveal] 0→3) =====
+    &.touring{
+      .deckbadge{visibility:hidden}
+      .band.hold,.band.brig{display:none}
+    }
+    &.touring[data-reveal="1"] .deckbadge,
+    &.touring[data-reveal="2"] .deckbadge,
+    &.touring[data-reveal="3"] .deckbadge{visibility:visible}
+    &.touring[data-reveal="2"] .band.hold,
+    &.touring[data-reveal="3"] .band.hold{display:block}
+    &.touring[data-reveal="3"] .band.brig{display:block}
+
     // ===== ABOVE THE WATERLINE — tall open sky + the drawn ship =====
     // sky grows with the flex slack; the deck is pinned to the bottom so its hull meets the
     // waterline (padding-top reserves open sky above the masts even on short viewports).
@@ -606,6 +619,38 @@ html:has(.pf){background:var(--sea)}
       .pathway{display:none}
     }
   }
+
+  // ===== guided-tour note — a vellum card + a brass "?" to relaunch it =====
+  // floats top-left and drags anywhere (JS makeDraggable), like the deck-plan card
+  .gb-note{position:fixed;top:20px;left:20px;z-index:30;
+    width:min(440px,calc(100% - 32px));padding:18px 22px 14px;border-radius:6px;
+    font-family:var(--mono);color:#12100a;cursor:grab;touch-action:none;
+    background:radial-gradient(120% 90% at 15% 0%,rgba(255,255,255,.28),transparent 55%),
+      linear-gradient(150deg,#efe6cf,#e1d3b1);
+    border:1px solid #b9a374;
+    box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 18px 44px rgba(0,0,0,.5),0 2px 6px rgba(0,0,0,.4)}
+  .gb-note[hidden]{display:none}
+  .gb-note:active{cursor:grabbing}
+  .gb-eyebrow{margin:0 0 6px;font-family:'Cinzel',var(--serif);text-transform:uppercase;
+    letter-spacing:.2em;font-size:11px;color:#7a5a2e}
+  .gb-note .gb-note-title{margin:0 0 7px;font-family:'Cinzel',var(--serif);font-weight:700;
+    font-size:clamp(19px,2.4vw,24px);color:#16324a;line-height:1.15}
+  .gb-note-text{margin:0;font-size:14px;line-height:1.5;font-weight:600;color:#12100a}
+  .gb-note-text em{color:#7a4a12;font-style:italic}
+  .gb-note-foot{display:flex;align-items:center;gap:14px;margin-top:14px}
+  .gb-dots{display:flex;gap:7px}
+  .gb-dots[hidden]{display:none}
+  .gb-dot{width:9px;height:9px;border-radius:50%;background:rgba(60,42,20,.28)}
+  .gb-dot.on{background:#c8992e;box-shadow:0 0 0 2px rgba(200,153,46,.3)}
+  .gb-nav{display:flex;gap:8px;margin-left:auto}
+  .gb-skip{margin-top:10px;background:none;border:0;padding:0;cursor:pointer;font-family:var(--serif);
+    font-size:12px;color:#7a5a2e;text-decoration:underline;text-underline-offset:2px}
+  .gb-skip[hidden]{display:none}
+  .gb-skip:hover{color:#3a2a12}
+  .gb-reopen{position:fixed;right:18px;bottom:18px;z-index:29;width:38px;height:38px;border-radius:50%;
+    display:grid;place-items:center;cursor:pointer;font-family:'Cinzel',var(--serif);font-size:18px;color:#2a1e0c;
+    background:linear-gradient(180deg,#f0cf6a,#c99a34);border:1px solid #8a6a22;box-shadow:0 2px 8px rgba(0,0,0,.45)}
+  .gb-reopen[hidden]{display:none}
 }
 
 // get-building seascape motion
