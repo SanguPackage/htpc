@@ -196,7 +196,7 @@ html{overflow-x:hidden}
   // align-items:start so a 1-line card isn't stretched to its 2-line neighbour's
   // height (which left the shorter card's content floating in dead space).
   .shelf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 10px;align-items:start}
-  @media(max-width:620px){.shelf{grid-template-columns:1fr;gap:6px}}
+  @media(max-width:900px){.shelf{grid-template-columns:1fr;gap:6px}}
   // NB: not `.chart` — that's the hero voyage-map container (margin-top:52px), which
   // this class would otherwise inherit and space every card 52px apart.
   .chart-card{display:flex;align-items:flex-start;gap:15px;min-width:0;height:100%;text-decoration:none;color:inherit;
