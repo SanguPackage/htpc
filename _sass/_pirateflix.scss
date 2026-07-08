@@ -6,6 +6,11 @@
 // so clamp horizontal overflow at the scroll root (keeps position:sticky working).
 html{overflow-x:hidden}
 
+// html/body have no background — the dark theme is painted only inside `.pf`, so any
+// strip `.pf` fails to cover (scrollbar-gutter reflow, a load-time overflow flash)
+// exposes the white canvas as a band. Paint the canvas too; :has scopes it to pirate pages.
+html:has(.pf){background:var(--sea)}
+
 // NB: the Cinzel @font-face lives in assets/style.scss — it needs Liquid's
 // relative_url for the /htpc baseurl, which @use partials don't get.
 
