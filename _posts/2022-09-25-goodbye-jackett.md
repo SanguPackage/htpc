@@ -6,6 +6,7 @@ subTitle: "Indexer Management: Ain't Nobody Got Time For That"
 date: 2022-09-25
 description: >
   Jackett was great but there were some issues, which Prowlarr addressed.
+image: /assets/blog-images/Prowlarr-Big.png
 bigimg:
   url: Prowlarr-Big.png
   desc: "Photo by Matt Bennett"

@@ -7,6 +7,7 @@ date: 2022-09-27
 description: >
   When it's the start of the new season of your favourite show, let the Arr's
   send you a little ping when it is ready for your viewing leisure.
+image: /assets/blog-images/notification-big.webp
 bigimg:
   url: notification-big.webp
 img:

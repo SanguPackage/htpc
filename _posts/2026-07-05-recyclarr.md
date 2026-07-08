@@ -7,6 +7,7 @@ date: 2026-07-05
 description: >
   Recyclarr auto-syncs the TRaSH Guides quality tuning into Sonarr and Radarr.
   It's genuinely clever — and I decided not to use it. Here's both halves.
+image: /assets/blog-images/recyclarr-big.webp
 bigimg:
   url: recyclarr-big.webp
 img:
@@ -76,3 +77,41 @@ Recyclarr pipes it into your setup automatically.
 # Conclusion
 
 Recyclarr isn't going in my stack — not because it's bad, but because it's *good at something I don't want*.
+
+
+# Recyclarr vs Configarr vs Profilarr
+
+Recyclarr isn't the only tool piping TRaSH into your `arr`s. Two alternatives attack the same
+problem from different directions:
+
+|   | Tool | Stars | Source | Commits | Last |
+|---|------|-------|--------|---------|------|
+| <img class="nb" height="26" src="{{ site.baseurl }}/assets/blog-images/recyclarr-logo.png"> | Recyclarr | <img class="nb" src="https://img.shields.io/github/stars/recyclarr/recyclarr.svg?style=social&label=Star"> | [recyclarr/recyclarr][gh-rec] | 2,335 | 3 days ago |
+| <img class="nb" height="26" src="{{ site.baseurl }}/assets/blog-images/configarr-logo.webp"> | Configarr | <img class="nb" src="https://img.shields.io/github/stars/raydak-labs/configarr.svg?style=social&label=Star"> | [raydak-labs/configarr][gh-cfg] | 764 | yesterday |
+| <img class="nb" height="26" src="{{ site.baseurl }}/assets/blog-images/profilarr-logo.png"> | Profilarr | <img class="nb" src="https://img.shields.io/github/stars/Dictionarry-Hub/profilarr.svg?style=social&label=Star"> | [Dictionarry-Hub/profilarr][gh-prf] | 1,444 | yesterday |
+
+[gh-rec]: https://github.com/recyclarr/recyclarr
+[gh-cfg]: https://github.com/raydak-labs/configarr
+[gh-prf]: https://github.com/Dictionarry-Hub/profilarr
+
+**Recyclarr** is config-as-code, and only that. A YAML file, a CLI, and a one-way sync of TRaSH Guides
+custom formats and quality profiles into Sonarr/Radarr. No UI, no database, no opinions of its own —
+it does what the guides say and nothing more. The oldest and most focused of the three.
+
+**Configarr** is "Recyclarr, but it doesn't stop at TRaSH". Same config-as-code spirit (YAML + container),
+except it also pulls in Profilarr's databases *and* lets you define your own custom formats and profiles
+inline. If you've hit the edges of Recyclarr's TRaSH-only scope, this is the drop-in with more room.
+
+**Profilarr** is the odd one out: a web app, not a CLI. You run it as a container and click around a UI
+backed by the curated [Dictionarry](https://dictionarry.dev) database — profiles and regex-based custom
+formats with git-style versioning, import/export, and pull-to-update. It trades config-as-code for
+approachability and a hand-tuned catalogue.
+
+Rough decision:
+
+- **Just want TRaSH, in a file you can commit** → Recyclarr
+- **Want TRaSH *plus* your own tweaks, still as code** → Configarr
+- **Don't want to touch YAML, want a curated GUI** → Profilarr
+
+For me, none of them — see above. But if you land on the "quality" side of the fence I bailed from,
+that's the map.

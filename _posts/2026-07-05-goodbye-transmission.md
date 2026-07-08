@@ -7,6 +7,7 @@ date: 2026-07-05
 description: >
   How Transmission 4.0 quietly killed the web UI, the linuxserver
   bring-your-own-UI dance that followed, and why I ended up on qBittorrent.
+image: /assets/blog-images/transmission-big.webp
 bigimg:
   url: transmission-big.webp
 img:

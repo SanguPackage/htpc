@@ -10,6 +10,7 @@ updates:
 description: >
   Give in some control over your setup but gain a
   ready to go solution out of the box.
+image: /assets/blog-images/prebuilt-boxes-big.webp
 bigimg:
   url: prebuilt-boxes-big.webp
 img:

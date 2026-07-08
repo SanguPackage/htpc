@@ -10,6 +10,7 @@ updates:
 description: >
   Now that we have determined what our setup should look like,
   let's combine them in a single docker-compose file.
+image: /assets/blog-images/Home%20Media%20Center-HolyGrail-Big.png
 bigimg:
   url: Home Media Center-HolyGrail-Big.png
   desc: "Photo from Once upon a time"

@@ -7,6 +7,7 @@ date: 2026-07-05
 description: >
   Ombi still works, but development stalled and it never spoke fluent
   Jellyfin. Jellyseerr does — so we switched. Then Jellyseerr became Seerr.
+image: /assets/blog-images/hello-seerr-big.webp
 bigimg:
   url: hello-seerr-big.webp
 img:

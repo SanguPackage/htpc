@@ -8,6 +8,7 @@ description: >
   Some torrent indexers sit behind Cloudflare and block Prowlarr outright.
   FlareSolverr solves the challenge for you — and Byparr is the drop-in
   alternative for when it can't.
+image: /assets/blog-images/flaresolverr-big.webp
 bigimg:
   url: flaresolverr-big.webp
 img:

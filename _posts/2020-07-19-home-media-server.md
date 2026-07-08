@@ -8,6 +8,7 @@ updates:
   - date: 2026-07-05
 description: >
   How to setup your own media server using Linuxserver.io docker images.
+image: /assets/blog-images/home-media-server-big.webp
 bigimg:
   url: home-media-server-big.webp
 img:

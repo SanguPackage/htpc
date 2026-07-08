@@ -9,6 +9,7 @@ updates:
     desc: "Dropped dead Emby, OpenELEC, several discontinued Plex companions, CouchPotato and sonarr-sub-downloader; qBittorrent is now the default download client"
 description: >
   Most projects can be swapped with any of these alternatives.
+image: /assets/blog-images/alternatives-big.webp
 bigimg:
   url: alternatives-big.webp
 img:

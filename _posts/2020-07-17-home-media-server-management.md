@@ -6,6 +6,7 @@ subTitle: "One dashboard to command the fleet — who remembers all those ports 
 date: 2020-07-17
 description: >
   What was that url again?
+image: /assets/blog-images/container-management-big.webp
 bigimg:
   url: container-management-big.webp
 img:

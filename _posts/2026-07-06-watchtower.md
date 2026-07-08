@@ -8,6 +8,7 @@ description: >
   Watchtower pulls fresh images and recreates your containers for you, on a cron,
   with cleanup and notifications. Here's how to gate it to just the fleet you mean —
   and when you should reach for `docker compose pull` by hand instead.
+image: /assets/blog-images/watchtower-big.webp
 bigimg:
   url: watchtower-big.webp
 img:

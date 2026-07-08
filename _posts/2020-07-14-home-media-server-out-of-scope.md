@@ -7,6 +7,7 @@ date: 2020-07-14
 description: >
   Other Linuxserver.io docker images for downloading, managing and streaming
   music, books, pictures and more.
+image: /assets/blog-images/Home%20Media%20Center-OutOfScope-Big.jpg
 bigimg:
   url: Home Media Center-OutOfScope-Big.jpg
   desc: "Photo by Jeremy Thomas"

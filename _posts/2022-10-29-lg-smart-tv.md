@@ -7,6 +7,7 @@ date: 2022-10-29
 description: >
   For webOS 6, get it from the official LG Content Store. If not, get ready to
   become a webOS TV Developer!
+image: /assets/blog-images/JellyfinLG-big.png
 bigimg:
   url: JellyfinLG-big.png
   desc: "Photo by Dall-E"
