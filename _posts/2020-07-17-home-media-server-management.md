@@ -18,6 +18,11 @@ series_order: 3
 toc:
   title: Container Management
   icon: docker
+gallery_homarr:
+  - image: Homarr-Dashboard.png
+    text: Homarr Dashboard
+  - image: Homarr-Settings.png
+    text: Homarr Settings
 updates:
   - date: "2026-07-05"
     desc: "Homarr moved to homarr-labs, added Homepage and Prismarr, dropped dead HTPC-Manager"
@@ -99,9 +104,7 @@ Some notable features why you may want to go with Homarr instead of Heimdall:
 - Docker: Start/Stop containers, Pin a running container to the dashboard
 - Customizations: Light/Dark themes, background image, dashboard icon size, or just inject custom CSS
 
-{% include post/image.html file="Homarr-Dashboard.png" alt="" title="" desc="Homarr Dashboard with calendar, ping, search, Transmission and docker integrations" maxWidth="500px" %}
-
-{% include post/image.html file="Homarr-Settings.png" alt="" title="" desc="The Settings in Homarr" maxWidth="242px" %}
+{% include gallery.html items=page.gallery_homarr type="inline" maxWidth="300px" %}
 
 
 

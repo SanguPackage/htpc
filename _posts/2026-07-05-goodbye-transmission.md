@@ -18,6 +18,15 @@ tags: [torrents, docker]
 series: swapping-tools
 series_order: 2
 github: transmission/transmission
+gallery_ui:
+  - image: transmission-ui-flood.png
+    text: Flood for Transmission
+  - image: transmission-ui-web-control.png
+    text: Transmission Web Control
+  - image: transmission-ui-transmissionic.png
+    text: Transmissionic
+  - image: transmission-ui-trguing.png
+    text: TrguiNG
 toc:
   title: 🧲 qBittorrent
 ---
@@ -121,12 +130,7 @@ services:
 
 Four contenders, same daemon underneath. Here's what they look like:
 
-<div class="ui-gallery">
-  <figure><a href="{{ site.baseurl }}/assets/blog-images/transmission-ui-flood.png"><img src="{{ site.baseurl }}/assets/blog-images/transmission-ui-flood.png" alt="Flood for Transmission"></a><figcaption>Flood for Transmission</figcaption></figure>
-  <figure><a href="{{ site.baseurl }}/assets/blog-images/transmission-ui-web-control.png"><img src="{{ site.baseurl }}/assets/blog-images/transmission-ui-web-control.png" alt="Transmission Web Control"></a><figcaption>Transmission Web Control</figcaption></figure>
-  <figure><a href="{{ site.baseurl }}/assets/blog-images/transmission-ui-transmissionic.png"><img src="{{ site.baseurl }}/assets/blog-images/transmission-ui-transmissionic.png" alt="Transmissionic"></a><figcaption>Transmissionic</figcaption></figure>
-  <figure><a href="{{ site.baseurl }}/assets/blog-images/transmission-ui-trguing.png"><img src="{{ site.baseurl }}/assets/blog-images/transmission-ui-trguing.png" alt="TrguiNG"></a><figcaption>TrguiNG</figcaption></figure>
-</div>
+{% include gallery.html items=page.gallery_ui type="inline" maxWidth="400px" %}
 
 And where each one lives — with how much love it's still getting:
 

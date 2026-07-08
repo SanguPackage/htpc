@@ -22,6 +22,29 @@ series_order: 1
 toc:
   title: Home Media Server
   icon: bookmark
+gallery_sonarr:
+  - image: sonarr-dashboard.png
+    text: Sonarr Series Library
+  - image: sonarr-calendar.png
+    text: Sonarr Calendar
+  - image: sonarr-quality.png
+    text: Sonarr Quality Profiles
+gallery_radarr:
+  - image: radarr-dashboard.png
+    text: Radarr Movie Library
+  - image: radarr-add-movie.png
+    text: Radarr Add Movie
+  - image: radarr-profiles.png
+    text: Radarr Quality Profiles
+  - image: radarr-import-lists.png
+    text: Radarr Import Lists
+  - image: radarr-notifications.png
+    text: Radarr Notifications
+gallery_jellyfin:
+  - image: Home Media Center-Jellyfin.png
+    text: Jellyfin Movie Library
+  - image: Home Media Center-Jellyfin2.jpg
+    text: Jellyfin Movie Details
 ---
 
 [Linuxserver.io](https://linuxserver.io) provides docker images of popular projects that work very well together.
@@ -100,10 +123,7 @@ Playback statistics. For me there were no must-have plugins though.
 
 Basically exactly what you'd expect:
 
-<div class="ui-gallery">
-  <figure><a href="{{ site.baseurl }}/assets/blog-images/Home Media Center-Jellyfin.png"><img src="{{ site.baseurl }}/assets/blog-images/Home Media Center-Jellyfin.png" alt="Jellyfin Movie Library"></a><figcaption>Jellyfin Movie Library</figcaption></figure>
-  <figure><a href="{{ site.baseurl }}/assets/blog-images/Home Media Center-Jellyfin2.jpg"><img src="{{ site.baseurl }}/assets/blog-images/Home Media Center-Jellyfin2.jpg" alt="Jellyfin Movie Details"></a><figcaption>Jellyfin Movie Details</figcaption></figure>
-</div>
+{% include gallery.html items=page.gallery_jellyfin type="inline" maxWidth="460px" %}
 
 
 # Sonarr & Radarr <small>- Library Management</small>
@@ -113,12 +133,16 @@ Basically exactly what you'd expect:
 [**Sonarr**](https://sonarr.tv/): Keep track of what series you want to follow. It will download new episodes as they are aired.
 There is even a calendar so you can keep track of things to watch each week :)
 
+{% include gallery.html items=page.gallery_sonarr id="sonarr" maxWidth="500px" %}
+
 <br>
 
 ![Radarr Logo]({{ site.baseurl }}/assets/blog-images/Home Media Center-Radarr-Logo.png "Radarr Logo"){: style="float: left; margin-right: 16px"}
 {% include github-stars.html url="Radarr/Radarr" desc="A fork of Sonarr to work with movies à la Couchpotato." %}
 [**Radarr**](https://radarr.video/): Pretty much Sonarr but for movies. Monitor announced movies and even lists, like the IMDB Top250 or
 [these TrakTV lists of famous directors](https://trakt.tv/users/origin14/lists).
+
+{% include gallery.html items=page.gallery_radarr id="radarr" maxWidth="500px" %}
 
 
 
@@ -180,6 +204,8 @@ or you just browse Prowlarr's list of preconfigured indexers and add all the pub
 
 It then syncs these indexers to Radarr and Sonarr so they find all torrents!
 Some hide behind CAPTCHAs, which you can defeat with [FlareSolverr or Byparr]({{ site.baseurl }}/blog/flaresolverr-byparr/).
+
+{% include post/image.html file="prowlarr-screen.png" alt="" title="" desc="Prowlarr's list of indexers" maxWidth="500px" %}
 
 
 ### qBittorrent <small>- Download Client</small>
