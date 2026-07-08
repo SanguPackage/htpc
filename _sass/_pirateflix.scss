@@ -396,8 +396,12 @@ html:has(.pf){background:var(--sea)}
 
   .deck-heading .yard{color:var(--brass)}
 
-  // everything below lives inside the ship, so it can't restyle the header/footer chrome
-  .ship{position:relative;margin:22px 0 72px;
+  // everything below lives inside the ship, so it can't restyle the header/footer chrome.
+  // flex column filling the viewport: the sky (abovewater) and deep water (belowwater) absorb
+  // the slack so the ocean scene always reaches from just under the header down to the footer.
+  .ship{position:relative;margin:22px 0 0;
+    display:flex;flex-direction:column;min-height:calc(100vh - 210px);
+    filter:none;   // the theme's .ship drop-shadow is for the small drawn ship, not this full scene
 
     // the hold/brig zones are <section>s; cancel the theme's section{padding:74px 0}
     // so the bands hug their content and stack seamlessly (no tall hold, no gap to the brig)
@@ -418,9 +422,79 @@ html:has(.pf){background:var(--sea)}
     .zone.open .detail{max-height:400px;opacity:1}
     .zhead{cursor:pointer;user-select:none}
 
-    // ===== THE DECK — a drawn ship; sail text on the canvas, deckhouses on deck =====
+    // ===== ABOVE THE WATERLINE — tall open sky + the drawn ship =====
+    // sky grows with the flex slack; the deck is pinned to the bottom so its hull meets the
+    // waterline (padding-top reserves open sky above the masts even on short viewports).
+    .abovewater{position:relative;flex:2 1 auto;display:flex;flex-direction:column;
+      justify-content:flex-end;padding-top:clamp(150px,22vh,380px)}
     .deck{position:relative;padding:0}
     .shipwrap{position:relative}
+
+    // the sea she sails: a CSS-region scene (gradient sky + absolutely-placed art) so the sun,
+    // clouds and gulls never crop as the sky stretches. Full-bleed via the 50vw break-out; the
+    // gradient's bottom (#123a47) is the waterline and matches the water below for a seamless seam.
+    .seascape{position:absolute;top:0;bottom:0;left:calc(50% - 50vw);right:calc(50% - 50vw);
+      z-index:0;overflow:hidden;pointer-events:none;
+      background:linear-gradient(180deg,#0a1826 0%,#14273a 24%,#1d3f57 56%,#2b5560 82%,#1f4a53 93%,#123a47 100%)}
+    .seascape .sun{position:absolute;top:20%;right:15%;width:clamp(66px,7vw,120px);aspect-ratio:1;
+      border-radius:50%;background:radial-gradient(circle at 50% 45%,#fdefc0,#f3c96a 55%,#e0a63e);
+      box-shadow:0 0 70px 30px rgba(240,190,90,.24);animation:pf-sun 6s ease-in-out infinite}
+    .seascape .cloud{position:absolute}
+    .seascape .cloud svg{display:block;width:100%;height:auto;fill:#455f76;opacity:.9}
+    .seascape .cloud-a{top:11%;left:6%;width:clamp(130px,15vw,250px);animation:pf-cloud 34s ease-in-out infinite alternate}
+    .seascape .cloud-b{top:26%;right:8%;width:clamp(100px,12vw,200px);animation:pf-cloud 40s ease-in-out infinite alternate reverse}
+    .seascape .cloud-c{top:15%;left:38%;width:clamp(80px,9vw,150px);animation:pf-cloud 46s ease-in-out infinite alternate}
+    .seascape .birds{position:absolute;top:25%;left:0;width:clamp(150px,16vw,230px);
+      animation:pf-fly 26s linear infinite}
+    .seascape .birds svg{display:block;width:100%;height:auto}
+    // the gulls beat their wings (scaleY flattens the M into a downstroke), slightly out of phase
+    .seascape .gull{transform-box:fill-box;transform-origin:center;animation:pf-flap .9s ease-in-out infinite}
+    .seascape .gull:nth-child(2){animation-duration:1.15s;animation-delay:-.35s}
+    .seascape .waves{position:absolute;left:0;bottom:0;width:100%;height:clamp(26px,4vh,52px);display:block}
+    .seascape .wave-1{animation:pf-wave 7s ease-in-out infinite alternate}
+    .seascape .wave-2{animation:pf-wave 9s ease-in-out infinite alternate reverse}
+    .seascape .wave-3{animation:pf-wave 11s ease-in-out infinite alternate}
+
+    // ===== BELOW THE WATERLINE — the hull cutaway floats in deep water =====
+    // padding-bottom (plus flex slack) opens deep water between the keel and the seabed so the
+    // ship floats rather than resting on the bottom. Full-bleed, behind the hold/brig bands, so
+    // water/fish/seabed show either side of the wrap-width hull; #123a47 at the top meets the sky.
+    .belowwater{position:relative;flex:5 1 auto;padding-bottom:clamp(300px,46vh,900px)}
+    .underwater{position:absolute;left:calc(50% - 50vw);right:calc(50% - 50vw);top:0;bottom:0;
+      z-index:0;overflow:hidden;pointer-events:none;
+      background:linear-gradient(180deg,#123a47 0%,#0e2f3c 18%,#0a2531 46%,#06171f 100%)}
+    .underwater .school{position:absolute;inset:0}
+    .underwater .fish{position:absolute;left:0;opacity:.8;transform:translateX(-8vw);
+      animation:pf-swim linear infinite}
+    .underwater .fish svg{display:block;width:100%;height:auto}
+    .underwater .fish.flip{animation-direction:reverse}
+    .underwater .fish.flip svg{transform:scaleX(-1)}
+    .underwater .f-brass svg>g{fill:#dca23e}
+    .underwater .f-teal svg>g{fill:#49ccb9}
+    .underwater .f-silver svg>g{fill:#aab6c2}
+    .underwater .seabed{position:absolute;left:0;bottom:0;width:100%;height:auto;display:block}
+    .underwater .weed{transform-box:fill-box;transform-origin:bottom center;
+      animation:pf-weed 5s ease-in-out infinite alternate}
+    .underwater .weed-b{animation-duration:6.5s;animation-delay:-1.5s}
+    .underwater .weed-c{animation-duration:4.2s;animation-delay:-.8s}
+
+    // footer as a plaque resting on the sea floor (the chrome <footer> is dropped on this page)
+    .seafloor-foot{position:absolute;left:50%;transform:translateX(-50%);bottom:clamp(16px,3.5vh,46px);
+      z-index:4;display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;max-width:92vw;
+      font-family:var(--mono);font-size:12.5px;color:#f0e6cd;text-align:center;
+      padding:8px 20px;border-radius:999px;border:1px solid rgba(224,179,74,.3);
+      background:rgba(9,20,32,.5);backdrop-filter:blur(3px);box-shadow:0 4px 18px rgba(0,0,0,.4)}
+    .seafloor-foot a{color:var(--teal);text-decoration:none;display:inline-flex;align-items:center}
+    .seafloor-foot .sangu img{height:26px;width:26px;border-radius:5px;display:block;
+      box-shadow:0 0 0 1px rgba(224,179,74,.35)}
+
+    @media(prefers-reduced-motion:reduce){
+      .seascape .sun,.seascape .cloud-a,.seascape .cloud-b,.seascape .cloud-c,
+      .seascape .birds,.seascape .gull,.seascape .wave,
+      .underwater .fish,.underwater .weed{animation:none}
+      .seascape .birds{transform:translateX(34vw)}    // park the gulls mid-sky
+      .underwater .fish{transform:translateX(42vw)}    // and the fish mid-water
+    }
     .shipart{display:block;width:100%;height:auto}
     .shipback{position:relative;z-index:0}
     // deck IN FRONT of the deckhouses so the bulwark grounds their bases
@@ -444,7 +518,7 @@ html:has(.pf){background:var(--sea)}
 
     // chart room = a deckhouse cabin on the left of the deck
     .chartbox{left:14%;bottom:0;width:23%;z-index:1;cursor:pointer;padding:7px 12px 4px;border-radius:4px;
-      background:linear-gradient(180deg,#5a4326,#3a2a17);border:2px solid #2e2012;box-shadow:0 8px 18px rgba(0,0,0,.5)}
+      background:linear-gradient(180deg,#5a4326,#3a2a17);border:2px solid #2e2012}
     .chartbox .roof{position:absolute;left:-2px;right:-2px;top:-15px;height:16px;background:#6b4f2a;
       clip-path:polygon(0 100%,50% 0,100% 100%)}
     .chartbox .role{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--brass)}
@@ -533,6 +607,15 @@ html:has(.pf){background:var(--sea)}
     }
   }
 }
+
+// get-building seascape motion
+@keyframes pf-sun{0%,100%{opacity:.94}50%{opacity:1}}
+@keyframes pf-cloud{from{transform:translateX(-24px)}to{transform:translateX(24px)}}
+@keyframes pf-fly{from{transform:translateX(-16vw)}to{transform:translateX(112vw)}}
+@keyframes pf-flap{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.5)}}
+@keyframes pf-wave{from{transform:translateX(-14px)}to{transform:translateX(14px)}}
+@keyframes pf-swim{from{transform:translateX(-8vw)}to{transform:translateX(108vw)}}
+@keyframes pf-weed{from{transform:rotate(-5deg)}to{transform:rotate(6deg)}}
 
 .pf-footer{border-top:1px solid var(--line);margin-top:20px;padding:34px 0;color:var(--muted);font-size:16px}
 .pf-footer .wrap{max-width:1080px;margin:0 auto;padding:0 28px;display:flex;gap:22px;flex-wrap:wrap;align-items:center}

@@ -20,10 +20,28 @@ layout: default
   <div class="wrap">
     <div class="ship" id="ship">
 
-      <!-- ============ THE DECK — a drawn ship; the three essentials ARE ship parts ============ -->
-      <div class="deck zone deck-zone open" data-zone="deck">
-        <div class="shipwrap">
-          <!-- back layer: rigging, mast, sail (sits BEHIND the deckhouses) -->
+      <!-- ============ ABOVE THE WATERLINE — open sky + the drawn ship, deck at the waterline ============ -->
+      <div class="abovewater">
+
+        <!-- the sea she sails: open sky, a low sun, drifting clouds, gulls, waves at the waterline.
+             CSS-region scene (gradient sky + positioned art) so nothing crops as the sky grows tall. -->
+        <div class="seascape" aria-hidden="true">
+          <span class="sun"></span>
+          <span class="cloud cloud-a"><svg viewBox="0 0 220 92"><path d="M10 80 q4 -34 42 -32 q16 -30 52 -20 q34 -18 50 16 q40 -4 36 30 q10 26 -28 26 z"/></svg></span>
+          <span class="cloud cloud-b"><svg viewBox="0 0 180 80"><path d="M8 70 q4 -28 34 -26 q13 -24 42 -16 q28 -14 40 14 q32 -2 30 24 q8 20 -22 20 z"/></svg></span>
+          <span class="cloud cloud-c"><svg viewBox="0 0 150 66"><path d="M8 58 q4 -24 30 -22 q11 -20 36 -14 q24 -12 34 12 q28 -2 26 20 q6 18 -20 18 z"/></svg></span>
+          <span class="birds"><svg viewBox="0 0 220 60" fill="none" stroke="#0d1c2b" stroke-width="3.2" stroke-linecap="round"><path class="gull" d="M18 30 q12 -14 24 0 q12 -14 24 0"/><path class="gull" d="M96 44 q9 -11 18 0 q9 -11 18 0"/></svg></span>
+          <svg class="waves" viewBox="0 0 1000 60" preserveAspectRatio="none" fill="none" stroke-linecap="round">
+            <path class="wave wave-1" stroke="#7fdccb" stroke-opacity=".34" stroke-width="2.4" d="M-20 20 C 120 12 210 28 340 20 S 560 12 700 20 S 900 28 1020 20"/>
+            <path class="wave wave-2" stroke="#bfe6dc" stroke-opacity=".2" stroke-width="2" d="M-20 36 C 140 30 230 44 360 36 S 580 29 720 37 S 920 44 1020 36"/>
+            <path class="wave wave-3" stroke="#4fd8c4" stroke-opacity=".16" stroke-width="1.8" d="M-20 52 C 130 46 240 58 380 52 S 600 46 740 53 S 940 58 1020 52"/>
+          </svg>
+        </div>
+
+        <div class="deck zone deck-zone open" data-zone="deck">
+          <div class="shipwrap">
+
+            <!-- back layer: rigging, mast, sail (sits BEHIND the deckhouses) -->
           <svg class="shipart shipback" viewBox="0 -80 1000 420" preserveAspectRatio="xMidYMax meet">
             <g class="rigging" stroke="#7a6544" stroke-width="2" fill="none" opacity=".7" vector-effect="non-scaling-stroke">
               <path d="M500 -64 L60 292"/><path d="M500 -64 L940 292"/>
@@ -96,8 +114,93 @@ layout: default
           </div>
 
           <div class="ovl deckbadge zhead"><span class="badge gold">{{ deck.badge }}</span></div>
+          </div>
         </div>
-      </div>
+      </div><!-- /.abovewater -->
+
+      <!-- ============ BELOW THE WATERLINE — the hull cutaway floats in open water, seabed below ============ -->
+      <div class="belowwater">
+
+        <!-- open water around the hull: fish above, a treasure seabed at the very bottom -->
+        <div class="underwater" aria-hidden="true">
+          <div class="school">
+            <span class="fish f-brass" style="top:19%;width:58px;animation-duration:27s"><svg viewBox="0 0 64 30"><g><ellipse cx="30" cy="15" rx="22" ry="9.5"/><path d="M9 15 L-5 4 L-2 15 L-5 26 Z"/><path d="M30 6 Q35 0 41 5 Z"/></g><circle cx="45" cy="12" r="2" fill="#0a1826"/></svg></span>
+            <span class="fish f-teal flip" style="top:45%;width:74px;animation-duration:35s;animation-delay:-9s"><svg viewBox="0 0 64 30"><g><ellipse cx="30" cy="15" rx="22" ry="9.5"/><path d="M9 15 L-5 4 L-2 15 L-5 26 Z"/><path d="M30 6 Q35 0 41 5 Z"/></g><circle cx="45" cy="12" r="2" fill="#0a1826"/></svg></span>
+            <span class="fish f-silver" style="top:62%;width:44px;animation-duration:31s;animation-delay:-15s"><svg viewBox="0 0 64 30"><g><ellipse cx="30" cy="15" rx="22" ry="9.5"/><path d="M9 15 L-5 4 L-2 15 L-5 26 Z"/><path d="M30 6 Q35 0 41 5 Z"/></g><circle cx="45" cy="12" r="2" fill="#0a1826"/></svg></span>
+            <span class="fish f-teal flip" style="top:33%;width:38px;animation-duration:42s;animation-delay:-4s"><svg viewBox="0 0 64 30"><g><ellipse cx="30" cy="15" rx="22" ry="9.5"/><path d="M9 15 L-5 4 L-2 15 L-5 26 Z"/><path d="M30 6 Q35 0 41 5 Z"/></g><circle cx="45" cy="12" r="2" fill="#0a1826"/></svg></span>
+            <span class="fish f-brass" style="top:55%;width:50px;animation-duration:23s;animation-delay:-7s"><svg viewBox="0 0 64 30"><g><ellipse cx="30" cy="15" rx="22" ry="9.5"/><path d="M9 15 L-5 4 L-2 15 L-5 26 Z"/><path d="M30 6 Q35 0 41 5 Z"/></g><circle cx="45" cy="12" r="2" fill="#0a1826"/></svg></span>
+          </div>
+
+          <svg class="seabed" viewBox="0 0 1400 240" preserveAspectRatio="xMidYMax meet">
+            <defs>
+              <linearGradient id="sandg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#d7bc78"/><stop offset="1" stop-color="#9c7a42"/>
+              </linearGradient>
+              <linearGradient id="chestw" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#7c4b23"/><stop offset="1" stop-color="#472a12"/>
+              </linearGradient>
+              <linearGradient id="rockg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#59616c"/><stop offset="1" stop-color="#333a43"/>
+              </linearGradient>
+            </defs>
+
+            <!-- swaying weeds rise from the sand (drawn behind the dune so they root in it) -->
+            <g stroke-linecap="round" fill="none">
+              <g transform="translate(300 150)"><g class="weed weed-a">
+                <path d="M0 0 C -13 -28 11 -46 -2 -74 C -12 -98 6 -112 0 -136" stroke="#2f915f" stroke-width="7"/>
+                <path d="M0 0 C 12 -24 -8 -42 6 -66 C 14 -84 2 -100 8 -118" stroke="#267a50" stroke-width="6"/>
+              </g></g>
+              <g transform="translate(1000 156)"><g class="weed weed-b">
+                <path d="M0 0 C 14 -30 -10 -50 4 -82 C 14 -106 -4 -122 2 -150" stroke="#2f915f" stroke-width="8"/>
+                <path d="M0 0 C -12 -26 8 -44 -6 -70 C -16 -90 -2 -106 -8 -128" stroke="#268a58" stroke-width="6"/>
+              </g></g>
+              <g transform="translate(760 160)"><g class="weed weed-c">
+                <path d="M0 0 C -10 -22 8 -38 -3 -60 C -11 -78 4 -92 -1 -110" stroke="#329a64" stroke-width="6"/>
+              </g></g>
+            </g>
+
+            <!-- the seabed -->
+            <path fill="url(#sandg)" d="M0 96 C 160 70 320 106 480 86 C 700 58 880 110 1080 84 C 1240 66 1330 98 1400 86 L1400 240 L0 240 Z"/>
+            <path fill="none" stroke="#836638" stroke-opacity=".55" stroke-width="3"
+              d="M0 96 C 160 70 320 106 480 86 C 700 58 880 110 1080 84 C 1240 66 1330 98 1400 86"/>
+            <g fill="#a9884c" opacity=".5"><ellipse cx="250" cy="150" rx="30" ry="5"/><ellipse cx="620" cy="140" rx="40" ry="6"/><ellipse cx="1180" cy="150" rx="34" ry="5"/></g>
+
+            <!-- rocks -->
+            <g fill="url(#rockg)" stroke="#242a31" stroke-width="1.5">
+              <path d="M120 156 q-34 -44 22 -50 q52 -8 58 24 q34 38 -20 44 q-46 8 -60 -18 z"/>
+              <path d="M560 150 q-22 -30 16 -34 q34 -4 38 16 q22 26 -14 30 q-30 4 -40 -12 z"/>
+              <path d="M1230 158 q-30 -38 20 -44 q46 -6 50 22 q30 34 -18 38 q-40 6 -52 -16 z"/>
+            </g>
+            <g fill="#6a727d" opacity=".6">
+              <path d="M150 132 q-14 -18 10 -22 q22 -2 24 12 z"/><path d="M1258 136 q-12 -16 10 -18 q18 -2 20 10 z"/>
+            </g>
+
+            <!-- the treasure chest, spilling gold -->
+            <g transform="translate(360 62)">
+              <ellipse cx="60" cy="86" rx="82" ry="16" fill="#e0b34a" opacity=".16"/>
+              <rect x="0" y="34" width="120" height="52" rx="5" fill="url(#chestw)" stroke="#2c190b" stroke-width="3"/>
+              <path d="M-3 38 Q-3 0 60 0 Q123 0 123 38 Z" fill="url(#chestw)" stroke="#2c190b" stroke-width="3"/>
+              <rect x="-4" y="32" width="128" height="9" rx="2" fill="#b98a34" stroke="#6e4f1c" stroke-width="1"/>
+              <g fill="none" stroke="#c8a44e" stroke-width="6"><path d="M18 4 V86"/><path d="M102 4 V86"/></g>
+              <rect x="52" y="44" width="16" height="18" rx="2" fill="#e9c664" stroke="#7a5a22" stroke-width="1.5"/>
+              <g fill="#f2d271" stroke="#c39a3a" stroke-width="1"><circle cx="30" cy="88" r="6"/><circle cx="46" cy="92" r="6"/><circle cx="14" cy="92" r="5"/><circle cx="62" cy="90" r="5"/></g>
+            </g>
+
+            <!-- a skull and crossed bones, resting in the sand -->
+            <g transform="translate(1000 96)">
+              <g stroke="#e7ddc4" stroke-width="10" stroke-linecap="round">
+                <path d="M-4 46 L92 78"/><path d="M92 46 L-4 78"/>
+              </g>
+              <g fill="#efe6ce" stroke="#c8ba97" stroke-width="1.5">
+                <circle cx="-6" cy="46" r="7"/><circle cx="-6" cy="78" r="7"/><circle cx="94" cy="46" r="7"/><circle cx="94" cy="78" r="7"/>
+              </g>
+              <path fill="#efe6ce" stroke="#c8ba97" stroke-width="1.5"
+                d="M14 30 Q14 -2 44 -2 Q74 -2 74 30 Q74 46 62 54 L62 64 Q62 70 54 70 L34 70 Q26 70 26 64 L26 54 Q14 46 14 30 Z"/>
+              <g fill="#2a2418"><ellipse cx="31" cy="30" rx="7" ry="8"/><ellipse cx="57" cy="30" rx="7" ry="8"/><path d="M44 40 l-5 10 h10 z"/></g>
+              <g stroke="#2a2418" stroke-width="1.6"><path d="M36 64 v6 M44 65 v6 M52 64 v6"/></g>
+            </g>
+          </svg>
+        </div>
 
       <!-- ============ THE CARGO HOLD — two floors of crates below the waterline ============ -->
       <div class="band hold">
@@ -191,9 +294,17 @@ layout: default
         </section>
       </div>
 
+        <!-- the footer, resting on the sea floor as a small plaque instead of a chrome bar -->
+        <div class="seafloor-foot">
+          <a href="https://github.com/SanguPackage/htpc" aria-label="GitHub">{% include icon.html name="github" %}</a>
+          <span>© 2015 - {{ site.time | date: '%Y' }} · PirateFlix · Sail responsibly ☠</span>
+          <a class="sangu" href="https://sangu.be" aria-label="Sangu"><img src="{{ '/assets/sangu-icon.png' | relative_url }}" alt="Sangu"></a>
+        </div>
+
+      </div><!-- /.belowwater -->
+
     </div>
   </div>
-  {% include pirate/footer.html %}
 </div>
 
 <!-- reusable SVG art (gradients + the helm wheel symbol) -->
