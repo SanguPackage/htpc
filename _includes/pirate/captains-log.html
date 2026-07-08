@@ -4,7 +4,7 @@
   <button type="button" class="log-search-clear" aria-label="Clear search" hidden>&times;</button>
 </div>
 
-<div class="log-list">
+<div class="log-list" data-search-url="{{ '/search.json' | relative_url }}">
   {% assign lastYear = "" %}
   {% for post in site.posts %}
     {% assign y = post.date | date: "%Y" %}

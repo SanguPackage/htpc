@@ -24,12 +24,16 @@ function init() {
   const headerClear = document.querySelector(".log-search .log-search-clear");
   const clears = [...document.querySelectorAll(".log-search-clear")];
 
+  // href -> post body text, filled in async from search.json (see below).
+  const bodies = Object.create(null);
+
   const apply = () => {
     const q = box.value.trim();
     const searching = q !== "";
     let hits = 0;
     entries.forEach((el) => {
-      const show = matches(el.dataset.search, q);
+      const hay = el.dataset.search + " " + (bodies[el.getAttribute("href")] || "");
+      const show = matches(hay, q);
       el.hidden = !show;
       if (show) hits++;
     });
@@ -48,6 +52,20 @@ function init() {
   box.addEventListener("input", apply);
   clears.forEach((btn) => btn.addEventListener("click", reset));
   apply();
+
+  // Pull in post bodies so search reaches article text, not just metadata.
+  // Metadata search already works before this resolves; a failure just leaves
+  // full-text off rather than breaking the filter.
+  const url = list.dataset.searchUrl;
+  if (url) {
+    fetch(url)
+      .then((r) => r.json())
+      .then((posts) => {
+        posts.forEach((p) => (bodies[p.url] = p.body));
+        apply();
+      })
+      .catch(() => {});
+  }
 }
 
 if (typeof document !== "undefined") {
