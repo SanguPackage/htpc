@@ -285,6 +285,17 @@ function init() {
       })
     : null;
 
+  // svg-pan-zoom preventDefaults every mouse event (down/move/up, any button), which
+  // swallows the mouse's back/forward-button navigation while the pointer is over the
+  // chart — the back button is blocked on its mouseup, not just mousedown. Keep every
+  // non-left button away from svg-pan-zoom (capture phase, on the parent) so the browser
+  // still gets back/forward/right-click; left-drag panning is untouched.
+  const stage = svg.closest(".deck-stage") || svg.parentElement;
+  if (stage) {
+    const passNonLeft = (e) => { if (e.button !== 0) e.stopPropagation(); };
+    ["mousedown", "mouseup"].forEach((t) => stage.addEventListener(t, passNonLeft, true));
+  }
+
   // hover highlight
   svg.querySelectorAll("[data-node]").forEach((n) => {
     n.addEventListener("mouseenter", () => lightUp(n));
