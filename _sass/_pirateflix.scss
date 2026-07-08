@@ -624,10 +624,43 @@ html:has(.pf){background:var(--sea)}
 
     @media(max-width:640px){
       .floor1,.floor2{grid-template-columns:1fr}
-      .chartbox,.helmbox{position:static;width:auto;margin:10px 0 0}   // stack the deckhouses under the drawn ship
-      .chartbox{left:auto;right:auto}
       .cells{grid-template-columns:1fr;padding:12px 8% 24px}
       .pathway{display:none}
+
+      // ---- DECK on mobile: the drawn-ship overlay doesn't fit a narrow column, so drop it
+      // for a vertical stack of three identical containers — chart room · Docker Compose ·
+      // helm — with the mast + sails on top. (Desktop keeps the drawn galleon.) ----
+      .shipwrap{display:flex;flex-direction:column;align-items:stretch;gap:6px;
+        max-width:380px;margin-inline:auto}
+      .shiphull,.rigging{display:none}        // no drawn hull, no ropes
+      .deckbadge{display:none}                // no "The Deck" sign on mobile
+      .shipback{order:1;width:66%;max-width:250px;margin:0 auto -20px}   // mast + sails; negative margin seats the mast base on the chart-room box (the SVG has blank hull space below the mast)
+      .ovl{position:static}                   // the cards leave the drawn deck and join the flow
+
+      // all three read the same: chart-room wood, full width, left-aligned
+      .chartbox,.helmplate,.sailtext{width:auto;border-radius:6px;padding:10px 14px;
+        background:linear-gradient(180deg,#5a4326,#3a2a17);border:2px solid #2e2012}
+      .chartbox{order:2;left:auto;right:auto;bottom:auto}
+      .chartbox .roof{display:none}           // no cabin roof on a stacked container
+      .helmbox{order:4;text-align:left;width:auto}   // was 22% on desktop
+      .helmwheel{display:none}                // helm without the steering wheel
+      .helmplate{display:block}
+      .helmplate .btns,.sailtext .btns{justify-content:flex-start}
+      // recolour the sail card (dark ink on cream) to the wood-cabin scheme
+      .sailtext{order:3;left:auto;right:auto;top:auto;text-align:left}
+      .sailtext .srole,.sailtext .sname,.sailtext .spay{text-shadow:none}
+      .sailtext .srole{color:var(--brass)}
+      .sailtext .sname{color:#fff;font-size:16px}
+      .sailtext .spay{color:#e6dbc2}
+      .sailtext .btn{color:var(--amber-soft);border-color:var(--gline);background:rgba(224,179,74,.06)}
+      .sailtext .btn:hover{background:rgba(224,179,74,.16);color:var(--amber-soft)}
+      .deck-zone:not(.open) .cpayoff{visibility:visible}   // deck stays expanded on mobile (no badge to toggle)
+
+      // during the guided tour only, the containers still hide until revealed (welcome = closed);
+      // the mast + sails stays as the "closed ship"
+      &.touring .deck-zone:not(.open) .chartbox,
+      &.touring .deck-zone:not(.open) .sailtext,
+      &.touring .deck-zone:not(.open) .helmbox{display:none}
     }
   }
 
