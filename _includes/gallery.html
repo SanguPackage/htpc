@@ -1,5 +1,12 @@
 {%- comment -%}
-Reusable image carousel + fullscreen lightbox. Pure CSS/HTML, no JavaScript.
+Image gallery with two layouts, selected by `type`:
+
+  type: cover  (default) - an inline cover (first image + "1 / N pictures" badge)
+                that opens a fullscreen overlay you scroll/swipe through or step
+                with ‹ › buttons. Pure CSS (:target/:has + scroll-snap), no JS.
+  type: inline - a responsive, mobile-friendly grid of thumbnails. Clicking one
+                opens it in the shared fullscreen image modal (image-zoom.js), so
+                it degrades to a plain grid without JS.
 
 Define the items in the page's front matter, then include:
 
@@ -9,40 +16,61 @@ Define the items in the page's front matter, then include:
       - image: transmission-ui-trguing.png
         text: TrguiNG
 
-    {% include gallery.html items=page.gallery id="ui-tour" %}
+    {% include gallery.html items=page.gallery id="ui-tour" maxWidth="500px" %}
+    {% include gallery.html items=page.shots type="inline" maxWidth="460px" %}
 
 Params:
-  items  (required)    array of { image, text? }
-  id     (recommended) unique slug -- required when a page has more than one
-                       gallery, since it namespaces the anchor ids
-  path   base URL for the image filenames (default /assets/blog-images/)
-  title  optional heading rendered above the carousel
+  items    (required)    array of { image, text? }
+  id       (recommended) unique slug -- namespaces the :target ids (cover type;
+                         required when a page has more than one cover gallery)
+  type     cover (default) | inline
+  maxWidth cover: max width of the inline cover image (default full width)
+                 inline: max width per thumbnail (default 340px)
+  path     base URL for the image filenames (default /assets/blog-images/)
+  title    optional heading rendered above the gallery
 {%- endcomment -%}
 {%- assign gid = include.id | default: 'gallery' -%}
 {%- assign base = include.path | default: '/assets/blog-images/' -%}
-{%- assign total = include.items | size -%}
-<div class="pf-gallery" id="{{ gid }}">
+{%- assign type = include.type | default: 'cover' -%}
+{%- if type == 'inline' -%}
+{%- assign mw = include.maxWidth | default: '340px' -%}
+<div class="pf-grid" style="--pf-grid-max: {{ mw }}">
   {%- if include.title %}<div class="pf-gallery__title">{{ include.title }}</div>{% endif -%}
-  <div class="pf-gallery__track">
+  {%- for item in include.items -%}
+  <figure class="imagewrapper">
+    <img src="{{ base | append: item.image | relative_url }}" alt="{{ item.text | escape }}" loading="lazy">
+    {%- if item.text %}<figcaption>{{ item.text }}</figcaption>{% endif -%}
+  </figure>
+  {%- endfor -%}
+</div>
+{%- else -%}
+{%- assign total = include.items | size -%}
+{%- assign cover = include.items | first -%}
+{%- assign mw = include.maxWidth | default: '100%' -%}
+<div class="pf-gallery" id="{{ gid }}" style="--pf-cover-max: {{ mw }}">
+  {%- if include.title %}<div class="pf-gallery__title">{{ include.title }}</div>{% endif -%}
+  <a class="pf-gallery__cover" href="#{{ gid }}-s-1" aria-label="Open gallery, {{ total }} pictures">
+    <img src="{{ base | append: cover.image | relative_url }}" alt="{{ cover.text | escape }}" loading="lazy">
+    <span class="pf-gallery__count">1 / {{ total }} pictures</span>
+  </a>
+</div>
+
+<div class="pf-lightbox" id="{{ gid }}-lb">
+  <a class="pf-lightbox__close" href="#{{ gid }}" aria-label="Close gallery"></a>
+  <div class="pf-lightbox__track">
     {%- for item in include.items -%}
     {%- if forloop.first %}{% assign prev = total %}{% else %}{% assign prev = forloop.index0 %}{% endif -%}
     {%- if forloop.last %}{% assign next = 1 %}{% else %}{% assign next = forloop.index | plus: 1 %}{% endif -%}
-    <figure class="pf-gallery__slide" id="{{ gid }}-{{ forloop.index }}">
-      <a class="pf-gallery__zoom" href="#{{ gid }}-lb-{{ forloop.index }}" aria-label="View full screen">
-        <img src="{{ base | append: item.image | relative_url }}" alt="{{ item.text | escape }}" loading="lazy">
-      </a>
+    <figure class="pf-lightbox__slide" id="{{ gid }}-s-{{ forloop.index }}">
+      <img src="{{ base | append: item.image | relative_url }}" alt="{{ item.text | escape }}" loading="lazy">
+      <span class="pf-lightbox__count">{{ forloop.index }} / {{ total }} pictures</span>
       {%- if item.text %}<figcaption>{{ item.text }}</figcaption>{% endif -%}
       {%- if total > 1 -%}
-      <a class="pf-gallery__nav pf-gallery__prev" href="#{{ gid }}-{{ prev }}" aria-label="Previous">&lsaquo;</a>
-      <a class="pf-gallery__nav pf-gallery__next" href="#{{ gid }}-{{ next }}" aria-label="Next">&rsaquo;</a>
+      <a class="pf-lightbox__nav pf-lightbox__prev" href="#{{ gid }}-s-{{ prev }}" aria-label="Previous">&lsaquo;</a>
+      <a class="pf-lightbox__nav pf-lightbox__next" href="#{{ gid }}-s-{{ next }}" aria-label="Next">&rsaquo;</a>
       {%- endif -%}
     </figure>
     {%- endfor -%}
   </div>
 </div>
-{%- for item in include.items -%}
-<div class="pf-lightbox" id="{{ gid }}-lb-{{ forloop.index }}">
-  <a class="pf-lightbox__close" href="#{{ gid }}-{{ forloop.index }}" aria-label="Close"></a>
-  <img src="{{ base | append: item.image | relative_url }}" alt="{{ item.text | escape }}">
-</div>
-{%- endfor -%}
+{%- endif -%}

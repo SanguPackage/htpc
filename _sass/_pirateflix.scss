@@ -782,31 +782,47 @@ html:has(.pf){background:var(--sea)}
 .pf-post .post-content img{max-width:100%;border:1px solid var(--line);border-radius:6px}
 .pf-post .post-content .github img{border:0;border-radius:0}
 // reusable carousel + lightbox (_includes/gallery.html) -- CSS-only
-.pf-post .post-content .pf-gallery{position:relative;margin:1.4em 0}
+// Cover gallery: an inline first-image cover that opens a fullscreen scroll-through (:target).
+.pf-post .post-content .pf-gallery{position:relative;margin:1.4em auto;max-width:var(--pf-cover-max,100%)}
 .pf-post .post-content .pf-gallery__title{font-family:var(--serif);color:var(--brass);margin-bottom:8px}
-.pf-post .post-content .pf-gallery__track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;border:1px solid var(--line);border-radius:8px;background:var(--panel);
-  scrollbar-width:none;-ms-overflow-style:none}
-.pf-post .post-content .pf-gallery__track::-webkit-scrollbar{display:none}
-.pf-post .post-content .pf-gallery__slide{position:relative;flex:0 0 100%;scroll-snap-align:center;margin:0}
-.pf-post .post-content .pf-gallery__slide img{display:block;width:100%;height:auto;border:0;border-radius:0;cursor:zoom-in}
-.pf-post .post-content .pf-gallery__slide figcaption{position:absolute;left:0;right:0;bottom:0;
-  padding:14px;font-size:13px;color:var(--ink);text-align:center;
-  background:linear-gradient(transparent,rgba(6,20,33,.85))}
-.pf-post .post-content .pf-gallery__nav{position:absolute;top:50%;transform:translateY(-50%);
-  width:40px;height:40px;display:flex;align-items:center;justify-content:center;
-  font-size:26px;line-height:1;color:#fff;text-decoration:none;
+.pf-post .post-content .pf-gallery__cover{display:block;position:relative;border:1px solid var(--line);
+  border-radius:8px;overflow:hidden;background:var(--panel);cursor:zoom-in}
+.pf-post .post-content .pf-gallery__cover img{display:block;width:100%;height:auto;border:0;border-radius:0}
+.pf-post .post-content .pf-gallery__count{position:absolute;right:10px;bottom:10px;padding:4px 11px;
+  border-radius:999px;font-size:12px;font-weight:600;color:var(--ink);
+  background:rgba(6,20,33,.72);border:1px solid var(--line)}
+.pf-post .post-content .pf-lightbox{position:fixed;inset:0;z-index:120;
+  background:rgba(6,20,33,.95);opacity:0;visibility:hidden;transition:opacity .2s}
+.pf-post .post-content .pf-lightbox:has(:target){opacity:1;visibility:visible}
+.pf-post .post-content .pf-lightbox__track{display:flex;width:100%;height:100%;overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none}
+.pf-post .post-content .pf-lightbox__track::-webkit-scrollbar{display:none}
+.pf-post .post-content .pf-lightbox__slide{position:relative;flex:0 0 100%;scroll-snap-align:center;margin:0;
+  display:flex;align-items:center;justify-content:center;padding:24px}
+.pf-post .post-content .pf-lightbox__slide img{max-width:92vw;max-height:88vh;border:1px solid var(--line);border-radius:6px}
+.pf-post .post-content .pf-lightbox__slide figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px;
+  font-size:14px;color:var(--ink);text-align:center;background:linear-gradient(transparent,rgba(6,20,33,.85))}
+.pf-post .post-content .pf-lightbox__close{position:absolute;top:16px;right:16px;z-index:2;width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:24px;line-height:1;
+  background:rgba(6,20,33,.6);border:1px solid var(--line);border-radius:50%}
+.pf-post .post-content .pf-lightbox__close::before{content:"\00d7"}
+.pf-post .post-content .pf-lightbox__close:hover{background:rgba(6,20,33,.95);color:var(--brass)}
+.pf-post .post-content .pf-lightbox__count{position:absolute;top:16px;left:16px;z-index:2;padding:4px 11px;
+  border-radius:999px;font-size:12px;font-weight:600;color:var(--ink);
+  background:rgba(6,20,33,.72);border:1px solid var(--line)}
+.pf-post .post-content .pf-lightbox__nav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;
+  width:48px;height:48px;display:flex;align-items:center;justify-content:center;
+  font-size:30px;line-height:1;color:#fff;text-decoration:none;
   background:rgba(6,20,33,.55);border:1px solid var(--line);border-radius:50%;transition:background .15s,color .15s}
-.pf-post .post-content .pf-gallery__nav:hover{background:rgba(6,20,33,.9);color:var(--brass)}
-.pf-post .post-content .pf-gallery__prev{left:12px}
-.pf-post .post-content .pf-gallery__next{right:12px}
-.pf-post .post-content .pf-lightbox{position:fixed;inset:0;z-index:120;display:flex;align-items:center;
-  justify-content:center;padding:24px;background:rgba(6,20,33,.92);
-  opacity:0;visibility:hidden;transition:opacity .2s}
-.pf-post .post-content .pf-lightbox:target{opacity:1;visibility:visible}
-.pf-post .post-content .pf-lightbox__close{position:absolute;inset:0;cursor:zoom-out}
-.pf-post .post-content .pf-lightbox img{position:relative;z-index:1;max-width:92vw;max-height:92vh;
-  border:1px solid var(--line);border-radius:6px;pointer-events:none}
+.pf-post .post-content .pf-lightbox__nav:hover{background:rgba(6,20,33,.9);color:var(--brass)}
+.pf-post .post-content .pf-lightbox__prev{left:16px}
+.pf-post .post-content .pf-lightbox__next{right:16px}
+// Inline grid gallery: mobile-friendly thumbnails that open in the shared image-zoom modal.
+.pf-post .post-content .pf-grid{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin:1.4em 0}
+.pf-post .post-content .pf-grid figure{margin:0;
+  flex:1 1 min(var(--pf-grid-max,340px),260px);max-width:var(--pf-grid-max,340px)}
+.pf-post .post-content .pf-grid img{width:100%;display:block}
+.pf-post .post-content .pf-grid figcaption{margin-top:6px;font-size:13px;color:var(--muted);text-align:center}
 // JS-driven zoom for post images bigger than their displayed size (image-zoom.js).
 // Overlay lives on <body>, outside .pf, so it isn't scoped under .post-content.
 .pf-post .post-content figure.imagewrapper img.zoomable{cursor:zoom-in}
@@ -824,12 +840,6 @@ html:has(.pf){background:var(--sea)}
 .pf-post .post-content details[open] summary{margin-bottom:4px}
 // borderless inline images (favicons, shields badges) inside prose/tables
 .pf-post .post-content img.nb{border:0;border-radius:0;vertical-align:middle;max-width:none}
-.pf-post .post-content .ui-gallery{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:1.4em 0}
-.pf-post .post-content .ui-gallery figure{margin:0}
-.pf-post .post-content .ui-gallery a{display:block}
-.pf-post .post-content .ui-gallery img{width:100%;display:block}
-.pf-post .post-content .ui-gallery figcaption{margin-top:6px;font-size:13px;color:var(--muted);text-align:center}
-@media(max-width:640px){.pf-post .post-content .ui-gallery{grid-template-columns:1fr}}
 .pf-post .post-hero{position:relative;height:260px;margin:6px 0 4px;border:1px solid var(--line);border-radius:8px;background-size:cover;background-position:center}
 .pf-post .post-hero figcaption{position:absolute;right:8px;bottom:6px;font-size:11px;color:var(--muted);background:rgba(6,20,33,.6);padding:2px 8px;border-radius:4px}
 .pf-post .post-aside .post-topic{font-family:var(--serif);font-size:20px;color:var(--brass);
