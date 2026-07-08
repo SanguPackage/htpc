@@ -76,8 +76,3 @@ exclude:
   - MIDJOURNEY.md  # internal notes — keep out of the published site
   - docs
   - test
-  - assets/js/code-enhance.test.js
-  - scripts
-  - leg-prototype.html    # throwaway style lab — keep out of build & sitemap
-  - prop-styles.html       # throwaway style lab — keep out of build & sitemap
-  - route-yarn-mockup.html # throwaway style lab — keep out of build & sitemap
