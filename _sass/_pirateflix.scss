@@ -491,6 +491,16 @@ html:has(.pf){background:var(--sea)}
     .underwater .weed-b{animation-duration:6.5s;animation-delay:-1.5s}
     .underwater .weed-c{animation-duration:4.2s;animation-delay:-.8s}
 
+    // the seabed chest is clickable (re-enable pointer events the water layer turns off);
+    // the lid swings back on its hinge and the hoard fades up
+    .underwater .chest{pointer-events:auto;cursor:pointer}
+    .underwater .chest-lid{transform-box:fill-box;transform-origin:0% 100%;
+      transition:transform .55s cubic-bezier(.34,1.4,.5,1)}
+    .underwater .chest.open .chest-lid{transform:rotate(-110deg)}
+    .underwater .chest-gold{opacity:0;transition:opacity .3s ease .12s}
+    .underwater .chest.open .chest-gold{opacity:1}
+    .underwater .chest.open .chest-glow{opacity:.4}
+
     // footer as a plaque resting on the sea floor (the chrome <footer> is dropped on this page)
     .seafloor-foot{position:absolute;left:50%;transform:translateX(-50%);bottom:clamp(16px,3.5vh,46px);
       z-index:4;display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;max-width:92vw;
@@ -507,6 +517,7 @@ html:has(.pf){background:var(--sea)}
       .underwater .fish,.underwater .weed{animation:none}
       .seascape .birds{transform:translateX(34vw)}    // park the gulls mid-sky
       .underwater .fish{transform:translateX(42vw)}    // and the fish mid-water
+      .underwater .chest-lid,.underwater .chest-gold{transition:none}
     }
     .shipart{display:block;width:100%;height:auto}
     .shipback{position:relative;z-index:0}

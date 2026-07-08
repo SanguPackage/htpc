@@ -175,14 +175,26 @@ layout: default
               <path d="M150 132 q-14 -18 10 -22 q22 -2 24 12 z"/><path d="M1258 136 q-12 -16 10 -18 q18 -2 20 10 z"/>
             </g>
 
-            <!-- the treasure chest, spilling gold -->
-            <g transform="translate(360 62)">
-              <ellipse cx="60" cy="86" rx="82" ry="16" fill="#e0b34a" opacity=".16"/>
+            <!-- the treasure chest — click it to swing the lid and reveal the gold -->
+            <g class="chest" transform="translate(360 62)">
+              <ellipse class="chest-glow" cx="60" cy="86" rx="82" ry="16" fill="#e0b34a" opacity=".16"/>
               <rect x="0" y="34" width="120" height="52" rx="5" fill="url(#chestw)" stroke="#2c190b" stroke-width="3"/>
-              <path d="M-3 38 Q-3 0 60 0 Q123 0 123 38 Z" fill="url(#chestw)" stroke="#2c190b" stroke-width="3"/>
-              <rect x="-4" y="32" width="128" height="9" rx="2" fill="#b98a34" stroke="#6e4f1c" stroke-width="1"/>
-              <g fill="none" stroke="#c8a44e" stroke-width="6"><path d="M18 4 V86"/><path d="M102 4 V86"/></g>
-              <rect x="52" y="44" width="16" height="18" rx="2" fill="#e9c664" stroke="#7a5a22" stroke-width="1.5"/>
+              <g fill="none" stroke="#c8a44e" stroke-width="6"><path d="M18 34 V86"/><path d="M102 34 V86"/></g>
+              <rect x="52" y="48" width="16" height="18" rx="2" fill="#e9c664" stroke="#7a5a22" stroke-width="1.5"/>
+              <!-- the hoard, hidden under the lid until it opens -->
+              <g class="chest-gold">
+                <path d="M6 42 Q60 20 114 42 Q114 48 60 50 Q6 48 6 42 Z" fill="#f0cf6a"/>
+                <g fill="#f7de8c" stroke="#c39a3a" stroke-width="1">
+                  <circle cx="30" cy="38" r="7"/><circle cx="48" cy="31" r="7"/><circle cx="66" cy="33" r="7"/><circle cx="84" cy="31" r="7"/>
+                  <circle cx="40" cy="44" r="6"/><circle cx="60" cy="44" r="6"/><circle cx="78" cy="44" r="6"/>
+                </g>
+              </g>
+              <!-- the lid — hinges at its back-left corner -->
+              <g class="chest-lid">
+                <path d="M-3 38 Q-3 0 60 0 Q123 0 123 38 Z" fill="url(#chestw)" stroke="#2c190b" stroke-width="3"/>
+                <rect x="-4" y="32" width="128" height="9" rx="2" fill="#b98a34" stroke="#6e4f1c" stroke-width="1"/>
+                <g fill="none" stroke="#c8a44e" stroke-width="6"><path d="M18 4 V38"/><path d="M102 4 V38"/></g>
+              </g>
               <g fill="#f2d271" stroke="#c39a3a" stroke-width="1"><circle cx="30" cy="88" r="6"/><circle cx="46" cy="92" r="6"/><circle cx="14" cy="92" r="5"/><circle cx="62" cy="90" r="5"/></g>
             </g>
 
@@ -375,6 +387,10 @@ layout: default
     ship.querySelectorAll('.cell, .crate, .pathway, .chartbox, .helmbox').forEach(function (c) {
       c.addEventListener('click', function (e) { if (touring() || e.target.closest('a')) return; openZone(c.closest('.zone')); });
     });
+
+    // easter egg: pop the seabed treasure chest open (and shut again)
+    var chest = ship.querySelector('.chest');
+    if (chest) chest.addEventListener('click', function () { chest.classList.toggle('open'); });
 
     // ---- Guided tour: reveal the vessel part by part, then hand over to the live view. ----
     var card = document.getElementById('gb-tour');
