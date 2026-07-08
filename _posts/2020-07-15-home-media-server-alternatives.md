@@ -17,7 +17,6 @@ img:
   linkUrl: 
 categories: 
 tags: [self-hosted, docker]
-series: home-media-server
 toc:
   title: Alternatives
   icon: docker

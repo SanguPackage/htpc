@@ -14,6 +14,7 @@ img:
 categories: 
 tags: [docker, self-hosted]
 series: home-media-server
+series_order: 3
 toc:
   title: Container Management
   icon: docker

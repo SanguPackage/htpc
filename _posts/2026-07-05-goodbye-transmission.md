@@ -16,6 +16,7 @@ img:
 categories: 
 tags: [torrents, docker]
 series: swapping-tools
+series_order: 2
 github: transmission/transmission
 toc:
   title: 🧲 qBittorrent

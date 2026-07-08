@@ -18,7 +18,6 @@ img:
   linkUrl: 
 categories: 
 tags: [self-hosted, hardware]
-series: home-media-server
 toc:
   title: Prebuilt Boxes
   icon: lightbulb

@@ -17,6 +17,7 @@ categories:
 github: seerr-team/seerr
 tags: [arr, jellyfin]
 series: swapping-tools
+series_order: 3
 toc:
   title: 🎬 Seerr
 ---

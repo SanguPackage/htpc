@@ -21,6 +21,7 @@ categories:
 github: Laoujin/Htpc
 tags: [docker, self-hosted]
 series: home-media-server
+series_order: 2
 toc:
   title: Docker Compose
   icon: docker

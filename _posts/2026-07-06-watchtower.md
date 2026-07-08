@@ -17,7 +17,6 @@ img:
 categories: 
 github: containrrr/watchtower
 tags: [docker, self-hosted]
-series: home-media-server
 toc:
   title: 🗼 Watchtower
 ---

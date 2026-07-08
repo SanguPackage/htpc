@@ -17,6 +17,7 @@ img:
 categories: 
 tags: [self-hosted, docker, media]
 series: home-media-server
+series_order: 1
 toc:
   title: Home Media Server
   icon: bookmark

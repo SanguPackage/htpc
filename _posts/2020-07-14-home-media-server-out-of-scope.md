@@ -16,7 +16,6 @@ img:
   url: out-of-scope-sm.webp
 categories: 
 tags: [self-hosted, media]
-series: home-media-server
 toc:
   title: Out of scope
   icon: ban

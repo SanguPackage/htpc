@@ -19,6 +19,7 @@ img:
 categories: 
 tags: [arr, torrents]
 series: swapping-tools
+series_order: 1
 toc:
   title: 🐅 Prowlarr
 ---
