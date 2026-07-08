@@ -799,8 +799,11 @@ html:has(.pf){background:var(--sea)}
 .pf-post .post-content .pf-lightbox__track::-webkit-scrollbar{display:none}
 .pf-post .post-content .pf-lightbox__slide{position:relative;flex:0 0 100%;scroll-snap-align:center;margin:0;
   display:flex;align-items:center;justify-content:center;padding:24px}
-.pf-post .post-content .pf-lightbox__slide img{max-width:92vw;max-height:88vh;border:1px solid var(--line);border-radius:6px}
-.pf-post .post-content .pf-lightbox__slide figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px;
+// Backdrop fills the slide behind the image; clicking the letterbox area closes.
+.pf-post .post-content .pf-lightbox__backdrop{position:absolute;inset:0;z-index:0;cursor:zoom-out}
+.pf-post .post-content .pf-lightbox__slide img{position:relative;z-index:1;max-width:92vw;max-height:88vh;
+  border:1px solid var(--line);border-radius:6px}
+.pf-post .post-content .pf-lightbox__slide figcaption{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:16px;
   font-size:14px;color:var(--ink);text-align:center;background:linear-gradient(transparent,rgba(6,20,33,.85))}
 .pf-post .post-content .pf-lightbox__close{position:absolute;top:16px;right:16px;z-index:2;width:44px;height:44px;
   display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:24px;line-height:1;

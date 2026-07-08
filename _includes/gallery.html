@@ -62,6 +62,7 @@ Params:
     {%- if forloop.first %}{% assign prev = total %}{% else %}{% assign prev = forloop.index0 %}{% endif -%}
     {%- if forloop.last %}{% assign next = 1 %}{% else %}{% assign next = forloop.index | plus: 1 %}{% endif -%}
     <figure class="pf-lightbox__slide" id="{{ gid }}-s-{{ forloop.index }}">
+      <a class="pf-lightbox__backdrop" href="#{{ gid }}" tabindex="-1" aria-hidden="true"></a>
       <img src="{{ base | append: item.image | relative_url }}" alt="{{ item.text | escape }}" loading="lazy">
       <span class="pf-lightbox__count">{{ forloop.index }} / {{ total }} pictures</span>
       {%- if item.text %}<figcaption>{{ item.text }}</figcaption>{% endif -%}
