@@ -894,7 +894,35 @@ html:has(.pf){background:var(--sea)}
 // --- captain's log (blog index): a ship's-log ledger grouped by year ---
 .pf-log{
   .log-head{padding:58px 0 30px}
+
+  // live filter over the ledger (blog-search.js). !important because the entries'
+  // explicit display (grid/flex) otherwise beats the UA [hidden] rule.
+  [hidden]{display:none!important}
+
+  .log-search{position:relative;display:flex;align-items:center;margin:0 0 26px}
+  // suppress the browser's native type=search clear button; we render our own
+  .log-search input::-webkit-search-cancel-button,
+  .log-search input::-webkit-search-decoration{-webkit-appearance:none;appearance:none}
+  .log-search-ico{position:absolute;left:16px;color:var(--brass);font-size:18px;pointer-events:none}
+  .log-search input{width:100%;font-family:var(--serif);font-size:16px;color:#fff;
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    padding:14px 44px;transition:border-color .15s}
+  .log-search input::placeholder{color:var(--muted)}
+  .log-search input:focus{outline:none;border-color:var(--brass)}
+  .log-search-clear{position:absolute;right:12px;display:flex;align-items:center;justify-content:center;
+    width:26px;height:26px;font-size:22px;line-height:1;color:var(--muted);
+    background:none;border:none;cursor:pointer;transition:color .15s}
+  .log-search-clear:hover{color:var(--brass)}
+
   .log-list{padding-bottom:24px}
+
+  // themed no-results state
+  .log-empty{text-align:center;padding:56px 0 40px}
+  .log-empty p{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--brass);margin:0 0 16px}
+  .log-empty .log-search-clear{position:static;width:auto;height:auto;font-family:var(--mono);
+    font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);
+    border:1px solid var(--line);border-radius:4px;padding:8px 16px}
+  .log-empty .log-search-clear:hover{color:#fff;border-color:var(--brass)}
 
   // year divider: "Anno 2026" flanked by hairlines
   .log-year{display:flex;align-items:center;gap:20px;margin:40px 0 6px}

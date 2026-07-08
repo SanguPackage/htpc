@@ -1,3 +1,9 @@
+<div class="log-search">
+  {% include icon.html name="search" class="log-search-ico" %}
+  <input type="search" placeholder="Search the log&hellip;" aria-label="Search the log" autocomplete="off" />
+  <button type="button" class="log-search-clear" aria-label="Clear search" hidden>&times;</button>
+</div>
+
 <div class="log-list">
   {% assign lastYear = "" %}
   {% for post in site.posts %}
@@ -7,7 +13,8 @@
       <div class="log-year"><span>Anno {{ y }}</span></div>
       {% assign lastYear = y %}
     {% endif %}
-    <a class="log-entry" href="{{ post.url | relative_url }}">
+    {% capture searchable %}{{ post.title }} {{ post.subTitle }} {{ post.description | strip_html }} {{ post.tags | join: " " }}{% endcapture %}
+    <a class="log-entry" href="{{ post.url | relative_url }}" data-search="{{ searchable | strip_newlines | normalize_whitespace | downcase | escape }}">
       <div class="log-coord">
         <span class="d">{{ post.date | date: "%d" }}</span>
         <span class="m">{{ post.date | date: "%b" }}</span>
@@ -24,3 +31,10 @@
     </a>
   {% endfor %}
 </div>
+
+<div class="log-empty" hidden>
+  <p>No entries in the log match that heading.</p>
+  <button type="button" class="log-search-clear">Clear the search &amp; show all</button>
+</div>
+
+<script src="{{ '/assets/js/blog-search.js' | relative_url }}" type="module"></script>
