@@ -1,0 +1,76 @@
+# Content for the /get-building/ hub — a cut-away pirate ship rendered by
+# _layouts/get-building.html. Three zones map to ship decks:
+#   deck  → the three essentials, drawn as ship parts (chart room / sail / helm)
+#   hold  → optional cargo crates, two floors
+#   brig  → the "not for you?" cells (alternatives / prebuilt)
+# Paths are site-absolute (leading /) since YAML isn't processed by Liquid, so they
+# can't use relative_url — the site is served at its subdomain apex (same convention
+# as _data/deck_plan.yml). Curated on purpose: adding a blog post does NOT auto-add
+# a card here.
+
+deck:
+  badge: "The Deck"
+  crew:
+    - role: "Understand"
+      name: "The Chart Room"
+      sub: "Home Media Server"
+      payoff: "What each container does & why this crew."
+      links:
+        - { label: "Briefing", url: "/blog/home-media-server/" }
+        - { label: "Blueprint", url: "/deck-plan/" }
+    - role: "Build"
+      name: "The Sails"
+      sub: "Le Docker Compose"
+      payoff: "Twelve containers, one file. She sails."
+      links:
+        - { label: "Copy-paste it →", url: "/blog/home-media-server-docker-compose/" }
+    - role: "Command"
+      name: "The Helm"
+      sub: "Container Management"
+      payoff: "One dashboard so you never memorise a port again."
+      links:
+        - { label: "Pick a dashboard →", url: "/blog/home-media-server-management/" }
+
+hold:
+  badge: "The Cargo Hold"
+  crates:
+    - role: "Lists"
+      name: "Follow the tides"
+      payoff: "IMDb / Trakt lists sail in on their own."
+      links:
+        - { label: "Follow", url: "/blog/lists/" }
+        - { label: "Integrations", url: "/blog/lists-part2/" }
+    - role: "Notifications"
+      name: "Word from the crow's nest"
+      payoff: "Pinged the moment a title lands."
+      links:
+        - { label: "Set the watch →", url: "/blog/notifications/" }
+    - role: "Requests"
+      name: "Requests from the crew"
+      payoff: "Crew & guests ask in Seerr."
+      links:
+        - { label: "Open the box →", url: "/blog/goodbye-ombi/" }
+    - role: "Recyclarr"
+      name: "The quality quartermaster"
+      payoff: "Auto-tuned profiles from TRaSH."
+      links:
+        - { label: "Weigh it up →", url: "/blog/recyclarr/" }
+    - role: "Watchtower"
+      name: "The self-updating fleet"
+      payoff: "Auto-update the crew while you sleep."
+      links:
+        - { label: "Set it →", url: "/blog/watchtower/" }
+
+brig:
+  badge: "The Brig"
+  cells:
+    - role: "Alternatives"
+      name: "Don't fancy the crew?"
+      payoff: "Every crew member has a stand-in."
+      links:
+        - { label: "Browse stand-ins →", url: "/blog/home-media-server-alternatives/" }
+    - role: "Prebuilt"
+      name: "Rather borrow than build?"
+      payoff: "All-in-one boxes, if you'd sooner not roll your own."
+      links:
+        - { label: "See the shortcuts →", url: "/blog/home-media-server-prebuilt-boxes/" }

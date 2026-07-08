@@ -384,133 +384,154 @@ html:has(.pf){background:var(--sea)}
   }
 }
 
-// --- get-sailing hub: the "cargo hold" — a scene per build stage ---
-// Each group is a scene (hold/deck/dock/quay) with its own backdrop; every guide
-// is an object (a CSS crate, or an SVG instrument from pirate/gs-cargo-art.html)
-// that reveals its detail on hover / focus / tap. --ac carries the group accent.
-.pf.gs-page{
-  --wood:#3b2817; --wood2:#4d341d; --iron:#1a1206;
+// --- get-building hub: a cut-away pirate ship, one interactive zone per deck ---
+// Ported from _prototypes/get-building.html. The warm ship palette is namespaced
+// (--gink/--gdim/--gline) so it never shadows the site's cool --ink/--line in the
+// shared nav/footer chrome. Per-band hull SVGs use preserveAspectRatio="none" so a
+// band's walls stretch vertically with the accordion; adjacent bands share their
+// boundary widths (waterline 6..94, keel rounds in) so the hull seam stays invisible.
+// non-scaling-stroke keeps outlines/bars crisp under that non-uniform scale.
+.pf.gb-page{
+  --amber-soft:#f2c96a; --gink:#e8dcc0; --gdim:#9fb0b3; --gline:rgba(224,179,74,.35);
 
-  .scene{position:relative;margin:34px 0;border-radius:12px;overflow:hidden;padding:0}
-  .scene-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:20px 24px 6px}
-  .scene-head .kick{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ac)}
-  .scene-head h2{font-family:var(--serif);color:#fff;font-size:24px;letter-spacing:.5px;margin:0}
-  .scene-head .req{font-family:var(--mono);font-size:9.5px;letter-spacing:2px;text-transform:uppercase;
-    color:var(--sea);background:var(--brass);border-radius:20px;padding:3px 9px;font-weight:700}
-  .scene-head .sub{width:100%;color:var(--muted);font-size:14px;margin:2px 0 0}
-  .stage{position:relative;padding:20px 24px 30px;display:flex;flex-wrap:wrap;align-items:flex-end}
+  .deck-heading .yard{color:var(--brass)}
 
-  // wooden hull backdrop (hold + dock)
-  .hold,.dock{background:
-      linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,.5)),
-      repeating-linear-gradient(180deg,var(--wood) 0 38px,var(--wood2) 38px 40px),
-      var(--wood);
-    border:1px solid #17100a}
-  .hold::before,.dock::before{content:'';position:absolute;inset:0;pointer-events:none;
-    background:repeating-linear-gradient(90deg,transparent 0 150px,rgba(0,0,0,.32) 150px 162px);
-    mix-blend-mode:multiply;opacity:.7}
-  .hold .scene-head h2,.dock .scene-head h2{color:#f3e7d2}
-  .hold .scene-head .sub,.dock .scene-head .sub{color:#c9b79a}
+  // everything below lives inside the ship, so it can't restyle the header/footer chrome
+  .ship{position:relative;margin:22px 0 72px;
 
-  // lit deck planks (deck)
-  .deck{background:
-      radial-gradient(600px 300px at 15% 0%,rgba(224,179,74,.10),transparent 60%),
-      linear-gradient(180deg,var(--panel),var(--sea2));border:1px solid var(--line)}
-  .deck::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
-    background:repeating-linear-gradient(90deg,transparent 0 120px,rgba(0,0,0,.25) 120px 130px)}
+    // the hold/brig zones are <section>s; cancel the theme's section{padding:74px 0}
+    // so the bands hug their content and stack seamlessly (no tall hold, no gap to the brig)
+    section{padding:0}
 
-  // stone quay + waterline (quay)
-  .quay{background:linear-gradient(180deg,var(--sea2) 0 62%,#0a2233 62% 70%,#0e2f45 70% 100%);border:1px solid var(--line)}
-  .quay::after{content:'';position:absolute;left:0;right:0;bottom:0;height:30%;pointer-events:none;
-    background:repeating-linear-gradient(90deg,rgba(79,216,196,.06) 0 22px,transparent 22px 44px)}
-  .quay .scene-head h2{color:#fff}
+    // shared card bits
+    .role{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--teal)}
+    .name{font-size:18px;font-weight:700;line-height:1.1;color:#fff}
+    .payoff{font-size:12.5px;color:var(--gdim);margin:6px 0 8px;line-height:1.4;max-width:32ch}
+    .btns{display:flex;gap:8px;flex-wrap:wrap}
+    .btn{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:0;text-transform:none;
+      border:1px solid var(--gline);border-radius:6px;padding:5px 9px;margin:0 6px 6px 0;
+      color:var(--amber-soft);background:rgba(224,179,74,.06)}
+    .btn:hover{background:rgba(224,179,74,.16);color:var(--amber-soft)}
 
-  // generic object (a guide)
-  .obj{position:relative;margin:14px 12px 0;cursor:pointer;text-align:left;color:inherit;
-    transition:transform .22s ease;outline:none}
-  .obj:hover,.obj:focus-visible{transform:translateY(-10px)}
-  .obj:focus-visible{outline:2px solid var(--ac);outline-offset:6px;border-radius:6px}
-  .obj .name{font-family:var(--serif);font-weight:700;color:#fff;line-height:1.1}
-  .obj .role{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--ac);margin-bottom:2px}
+    // zones fade their detail in/out; heads are always clickable
+    .zone .detail{max-height:0;opacity:0;overflow:hidden;transition:max-height .3s ease,opacity .25s ease}
+    .zone.open .detail{max-height:400px;opacity:1}
+    .zhead{cursor:pointer;user-select:none}
 
-  // detail reveals on hover / focus / tap-open
-  .detail{max-height:0;opacity:0;overflow:hidden;transition:max-height .3s ease,opacity .25s ease,margin .3s ease}
-  .obj:hover .detail,.obj:focus-visible .detail,.obj.open .detail{max-height:200px;opacity:1;margin-top:8px}
-  .detail p{margin:0 0 10px;font-size:13px;color:var(--muted);max-width:32ch}
-  .btns{display:flex;gap:8px;flex-wrap:wrap}
-  .btns .btn{font-family:var(--mono);font-size:11px;letter-spacing:.5px;text-transform:none;text-decoration:none;
-    color:var(--ac);border:1px solid var(--ac);border-radius:5px;padding:6px 10px;
-    background:rgba(0,0,0,.25);white-space:nowrap;transition:background .18s,color .18s}
-  .btns .btn:hover,.btns .btn:focus-visible{background:var(--ac);color:#08131f}
+    // ===== THE DECK — a drawn ship; sail text on the canvas, deckhouses on deck =====
+    .deck{position:relative;padding:0}
+    .shipwrap{position:relative}
+    .shipart{display:block;width:100%;height:auto}
+    .shipback{position:relative;z-index:0}
+    // deck IN FRONT of the deckhouses so the bulwark grounds their bases
+    .shiphull{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;transition:opacity .3s}
+    .deck-zone.open .shiphull{opacity:0}   // deck open: bulwark clears so the deckhouses show fully
+    .rigging{transition:opacity .3s}
+    .deck-zone.open .rigging{opacity:0}
+    .ovl{position:absolute}
 
-  // crate (hold + dock)
-  .crate .box{position:relative;border-radius:5px;padding:16px 16px 14px;
-    background:
-      linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.25)),
-      repeating-linear-gradient(90deg,#5a3d22 0 30px,#4a3119 30px 32px),#4a3119;
-    border:2px solid #241708;box-shadow:0 16px 26px rgba(0,0,0,.5),inset 0 0 0 6px rgba(0,0,0,.18)}
-  .crate .box::before,.crate .box::after{content:'';position:absolute;width:16px;height:16px;border:2px solid var(--iron);opacity:.85}
-  .crate .box::before{top:5px;left:5px;border-right:0;border-bottom:0}
-  .crate .box::after{top:5px;right:5px;border-left:0;border-bottom:0}
-  .crate .brace{position:absolute;bottom:5px;width:16px;height:16px;border:2px solid var(--iron);opacity:.85}
-  .crate .brace.l{left:5px;border-right:0;border-top:0}
-  .crate .brace.r{right:5px;border-left:0;border-top:0}
-  .crate .strap{position:absolute;inset:0;overflow:hidden;border-radius:5px;pointer-events:none}
-  .crate .strap span{position:absolute;top:-30%;left:38%;width:16px;height:170%;background:var(--ac);opacity:.9;
-    transform:rotate(22deg);box-shadow:0 0 0 2px rgba(0,0,0,.35)}
-  .crate .stencil{position:relative;z-index:2;font-family:var(--mono);font-weight:700;letter-spacing:2px;
-    color:#f3e2c4;text-shadow:0 1px 0 rgba(0,0,0,.6)}
-  .crate .num{display:inline-block;font-family:var(--mono);font-weight:700;font-size:26px;color:var(--ac);
-    -webkit-text-stroke:1px rgba(0,0,0,.4);line-height:1}
-  .crate .plate{position:relative;z-index:2;margin-top:8px;display:inline-block;
-    background:rgba(10,14,20,.72);border:1px solid rgba(0,0,0,.5);border-radius:3px;padding:4px 8px}
-  .crate .plate .name{font-size:18px}
-  .crate .role{position:relative;z-index:2}
-  .crate .detail{position:relative;z-index:2}
-  .crate.big .box{min-height:150px}
-  .hold .stage{gap:6px;align-items:flex-end}
-  .crate.c1{flex:1 1 240px}
-  .crate.c2{flex:1 1 240px;margin-bottom:24px}
-  .crate.c3{flex:1 1 240px}
+    // Le Docker Compose written on the sail canvas (dark ink on cream)
+    .sailtext{left:35%;right:35%;top:calc(39% - 28px);text-align:center;z-index:3;
+      background:rgba(244,236,214,.28);border:1px solid rgba(70,48,22,.4);border-radius:8px;padding:8px 10px}
+    .sailtext .srole,.sailtext .sname,.sailtext .spay{text-shadow:0 0 5px #f7f0de,0 0 3px #f7f0de,0 1px 1px #f7f0de}
+    .sailtext .srole{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#6b4a1e}
+    .sailtext .sname{font-size:19px;font-weight:700;font-family:var(--serif);color:#241a0e;line-height:1.05;margin:3px 0 6px}
+    .sailtext .spay{font-size:12px;line-height:1.35;color:#3a2c18;margin:0 0 9px}
+    .sailtext .btns{justify-content:center}
+    .sailtext .btn{color:#3a2a17;border-color:#8a6a34;background:rgba(0,0,0,.06)}
+    .sailtext .btn:hover{background:rgba(0,0,0,.14);color:#3a2a17}
+    .deckbadge{left:50%;bottom:3%;transform:translateX(-50%);z-index:3}
 
-  // instruments (deck)
-  .inst{flex:1 1 190px;max-width:220px;text-align:center}
-  .inst .art{height:118px;display:flex;align-items:flex-end;justify-content:center;filter:drop-shadow(0 10px 12px rgba(0,0,0,.5))}
-  .inst svg{overflow:visible}
-  .inst .name{font-size:17px;margin-top:8px}
-  .inst .detail{margin-left:auto;margin-right:auto}
-  .inst .detail p{margin-left:auto;margin-right:auto}
-  .inst .btns{justify-content:center}
-  .glow{transition:filter .25s}
-  .inst:hover .glow,.inst:focus-visible .glow{filter:drop-shadow(0 0 8px var(--ac))}
+    // chart room = a deckhouse cabin on the left of the deck
+    .chartbox{left:14%;bottom:0;width:23%;z-index:1;cursor:pointer;padding:7px 12px 4px;border-radius:4px;
+      background:linear-gradient(180deg,#5a4326,#3a2a17);border:2px solid #2e2012;box-shadow:0 8px 18px rgba(0,0,0,.5)}
+    .chartbox .roof{position:absolute;left:-2px;right:-2px;top:-15px;height:16px;background:#6b4f2a;
+      clip-path:polygon(0 100%,50% 0,100% 100%)}
+    .chartbox .role{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--brass)}
+    .chartbox .pname{font-size:16px;font-weight:700;font-family:var(--serif);color:#fff;margin-bottom:0;line-height:1.15}
+    .chartbox .cpayoff{font-size:11.5px;color:#e6dbc2;line-height:1.3;margin:0 0 6px}
+    .deck-zone:not(.open) .cpayoff{visibility:hidden}   // deck closed: hide the description but keep its space
+    .chartbox .btns{gap:6px}
 
-  // swap crates (dock)
-  .swap{flex:1 1 250px;max-width:300px}
-  .swap .box{padding:14px}
-  .swap.crate.big .box{min-height:0}
-  .swap .out{font-family:var(--mono);font-size:11px;color:var(--muted);
-    text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
-  .swap .hoist{position:absolute;top:-10px;right:10px;z-index:3;font-family:var(--mono);font-size:9px;letter-spacing:1px;
-    text-transform:uppercase;color:var(--sea);background:var(--red);border-radius:10px;padding:2px 7px;font-weight:700}
+    // helm = the ship's wheel itself, with a mounted nameplate
+    .helmbox{right:7%;bottom:0;width:22%;z-index:1;text-align:center;cursor:pointer}
+    .helmwheel{display:block;width:92px;height:92px;margin:0 auto -8px;filter:drop-shadow(0 4px 7px rgba(0,0,0,.55))}
+    .helmplate{position:relative;display:inline-block;background:linear-gradient(180deg,#5a4326,#3a2a17);
+      border:2px solid #2e2012;border-radius:4px;padding:8px 12px 16px}
+    .helmplate .role{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--brass)}
+    .helmplate .pname{font-size:16px;font-weight:700;font-family:var(--serif);color:#fff;margin-bottom:7px}
+    .helmplate .btns{justify-content:center;gap:6px}
 
-  // quay side-trips
-  .quayitem{flex:1 1 240px;max-width:300px;text-align:center}
-  .quayitem .art{height:110px;display:flex;align-items:flex-end;justify-content:center;filter:drop-shadow(0 10px 12px rgba(0,0,0,.5))}
-  .quayitem .name{font-size:18px;margin-top:8px}
-  .quayitem .detail{margin:8px auto 0}
-  .quayitem .detail p{margin-left:auto;margin-right:auto}
-  .quayitem .btns{justify-content:center}
+    // ===== HULL bands (hold + brig) =====
+    .band{position:relative}
+    .hullart{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+    .band .content{position:relative;z-index:1}
+    .hullwrap{position:relative}
 
-  @media(max-width:640px){
-    .stage{flex-direction:column;align-items:stretch}
-    .crate,.inst,.swap,.quayitem{max-width:none;margin-bottom:6px}
-    .crate.c2{margin-bottom:6px}
-    .detail{max-height:none;opacity:1;margin-top:8px}   // always show on small screens
+    // -- the cargo hold: two floors of crates --
+    .hold .content{padding:10px 0 16px}
+    .hold .zhead{display:flex;align-items:center;justify-content:center;gap:10px;padding:8px 0 12px}
+    .floors{display:flex;flex-direction:column;gap:12px}
+    .floor{display:grid;gap:12px;padding:0 8%;align-items:end}   // crates rest on the floor, not floating
+    .floor1{grid-template-columns:repeat(3,1fr)}
+    .floor2{grid-template-columns:repeat(2,minmax(0,220px));justify-content:center}
+    .floordiv{height:2px;margin:0 6%;background:#5a4326;box-shadow:0 1px 0 rgba(0,0,0,.4)}   // deck plank, wall to wall
+    // wooden crate — mirrors the old "lay the keel" boxes
+    .crate{position:relative;cursor:pointer}
+    .crate .box{position:relative;border-radius:5px;padding:14px 15px 12px;
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.25)),
+        repeating-linear-gradient(90deg,#5a3d22 0 30px,#4a3119 30px 32px),#4a3119;
+      border:2px solid #241708;box-shadow:0 14px 24px rgba(0,0,0,.5),inset 0 0 0 6px rgba(0,0,0,.18)}
+    .crate .box::before,.crate .box::after{content:'';position:absolute;width:15px;height:15px;border:2px solid #9aa0aa;opacity:.85}
+    .crate .box::before{top:5px;left:5px;border-right:0;border-bottom:0}
+    .crate .box::after{top:5px;right:5px;border-left:0;border-bottom:0}
+    .crate .brace{position:absolute;bottom:5px;width:15px;height:15px;border:2px solid #9aa0aa;opacity:.85}
+    .crate .brace.l{left:5px;border-right:0;border-top:0}
+    .crate .brace.r{right:5px;border-left:0;border-top:0}
+    .crate .role{position:relative;z-index:2;margin:0;font-family:var(--mono);font-size:10.5px;
+      letter-spacing:2px;text-transform:uppercase;color:var(--brass)}
+    .crate .plate{position:relative;z-index:2;margin-top:8px;display:inline-block;
+      background:rgba(10,14,20,.72);border:1px solid rgba(0,0,0,.5);border-radius:3px;padding:4px 8px}
+    .crate .plate .name{font-size:17px;font-weight:700;color:#fff;font-family:var(--serif)}
+    .crate .cdetail{position:relative;z-index:2}
+    .hold .zone:not(.open) .box{padding:10px 12px;text-align:center}   // closed: compact, role only
+    .hold .zone:not(.open) .cdetail{display:none}
+
+    // -- the brig: two barred cells flanking a walkway --
+    .brig .zhead{position:relative;z-index:4;text-align:center;padding:10px 0 0}   // sign hung over the bars
+    .cells{position:relative;z-index:1;display:grid;grid-template-columns:1fr .5fr 1fr;align-items:start;padding:12px 11% 30px}
+    .barsart{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;transition:opacity .25s}
+    .brig .zone.open .barsart{z-index:0;opacity:.22}   // open: text steps in front of the bars
+    .cell{position:relative;z-index:1;padding:6px 12px 10px;cursor:pointer}
+    .cell.right{text-align:right}
+    .cell.right .btns{justify-content:flex-end}   // buttons follow the right-aligned text (flex ignores text-align)
+    .cell.right .payoff{margin-left:auto}         // cap the payoff at 32ch but push it to the right edge
+    .pathway{align-self:stretch;cursor:pointer}   // the walkway — hull shows through, opens the brig
+    .cell .payoff{margin-top:6px}
+    .brig .zone:not(.open) .cell .name{display:none}   // closed brig: role only, compact
+    .brig .zone:not(.open) .cell{padding-top:2px;padding-bottom:2px}
+    .brig .zone:not(.open) .cells{padding-top:6px;padding-bottom:14px}
+
+    // ===== badges (zone signs) =====
+    .badge{display:inline-block;margin:0;font-family:var(--mono);font-size:12px;font-weight:800;letter-spacing:.2em;
+      text-transform:uppercase;color:#3a2a17;padding:5px 18px;border-radius:999px;border:1px solid #7a5a22;
+      background:linear-gradient(180deg,#e9c163,#b8892e);
+      box-shadow:0 2px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.35)}
+    .badge.gold{color:#3a2a10;border-color:#9a7418;
+      background:linear-gradient(180deg,#fff4c4 0%,#f4d268 34%,#e0ac38 63%,#bd8a2c 100%);
+      box-shadow:0 2px 12px rgba(224,179,74,.4),inset 0 1px 0 rgba(255,255,255,.75),inset 0 -3px 5px rgba(120,80,10,.4)}
+    .badge.silver{color:#28303a;background:linear-gradient(180deg,#eef2f6,#a9b5c1);border-color:#7c8794}
+    .badge.bronze{color:#2e1a0c;background:linear-gradient(180deg,#d9975c,#9a5d2c);border-color:#6e3f1e}
+
+    @media(max-width:640px){
+      .floor1,.floor2{grid-template-columns:1fr}
+      .chartbox,.helmbox{position:static;width:auto;margin:10px 0 0}   // stack the deckhouses under the drawn ship
+      .chartbox{left:auto;right:auto}
+      .cells{grid-template-columns:1fr;padding:12px 8% 24px}
+      .pathway{display:none}
+    }
   }
-}
-@media(prefers-reduced-motion:reduce){
-  .pf.gs-page .obj{transition:none}
-  .pf.gs-page .obj:hover,.pf.gs-page .obj:focus-visible{transform:none}
 }
 
 .pf-footer{border-top:1px solid var(--line);margin-top:20px;padding:34px 0;color:var(--muted);font-size:16px}

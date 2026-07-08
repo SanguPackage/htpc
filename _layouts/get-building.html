@@ -1,0 +1,247 @@
+---
+layout: default
+---
+{%- assign deck = site.data.get_building.deck -%}
+{%- assign chart = deck.crew[0] -%}
+{%- assign sail = deck.crew[1] -%}
+{%- assign helm = deck.crew[2] -%}
+{%- assign hold = site.data.get_building.hold -%}
+{%- assign brig = site.data.get_building.brig -%}
+<div class="pf gb-page">
+  <header class="pf-nav deck-header">
+    {% include pirate/brand.html %}
+    <div class="deck-title">
+      <h1 class="deck-heading">Get <span class="yard">building.</span></h1>
+      <p class="deck-subtitle">Build her in the yard, then take her to the high seas.</p>
+    </div>
+    <a class="btn" href="{{ '/' | relative_url }}">← Back to port</a>
+  </header>
+
+  <div class="wrap">
+    <div class="ship" id="ship">
+
+      <!-- ============ THE DECK — a drawn ship; the three essentials ARE ship parts ============ -->
+      <div class="deck zone deck-zone open" data-zone="deck">
+        <div class="shipwrap">
+          <!-- back layer: rigging, mast, sail (sits BEHIND the deckhouses) -->
+          <svg class="shipart shipback" viewBox="0 -80 1000 420" preserveAspectRatio="xMidYMax meet">
+            <g class="rigging" stroke="#7a6544" stroke-width="2" fill="none" opacity=".7" vector-effect="non-scaling-stroke">
+              <path d="M500 -64 L60 292"/><path d="M500 -64 L940 292"/>
+              <path d="M500 -64 L250 292"/><path d="M500 -64 L750 292"/>
+            </g>
+            <rect x="491" y="-72" width="18" height="374" rx="6" fill="#5a4326" stroke="#3a2a17" stroke-width="2"/>
+            <path d="M500 -70 L566 -57 L500 -44 Z" fill="#b23a2e" stroke="#7a241c" stroke-width="1.5"/>
+            <path d="M479 -22 h42 v8 q0 7 -7 7 h-28 q-7 0 -7 -7 z" fill="#5a4326" stroke="#3a2a17" stroke-width="2"/>
+            <g class="part">
+              <rect x="258" y="12" width="484" height="11" rx="5" fill="#4a3620"/>
+              <path d="M276 23 Q500 60 724 23 L706 186 Q500 220 294 186 Z" fill="url(#sailg)" stroke="#b8a97f" stroke-width="1.6"/>
+              <g stroke="#cabd99" stroke-width="1.3" opacity=".4" fill="none">
+                <path d="M402 36 Q396 116 410 192"/><path d="M598 36 Q604 116 590 192"/>
+              </g>
+              <!-- Jolly Roger watermark on the canvas -->
+              <g opacity=".26" transform="translate(500 108) scale(1.7) translate(-500 -54)">
+                <g stroke="#3a2a1a" stroke-width="8" stroke-linecap="round"><path d="M466 32 L534 82"/><path d="M534 32 L466 82"/></g>
+                <g fill="#3a2a1a">
+                  <circle cx="466" cy="32" r="7"/><circle cx="534" cy="32" r="7"/><circle cx="466" cy="82" r="7"/><circle cx="534" cy="82" r="7"/>
+                  <path d="M482 46 Q482 26 500 26 Q518 26 518 46 Q518 58 511 64 L511 72 Q511 78 504 78 L496 78 Q489 78 489 72 L489 64 Q482 58 482 46 Z"/>
+                </g>
+                <g fill="#e7ddc4">
+                  <ellipse cx="493" cy="48" rx="5" ry="6"/><ellipse cx="507" cy="48" rx="5" ry="6"/>
+                  <path d="M500 55 l-4 8 h8 z"/>
+                </g>
+                <g stroke="#e7ddc4" stroke-width="1.6" stroke-linecap="round"><path d="M496 72 v5 M500 73 v5 M504 72 v5"/></g>
+              </g>
+            </g>
+          </svg>
+
+          <!-- chart room = a deckhouse cabin on the left of the deck -->
+          <div class="ovl chartbox">
+            <div class="roof"></div>
+            <div class="role">{{ chart.role }}</div>
+            <div class="pname">{{ chart.name }}</div>
+            <p class="cpayoff">{{ chart.payoff }}</p>
+            <div class="btns">{% for link in chart.links %}<a class="btn" href="{{ link.url }}">{{ link.label }}</a>{% endfor %}</div>
+          </div>
+
+          <!-- helm = the ship's wheel itself, with a mounted nameplate -->
+          <div class="ovl helmbox">
+            <svg class="helmwheel" viewBox="0 0 100 100"><use href="#art-wheel"/></svg>
+            <div class="helmplate">
+              <div class="role">{{ helm.role }}</div>
+              <div class="pname">{{ helm.name }}</div>
+              <div class="btns">{% for link in helm.links %}<a class="btn" href="{{ link.url }}">{{ link.label }}</a>{% endfor %}</div>
+            </div>
+          </div>
+
+          <!-- hull layer: galleon hull, bowsprit, gun ports, wale (IN FRONT of the deckhouses to ground them) -->
+          <svg class="shiphull" viewBox="0 -80 1000 420" preserveAspectRatio="xMidYMax meet">
+            <path d="M36 258 Q268 300 500 297 Q732 294 964 246 L940 340 L60 340 Z" fill="url(#deckg)" stroke="#2e2012" stroke-width="2.5"/>
+            <line x1="76" y1="250" x2="2" y2="220" stroke="#5a4326" stroke-width="8" stroke-linecap="round"/>
+            <g fill="#140d06" stroke="#6b4f2a" stroke-width="2">
+              <rect x="150" y="286" width="26" height="22" rx="2"/><rect x="290" y="296" width="26" height="22" rx="2"/>
+              <rect x="430" y="296" width="26" height="22" rx="2"/><rect x="570" y="292" width="26" height="22" rx="2"/>
+              <rect x="710" y="284" width="26" height="22" rx="2"/><rect x="850" y="272" width="26" height="22" rx="2"/>
+            </g>
+            <path d="M40 312 Q268 338 500 335 Q732 332 960 290" fill="none" stroke="#33240f" stroke-width="9" opacity=".7"/>
+            <path d="M36 258 Q268 300 500 297 Q732 294 964 246" fill="none" stroke="#7a5a30" stroke-width="5"/>
+            <path d="M36 258 Q268 300 500 297 Q732 294 964 246" fill="none" stroke="#c8a44e" stroke-width="1.5" opacity=".5"/>
+          </svg>
+
+          <!-- Le Docker Compose written on the sail canvas (dark ink on cream) -->
+          <div class="ovl sailtext">
+            <div class="srole">{{ sail.role }}</div>
+            <div class="sname">{{ sail.sub }}</div>
+            <p class="spay">{{ sail.payoff }}</p>
+            <div class="btns">{% for link in sail.links %}<a class="btn" href="{{ link.url }}">{{ link.label }}</a>{% endfor %}</div>
+          </div>
+
+          <div class="ovl deckbadge zhead"><span class="badge gold">{{ deck.badge }}</span></div>
+        </div>
+      </div>
+
+      <!-- ============ THE CARGO HOLD — two floors of crates below the waterline ============ -->
+      <div class="band hold">
+        <svg class="hullart" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path d="M6 0 L94 0 L94 100 L6 100 Z" fill="url(#woodg)" stroke="#6b4f2a" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+        </svg>
+        <section class="zone" data-zone="hold">
+          <div class="content">
+            <div class="zhead"><h2 class="badge silver">{{ hold.badge }}</h2></div>
+            <div class="floors">
+              <div class="floor floor1">
+                {% for c in hold.crates limit:3 %}
+                <div class="crate">
+                  <div class="box">
+                    <span class="brace l"></span><span class="brace r"></span>
+                    <div class="role">{{ c.role }}</div>
+                    <div class="cdetail">
+                      <div class="plate"><span class="name">{{ c.name }}</span></div>
+                      <p class="payoff">{{ c.payoff }}</p>
+                      <div class="btns">{% for link in c.links %}<a class="btn" href="{{ link.url }}">{{ link.label }}</a>{% endfor %}</div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              <div class="floordiv"></div>
+              <div class="floor floor2">
+                {% for c in hold.crates offset:3 %}
+                <div class="crate">
+                  <div class="box">
+                    <span class="brace l"></span><span class="brace r"></span>
+                    <div class="role">{{ c.role }}</div>
+                    <div class="cdetail">
+                      <div class="plate"><span class="name">{{ c.name }}</span></div>
+                      <p class="payoff">{{ c.payoff }}</p>
+                      <div class="btns">{% for link in c.links %}<a class="btn" href="{{ link.url }}">{{ link.label }}</a>{% endfor %}</div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ============ THE BRIG — two barred cells flanking a walkway, at the rounded keel ============ -->
+      <div class="band brig">
+        <section class="zone" data-zone="brig">
+          <div class="hullwrap">
+            <svg class="hullart" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M6 0 L94 0 L94 50 Q94 100 60 100 L40 100 Q6 100 6 50 Z" fill="url(#brigg)" stroke="#6b4f2a" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+            </svg>
+            <div class="zhead"><h2 class="badge bronze">{{ brig.badge }}</h2></div>
+            <div class="cells">
+              <div class="cell">
+                <div class="role">{{ brig.cells[0].role }}</div><div class="name">{{ brig.cells[0].name }}</div>
+                <div class="detail"><p class="payoff">{{ brig.cells[0].payoff }}</p><div class="btns">{% for link in brig.cells[0].links %}<a class="btn" href="{{ link.url }}">{{ link.label }}</a>{% endfor %}</div></div>
+              </div>
+              <div class="pathway"></div>
+              <div class="cell right">
+                <div class="role">{{ brig.cells[1].role }}</div><div class="name">{{ brig.cells[1].name }}</div>
+                <div class="detail"><p class="payoff">{{ brig.cells[1].payoff }}</p><div class="btns">{% for link in brig.cells[1].links %}<a class="btn" href="{{ link.url }}">{{ link.label }}</a>{% endfor %}</div></div>
+              </div>
+            </div>
+            <!-- grate: two barred cell-fronts flanking a central walkway, CLIPPED to the hull path -->
+            <svg class="barsart" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs><clipPath id="brigbarclip"><path d="M6 0 L94 0 L94 50 Q94 100 60 100 L40 100 Q6 100 6 50 Z"/></clipPath></defs>
+              <g clip-path="url(#brigbarclip)">
+                <g fill="url(#barmetal)">
+                  <rect x="6.10" y="0" width="1.8" height="100" rx="0.9"/><rect x="39.10" y="0" width="1.8" height="100" rx="0.9"/>
+                  <rect x="11.30" y="0" width="1.8" height="100" rx="0.9"/><rect x="16.50" y="0" width="1.8" height="100" rx="0.9"/>
+                  <rect x="21.70" y="0" width="1.8" height="100" rx="0.9"/><rect x="26.90" y="0" width="1.8" height="100" rx="0.9"/>
+                  <rect x="32.10" y="0" width="1.8" height="100" rx="0.9"/>
+                </g>
+                <g stroke="#cdd3da" stroke-width="3" stroke-linecap="butt" vector-effect="non-scaling-stroke">
+                  <line x1="7" y1="4" x2="40" y2="4"/><line x1="7" y1="46" x2="40" y2="46"/>
+                </g>
+                <g fill="url(#barmetal)">
+                  <rect x="59.10" y="0" width="1.8" height="100" rx="0.9"/><rect x="92.10" y="0" width="1.8" height="100" rx="0.9"/>
+                  <rect x="64.30" y="0" width="1.8" height="100" rx="0.9"/><rect x="69.50" y="0" width="1.8" height="100" rx="0.9"/>
+                  <rect x="74.70" y="0" width="1.8" height="100" rx="0.9"/><rect x="79.90" y="0" width="1.8" height="100" rx="0.9"/>
+                  <rect x="85.10" y="0" width="1.8" height="100" rx="0.9"/>
+                </g>
+                <g stroke="#cdd3da" stroke-width="3" stroke-linecap="butt" vector-effect="non-scaling-stroke">
+                  <line x1="60" y1="4" x2="93" y2="4"/><line x1="60" y1="46" x2="93" y2="46"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </div>
+  {% include pirate/footer.html %}
+</div>
+
+<!-- reusable SVG art (gradients + the helm wheel symbol) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="sailg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#efe6cf" stop-opacity=".9"/><stop offset="1" stop-color="#cdbfa0" stop-opacity=".7"/>
+  </linearGradient>
+  <linearGradient id="deckg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#7a5832"/><stop offset="1" stop-color="#463019"/>
+  </linearGradient>
+  <linearGradient id="woodg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#402d1b"/><stop offset="1" stop-color="#20160d"/>
+  </linearGradient>
+  <linearGradient id="brigg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#241811"/><stop offset="1" stop-color="#0c0805"/>
+  </linearGradient>
+  <linearGradient id="barmetal" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#4c5158"/><stop offset=".38" stop-color="#dfe4ea"/>
+    <stop offset=".52" stop-color="#ffffff"/><stop offset=".7" stop-color="#a7aeb8"/>
+    <stop offset="1" stop-color="#41464c"/>
+  </linearGradient>
+  <symbol id="art-wheel" viewBox="0 0 100 100">
+    <g fill="none" stroke="var(--brass)" stroke-width="3">
+      <circle cx="50" cy="50" r="26"/><circle cx="50" cy="50" r="9"/>
+      <line x1="50" y1="8" x2="50" y2="92"/><line x1="8" y1="50" x2="92" y2="50"/>
+      <line x1="20" y1="20" x2="80" y2="80"/><line x1="80" y1="20" x2="20" y2="80"/>
+    </g>
+    <g fill="var(--brass)">
+      <circle cx="50" cy="8" r="4"/><circle cx="50" cy="92" r="4"/><circle cx="8" cy="50" r="4"/><circle cx="92" cy="50" r="4"/>
+      <circle cx="20" cy="20" r="3"/><circle cx="80" cy="80" r="3"/><circle cx="80" cy="20" r="3"/><circle cx="20" cy="80" r="3"/>
+    </g>
+  </symbol>
+</defs></svg>
+
+<script>
+  // Single-open accordion. Zone heads (badges) toggle; clicking a crate/cell/deckhouse
+  // opens its zone. Deck starts open so the ship reads as whole on load.
+  (function () {
+    var ship = document.getElementById('ship');
+    if (!ship) return;
+    function closeAll() { ship.querySelectorAll('.zone').forEach(function (z) { z.classList.remove('open'); }); }
+    function open(zone) { closeAll(); zone.classList.add('open'); }
+    function toggle(zone) { var was = zone.classList.contains('open'); closeAll(); if (!was) zone.classList.add('open'); }
+    ship.querySelectorAll('.zhead').forEach(function (h) {
+      h.addEventListener('click', function () { toggle(h.closest('.zone')); });
+    });
+    ship.querySelectorAll('.cell, .crate, .pathway, .chartbox, .helmbox').forEach(function (c) {
+      c.addEventListener('click', function (e) { if (e.target.closest('a')) return; open(c.closest('.zone')); });
+    });
+  })();
+</script>
