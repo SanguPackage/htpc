@@ -22,7 +22,7 @@ toc:
   title: 🧲 qBittorrent
 ---
 
-Way back in the [original setup]({{ site.baseurl }}/blog/home-media-server#transmission---download-client)
+Way back in the [original setup]({{ site.baseurl }}/blog/home-media-server#qbittorrent---download-client)
 I went with **Transmission** and picked the familiar
 [`transmission-web-control`](https://github.com/ronggang/transmission-web-control) UI because it looks like
 a regular desktop client. That served me well for years.
