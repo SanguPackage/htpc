@@ -6,6 +6,7 @@ subTitle: "How to fill all the terabytes and get on the FBI most wanted list wit
 date: 2020-07-19
 updates:
   - date: 2026-07-05
+    desc: "Removed old references to Jackett. Replaced Ombi with Seerr, Transmission with qBittorrent and replaced the plan picture with the svg plan"
 description: >
   How to setup your own media server using Linuxserver.io docker images.
 image: /assets/blog-images/home-media-server-big.webp
@@ -59,7 +60,9 @@ Luckily many developers have been busy bees so that proved pretty easy, everythi
 to find out that most UIs seem to be written in React.  
 On the way I even got myself a little extra: When I add a movie to my IMDB watchlist, it will start downloading it.
 
-{% include post/image.html file="Home Media Center-High Level.png" alt="" title="" desc="" %}
+<figure class="diagram-embed">
+  <div class="diagram-embed__frame">{% include pirate/goal-diagram-svg.html %}</div>
+</figure>
 
 
 ## Filling in the dots
@@ -71,9 +74,7 @@ What **do** you want to watch?
 
 Anyway, I came up with something that looks like this:
 
-![The Goal]({{ site.baseurl }}/assets/blog-images/Home Media Center-In Depth.png "The Goal"){: .img-responsive}
-
-<p style="text-align:center;margin:24px 0"><a class="btn solid" href="{{ '/deck-plan/' | relative_url }}">Want a more interactive blueprint of the fleet? Check the Deck Plan →</a></p>
+{% include pirate/deck-plan-embed.html %}
 
 ## Breakdown
 

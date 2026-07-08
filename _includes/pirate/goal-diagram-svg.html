@@ -1,0 +1,62 @@
+<!-- High-level "black box" view of the media server, hand-drawn in the Deck-Plan
+     visual language (see pirate/deck-plan-svg.html). Marker/gradient ids are
+     goal-prefixed because the Deck-Plan SVG shares the same page and would
+     otherwise clash on #flow-arrow / #brass. -->
+<svg viewBox="0 82 1040 424" class="goal-svg" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="goal-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"></path></marker>
+    <linearGradient id="goal-brass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7f5c1f"></stop><stop offset="0.35" stop-color="#f4e2a1"></stop><stop offset="0.5" stop-color="#c69433"></stop><stop offset="0.65" stop-color="#f4e2a1"></stop><stop offset="1" stop-color="#7f5c1f"></stop></linearGradient>
+  </defs>
+
+  <rect x="0" y="82" width="1040" height="424" fill="#0f172a"></rect>
+
+  <!-- Internet source group -->
+  <rect x="60" y="100" width="240" height="300" rx="8" fill="#1f2a3a" opacity="0.5"></rect>
+  <rect x="60" y="100" width="240" height="300" rx="8" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="6 5"></rect>
+  <text x="180" y="122" text-anchor="middle" fill="#64748b" font-size="12" letter-spacing="1">Internet</text>
+
+  <g>
+    <rect x="90" y="150" width="180" height="48" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"></rect>
+    <g transform="translate(106 162)" fill="none" stroke="#94a3b8" color="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="M6 10.5h7M15 10.5h3"></path><path d="M6 14.5h3M11 14.5h7"></path></g>
+    <text x="200" y="179" text-anchor="middle" font-size="14" fill="#cbd5e1">Subtitles</text>
+  </g>
+  <g>
+    <rect x="90" y="228" width="180" height="48" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"></rect>
+    <g transform="translate(106 240)" fill="none" stroke="#94a3b8" color="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></g>
+    <text x="200" y="257" text-anchor="middle" font-size="14" fill="#cbd5e1">Usenet</text>
+  </g>
+  <g>
+    <rect x="90" y="306" width="180" height="48" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"></rect>
+    <g transform="translate(106 318)" fill="none" stroke="#94a3b8" color="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v7a6 6 0 0 0 12 0V4"></path><path d="M10 4v7a2 2 0 0 0 4 0V4"></path><path d="M6 4h4M14 4h4"></path><path d="M6 7.5h4M14 7.5h4"></path></g>
+    <text x="200" y="335" text-anchor="middle" font-size="14" fill="#cbd5e1">Torrents</text>
+  </g>
+
+  <!-- Search / Download flows between Internet and the box -->
+  <path d="M400 200 L300 200" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#goal-arrow)"></path>
+  <rect x="325" y="191" width="50" height="18" rx="3" fill="#0f172a"></rect><text x="350" y="204" text-anchor="middle" font-size="11" fill="#94a3b8">Search</text>
+  <path d="M300 300 L400 300" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#goal-arrow)"></path>
+  <rect x="317" y="291" width="66" height="18" rx="3" fill="#0f172a"></rect><text x="350" y="304" text-anchor="middle" font-size="11" fill="#94a3b8">Download</text>
+
+  <!-- The black box: what's inside comes later (the Deck Plan) -->
+  <rect x="400" y="140" width="260" height="220" rx="14" fill="#1e293b" stroke="url(#goal-brass)" stroke-width="2.5"></rect>
+  <text x="530" y="172" text-anchor="middle" font-size="13" fill="#cbd5e1" letter-spacing="0.5">Your Home Media Server</text>
+  <text x="530" y="298" text-anchor="middle" font-size="130" font-weight="700" fill="url(#goal-brass)">?</text>
+
+  <!-- Stream to the telly -->
+  <path d="M660 232 L876 240" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#goal-arrow)"></path>
+  <rect x="737" y="226" width="50" height="18" rx="3" fill="#0f172a"></rect><text x="762" y="239" text-anchor="middle" font-size="11" fill="#94a3b8">Stream</text>
+  <g><title>Your telly</title>
+    <circle cx="910" cy="240" r="32" fill="#22d3ee"></circle>
+    <g transform="translate(893.2 223.2) scale(1.4)" fill="none" stroke="#0f172a" color="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="12" rx="2"></rect><path d="M8.5 21h7M12 17v4"></path></g>
+    <text x="910" y="300" text-anchor="middle" font-size="14" fill="#cbd5e1">Your telly</text>
+  </g>
+
+  <!-- Sync with storage -->
+  <path d="M530 360 L530 400" fill="none" stroke="#64748b" stroke-width="1.5" marker-start="url(#goal-arrow)" marker-end="url(#goal-arrow)"></path>
+  <rect x="540" y="371" width="40" height="18" rx="3" fill="#0f172a"></rect><text x="560" y="384" text-anchor="middle" font-size="11" fill="#94a3b8">Sync</text>
+  <g><title>Your storage</title>
+    <circle cx="530" cy="430" r="28" fill="#f59e0b"></circle>
+    <g transform="translate(514.4 414.4) scale(1.3)" fill="none" stroke="#0f172a" color="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="6.5" rx="1.5"></rect><rect x="3.5" y="13" width="17" height="6.5" rx="1.5"></rect><circle cx="7" cy="7.75" r="1" fill="currentColor" stroke="none"></circle><circle cx="7" cy="16.25" r="1" fill="currentColor" stroke="none"></circle></g>
+    <text x="530" y="474" text-anchor="middle" font-size="14" fill="#cbd5e1">Your storage</text>
+  </g>
+</svg>

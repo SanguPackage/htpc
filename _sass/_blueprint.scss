@@ -336,3 +336,51 @@ $brass-hi:   #f4e2a1;
   svg.touring .flow-node, svg.touring .hl-node, svg.touring .conn,
   svg.touring .group-box, svg.touring .edge-label { transition: none; }
 }
+
+// Static Deck-Plan preview embedded in blog posts: the live SVG, framed and
+// linked through to the interactive /deck-plan/ (no blueprint.js on post pages).
+.deck-embed {
+  margin: 1.6em 0;
+
+  &__frame {
+    display: block; position: relative;
+    aspect-ratio: 1040 / 740;
+    background: #0f172a;
+    border: 1px solid $brass-lo;
+    border-radius: 10px; overflow: hidden;
+    box-shadow: 0 3px 16px rgba(0, 0, 0, .35);
+
+    .floor-svg { display: block; }
+  }
+
+  &__cta {
+    position: absolute; right: 12px; bottom: 12px;
+    padding: 6px 13px; border-radius: 999px;
+    font-size: 13px; font-weight: 600; white-space: nowrap;
+    color: $brass-hi; background: rgba(15, 23, 42, .85);
+    border: 1px solid $brass-lo;
+    transition: background .18s ease, transform .18s ease;
+
+    &:hover, &:focus-visible {
+      background: rgba(31, 42, 58, .95); transform: translateY(-1px);
+    }
+  }
+
+  figcaption { margin-top: 8px; text-align: center; font-size: 13px; color: var(--muted); }
+}
+
+// Illustrative diagram framed like the Deck-Plan embed, but self-sizing to its
+// own viewBox — no interactive plan behind it, so no click-through CTA.
+.diagram-embed {
+  margin: 1.6em 0;
+
+  &__frame {
+    background: #0f172a;
+    border: 1px solid $brass-lo;
+    border-radius: 10px; overflow: hidden;
+    box-shadow: 0 3px 16px rgba(0, 0, 0, .35);
+  }
+  .goal-svg { display: block; width: 100%; height: auto; }
+
+  figcaption { margin-top: 8px; text-align: center; font-size: 13px; color: var(--muted); }
+}
