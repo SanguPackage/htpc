@@ -38,8 +38,9 @@ defaults:
       image: /assets/hero.webp
 
 
-# Analytics — the gtag.js include is already GA4-compatible; swap in a GA4 Measurement ID (G-XXXXXXXXXX) when ready.
-google_analytics: UA-30075487-3
+# Analytics — GA4 Measurement ID (G-XXXXXXXXXX). The old UA-30075487-3 property stopped
+# processing data in July 2023; create a GA4 property and paste its ID here.
+google_analytics: G-XXXXXXXXXX
 
 
 # Blog
@@ -77,3 +78,6 @@ exclude:
   - test
   - assets/js/code-enhance.test.js
   - scripts
+  - leg-prototype.html    # throwaway style lab — keep out of build & sitemap
+  - prop-styles.html       # throwaway style lab — keep out of build & sitemap
+  - route-yarn-mockup.html # throwaway style lab — keep out of build & sitemap
