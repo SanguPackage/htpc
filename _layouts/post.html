@@ -1,6 +1,18 @@
 ---
 layout: default
 ---
+{%- comment -%} BreadcrumbList: renders the SERP trail Home › Captain's Log › post {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ '/' | absolute_url }}"},
+    {"@type": "ListItem", "position": 2, "name": "Captain's Log", "item": "{{ '/blog/' | absolute_url }}"},
+    {"@type": "ListItem", "position": 3, "name": {{ page.title | jsonify }}}
+  ]
+}
+</script>
 <div class="pf pf-post">
   {% include pirate/nav.html %}
   <div class="wrap">
