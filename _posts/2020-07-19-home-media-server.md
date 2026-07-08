@@ -131,11 +131,11 @@ Some other features:
 - Settings > Media Management: {% include icon.html name="folder-tree" %} Automatic renaming and organizing
 - **Settings > Profiles & Quality**: Define file sizes and profiles which you want/don't want
 - **Wanted > Manual Import**: Import existing content from your filesystem
-- {% include icon.html name="search" %} Automatic Search and {% include icon.html name="user" %} Manual Search for downloading new content
+- <span>{% include icon.html name="search" %}</span> Automatic Search and {% include icon.html name="user" %} Manual Search for downloading new content
 - Activity: Visualization and basic manipulation of content being downloaded
 - Settings > Connect: Send notifications of events to API, Email, Slack, Growl, Jellyfin, ...
 - Settings > Lists: Define an automatic instream of new movies by following IMDB, TrakTV, RSS, ... lists & feeds
-- {% include icon.html name="bookmark-check" %} Monitored or {% include icon.html name="bookmark" %} Not Monitored: Should it download automatically
+- <span>{% include icon.html name="bookmark-check" %}</span> Monitored or {% include icon.html name="bookmark" %} Not Monitored: Should it download automatically
 - A nice web UI for all that
 
 One predefined instream is [StevenLU](https://github.com/sjlu/popular-movies): a list of popular movies based on a series of heuristics (theater visits).
@@ -163,54 +163,31 @@ But first you'll have to choose between Torrents and Usenet, or you can go for b
 ## Torrents
 
 There are free indexers out there (one starts with pirate and ends with bay😃) or you may already have access
-to a private indexer. A few, for example [PassThePopcorn](https://passthepopcorn.me/), can be configured directly in Sonarr
+to a private indexer. A few, for example [PassThePopcorn](https://passthepopcorn.me/), can be configured directly in Sonarr/Radarr
 but if you are relying on free offerings, you may not want to maintain the connection to multiple indexers manually
 (after all they tend to change urls every so often).
 
-### Indexers
-
-#### Prowlarr
+### Prowlarr <small>- Indexers</small>
 
 ![Prowlarr Logo]({{ site.baseurl }}/assets/blog-images/Prowlarr-Icon.png "Prowlarr Logo"){: style="float: left; margin-right: 16px"}
-At this point I would suggest [going with Prowlarr instead of Jackett]({{ site.baseurl }}/blog/goodbye-jackett) for new setups!  
-{% include github-stars.html url="Prowlarr/Prowlarr" desc="Jackett alternative but for both Usenet & Torrents (with automatic sync)" %}
+{% include github-stars.html url="Prowlarr/Prowlarr" desc="Indexer manager/proxy for both Usenet & Torrents with automatic sync" %}
 
-
-If you're not sure which indexers to add the list, check
+And that's where Prowlarr comes in... If you're not sure which indexers to add to your list, check
 [Reddit: Some free indexer recommendations](https://www.reddit.com/r/torrents/comments/5ok0yd/torrent_sites/)
+or you just browse Prowlarr's list of preconfigured indexers and add all the public ones.
+
+It then syncs these indexers to Radarr and Sonarr so they find all torrents!
+Some hide behind CAPTCHAs, which you can defeat with [FlareSolverr or Byparr]({{ site.baseurl }}/blog/flaresolverr-byparr/).
 
 
-#### Jackett <small>- **DEPRECATED**</small>
-
-
-![Jackett Logo]({{ site.baseurl }}/assets/blog-images/Home Media Center-Jackett-Logo.png "Jackett Logo"){: style="float: left; margin-right: 16px"}
-
-{% include github-stars.html url="Jackett/Jackett" desc="API Support for your favorite torrent trackers." %}
-Jackett is the perfect companion for this. It maintains a list of preconfigured indexers for you.
-Its uniform search API is used by Sonarr and Radarr.
-
-Once you've added some indexers in Jackett, you can configure them in Sonarr in Settings > Indexers > Torznab > Presets.
-
-### Download Clients
-
-#### qBittorrent
+### qBittorrent <small>- Download Client</small>
 
 ![qBittorrent Logo]({{ site.baseurl }}/assets/blog-images/qbittorrent-logo.png "qBittorrent Logo"){: style="float: left; margin-right: 16px"}
-At this point I would suggest [going with qBittorrent instead of Transmission]({{ site.baseurl }}/blog/goodbye-transmission) for new setups!
-
-{% include github-stars.html url="qbittorrent/qBittorrent" desc="qBittorrent BitTorrent client" %}
-
-
-#### Transmission <small>- **DEPRECATED**</small>
-
-![Transmission Logo]({{ site.baseurl }}/assets/blog-images/Home Media Center-Transmission-Logo.png "Transmission Logo"){: style="float: left; margin-right: 16px"}
-{% include github-stars.html url="transmission/transmission" desc="Transmission BitTorrent client" %}
-
-<br>
-
-Once Sonarr has received matching torrents from your favorite indexers, it will figure out which
-one to pick based on your Quality/Profile settings and put the torrent in a folder for your
-Download Client to pick up.
+{% include github-stars.html url="qbittorrent/qBittorrent" desc="BitTorrent client" %}
+Once Sonarr/Radarr has received matching torrents from your favorite indexers, it will figure out which
+one to pick based on your Quality/Profile settings and put the torrent in a folder for
+qBittorrent to pick up.  
+Checkout our [qBittorrent migration blog post]({{ site.baseurl }}/blog/goodbye-transmission) for setup gotchas!
 
 
 ## Usenet
@@ -276,31 +253,19 @@ subtitle sites you can connect to with login credentials or an API key. It even 
 If you're unsure which ones to add, check out the [Bazarr Stats](https://wiki.bazarr.media/bazarr-stats/).
 
 
-# Requests
+# Seerr <small>- Requests</small>
 
-## Seerr
+![Seerr Logo]({{ site.baseurl }}/assets/seerr.png "Seerr Logo"){: style="float: left; margin-right: 16px; width: 50px"}
+{% include github-stars.html url="seerr-team/seerr" desc="Request app for friends and family" %}
 
-For new setups, [go with Seerr instead of Ombi]({{ site.baseurl }}/blog/goodbye-ombi): it logs in
-with Jellyfin, imports your users straight from the server, and is actively developed.
-
-{% include github-stars.html url="seerr-team/seerr" desc="Request app — the merged Overseerr + Jellyseerr successor" %}
-
-
-## Ombi <small>- **DEPRECATED**</small>
-
-![Ombi Logo]({{ site.baseurl }}/assets/blog-images/Home Media Center-Ombi-Logo.png "Ombi Logo"){: style="float: left; margin-right: 16px"}
-
-{% include github-stars.html url="tidusjar/Ombi" desc="Want a Movie or TV Show on Plex or Emby? Use Ombi!" %}
-
-Anyone you give access to Ombi can request movies/series (with voting!) and those shows and movies get imported
+Anyone you give access to Seerr can request movies/series and those shows and movies get imported
 in Sonarr/Radarr directly or after you approve.
 
 This extra step can be handy because Sonarr/Radarr are pretty sophisticated applications. You probably do not want to start
-explaining all that to your mother. The Ombi UI on the other hand is pretty much a searchbox, type in something and click
+explaining all that to your mother. The Seerr UI on the other hand is pretty much a searchbox, type in something and click
 the request button.
 
-
-{% include post/image.html file="Home Media Center-Ombi-Screenshot.png" alt="" title="" desc="Ombi Requests" maxWidth="360px" %}
+{% include post/image.html file="seerr-preview.jpg" alt="" title="" desc="Seerr Requests" maxWidth="460px" %}
 
 
 
@@ -314,7 +279,7 @@ but can really only follow up on it if it's available on Netflix.
 Most of them have access to (parts of) your filesystem. By changing just a few settings a malicious user with access to
 Radarr, Sonarr, ... can delete all your media files.
 
-The safest stance is to **not put the arrs on the internet in the first place**: only your request app
+Safest is to **not put the arrs on the internet in the first place**: only your request app
 (Seerr) and the media server (Jellyfin) should be publicly reachable — keep Radarr, Sonarr, Prowlarr, the
 download client, ... on your LAN or behind a VPN. If you do expose something, make sure it has a strong
 login/password; for some containers authentication is turned off by default!

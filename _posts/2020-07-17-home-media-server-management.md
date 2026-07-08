@@ -100,7 +100,7 @@ Some notable features why you may want to go with Homarr instead of Heimdall:
 
 {% include post/image.html file="Homarr-Dashboard.png" alt="" title="" desc="Homarr Dashboard with calendar, ping, search, Transmission and docker integrations" maxWidth="500px" %}
 
-{% include post/image.html file="Homarr-Settings.png" alt="" title="" desc="The Settings in Homarr" maxWidth="350px" %}
+{% include post/image.html file="Homarr-Settings.png" alt="" title="" desc="The Settings in Homarr" maxWidth="242px" %}
 
 
 

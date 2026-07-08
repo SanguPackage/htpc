@@ -14,14 +14,14 @@ img:
   url: hello-seerr-sm.webp
   desc: "Type a title, click request, done."
 categories: 
-github: Ombi-app/Ombi
+github: seerr-team/seerr
 tags: [arr, jellyfin]
 series: swapping-tools
 toc:
   title: 🎬 Seerr
 ---
 
-The [original setup]({{ site.baseurl }}/blog/home-media-server#ombi---requests) used **Ombi** as the request box:
+The [original setup]({{ site.baseurl }}/blog/home-media-server#seerr---requests) used **Ombi** as the request box:
 the friendly search-and-click front door you hand to family so nobody makes you explain Sonarr's quality profiles
 over Sunday dinner. Type a title, click request, and it lands in Sonarr/Radarr.
 
