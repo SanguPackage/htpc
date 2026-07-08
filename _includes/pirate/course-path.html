@@ -89,12 +89,25 @@
           </svg>
 
           <img class="prop p-storm"   src="{{ '/assets/pirate/storm.webp' | relative_url }}"           alt="" loading="lazy">
+          <svg class="prop p-storm-bolt" viewBox="0 0 100 100" aria-hidden="true">
+            <path class="bolt" d="M55 30 L45 52 L54 52 L40 80 M50 45 L59 48 L51 60"/>
+            <g class="rain">
+              <line x1="34" y1="60" x2="31" y2="72"/>
+              <line x1="48" y1="62" x2="45" y2="74"/>
+              <line x1="62" y1="60" x2="59" y2="72"/>
+              <line x1="55" y1="66" x2="52" y2="78"/>
+            </g>
+          </svg>
           <img class="prop p-skull"   src="{{ '/assets/pirate/skull-island.webp' | relative_url }}"    alt="" loading="lazy">
           <img class="prop p-serpent" src="{{ '/assets/pirate/sea-serpent.webp' | relative_url }}"     alt="" loading="lazy">
           <img class="prop p-island"  src="{{ '/assets/pirate/treasure-island.webp' | relative_url }}" alt="" loading="lazy">
         </div>
 
-        <span class="ship" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#i-ship"/></svg></span>
+        <span class="ship" aria-hidden="true">
+          <span class="ship-bob">
+            <svg viewBox="0 0 100 100"><use href="#i-ship"/></svg>
+          </span>
+        </span>
 
         <div class="crew c2" style="--c:#4fd8c4">
           <span class="node" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#i-crates"/></svg></span>

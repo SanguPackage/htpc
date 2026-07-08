@@ -44,5 +44,13 @@
     if (!ticking) { ticking = true; requestAnimationFrame(() => { frame(); ticking = false; }); }
   }, { passive: true });
   addEventListener('resize', () => { setScale(); frame(); });
+  // ambient chart motion only loops while the section is on-screen (.live)
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      for (const e of entries) course.classList.toggle('live', e.isIntersecting);
+    }).observe(course);
+  } else {
+    course.classList.add('live');
+  }
   setScale(); frame();
 })();
