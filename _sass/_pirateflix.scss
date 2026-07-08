@@ -233,15 +233,27 @@ html{overflow-x:hidden}
   .course-out a{color:var(--teal);text-decoration:none}
   .course-out a + a{margin-left:18px}
 
-  #course .fleet{grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch;position:relative}
-  @media(max-width:720px){#course .fleet{grid-template-columns:1fr}}
+  // The three ports are absolutely placed on a fixed 1000×1880 "leg"; course-voyage.js
+  // sets --scale to fit it to the column and scrubs --p (0..1) from scroll. The sea is a
+  // pure-CSS graticule; the hazards are engraved <img> props revealed by --p; the course
+  // + red fork are drawn by SVG reveal masks the JS advances.
+  #course{--p:0;--scale:1}
+  #course .chart-sea{position:relative;overflow:hidden;border-radius:14px;
+    background-image:
+      repeating-linear-gradient(0deg,  rgba(79,216,196,.045) 0 1px, transparent 1px 74px),
+      repeating-linear-gradient(90deg, rgba(79,216,196,.045) 0 1px, transparent 1px 74px)}
+  // padding-top gives the lifted compass node on card 01 headroom above the leg (the
+  // overflow:hidden that clips the 1000px leg sideways would otherwise crop it); the
+  // height gains the same amount so the scaled leg still fits (box-sizing is border-box)
+  #course .legwrap{display:flex;justify-content:center;overflow:hidden;
+    padding-top:64px;height:calc(1880px * var(--scale) + 64px)}
+  #course .leg{position:relative;flex:0 0 1000px;width:1000px;height:1880px;transform-origin:top center;transform:scale(var(--scale))}
+  #course .leg .c1{position:absolute;top:0;left:20px}
+  #course .leg .c2{position:absolute;top:560px;left:600px}
+  #course .leg .c3{position:absolute;top:1180px;left:30px}
 
-  // dashed route threading the three nodes; drops out once the cards stack
-  #course .route{position:absolute;top:56px;left:8%;right:8%;height:2px;z-index:0;
-    background:repeating-linear-gradient(90deg,var(--brass) 0 10px,transparent 10px 20px);opacity:.5}
-  @media(max-width:720px){#course .route{display:none}}
-
-  #course .crew{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;
+  // ports sit above the ship (z-2) so it docks "behind" them
+  #course .crew{position:relative;z-index:3;width:336px;display:flex;flex-direction:column;align-items:center;
     text-align:center;padding:30px 22px 22px;border-radius:12px;
     border:1px solid color-mix(in srgb,var(--c) 30%,var(--line));
     background:linear-gradient(180deg,color-mix(in srgb,var(--c) 12%,var(--panel)),var(--sea2));
@@ -254,15 +266,49 @@ html{overflow-x:hidden}
     background:var(--sea);border:2px solid var(--c);position:relative;z-index:2;
     box-shadow:0 0 0 6px var(--sea),0 0 26px -4px color-mix(in srgb,var(--c) 70%,transparent)}
   #course .node svg{width:48px;height:48px;color:var(--c)}
-
   #course .step{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--c);
     border:1px solid color-mix(in srgb,var(--c) 40%,transparent);border-radius:20px;padding:2px 12px;margin-bottom:10px}
   #course .n{font-size:20px}
   #course .d{margin-top:6px}
-
   #course .more{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:auto;padding-top:16px}
   #course .btn{font-size:12px;padding:9px 16px;border-color:var(--c,var(--brass));color:var(--c,var(--brass))}
   #course .btn:hover{background:var(--c,var(--brass));color:#0a1826}
+
+  // the sea scene: drawn course + engraved hazard props, behind the ports
+  #course .scene{position:absolute;inset:0;z-index:1;pointer-events:none}
+  #course .scene svg.course-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  #course .course{fill:none;stroke:var(--brass);stroke-width:7;stroke-linecap:round;stroke-dasharray:2 22;
+    filter:drop-shadow(0 0 5px color-mix(in srgb,var(--brass) 55%,transparent))}
+  #course .course.dead{stroke:var(--red);stroke-width:6;opacity:.72}
+  #course .prop{position:absolute;pointer-events:none}
+  #course img.prop{display:block;object-fit:contain}
+  #course .p-storm{left:243px;top:326px;width:154px;height:154px;opacity:clamp(0, calc((var(--p) - .05) * 6), .9)}
+  #course .p-skull{left:582px;top:250px;width:256px;height:171px;opacity:clamp(0, calc((var(--p) - .23) * 7), .95)}
+  #course .p-serpent{left:368px;top:894px;width:264px;height:198px;opacity:clamp(0, calc((var(--p) - .42) * 5), .95)}
+  #course .p-island{left:480px;top:1556px;width:240px;height:198px;
+    opacity:clamp(0, calc((var(--p) - .82) * 7), .98);filter:drop-shadow(0 0 8px color-mix(in srgb,var(--brass) 40%,transparent))}
+
+  // ship rides the same path via offset-path; JS supplies the upright bank rotation
+  #course .ship{position:absolute;left:0;top:0;width:60px;height:60px;color:var(--brass);z-index:2;
+    offset-path:path("M 195 260 C 190 345 178 415 190 478 C 210 540 275 560 340 560 C 376 542 412 525 448 507 C 492 522 518 547 545 562 C 635 574 702 580 768 588 C 812 660 812 740 768 812 C 812 900 820 1010 772 1090 C 720 1160 620 1200 500 1200 C 380 1200 250 1195 198 1200 C 150 1280 150 1360 198 1440 C 280 1560 390 1685 475 1725 C 512 1748 548 1728 578 1699");
+    offset-rotate:0deg;offset-distance:calc(var(--p) * 100%);
+    opacity:clamp(0, calc((var(--p) - .015) * 40), 1);
+    filter:drop-shadow(0 0 6px color-mix(in srgb,var(--brass) 55%,transparent))}
+  #course .ship svg{width:100%;height:100%}
+  #course .hint{position:absolute;left:60px;top:330px;color:var(--muted);font-size:12px;letter-spacing:2px;
+    text-transform:uppercase;opacity:clamp(0, calc(.5 - var(--p) * 3), .7);animation:pf-course-bob 1.8s ease-in-out infinite}
+  @keyframes pf-course-bob{50%{transform:translateY(6px)}}
+
+  // below 700px the scene can't scrub sideways — drop to a plain vertical stack + dashed spine
+  @media(max-width:700px){
+    #course .legwrap{height:auto;display:block}
+    #course .leg{flex:none;width:100%;height:auto;transform:none;display:flex;flex-direction:column;align-items:center;gap:30px;padding:10px 0}
+    #course .leg .c1,#course .leg .c2,#course .leg .c3{position:static}
+    #course .scene,#course .hint,#course .ship{display:none}
+    #course .crew{width:100%;max-width:360px}
+    #course .leg::before{content:'';position:absolute;z-index:0;top:8px;bottom:8px;left:50%;width:2px;transform:translateX(-50%);
+      background:repeating-linear-gradient(180deg,var(--brass) 0 10px,transparent 10px 20px);opacity:.55}
+  }
 }
 
 // --- get-sailing hub: the "cargo hold" — a scene per build stage ---

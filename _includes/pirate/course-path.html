@@ -3,7 +3,8 @@
   <p class="sub">Three steps from empty NAS to your own bottomless cinema.</p>
 
   {% comment %}
-  The three voyage instruments. Strokes use currentColor so each card's --c tints them.
+  The voyage instruments (tinted per card via --c) plus the ship the visitor sails
+  by scrolling. Strokes use currentColor so each card's --c tints them.
   {% endcomment %}
   <svg width="0" height="0" class="pf-course-defs" aria-hidden="true">
     <symbol id="i-map" viewBox="0 0 100 100">
@@ -36,37 +37,86 @@
         <circle cx="17" cy="50" r="2.6"/><circle cx="83" cy="50" r="2.6"/>
       </g>
     </symbol>
+    <symbol id="i-ship" viewBox="0 0 100 100">
+      <path d="M50 62 V14" fill="none" stroke="#5a3b22" stroke-width="3" stroke-linecap="round"/>
+      <path d="M52 20 q18 6 20 26 h-20 Z" fill="#e9dfc4" stroke="#c9bd97" stroke-width="1.4" stroke-linejoin="round"/>
+      <path d="M48 24 q-14 6 -15 22 h15 Z" fill="#efe7cf" stroke="#c9bd97" stroke-width="1.4" stroke-linejoin="round"/>
+      <path d="M50 14 h15 l-4 5 l4 5 h-15 Z" fill="#e2564a"/>
+      <path d="M20 66 h60 l-10 15 h-40 Z" fill="#6d4a2c" stroke="#4a3018" stroke-width="1.4" stroke-linejoin="round"/>
+      <path d="M23 69 h54" fill="none" stroke="#e0b34a" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M14 83 q36 9 72 0" fill="none" stroke="#cfe3f2" stroke-width="2" opacity=".55"/>
+    </symbol>
   </svg>
 
-  <div class="fleet">
-    <div class="route" aria-hidden="true"></div>
-    <div class="crew" style="--c:#e0b34a">
-      <span class="node" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#i-map"/></svg></span>
-      <span class="step">01 · Understand</span>
-      <div class="n">Home Media Server</div>
-      <div class="d">What each container does &amp; why this crew.</div>
-      <div class="more">
-        <a class="btn" href="{% post_url 2020-07-19-home-media-server %}">Read the briefing →</a>
-        <a class="btn" href="{{ '/deck-plan/' | relative_url }}">Study the blueprint →</a>
-      </div>
-    </div>
-    <div class="crew" style="--c:#4fd8c4">
-      <span class="node" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#i-crates"/></svg></span>
-      <span class="step">02 · Build</span>
-      <div class="n">Le Docker Compose</div>
-      <div class="d">Twelve containers, one file, running by supper.</div>
-      <div class="more">
-        <a class="btn" href="{% post_url 2020-07-18-home-media-server-docker-compose %}">Copy-paste it →</a>
-      </div>
-    </div>
-    <div class="crew" style="--c:#e2564a">
-      <span class="node" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#i-helm"/></svg></span>
-      <span class="step">03 · Command</span>
-      <div class="n">Container Management</div>
-      <div class="d">One dashboard so you never memorise a port again.</div>
-      <div class="more">
-        <a class="btn" href="{% post_url 2020-07-17-home-media-server-management %}">Pick a dashboard →</a>
+  {% comment %}
+  The three ports sit at fixed spots on a 1000×1880 "leg"; course-voyage.js scales it
+  to the column and scrubs --p on scroll. Below 700px the leg drops to a plain
+  vertical stack (see _pirateflix.scss) and the scene/ship are hidden.
+  {% endcomment %}
+  <div class="chart-sea">
+    <div class="legwrap">
+      <div class="leg">
+        <div class="crew c1" style="--c:#e0b34a">
+          <span class="node" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#i-map"/></svg></span>
+          <span class="step">01 · Understand</span>
+          <div class="n">Home Media Server</div>
+          <div class="d">What each container does &amp; why this crew.</div>
+          <div class="more">
+            <a class="btn" href="{% post_url 2020-07-19-home-media-server %}">Read the briefing →</a>
+            <a class="btn" href="{{ '/deck-plan/' | relative_url }}">Study the blueprint →</a>
+          </div>
+        </div>
+
+        <span class="hint" aria-hidden="true">scroll to sail ⌄</span>
+
+        <div class="scene" aria-hidden="true">
+          <svg class="course-svg" viewBox="0 0 1000 1880" preserveAspectRatio="none">
+            <defs>
+              <mask id="revealMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1880">
+                <path id="maskPath" fill="none" stroke="#fff" stroke-width="44" stroke-linecap="round"
+                  pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"
+                  d="M 195 260 C 190 345 178 415 190 478 C 210 540 275 560 340 560 C 376 542 412 525 448 507 C 492 522 518 547 545 562 C 635 574 702 580 768 588 C 812 660 812 740 768 812 C 812 900 820 1010 772 1090 C 720 1160 620 1200 500 1200 C 380 1200 250 1195 198 1200 C 150 1280 150 1360 198 1440 C 280 1560 390 1685 475 1725 C 512 1748 548 1728 578 1699"/>
+              </mask>
+              <mask id="revealDead" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1880">
+                <path id="maskDead" fill="none" stroke="#fff" stroke-width="40" stroke-linecap="round"
+                  pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"
+                  d="M 448 507 C 535 465 612 430 700 385"/>
+              </mask>
+            </defs>
+            <path class="course dead" mask="url(#revealDead)" d="M 448 507 C 535 465 612 430 700 385"/>
+            <path class="course" mask="url(#revealMask)"
+              d="M 195 260 C 190 345 178 415 190 478 C 210 540 275 560 340 560 C 376 542 412 525 448 507 C 492 522 518 547 545 562 C 635 574 702 580 768 588 C 812 660 812 740 768 812 C 812 900 820 1010 772 1090 C 720 1160 620 1200 500 1200 C 380 1200 250 1195 198 1200 C 150 1280 150 1360 198 1440 C 280 1560 390 1685 475 1725 C 512 1748 548 1728 578 1699"/>
+          </svg>
+
+          <img class="prop p-storm"   src="{{ '/assets/pirate/storm.webp' | relative_url }}"           alt="" loading="lazy">
+          <img class="prop p-skull"   src="{{ '/assets/pirate/skull-island.webp' | relative_url }}"    alt="" loading="lazy">
+          <img class="prop p-serpent" src="{{ '/assets/pirate/sea-serpent.webp' | relative_url }}"     alt="" loading="lazy">
+          <img class="prop p-island"  src="{{ '/assets/pirate/treasure-island.webp' | relative_url }}" alt="" loading="lazy">
+        </div>
+
+        <span class="ship" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#i-ship"/></svg></span>
+
+        <div class="crew c2" style="--c:#4fd8c4">
+          <span class="node" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#i-crates"/></svg></span>
+          <span class="step">02 · Build</span>
+          <div class="n">Le Docker Compose</div>
+          <div class="d">Twelve containers, one file, running by supper.</div>
+          <div class="more">
+            <a class="btn" href="{% post_url 2020-07-18-home-media-server-docker-compose %}">Copy-paste it →</a>
+          </div>
+        </div>
+
+        <div class="crew c3" style="--c:#e2564a">
+          <span class="node" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#i-helm"/></svg></span>
+          <span class="step">03 · Command</span>
+          <div class="n">Container Management</div>
+          <div class="d">One dashboard so you never memorise a port again.</div>
+          <div class="more">
+            <a class="btn" href="{% post_url 2020-07-17-home-media-server-management %}">Pick a dashboard →</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+<script src="{{ '/assets/js/course-voyage.js' | relative_url }}" defer></script>
