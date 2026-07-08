@@ -495,7 +495,13 @@ layout: default
     skip.addEventListener('click', function () { endTour(); });
     reopen.addEventListener('click', goWelcome);
 
-    var seen; try { seen = localStorage.getItem(SEEN); } catch (e) { seen = null; }
-    if (seen) reopen.hidden = false; else goWelcome();
+    // no guided tour on phones — the stacked deck is self-explanatory, so keep the live
+    // view and never show the parchment note (nor the "?" that relaunches it)
+    if (window.matchMedia('(max-width: 640px)').matches) {
+      card.hidden = true; reopen.hidden = true;
+    } else {
+      var seen; try { seen = localStorage.getItem(SEEN); } catch (e) { seen = null; }
+      if (seen) reopen.hidden = false; else goWelcome();
+    }
   })();
 </script>
