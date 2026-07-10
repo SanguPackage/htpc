@@ -4,7 +4,7 @@
   body: >-
     Every voyage starts with a wish. You add films yourself; friends & family send
     theirs through Seerr — the request desk — and you wave them aboard.
-  nodes: ["you", "friendsfamily", "Seerr", "Libraries (PVRs)"]
+  nodes: ["you", "friendsfamily", "SuggestArr", "Seerr", "Libraries (PVRs)"]
 
 - title: Your quartermasters
   body: >-

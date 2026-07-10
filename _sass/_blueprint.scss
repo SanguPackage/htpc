@@ -58,6 +58,7 @@
 // Cursor is default for every node; blueprint.js promotes only the clickable ones
 // (those with a deck_plan entry) to a pointer, so the cursor tracks clickability.
 [data-node] { cursor: default; }
+.logo-mark { display: none; } // context-specific variant; the embed swaps it in
 .conn { transition: opacity .12s ease, stroke .12s ease, stroke-width .12s ease; }
 .conn.lit { stroke: #93c5fd; stroke-width: 2.5; opacity: 1; }
 .group-box.lit { stroke: #93c5fd; stroke-width: 2.5; }
@@ -351,6 +352,18 @@ $brass-hi:   #f4e2a1;
     box-shadow: 0 3px 16px rgba(0, 0, 0, .35);
 
     .floor-svg { display: block; }
+
+    // Here the chart illustrates the core stack; SuggestArr and Wizarr are optional
+    // companions, so render them in the neutral actor palette (like You / Friends &
+    // Family) rather than as branded services, to keep the essential pipeline dominant.
+    [data-node="SuggestArr"] .ring,
+    [data-node="Wizarr"] .ring { fill: #334155; }
+    [data-node="SuggestArr"] image { filter: grayscale(1); }
+
+    // Wizarr's logo is a filled red disc; here show only the wizard mark on the
+    // neutral ring so it reads like You / Friends & Family.
+    [data-node="Wizarr"] .logo-full { display: none; }
+    [data-node="Wizarr"] .logo-mark { display: inline; }
   }
 
   &__cta {

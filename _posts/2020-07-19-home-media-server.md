@@ -115,8 +115,8 @@ Need more details? Reddit is an excellent source of information for everything S
 
 Went with the new kid on the block [**Jellyfin**](https://jellyfin.org/). Point it to a folder with movies and series and watch it go!
 Has apps for Android, Apple and a website with Chromecast support.
-There are also some [plugins](https://jellyfin.org/docs/general/server/plugins/index.html) like for OpenSubtitles,
-Playback statistics. For me there were no must-have plugins though.
+
+Check out our [Jellyfin Setup]({% post_url 2026-07-08-jellyfin-setup %}) post for some must-have plugins and companion projects.
 
 
 ## What it looks like
@@ -292,6 +292,10 @@ in Sonarr/Radarr directly or after you approve.
 This extra step can be handy because Sonarr/Radarr are pretty sophisticated applications. You probably do not want to start
 explaining all that to your mother. The Seerr UI on the other hand is pretty much a searchbox, type in something and click
 the request button.
+
+Check out our [Lists Part 2]({% post_url 2022-10-02-lists-part2 %}) post for more information.
+Especially SuggestArr might be worth checking out!
+
 
 {% include post/image.html file="seerr-preview.jpg" alt="" title="" desc="Seerr Requests" maxWidth="460px" %}
 

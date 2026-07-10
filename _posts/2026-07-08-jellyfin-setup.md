@@ -90,6 +90,8 @@ The ships that orbit Jellyfin.
 The front door you give friends and family: they search, click *request*, and it lands in Sonarr/Radarr
 (directly or after you approve).
 
+Also worth considering: [adding SuggestArr]({% post_url 2022-10-02-lists-part2 %}) for automated requests.
+
 <details markdown="1">
 <summary>Docker Compose</summary>
 
@@ -281,7 +283,7 @@ There is also an alternative inviter-app:
 {% include github-stars.html url="intro-skipper/intro-skipper" desc="Automatically detect and skip intro/credit sequences in Jellyfin" %}
 
 Adding a **Skip Intro** button!? My god... I need to [install](https://github.com/intro-skipper/intro-skipper/wiki/Installation)
-this right now...
+this right now... Update: I did, and it's awesome 🤩
 
 - Jellyfin → Dashboard → Plugins
 - Prerequisite: Available → Install "TheTVDB"
@@ -291,6 +293,7 @@ this right now...
 - Intro Skipper → Install
 - Dashboard → Restart
 - Dashboard → Scheduled Tasks → Detect and Analyze Media Segments
+  - This is going to take a while if you already have some series
 - Profit
 
 

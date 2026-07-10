@@ -84,6 +84,29 @@ Seerr:
     - { label: "Official site", url: "https://docs.seerr.dev/" }
     - { label: "On the blog", url: "/blog/goodbye-ombi/" }
   screenshots: []
+SuggestArr:
+  title: SuggestArr
+  logo: /assets/blueprint/logos/suggestarr.svg
+  github: giuseppe99barchetta/SuggestArr
+  stars: 1202
+  description: >
+    The lookout. Reads what the crew has been watching in Jellyfin and quietly
+    files requests for similar titles into Seerr — so the library keeps growing
+    on its own.
+  links:
+    - { label: "On the blog", url: "/blog/lists-part2/" }
+  screenshots: []
+Wizarr:
+  title: Wizarr
+  logo: /assets/blueprint/logos/wizarr.svg
+  github: wizarrrr/wizarr
+  stars: 2951
+  description: >
+    The boarding party. Hands friends and family a self-service invite to sign
+    themselves onto Jellyfin — no passwords passed around, no captain required.
+  links:
+    - { label: "On the blog", url: "/blog/jellyfin-setup/" }
+  screenshots: []
 Jellyfin:
   title: Jellyfin
   logo: /assets/blueprint/logos/jellyfin.svg
@@ -95,7 +118,7 @@ Jellyfin:
     every telly, phone and browser in the house.
   links:
     - { label: "Official site", url: "https://jellyfin.org" }
-    - { label: "On the blog", url: "/blog/home-media-server/" }
+    - { label: "On the blog", url: "/blog/jellyfin-setup/" }
   screenshots: []
 FlareSolverr:
   title: FlareSolverr
@@ -117,6 +140,27 @@ Jellystat:
     Jellyfin's logbook. Watch statistics and history for your media server —
     who watched what, and how often.
   links: []
+  screenshots: []
+intro-skipper:
+  title: Intro Skipper
+  logo: /assets/blueprint/logos/intro-skipper.svg
+  github: intro-skipper/intro-skipper
+  stars: 2531
+  description: >
+    The bosun's shortcut. A Jellyfin plugin that spots TV intros and credits
+    and lets you skip them with a tap — no more sitting through the theme tune.
+  links: []
+  screenshots: []
+streamystats:
+  title: Streamystats
+  logo: /assets/blueprint/logos/streamystats.svg
+  github: fredrikburmester/streamystats
+  stars: 772
+  description: >
+    A second logbook. Deeper Jellyfin analytics and dashboards — watch history,
+    trends and per-user stats, charted.
+  links:
+    - { label: "On the blog", url: "/blog/jellyfin-setup/#streamystats" }
   screenshots: []
 
 # Plain new-tab links (category nodes) — clicking navigates straight to the site.
