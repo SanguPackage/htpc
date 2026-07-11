@@ -78,6 +78,10 @@ Two things make it work:
    engine lighting up.
 
 
+If your system has poor CPU/GPU, consider using Tdarr for automated transcoding
+{% include github-stars.html url="HaveAGitGat/Tdarr" desc="Distributed transcode automation using FFmpeg/HandBrake + Audio/Video library analytics + video health checking" %}
+
+
 # The Companions
 
 The ships that orbit Jellyfin.

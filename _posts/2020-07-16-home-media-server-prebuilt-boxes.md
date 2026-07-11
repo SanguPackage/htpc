@@ -67,6 +67,7 @@ If you are looking for something hands on, this might be for you. There is work 
 {% include github-stars.html url="navilg/media-stack" desc="Self-hosted media stack with AI-powered recommendations (Recommendarr), Sonarr/Radarr/Prowlarr/Jellyfin/Seerr and VPN." %}
 {% include github-stars.html url="AdrienPoupa/docker-compose-nas" desc="Simple Docker Compose NAS: Sonarr, Radarr, Prowlarr, Jellyfin, qBittorrent, PIA VPN and Traefik with SSL support." %}
 {% include github-stars.html url="jfroment/seedbox" desc="A Docker-powered seedbox with persistent data and more cool stuff." %}
+{% include github-stars.html url="Luctia/ezarr" desc="As easy as possible setup of an entire mediacenter stack using Docker" %}
 
 
 # mediastack

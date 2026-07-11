@@ -113,3 +113,11 @@ If you want a whole Dashboard...
 - Easy Step by Step [installation instructions pdf]({{ site.baseurl }}/assets/Notifications - Notifiarr guide.pdf)
 - [Official Wiki](https://notifiarr.wiki/)
 - [Youtube: TRaSH Guides & Notifiarr](https://www.youtube.com/watch?v=DCxU3Vzaz6k)
+
+
+<!--
+## Calendarr
+Last update a year ago.
+Groups Radarr/Sonarr together and sends it grouped to Slack/Discord
+{% include github-stars.html url="jordanlambrecht/calendarr" desc="Publish Sonarr and Radarr's release calendar to Discord + Slack on a weekly/daily basis" %}
+-->

@@ -171,8 +171,9 @@ baddest Remux-2160p release and you are looking at 40-80 gigs for one movie.
 
 ## Extra's
 
-{% include github-stars.html url="RemiRigal/Overseerr-Assistant" desc="Browser extension: one-click requests on IMDb/TMDb — works with Jellyseerr/Seerr" %}
 {% include github-stars.html url="gilbN/theme.park" desc="A collection of themes/skins for your favorite apps." %}
+{% include github-stars.html url="RandomNinjaAtk/arr-scripts" desc="Extended Container Scripts - Automation scripts to make life easier!" %}
+{% include github-stars.html url="RemiRigal/Overseerr-Assistant" desc="Browser extension: one-click requests on IMDb/TMDb — works with Jellyseerr/Seerr" %}
 
 
 # Downloading Stuff
